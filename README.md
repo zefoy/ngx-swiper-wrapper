@@ -1,2 +1,3 @@
 # angular2-swiper-wrapper
-Angular 2 wrapper library for swiper
+
+This is an Angular 2 wrapper library for [swiper](https://www.npmjs.com/package/swiper).

@@ -1,0 +1,39 @@
+<div class="box-container">
+  <div class="app-title">{{title}}</div>
+
+  <div class="info-container">
+    You can change the settings of the Swiper area by clicking the buttons on the left panel.
+  </div>
+
+  <div class="split-container">
+    <div class="left-container">
+      <div class="box-title">Settings</div>
+
+      <div class="content-container">
+        <div class="action-toggle-button" (click)='togglePagination()'>{{config.pagination ? "Disable pagination" : "Enable pagination"}}</div>
+
+        <div class="action-toggle-button" (click)='toggleDirection()'>{{(config.direction == "horizontal") ? "Change to vertical" : "Change to horizontal"}}</div>
+
+        <div class="action-toggle-button" (click)='increasePerView()' [class.disabled]="config.slidesPerView >= items.length">Slides per view +</div>
+
+        <div class="action-toggle-button" (click)='decreasePerView()' [class.disabled]="config.slidesPerView <= 1">Slides per view -</div>
+
+        <div class="action-toggle-button" (click)='toggleMousewheelControl()'>{{config.mousewheelControl ? "Disable mouse wheel" : "Enable mouse wheel"}}</div>
+
+        <div class="action-toggle-button" (click)='toggleArrowKeysEnabled()'>{{config.arrowKeysEnabled ? "Disable arrow keys" : "Enable arrow keys"}}</div>
+      </div>
+    </div>
+
+    <div class="right-container">
+      <div class="box-title">Swiper</div>
+
+      <div class="content-container">
+        <swiper-view overlay-controls [config]="config" (onSwiperIndex)="onSwiperIndex($event)">
+          <swiper-item *ngFor="let item of items">
+            {{item}}
+          </swiper-item>
+        </swiper-view>
+      </div>
+    </div>
+  </div>
+</div>

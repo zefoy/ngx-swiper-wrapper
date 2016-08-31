@@ -1,0 +1,173 @@
+.swiper-container {
+  overflow: visible;
+  width: 100%;
+  height: 100%;
+  margin: 0 0 30px;
+
+  &:hover {
+    .swiper-prev,
+    .swiper-next {
+      opacity: 1;
+    }
+  }
+
+  .swiper-prev {
+    left: -24px;
+  }
+
+  .swiper-next {
+    right: -24px;
+    transform: rotate(180deg);
+  }
+
+  .swiper-prev,
+  .swiper-next {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+
+    width: 20px;
+    height: 100%;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+
+    opacity: 0;
+    cursor: pointer;
+    background-color: white;
+
+    transition: opacity 0.5s linear;
+
+    &::after,
+    &::before {
+      content: ' ';
+
+      position: absolute;
+      top: 50%;
+
+      width: 24px;
+      height: 4px;
+      margin-left: -4px;
+
+      background-color: rgba(0, 0, 0, 0.2);
+
+      transition: background-color 0.5s ease;
+    }
+
+    &::after {
+      margin-top: 11px;
+      transform: rotate(70deg) skew(-20deg);
+    }
+
+    &::before {
+      margin-top: -11px;
+      transform: rotate(-70deg) skew(20deg);
+    }
+
+    &:hover {
+      &::after,
+      &::before {
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    &.disabled {
+      cursor: default;
+
+      &::after,
+      &::before {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  .swiper-more {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid white;
+
+    cursor: pointer;
+    text-align: center;
+    color: #555;
+    background-color: white;
+
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+
+    &:hover {
+      font-weight: bold;
+      color: #555;
+      border-color: #aaa;
+      background-color: #eee;
+    }
+  }
+
+  .swiper-content {
+    overflow: hidden;
+    height: 100%;
+  }
+
+  .swiper-pagination {
+    width: 100%;
+
+    .swiper-pagination-handle {
+      padding: 0 3px;
+
+      cursor: pointer;
+
+      .swiper-pagination-bullet {
+        margin: 0;
+
+        pointer-events: none;
+      }
+
+      .swiper-pagination-bullet-last,
+      .swiper-pagination-bullet-first {
+        border: 1px solid rgba(0, 0, 0, 0.5);
+        margin: -1px 5px !important;
+      }
+    }
+  }
+
+  &.overlay-controls {
+    margin: 0;
+
+    .swiper-prev {
+      left: 5%;
+    }
+
+    .swiper-next {
+      right: 5%;
+    }
+
+    .swiper-prev,
+    .swiper-next {
+      top: 50%;
+
+      width: 45px;
+      height: 90px;
+      border: none;
+      margin-top: -90px;
+
+      opacity: 1;
+      background-color: transparent;
+
+      &::after,
+      &::before {
+        width: 45px;
+        height: 16px;
+        margin: 0;
+      }
+
+      &::after {
+        top: 58px;
+      }
+
+      &::before {
+        top: 16px;
+      }
+    }
+
+    .swiper-pagination {
+      bottom: 8px;
+    }
+  }
+}

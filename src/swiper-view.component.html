@@ -1,0 +1,14 @@
+<div class="swiper-container" [ngClass]="{'overlay-controls': overlayMode}">
+  <div class="swiper-content">
+    <div class="swiper-wrapper">
+      <ng-content></ng-content>
+    </div>
+  </div>
+
+  <div *ngIf="options?.layout == 'horizontal'" class="swiper-prev" [ngClass]="{'disabled': isAtFirst }" (click)="prevItem()"></div>
+  <div *ngIf="options?.layout == 'horizontal'" class="swiper-next" [ngClass]="{'disabled': isAtLast }" (click)="nextItem()"></div>
+
+  <div *ngIf="options?.layout == 'vertical'" class="swiper-more" [ngClass]="{'disabled': isAtLast }" (click)="nextItem()">Show more</div>
+
+  <div [hidden]="!options?.pagination" class="swiper-pagination" (click)="onChangeIndex($event)"></div>
+</div>
