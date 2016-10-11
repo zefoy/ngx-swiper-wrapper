@@ -15,12 +15,7 @@ export class AppComponent {
   private items = ["First slide", "Second slide", "Third slide", "Fourth slide", "Fifth slide", "Sixth slide"];
 
   private config: SwiperConfigInterface = {
-    direction: "horizontal",
-    slidesPerView: 1,
-    pagination: true,
-    autoHeight: false,
-    mousewheelControl: false,
-    arrowKeysEnabled: true
+    pagination: true
   };
 
   refresh(): boolean {
