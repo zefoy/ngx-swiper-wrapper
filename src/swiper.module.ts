@@ -15,7 +15,7 @@ export const SWIPER_CONFIG = new OpaqueToken('SWIPER_CONFIG');
     exports: [CommonModule, SwiperItemComponent, SwiperViewComponent]
 })
 export class SwiperModule {
-	constructor (@Optional() @SkipSelf() parentModule: SwiperModule) {
+  constructor (@Optional() @SkipSelf() parentModule: SwiperModule) {
     if (parentModule) {
       throw new Error(`SwiperModule is already loaded.
         Import it in the AppModule only!`);
