@@ -1,3 +1,7 @@
+0.8.0 Feature release
+
+  - Added support for all the swiper options
+
 0.0.3 Packaging changes
 
   - Updated to use the latest Angular 2 version
