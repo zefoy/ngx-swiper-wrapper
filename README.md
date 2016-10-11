@@ -45,10 +45,17 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
 ##### Use it in your html template (with custom configuration):
 
 ```html
+  <swiper-view [config]="config" (onSwiperIndex)="onSwiperIndex($event)">
+    <swiper-item>
+      Swiper content
+    </swiper-item>
+  </swiper-view>
 ```
 
 ```javascript
 [config]          // Custom config to override the global defaults.
+
+(onSwiperIndex)   // Event handler for the swiper index change.
 ```
 
 ##### Available configuration options (custom / global configuration):
