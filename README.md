@@ -29,7 +29,7 @@ import { SwiperConfigInterface } from 'angular2-swiper-wrapper';
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
-  slidesPerView: 1,
+  slidesPerView: 'auto',
   keyboardControl: true
 };
 
@@ -45,7 +45,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
 ##### Use it in your html template (with custom configuration):
 
 ```html
-  <swiper-view [config]="config" (onSwiperIndex)="onSwiperIndex($event)">
+  <swiper-view [config]="config" (indexChange)="onIndexChange($event)">
     <swiper-item>
       Swiper content
     </swiper-item>
@@ -53,16 +53,20 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
 ```
 
 ```javascript
-[config]          // Custom config to override the global defaults.
+[config]         // Custom config to override the global defaults.
 
-(onSwiperIndex)   // Event handler for the swiper index change.
+(indexChange)    // Event handler for the swiper index change.
 ```
 
 ##### Available configuration options (custom / global configuration):
 
 ```javascript
-keyboardControl   // Enables navigation through arrow keys (Default: false).
-
+direction        // Direction of the swiper (Default: 'horizontal').
+threshold        // Distance needed for the swipe action (Default: 0).
+spaceBetween     // Space in pixels between the swiper items (Default: 0).
+slidesPerView    // Number of the items per view or 'auto' (Default: 1).
+centeredSlides   // Align active item on center not left (Default: false).
+keyboardControl  // Enables navigation through arrow keys (Default: false).
 ```
 
 For more detailed documentation with all the supported options see [swiper documentation](http://idangero.us/swiper/api/).

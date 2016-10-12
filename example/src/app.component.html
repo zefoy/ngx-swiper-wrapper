@@ -14,9 +14,9 @@
 
         <div class="action-toggle-button" (click)='toggleDirection()'>{{(config.direction == "horizontal") ? "Change to vertical" : "Change to horizontal"}}</div>
 
-        <div class="action-toggle-button" (click)='increasePerView()' [class.disabled]="config.slidesPerView >= items.length">Slides per view +</div>
+        <div class="action-toggle-button" (click)='increasePerView()' [class.disabled]="config.slidesPerView < items.length">Slides per view +</div>
 
-        <div class="action-toggle-button" (click)='decreasePerView()' [class.disabled]="config.slidesPerView <= 1">Slides per view -</div>
+        <div class="action-toggle-button" (click)='decreasePerView()' [class.disabled]="config.slidesPerView > 1">Slides per view -</div>
 
         <div class="action-toggle-button" (click)='toggleKeyboardControl()'>{{config.keyboardControl ? "Disable arrow keys" : "Enable arrow keys"}}</div>
 
@@ -28,7 +28,7 @@
       <div class="box-title">Swiper</div>
 
       <div class="content-container">
-        <swiper-view overlay-controls [config]="config" (onSwiperIndex)="onSwiperIndex($event)">
+        <swiper-view overlay-controls [config]="config" (indexChange)="onIndexChange($event)">
           <swiper-item *ngFor="let item of items">
             {{item}}
           </swiper-item>

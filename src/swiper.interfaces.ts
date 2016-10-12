@@ -35,7 +35,7 @@ export interface SwiperConfigInterface {
 
   spaceBetween?: number,
   centeredSlides?: boolean,
-  slidesPerView?: number,
+  slidesPerView?: number | string,
   slidesPerGroup?: number,
   slidesPerColumn?: number,
   slidesPerColumnFill?: string,
@@ -126,7 +126,54 @@ export interface SwiperConfigInterface {
   observer?: boolean,
   observeParents?: boolean,
 
-  breakpoints?: any
+  breakpoints?: any,
+
+  slideClass?: string,
+  slideActiveClass?: string,
+  slideVisibleClass?: string,
+  slideDuplicateClass?: string,
+  slideNextClass?: string,
+  slidePrevClass?: string,
+  wrapperClass?: string,
+  bulletClass?: string,
+  bulletActiveClass?: string,
+  paginationHiddenClass?: string,
+  paginationCurrentClass?: string,
+  paginationTotalClass?: string,
+  paginationProgressbarClass?: string,
+  buttonDisabledClass?: string,
+
+  runCallbacksOnInit?: boolean,
+  onInit?: any,
+  onSlideChangeStart?: any,
+  onSlideChangeEnd?: any,
+  onSlideNextStart?: any,
+  onSlideNextEnd?: any,
+  onSlidePrevStart?: any,
+  onSlidePrevEnd?: any,
+  onTransitionStart?: any,
+  onTransitionEnd?: any,
+  onTouchStart?: any,
+  onTouchMove?: any,
+  onTouchMoveOpposite?: any,
+  onSliderMove?: any,
+  onTouchEnd?: any,
+  onClick?: any,
+  onTap?: any,
+  onDoubleTap?: any,
+  onImagesReady?: any,
+  onProgress?: any,
+  onReachBeginning?: any,
+  onReachEnd?: any,
+  onDestroy?: any,
+  onSetTranslate?: any,
+  onSetTransition?: any,
+  onAutoplay?: any,
+  onAutoplayStart?: any,
+  onAutoplayStop?: any,
+  onLazyImageLoad?: any,
+  onLazyImageReady?: any,
+  onPaginationRendered?: any
 }
 
 export interface fadeObjectInterface {
@@ -214,7 +261,7 @@ export class SwiperConfig implements SwiperConfigInterface {
 
   spaceBetween: number;
   centeredSlides: boolean;
-  slidesPerView: number;
+  slidesPerView: number | string;
   slidesPerGroup: number;
   slidesPerColumn: number;
   slidesPerColumnFill: string;
@@ -306,6 +353,53 @@ export class SwiperConfig implements SwiperConfigInterface {
   observeParents: boolean;
 
   breakpoints: any;
+
+  slideClass: string;
+  slideActiveClass: string;
+  slideVisibleClass: string;
+  slideDuplicateClass: string;
+  slideNextClass: string;
+  slidePrevClass: string;
+  wrapperClass: string;
+  bulletClass: string;
+  bulletActiveClass: string;
+  paginationHiddenClass: string;
+  paginationCurrentClass: string;
+  paginationTotalClass: string;
+  paginationProgressbarClass: string;
+  buttonDisabledClass: string;
+
+  runCallbacksOnInit: boolean;
+  onInit: any;
+  onSlideChangeStart: any;
+  onSlideChangeEnd: any;
+  onSlideNextStart: any;
+  onSlideNextEnd: any;
+  onSlidePrevStart: any;
+  onSlidePrevEnd: any;
+  onTransitionStart: any;
+  onTransitionEnd: any;
+  onTouchStart: any;
+  onTouchMove: any;
+  onTouchMoveOpposite: any;
+  onSliderMove: any;
+  onTouchEnd: any;
+  onClick: any;
+  onTap: any;
+  onDoubleTap: any;
+  onImagesReady: any;
+  onProgress: any;
+  onReachBeginning: any;
+  onReachEnd: any;
+  onDestroy: any;
+  onSetTranslate: any;
+  onSetTransition: any;
+  onAutoplay: any;
+  onAutoplayStart: any;
+  onAutoplayStop: any;
+  onLazyImageLoad: any;
+  onLazyImageReady: any;
+  onPaginationRendered: any;
 
   constructor(config: SwiperConfigInterface = {}) {
      this.assign(config);

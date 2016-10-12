@@ -25,7 +25,7 @@ export class AppComponent {
   }
 
   increaseItems(): boolean {
-    if (this.config.slidesPerView < 6) {
+    if (this.config.slidesPerView < this.items.length) {
       this.config.slidesPerView++;
     }
 
@@ -70,7 +70,7 @@ export class AppComponent {
     return false;
   }
 
-  onSwiperIndex(index: number) {
+  onIndexChange(index: number) {
     console.log("Swiper index: " + index);
   }
 }

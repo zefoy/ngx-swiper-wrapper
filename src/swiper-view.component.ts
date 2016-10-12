@@ -24,7 +24,7 @@ export class SwiperViewComponent implements OnInit, DoCheck {
 
   @Input() config : SwiperConfigInterface;
 
-  @Output() onSwiperIndex = new EventEmitter<number>();
+  @Output() indexChange = new EventEmitter<number>();
 
   constructor(@Attribute('overlay-controls') overlayMode: boolean, private elementRef: ElementRef, private differs : KeyValueDiffers, @Optional() private defaults: SwiperConfig) {
     this.configDiff = differs.find({}).create(null);
@@ -66,7 +66,7 @@ export class SwiperViewComponent implements OnInit, DoCheck {
         this.isAtLast = slider.isEnd;
         this.isAtFirst = slider.isBeginning;
 
-        this.onSwiperIndex.emit(slider.snapIndex);
+        this.indexChange.emit(slider.snapIndex);
       };
     }
 
