@@ -5,10 +5,10 @@
     </div>
   </div>
 
-  <div *ngIf="options?.direction == 'horizontal'" class="swiper-prev" [ngClass]="{'disabled': isAtFirst }" (click)="prevItem()"></div>
-  <div *ngIf="options?.direction == 'horizontal'" class="swiper-next" [ngClass]="{'disabled': isAtLast }" (click)="nextItem()"></div>
+  <div *ngIf="swiperConfig?.direction == 'horizontal'" class="swiper-prev" [ngClass]="{'disabled': isAtFirst }" (click)="prevItem()"></div>
+  <div *ngIf="swiperConfig?.direction == 'horizontal'" class="swiper-next" [ngClass]="{'disabled': isAtLast }" (click)="nextItem()"></div>
 
-  <div *ngIf="options?.direction == 'vertical'" class="swiper-more" [ngClass]="{'disabled': isAtLast }" (click)="nextItem()">Show more</div>
+  <div *ngIf="swiperConfig?.direction == 'vertical'" class="swiper-more" [ngClass]="{'disabled': isAtLast }" (click)="nextItem()">Show more</div>
 
-  <div [hidden]="!options?.pagination" class="swiper-pagination" (click)="onIndexSelect($event)"></div>
+  <div [hidden]="!swiperConfig?.pagination" class="swiper-pagination" (click)="onIndexSelect($event)"></div>
 </div>

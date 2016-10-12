@@ -1,4 +1,6 @@
-import { Injectable, Inject, Component, ElementRef, Host, Input } from '@angular/core';
+declare var require: any;
+
+import { Component, Injectable, Host, Inject, ElementRef } from '@angular/core';
 
 import { SwiperViewComponent } from './swiper-view.component';
 
@@ -9,8 +11,6 @@ import { SwiperViewComponent } from './swiper-view.component';
   styles: [require('swiper-item.component.scss')]
 })
 export class SwiperItemComponent {
-  @Input() index: number;
-
   constructor( @Inject(ElementRef) elementRef: ElementRef, @Host() @Inject(SwiperViewComponent) swiper: SwiperViewComponent
   ) {
     elementRef.nativeElement.classList.add('swiper-slide');

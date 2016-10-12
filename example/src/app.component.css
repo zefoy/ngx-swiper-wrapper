@@ -91,7 +91,7 @@
 }
 
 .action-toggle-button.disabled {
-  cursor: none;
+  cursor: default;
   color: #aaa;
   background-color: #eee;
 }

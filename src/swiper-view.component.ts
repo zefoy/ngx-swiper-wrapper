@@ -22,6 +22,8 @@ export class SwiperViewComponent implements OnInit, DoCheck {
   private configDiff: any;
   private overlayMode: boolean;
 
+  private swiperConfig: SwiperConfig;
+
   @Input() config : SwiperConfigInterface;
 
   @Output() indexChange = new EventEmitter<number>();
@@ -53,16 +55,18 @@ export class SwiperViewComponent implements OnInit, DoCheck {
   }
 
   buildSwiper() {
-    let config = new SwiperConfig(this.defaults);
+    const nativeElement = this.elementRef.nativeElement;
 
-    config.assign(this.config);
+    this.swiperConfig = new SwiperConfig(this.defaults);
 
-    if (config.pagination === true) {
-      config.pagination = '.spiwer-pagination';
+    this.swiperConfig.assign(this.config);
+
+    if (this.swiperConfig.pagination === true) {
+      this.swiperConfig.pagination = '.spiwer-pagination';
     }
 
-    if (!config['onSlideChangeStart']) {
-      config['onSlideChangeStart'] = (slider) => {
+    if (!this.swiperConfig['onSlideChangeStart']) {
+      this.swiperConfig['onSlideChangeStart'] = (slider) => {
         this.isAtLast = slider.isEnd;
         this.isAtFirst = slider.isBeginning;
 
@@ -70,8 +74,8 @@ export class SwiperViewComponent implements OnInit, DoCheck {
       };
     }
 
-    if (!config['paginationBulletRender']) {
-      config['paginationBulletRender'] = (index, className) => {
+    if (!this.swiperConfig['paginationBulletRender']) {
+      this.swiperConfig['paginationBulletRender'] = (index, className) => {
         if (index === 0) {
           return '<span class="swiper-pagination-handle" index=' + index + '>' +
             '<span class="' + className + ' ' + className + '-first"></span></span>';
@@ -85,9 +89,7 @@ export class SwiperViewComponent implements OnInit, DoCheck {
       };
     }
 
-    const nativeElement = this.elementRef.nativeElement;
-
-    this.swiper = new Swiper(nativeElement.children[0].children[0], config);
+    this.swiper = new Swiper(nativeElement.children[0].children[0], this.swiperConfig);
   }
 
   rebuildSwiper() {
@@ -102,16 +104,16 @@ export class SwiperViewComponent implements OnInit, DoCheck {
     return this.swiper.activeIndex;
   }
 
-  setIndex(index: number) {
-    this.swiper.slideTo(index);
+  setIndex(index: number, speed?: number, callbacks?: boolean) {
+    this.swiper.slideTo(index, speed, callbacks);
   }
 
-  prevItem() {
-    this.swiper.slidePrev();
+  prevItem(callbacks?: boolean, speed?: number) {
+    this.swiper.slidePrev(callbacks, speed);
   }
 
-  nextItem() {
-    this.swiper.slideNext();
+  nextItem(callbacks?: boolean, speed?: number) {
+    this.swiper.slideNext(callbacks, speed);
   }
 
   stopPlay() {
@@ -122,11 +124,11 @@ export class SwiperViewComponent implements OnInit, DoCheck {
     this.swiper.startAutoplay();
   }
 
-  lockSwiper() {
+  lockSwipes() {
     this.swiper.lockSwipes();
   }
 
-  unlockSwiper() {
+  unlockSwipes() {
     this.swiper.unlockSwipes();
   }
 
