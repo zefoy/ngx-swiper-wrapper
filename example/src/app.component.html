@@ -5,8 +5,8 @@
     You can change the settings of the Swiper area by clicking the buttons on the left panel.
   </div>
 
-  <div class="split-container">
-    <div class="left-container">
+  <div class="horizontal-container">
+    <div class="vertical-container">
       <div class="box-title">Settings</div>
 
       <div class="content-container">
@@ -18,13 +18,13 @@
 
         <div class="action-toggle-button" (click)='decreasePerView()' [class.disabled]="config.slidesPerView <= 1">Slides per view -</div>
 
-        <div class="action-toggle-button" (click)='toggleMousewheelControl()'>{{config.mousewheelControl ? "Disable mouse wheel" : "Enable mouse wheel"}}</div>
+        <div class="action-toggle-button" (click)='toggleKeyboardControl()'>{{config.keyboardControl ? "Disable arrow keys" : "Enable arrow keys"}}</div>
 
-        <div class="action-toggle-button" (click)='toggleArrowKeysEnabled()'>{{config.arrowKeysEnabled ? "Disable arrow keys" : "Enable arrow keys"}}</div>
+        <div class="action-toggle-button" (click)='toggleMousewheelControl()'>{{config.mousewheelControl ? "Disable mouse wheel" : "Enable mouse wheel"}}</div>
       </div>
     </div>
 
-    <div class="right-container">
+    <div class="vertical-container">
       <div class="box-title">Swiper</div>
 
       <div class="content-container">

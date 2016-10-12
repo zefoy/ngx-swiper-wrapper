@@ -1,6 +1,8 @@
+declare var require: any;
+
 const Swiper = require('swiper');
 
-import { Attribute, Component, OnInit, DoCheck, Optional, ElementRef, EventEmitter, HostListener, Inject, Injectable, Input, Output, KeyValueDiffers, ViewEncapsulation } from '@angular/core';
+import { Attribute, Component, OnInit, DoCheck, ElementRef, Optional, Injectable, Input, Output, EventEmitter, KeyValueDiffers, ViewEncapsulation } from '@angular/core';
 
 import { SwiperConfig, SwiperConfigInterface } from './swiper.interfaces';
 
@@ -11,24 +13,21 @@ import { SwiperConfig, SwiperConfigInterface } from './swiper.interfaces';
   styles: [require('swiper-view.component.scss'), require('swiper/dist/css/swiper.min.css')],
   encapsulation: ViewEncapsulation.None
 })
-export class SwiperViewComponent implements OnInit {
+export class SwiperViewComponent implements OnInit, DoCheck {
   public swiper: any;
-  options: any = {};
 
-  isAtLast: boolean = false;
-  isAtFirst: boolean = true;
+  public isAtLast: boolean;
+  public isAtFirst: boolean;
 
-  configDiffer: any = false;
-  overlayMode: boolean = false;
-
-  @Input() pager: any;
+  private configDiff: any;
+  private overlayMode: boolean;
 
   @Input() config : SwiperConfigInterface;
 
   @Output() onSwiperIndex = new EventEmitter<number>();
 
-  constructor( @Attribute('overlay-controls') overlayMode: boolean, @Inject(ElementRef) private elementRef: ElementRef, private differs : KeyValueDiffers, @Optional() private defaults: SwiperConfig) {
-    this.configDiffer = differs.find({}).create(null);
+  constructor(@Attribute('overlay-controls') overlayMode: boolean, private elementRef: ElementRef, private differs : KeyValueDiffers, @Optional() private defaults: SwiperConfig) {
+    this.configDiff = differs.find({}).create(null);
 
     this.overlayMode = (overlayMode !== null && overlayMode !== false) ? true : false;
   }
@@ -38,7 +37,7 @@ export class SwiperViewComponent implements OnInit {
   }
 
   ngDoCheck() {
-    let configChanges = this.configDiffer.diff(this.config);
+    let configChanges = this.configDiff.diff(this.config);
 
     if (configChanges) {
       this.rebuildSwiper();
@@ -50,7 +49,7 @@ export class SwiperViewComponent implements OnInit {
       if (this.swiper) {
         this.swiper.update();
       }
-    });
+    }, 0);
   }
 
   buildSwiper() {
@@ -58,27 +57,21 @@ export class SwiperViewComponent implements OnInit {
 
     config.assign(this.config);
 
-    this.options = {
-      direction: config.direction || "horizontal",
-      loop: false,
-      speed: 600,
-      threshold: 50,
-      spaceBetween: 5,
-      slidesPerView: config.slidesPerView || 1,
-      centeredSlides: true,
-      slideToClickedSlide: true,
-      autoHeight: config.autoHeight || false,
-      mousewheelControl: config.mousewheelControl || false,
-      pagination: config.pagination==false? false : '.swiper-pagination',
+    if (config.pagination === true) {
+      config.pagination = '.spiwer-pagination';
+    }
 
-      onSlideChangeStart: (slider) => {
+    if (!config['onSlideChangeStart']) {
+      config['onSlideChangeStart'] = (slider) => {
         this.isAtLast = slider.isEnd;
         this.isAtFirst = slider.isBeginning;
 
         this.onSwiperIndex.emit(slider.snapIndex);
-      },
+      };
+    }
 
-      paginationBulletRender: (index, className) => {
+    if (!config['paginationBulletRender']) {
+      config['paginationBulletRender'] = (index, className) => {
         if (index === 0) {
           return '<span class="swiper-pagination-handle" index=' + index + '>' +
             '<span class="' + className + ' ' + className + '-first"></span></span>';
@@ -89,12 +82,12 @@ export class SwiperViewComponent implements OnInit {
           return '<span class="swiper-pagination-handle" index=' + index + '>' +
             '<span class="' + className + ' ' + className + '-middle"></span></span>';
         }
-      }
-    };
+      };
+    }
 
     const nativeElement = this.elementRef.nativeElement;
 
-    this.swiper = new Swiper(nativeElement.children[0].children[0], this.options);
+    this.swiper = new Swiper(nativeElement.children[0].children[0], config);
   }
 
   rebuildSwiper() {
@@ -121,28 +114,23 @@ export class SwiperViewComponent implements OnInit {
     this.swiper.slideNext();
   }
 
-  onChangeIndex(event: any) {
-    this.setIndex(event.target.attributes.index.value);
+  stopPlay() {
+    this.swiper.stopAutoplay();
   }
 
-  @HostListener('document:keyup', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    if (this.config && this.config.arrowKeysEnabled != false) {
-      let left = 37, up = 38, right = 39, down = 40;
+  startPlay() {
+    this.swiper.startAutoplay();
+  }
 
-      if (this.config.direction == 'vertical') {
-        if (event.keyCode == down) {
-          this.nextItem();
-        } else if (event.keyCode == up) {
-          this.prevItem();
-        }
-      } else {
-        if (event.keyCode == right) {
-          this.nextItem();
-        } else if (event.keyCode == left) {
-          this.prevItem();
-        }
-      }
-    }
+  lockSwiper() {
+    this.swiper.lockSwipes();
+  }
+
+  unlockSwiper() {
+    this.swiper.unlockSwipes();
+  }
+
+  onIndexSelect(event: any) {
+    this.setIndex(event.target.attributes.index.value);
   }
 }

@@ -8,8 +8,11 @@ import { AppComponent } from './app.component';
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
+  threshold: 50,
+  spaceBetween: 5,
   slidesPerView: 1,
-  arrowKeysEnabled: true
+  centeredSlides: true,
+  keyboardControl: true
 };
 
 @NgModule({

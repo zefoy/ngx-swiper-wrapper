@@ -24,16 +24,18 @@ export class AppComponent {
     return false;
   }
 
-  increasePerView(): boolean {
-    if (this.config.slidesPerView < 6)
+  increaseItems(): boolean {
+    if (this.config.slidesPerView < 6) {
       this.config.slidesPerView++;
+    }
 
     return false;
   }
 
-  decreasePerView(): boolean {
-    if (this.config.slidesPerView > 1)
+  decreaseItems(): boolean {
+    if (this.config.slidesPerView > 1) {
       this.config.slidesPerView--;
+    }
 
     return false;
   }
@@ -56,8 +58,8 @@ export class AppComponent {
     return false;
   }
 
-  toggleArrowKeysEnabled(): boolean {
-    this.config.arrowKeysEnabled = !this.config.arrowKeysEnabled;
+  toggleKeyboardControl(): boolean {
+    this.config.keyboardControl = !this.config.keyboardControl;
 
     return false;
   }

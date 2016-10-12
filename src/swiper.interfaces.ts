@@ -74,7 +74,7 @@ export interface SwiperConfigInterface {
 
   uniqueNavElements?: boolean,
 
-  pagination?: boolean,
+  pagination?: any | string,
   paginationType?: string,
   paginationHide?: boolean,
   paginationElement?: string,
@@ -253,7 +253,7 @@ export class SwiperConfig implements SwiperConfigInterface {
 
   uniqueNavElements: boolean;
 
-  pagination: boolean;
+  pagination: any | string;
   paginationType: string;
   paginationHide: boolean;
   paginationElement: string;

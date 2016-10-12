@@ -1,75 +1,83 @@
-.app-title,
+.app-title {
+  font-size: 24px;
+}
+
 .box-title {
-  font-size: 1.8em;
+  font-size: 20px;
 }
 
 .box-container {
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
-  padding: 32px;
-  max-width: 800px;
-  max-height: 600px;
+  width: 800px;
+  height: 500px;
+  max-width: 90%;
+  max-height: 90%;
+  padding: 24px;
+  margin: 24px auto;
   border-radius: 4px;
-  margin: 32px auto;
 
   color: #555;
-  background-color: #eee;
   font-family: sans-serif;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18), 0 6px 6px rgba(0, 0, 0, 0.25);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.18),
+    0 6px 6px rgba(0, 0, 0, 0.25);
+  background-color: #eee;
 }
 
 .info-container {
-  padding: 16px;
-  line-height: 1.5em;
-}
+  padding: 12px 16px;
 
-.left-container {
-  display: flex;
-  align-items: stretch;
-  flex: auto 0 1;
-  flex-direction: column;
-}
-
-.right-container {
-  display: flex;
-  align-items: stretch;
-  flex: auto 1 1;
-  flex-direction: column;
-}
-
-.split-container {
-  display: flex;
-  align-items: stretch;
-  flex: auto 1 1;
-  flex-direction: row;
+  line-height: 24px;
 }
 
 .content-container {
   position: relative;
+
   display: flex;
-  align-items: stretch;
-  flex: auto 1 1;
+  overflow: auto;
+  flex: 1 1 auto;
   flex-direction: column;
-  padding: 16px;
-  border-radius: 4px;
+  align-items: stretch;
+  padding: 16px 24px;
   margin: 8px 16px;
+  border-radius: 4px;
 
   background-color: #fff;
 }
 
+.vertical-container {
+  display: flex;
+  flex: 1 1 50%;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.horizontal-container {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+@media all and (max-width: 800px) {
+  .horizontal-container {
+    flex-direction: column;
+  }
+}
+
 .action-toggle-button {
   display: flex;
-  width: 150px;
-  height: 40px;
-  min-width: 175px;
-  max-width: 175px;
+  box-sizing: border-box;
+  flex: 1 1 auto;
   align-items: center;
   justify-content: center;
+  width: 100%;
   padding: 16px;
+  margin: 8px 0;
   border-radius: 4px;
   border: 1px solid #555;
-  margin: 8px;
 
   cursor: pointer;
   font-size: 14px;

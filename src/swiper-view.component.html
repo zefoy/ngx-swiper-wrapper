@@ -10,5 +10,5 @@
 
   <div *ngIf="options?.direction == 'vertical'" class="swiper-more" [ngClass]="{'disabled': isAtLast }" (click)="nextItem()">Show more</div>
 
-  <div [hidden]="!options?.pagination" class="swiper-pagination" (click)="onChangeIndex($event)"></div>
+  <div [hidden]="!options?.pagination" class="swiper-pagination" (click)="onIndexSelect($event)"></div>
 </div>

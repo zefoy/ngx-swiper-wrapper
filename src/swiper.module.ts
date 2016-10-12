@@ -26,18 +26,18 @@ export class SwiperModule {
     return {
       ngModule: SwiperModule,
       providers: [
-          {
-            provide: SWIPER_CONFIG,
-            useValue: config ? config : {}
-          },
-          {
-            provide: SwiperConfig,
-            useFactory: provideSwiperConfig,
-            deps: [
-              SWIPER_CONFIG
-            ]
-          }
-        ]
+        {
+          provide: SWIPER_CONFIG,
+          useValue: config ? config : {}
+        },
+        {
+          provide: SwiperConfig,
+          useFactory: provideSwiperConfig,
+          deps: [
+            SWIPER_CONFIG
+          ]
+        }
+      ]
     };
   }
 }
