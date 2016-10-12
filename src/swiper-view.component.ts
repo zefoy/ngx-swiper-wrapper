@@ -12,7 +12,7 @@ import { SwiperConfig, SwiperConfigInterface } from './swiper.interfaces';
   encapsulation: ViewEncapsulation.None
 })
 export class SwiperViewComponent implements OnInit {
-  swiper: any;
+  public swiper: any;
   options: any = {};
 
   isAtLast: boolean = false;

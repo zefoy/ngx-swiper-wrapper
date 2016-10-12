@@ -19,7 +19,7 @@ See a live example application <a href="https://zefoy.github.io/angular2-swiper-
 
 ### Installing and usage
 
-    npm install angular2-dropzone-wrapper --save-dev
+    npm install angular2-swiper-wrapper --save-dev
 
 ##### Load the module for your app (with global configuration):
 
@@ -30,7 +30,7 @@ import { SwiperConfigInterface } from 'angular2-swiper-wrapper';
 const SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
   slidesPerView: 1,
-  arrowKeysEnabled: true
+  keyboardControl: true
 };
 
 @NgModule({
@@ -61,7 +61,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
 ##### Available configuration options (custom / global configuration):
 
 ```javascript
-arrowKeysEnabled  // Time for resetting upload area after canceling (Default: null).
+keyboardControl   // Enables navigation through arrow keys (Default: false).
 
 ```
 
