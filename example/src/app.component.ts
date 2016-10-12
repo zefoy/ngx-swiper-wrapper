@@ -15,7 +15,8 @@ export class AppComponent {
   private items = ["First slide", "Second slide", "Third slide", "Fourth slide", "Fifth slide", "Sixth slide"];
 
   private config: SwiperConfigInterface = {
-    pagination: true
+    pagination: true,
+    slidesPerView: 1
   };
 
   refresh(): boolean {
@@ -26,7 +27,7 @@ export class AppComponent {
 
   increaseItems(): boolean {
     if (this.config.slidesPerView < this.items.length) {
-      this.config.slidesPerView++;
+      this.config.slidesPerView = +this.config.slidesPerView + 1;
     }
 
     return false;
@@ -34,7 +35,7 @@ export class AppComponent {
 
   decreaseItems(): boolean {
     if (this.config.slidesPerView > 1) {
-      this.config.slidesPerView--;
+      this.config.slidesPerView = +this.config.slidesPerView - 1;
     }
 
     return false;
