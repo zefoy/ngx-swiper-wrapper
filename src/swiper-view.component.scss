@@ -5,11 +5,12 @@
   margin: 0;
 
   .swiper-prev {
-    left: 5%;
+    left: 3%;
   }
 
   .swiper-next {
-    right: 5%;
+    right: 3%;
+
     transform: rotate(180deg);
   }
 
@@ -44,11 +45,13 @@
 
     &::after {
       top: 55px;
+
       transform: rotate(70deg) skew(-20deg);
     }
 
     &::before {
       top: 18px;
+
       transform: rotate(-70deg) skew(20deg);
     }
 
