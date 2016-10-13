@@ -15,17 +15,14 @@ export class AppComponent {
   private items = ["First slide", "Second slide", "Third slide", "Fourth slide", "Fifth slide", "Sixth slide"];
 
   private config: SwiperConfigInterface = {
+    direction: 'horizontal',
     pagination: true,
-    slidesPerView: 1
+    slidesPerView: 1,
+    keyboardControl: true,
+    mousewheelControl: true
   };
 
-  refresh(): boolean {
-    this.swiperView.rebuildSwiper();
-
-    return false;
-  }
-
-  increaseItems(): boolean {
+  increasePerView(): boolean {
     if (this.config.slidesPerView < this.items.length) {
       this.config.slidesPerView = +this.config.slidesPerView + 1;
     }
@@ -33,7 +30,7 @@ export class AppComponent {
     return false;
   }
 
-  decreaseItems(): boolean {
+  decreasePerView(): boolean {
     if (this.config.slidesPerView > 1) {
       this.config.slidesPerView = +this.config.slidesPerView - 1;
     }

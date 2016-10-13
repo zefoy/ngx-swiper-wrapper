@@ -41,7 +41,7 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
     options.assign(this.config); // Custom config
 
     if (options.pagination === true) {
-      options.pagination = '.spiwer-pagination';
+      options.pagination = '.swiper-pagination';
     }
 
     if (!options['onSlideChangeStart']) {
