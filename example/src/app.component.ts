@@ -17,6 +17,8 @@ export class AppComponent {
   private config: SwiperConfigInterface = {
     direction: 'horizontal',
     pagination: true,
+    prevButton: true,
+    nextButton: true,
     slidesPerView: 1,
     keyboardControl: true,
     mousewheelControl: true
@@ -44,14 +46,16 @@ export class AppComponent {
     return false;
   }
 
-  togglePagination(): boolean {
-    this.config.pagination = !this.config.pagination;
+  toggleAutoHeight(): boolean {
+    this.config.autoHeight = !this.config.autoHeight;
 
     return false;
   }
 
-  toggleAutoHeight(): boolean {
-    this.config.autoHeight = !this.config.autoHeight;
+  toggleOverlayControls(): boolean {
+    this.config.pagination = !this.config.pagination;
+    this.config.prevButton = !this.config.prevButton;
+    this.config.nextButton = !this.config.nextButton;
 
     return false;
   }

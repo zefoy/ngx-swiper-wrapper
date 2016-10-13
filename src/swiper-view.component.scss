@@ -2,21 +2,14 @@
   overflow: visible;
   width: 100%;
   height: 100%;
-  margin: 0 0 30px;
-
-  &:hover {
-    .swiper-prev,
-    .swiper-next {
-      opacity: 1;
-    }
-  }
+  margin: 0;
 
   .swiper-prev {
-    left: -24px;
+    left: 5%;
   }
 
   .swiper-next {
-    right: -24px;
+    right: 5%;
     transform: rotate(180deg);
   }
 
@@ -24,17 +17,15 @@
   .swiper-next {
     position: absolute;
     z-index: 10;
-    top: 0;
+    top: 50%;
 
-    width: 20px;
-    height: 100%;
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    width: 40px;
+    height: 80px;
+    margin-top: -40px;
+    border: none;
 
-    opacity: 0;
     cursor: pointer;
-    background-color: white;
-
-    transition: opacity 0.5s linear;
+    background-color: transparent;
 
     &::after,
     &::before {
@@ -43,22 +34,21 @@
       position: absolute;
       top: 50%;
 
-      width: 24px;
-      height: 4px;
-      margin-left: -4px;
+      width: 40px;
+      height: 8px;
 
       background-color: rgba(0, 0, 0, 0.2);
 
-      transition: background-color 0.5s ease;
+      transition: background-color 500ms ease;
     }
 
     &::after {
-      margin-top: 11px;
+      top: 55px;
       transform: rotate(70deg) skew(-20deg);
     }
 
     &::before {
-      margin-top: -11px;
+      top: 18px;
       transform: rotate(-70deg) skew(20deg);
     }
 
@@ -86,16 +76,19 @@
     border: 1px solid white;
 
     cursor: pointer;
-    text-align: center;
     color: #555;
+    text-align: center;
     background-color: white;
 
-    transition: border-color 0.3s ease, background-color 0.3s ease;
+    transition:
+      border-color 300ms ease,
+      background-color 300ms ease;
 
     &:hover {
-      font-weight: bold;
-      color: #555;
       border-color: #aaa;
+
+      color: #555;
+      font-weight: bold;
       background-color: #eee;
     }
   }
@@ -106,6 +99,8 @@
   }
 
   .swiper-pagination {
+    bottom: 8px;
+
     width: 100%;
 
     .swiper-pagination-handle {
@@ -121,53 +116,9 @@
 
       .swiper-pagination-bullet-last,
       .swiper-pagination-bullet-first {
-        border: 1px solid rgba(0, 0, 0, 0.5);
         margin: -1px 5px !important;
+        border: 1px solid rgba(0, 0, 0, 0.5);
       }
-    }
-  }
-
-  &.overlay-controls {
-    margin: 0;
-
-    .swiper-prev {
-      left: 5%;
-    }
-
-    .swiper-next {
-      right: 5%;
-    }
-
-    .swiper-prev,
-    .swiper-next {
-      top: 50%;
-
-      width: 45px;
-      height: 90px;
-      border: none;
-      margin-top: -90px;
-
-      opacity: 1;
-      background-color: transparent;
-
-      &::after,
-      &::before {
-        width: 45px;
-        height: 16px;
-        margin: 0;
-      }
-
-      &::after {
-        top: 58px;
-      }
-
-      &::before {
-        top: 16px;
-      }
-    }
-
-    .swiper-pagination {
-      bottom: 8px;
     }
   }
 }

@@ -2,7 +2,7 @@ declare var require: any;
 
 const Swiper = require('swiper');
 
-import { Attribute, Component, OnInit, DoCheck, OnDestroy, OnChanges, SimpleChanges, ElementRef, Optional, Injectable, Input, Output, EventEmitter, KeyValueDiffers, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, DoCheck, OnDestroy, OnChanges, SimpleChanges, ElementRef, Optional, Injectable, Input, Output, EventEmitter, KeyValueDiffers, ViewEncapsulation } from '@angular/core';
 
 import { SwiperConfig, SwiperConfigInterface } from './swiper.interfaces';
 
@@ -21,7 +21,8 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
 
   private configDiff: any;
 
-  private overlayMode: boolean;
+  private showButtons: boolean;
+  private showPagination: boolean;
 
   @Input() disabled: boolean = false;
 
@@ -29,18 +30,33 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
 
   @Output() indexChange = new EventEmitter<number>();
 
-  constructor(@Attribute('overlay-controls') overlayMode: boolean, private elementRef: ElementRef, private differs : KeyValueDiffers, @Optional() private defaults: SwiperConfig) {
-    this.overlayMode = (overlayMode !== null && overlayMode !== false) ? true : false;
-  }
+  constructor(private elementRef: ElementRef, private differs : KeyValueDiffers, @Optional() private defaults: SwiperConfig) {}
 
   ngOnInit() {
+    this.showButtons = false;
+    this.showPagination = false;
+
     let element = this.elementRef.nativeElement;
 
     let options = new SwiperConfig(this.defaults);
 
     options.assign(this.config); // Custom config
 
+    if (options.prevButton === true) {
+      this.showButtons = true;
+
+      options.prevButton = '.swiper-prev';
+    }
+
+    if (options.nextButton === true) {
+      this.showButtons = true;
+
+      options.nextButton = '.swiper-next';
+    }
+
     if (options.pagination === true) {
+      this.showPagination = true;
+
       options.pagination = '.swiper-pagination';
     }
 

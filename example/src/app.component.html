@@ -10,13 +10,13 @@
       <div class="box-title">Settings</div>
 
       <div class="content-container">
-        <div class="action-toggle-button" (click)='togglePagination()'>{{config.pagination ? "Disable pagination" : "Enable pagination"}}</div>
-
         <div class="action-toggle-button" (click)='toggleDirection()'>{{(config.direction == "horizontal") ? "Change to vertical" : "Change to horizontal"}}</div>
 
         <div class="action-toggle-button" (click)='increasePerView()' [class.disabled]="config.slidesPerView >= items.length">Slides per view +</div>
 
         <div class="action-toggle-button" (click)='decreasePerView()' [class.disabled]="config.slidesPerView <= 1">Slides per view -</div>
+
+        <div class="action-toggle-button" (click)='toggleOverlayControls()'>{{config.pagination ? "Disable controls" : "Enable controls"}}</div>
 
         <div class="action-toggle-button" (click)='toggleKeyboardControl()'>{{config.keyboardControl ? "Disable arrow keys" : "Enable arrow keys"}}</div>
 
