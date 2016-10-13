@@ -34005,7 +34005,7 @@ var SwiperViewComponent = (function () {
         }
         this.swiper = new Swiper(element.children[0].children[0], options);
         if (!this.configDiff) {
-            this.configDiff = this.differs.find(this.config).create(null);
+            this.configDiff = this.differs.find(this.config || {}).create(null);
         }
     };
     SwiperViewComponent.prototype.ngDoCheck = function () {
