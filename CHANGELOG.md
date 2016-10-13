@@ -1,3 +1,7 @@
+0.8.1 Bug fix release
+
+  - Fixed error when config was not used
+
 0.8.0 Feature release
 
   - Added support for all the swiper options

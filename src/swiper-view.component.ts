@@ -87,7 +87,7 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
     this.swiper = new Swiper(element.children[0].children[0], options);
 
     if (!this.configDiff) {
-      this.configDiff = this.differs.find(this.config).create(null);
+      this.configDiff = this.differs.find(this.config || {}).create(null);
     }
   }
 

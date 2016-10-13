@@ -3,7 +3,7 @@
   "description": "Angular 2 wrapper library for swiper",
   "bugs": "https://github.com/zefoy/angular2-swiper-wrapper/issues",
   "license": "MIT",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "main": "./lib/index.js",
   "typings": "./lib/src/index.d.ts",
   "files": [
