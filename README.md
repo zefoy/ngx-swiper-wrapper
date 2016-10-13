@@ -37,7 +37,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
   ...
   imports: [
     ...
-    SwiperModule.forRoot(SWIPER_CONFIG,)
+    SwiperModule.forRoot(SWIPER_CONFIG)
   ]
 })
 ```
