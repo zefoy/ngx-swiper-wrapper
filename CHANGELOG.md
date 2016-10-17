@@ -1,3 +1,7 @@
+0.9.1 Bug fix release
+
+  - Fixed index change event for the scrollbar
+
 0.9.0 Feature release
 
   - Added default scrollbar element

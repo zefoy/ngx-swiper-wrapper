@@ -77,6 +77,15 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
       };
     }
 
+    if (!options['onScrollbarDragEnd']) {
+      options['onScrollbarDragEnd'] = (swiper) => {
+        this.isAtLast = swiper.isEnd;
+        this.isAtFirst = swiper.isBeginning;
+
+        this.indexChange.emit(swiper.snapIndex);
+      };
+    }
+
     if (!options['paginationBulletRender']) {
       options['paginationBulletRender'] = (index, className) => {
         if (index === 0) {
