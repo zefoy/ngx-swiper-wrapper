@@ -33964,6 +33964,7 @@ var SwiperViewComponent = (function () {
     SwiperViewComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.showButtons = false;
+        this.showScrollbar = false;
         this.showPagination = false;
         var element = this.elementRef.nativeElement;
         var options = new swiper_interfaces_1.SwiperConfig(this.defaults);
@@ -33976,15 +33977,19 @@ var SwiperViewComponent = (function () {
             this.showButtons = true;
             options.nextButton = '.swiper-next';
         }
+        if (options.scrollbar === true) {
+            this.showScrollbar = true;
+            options.scrollbar = '.swiper-scrollbar';
+        }
         if (options.pagination === true) {
             this.showPagination = true;
             options.pagination = '.swiper-pagination';
         }
         if (!options['onSlideChangeStart']) {
-            options['onSlideChangeStart'] = function (slider) {
-                _this.isAtLast = slider.isEnd;
-                _this.isAtFirst = slider.isBeginning;
-                _this.indexChange.emit(slider.snapIndex);
+            options['onSlideChangeStart'] = function (swiper) {
+                _this.isAtLast = swiper.isEnd;
+                _this.isAtFirst = swiper.isBeginning;
+                _this.indexChange.emit(swiper.snapIndex);
             };
         }
         if (!options['paginationBulletRender']) {
@@ -34013,6 +34018,7 @@ var SwiperViewComponent = (function () {
         if (changes) {
             this.ngOnDestroy();
             this.ngOnInit();
+            this.update();
         }
     };
     SwiperViewComponent.prototype.ngOnDestroy = function () {
@@ -34035,6 +34041,8 @@ var SwiperViewComponent = (function () {
         setTimeout(function () {
             if (_this.swiper) {
                 _this.swiper.update();
+                _this.isAtLast = _this.swiper.isEnd;
+                _this.isAtFirst = _this.swiper.isBeginning;
             }
         }, 0);
     };
@@ -34260,7 +34268,7 @@ module.exports = ".swiper-slide {\n  display: flex;\n  overflow: auto;\n  flex-d
 /* 6 */
 /***/ function(module, exports) {
 
-module.exports = ".swiper-container {\n  overflow: visible;\n  width: 100%;\n  height: 100%;\n  margin: 0; }\n  .swiper-container .swiper-prev {\n    left: 3%; }\n  .swiper-container .swiper-next {\n    right: 3%;\n    transform: rotate(180deg); }\n  .swiper-container .swiper-prev,\n  .swiper-container .swiper-next {\n    position: absolute;\n    z-index: 10;\n    top: 50%;\n    width: 40px;\n    height: 80px;\n    margin-top: -40px;\n    border: none;\n    cursor: pointer;\n    background-color: transparent; }\n    .swiper-container .swiper-prev::after, .swiper-container .swiper-prev::before,\n    .swiper-container .swiper-next::after,\n    .swiper-container .swiper-next::before {\n      content: ' ';\n      position: absolute;\n      top: 50%;\n      width: 40px;\n      height: 8px;\n      background-color: rgba(0, 0, 0, 0.2);\n      transition: background-color 500ms ease; }\n    .swiper-container .swiper-prev::after,\n    .swiper-container .swiper-next::after {\n      top: 55px;\n      transform: rotate(70deg) skew(-20deg); }\n    .swiper-container .swiper-prev::before,\n    .swiper-container .swiper-next::before {\n      top: 18px;\n      transform: rotate(-70deg) skew(20deg); }\n    .swiper-container .swiper-prev:hover::after, .swiper-container .swiper-prev:hover::before,\n    .swiper-container .swiper-next:hover::after,\n    .swiper-container .swiper-next:hover::before {\n      background-color: rgba(0, 0, 0, 0.5); }\n    .swiper-container .swiper-prev.disabled,\n    .swiper-container .swiper-next.disabled {\n      cursor: default; }\n      .swiper-container .swiper-prev.disabled::after, .swiper-container .swiper-prev.disabled::before,\n      .swiper-container .swiper-next.disabled::after,\n      .swiper-container .swiper-next.disabled::before {\n        background-color: rgba(0, 0, 0, 0.1); }\n  .swiper-container .swiper-more {\n    box-sizing: border-box;\n    width: 100%;\n    padding: 8px;\n    border: 1px solid white;\n    cursor: pointer;\n    color: #555;\n    text-align: center;\n    background-color: white;\n    transition: border-color 300ms ease, background-color 300ms ease; }\n    .swiper-container .swiper-more:hover {\n      border-color: #aaa;\n      color: #555;\n      font-weight: bold;\n      background-color: #eee; }\n  .swiper-container .swiper-content {\n    overflow: hidden;\n    height: 100%; }\n  .swiper-container .swiper-pagination {\n    bottom: 8px;\n    width: 100%; }\n    .swiper-container .swiper-pagination .swiper-pagination-handle {\n      padding: 0 3px;\n      cursor: pointer; }\n      .swiper-container .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet {\n        margin: 0;\n        pointer-events: none; }\n      .swiper-container .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet-last,\n      .swiper-container .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet-first {\n        margin: -1px 5px !important;\n        border: 1px solid rgba(0, 0, 0, 0.5); }\n"
+module.exports = ".swiper-container {\n  overflow: visible;\n  width: 100%;\n  height: 100%;\n  margin: 0; }\n  .swiper-container .swiper-prev {\n    left: 3%; }\n  .swiper-container .swiper-next {\n    right: 3%;\n    transform: rotate(180deg); }\n  .swiper-container .swiper-prev,\n  .swiper-container .swiper-next {\n    position: absolute;\n    z-index: 10;\n    top: 50%;\n    width: 40px;\n    height: 80px;\n    margin-top: -40px;\n    border: none;\n    cursor: pointer;\n    background-color: transparent; }\n    .swiper-container .swiper-prev::after, .swiper-container .swiper-prev::before,\n    .swiper-container .swiper-next::after,\n    .swiper-container .swiper-next::before {\n      content: ' ';\n      position: absolute;\n      top: 50%;\n      width: 40px;\n      height: 8px;\n      background-color: rgba(0, 0, 0, 0.2);\n      transition: background-color 500ms ease; }\n    .swiper-container .swiper-prev::after,\n    .swiper-container .swiper-next::after {\n      top: 55px;\n      transform: rotate(70deg) skew(-20deg); }\n    .swiper-container .swiper-prev::before,\n    .swiper-container .swiper-next::before {\n      top: 18px;\n      transform: rotate(-70deg) skew(20deg); }\n    .swiper-container .swiper-prev:hover::after, .swiper-container .swiper-prev:hover::before,\n    .swiper-container .swiper-next:hover::after,\n    .swiper-container .swiper-next:hover::before {\n      background-color: rgba(0, 0, 0, 0.5); }\n    .swiper-container .swiper-prev.disabled,\n    .swiper-container .swiper-next.disabled {\n      cursor: default; }\n      .swiper-container .swiper-prev.disabled::after, .swiper-container .swiper-prev.disabled::before,\n      .swiper-container .swiper-next.disabled::after,\n      .swiper-container .swiper-next.disabled::before {\n        background-color: rgba(0, 0, 0, 0.1); }\n  .swiper-container .swiper-more {\n    box-sizing: border-box;\n    width: 100%;\n    padding: 8px;\n    border: 1px solid white;\n    cursor: pointer;\n    color: #555;\n    text-align: center;\n    background-color: white;\n    transition: border-color 300ms ease, background-color 300ms ease; }\n    .swiper-container .swiper-more:hover {\n      border-color: #aaa;\n      color: #555;\n      font-weight: bold;\n      background-color: #eee; }\n  .swiper-container .swiper-content {\n    overflow: hidden;\n    height: 100%; }\n  .swiper-container .swiper-scrollbar {\n    position: absolute;\n    z-index: 10;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    opacity: 1;\n    width: 8px;\n    height: 100%;\n    cursor: pointer;\n    transition: width 250ms ease-in-out, opacity 250ms ease-in-out !important; }\n    .swiper-container .swiper-scrollbar:hover {\n      width: 16px; }\n  .swiper-container .swiper-pagination {\n    bottom: 8px;\n    width: 100%; }\n    .swiper-container .swiper-pagination .swiper-pagination-handle {\n      padding: 0 3px;\n      cursor: pointer; }\n      .swiper-container .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet {\n        margin: 0;\n        pointer-events: none; }\n      .swiper-container .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet-last,\n      .swiper-container .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet-first {\n        margin: -1px 1px !important;\n        border: 1px solid rgba(0, 0, 0, 0.5); }\n"
 
 /***/ },
 /* 7 */
@@ -34278,7 +34286,7 @@ module.exports = "<div class=\"swiper-slide\">\n  <ng-content></ng-content>\n</d
 /* 9 */
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"swiper-container\">\n  <div class=\"swiper-content\">\n    <div class=\"swiper-wrapper\">\n      <ng-content></ng-content>\n    </div>\n  </div>\n\n  <div [hidden]=\"!showButtons\" class=\"swiper-prev\" [ngClass]=\"{'disabled': isAtFirst }\"></div>\n  <div [hidden]=\"!showButtons\" class=\"swiper-next\" [ngClass]=\"{'disabled': isAtLast }\"></div>\n\n  <div [hidden]=\"!showPagination\" class=\"swiper-pagination\" (click)=\"onIndexSelect($event)\"></div>\n</div>\n"
+module.exports = "<div class=\"swiper-container\">\n  <div class=\"swiper-content\">\n    <div class=\"swiper-wrapper\">\n      <ng-content></ng-content>\n    </div>\n  </div>\n\n  <div [hidden]=\"!showScrollbar\" class=\"swiper-scrollbar\"></div>\n\n  <div [hidden]=\"!showButtons\" class=\"swiper-prev\" [ngClass]=\"{'disabled': isAtFirst }\"></div>\n  <div [hidden]=\"!showButtons\" class=\"swiper-next\" [ngClass]=\"{'disabled': isAtLast }\"></div>\n\n  <div [hidden]=\"!showPagination\" class=\"swiper-pagination\" (click)=\"onIndexSelect($event)\"></div>\n</div>\n"
 
 /***/ },
 /* 10 */
@@ -49376,13 +49384,17 @@ var AppComponent = (function () {
         this.title = 'Simple example app for the angular2-swiper-wrapper';
         this.items = ["First slide", "Second slide", "Third slide", "Fourth slide", "Fifth slide", "Sixth slide"];
         this.config = {
+            scrollbar: false,
             direction: 'horizontal',
             pagination: true,
             prevButton: true,
             nextButton: true,
             slidesPerView: 1,
+            scrollbarHide: false,
             keyboardControl: true,
-            mousewheelControl: true
+            mousewheelControl: true,
+            scrollbarDraggable: true,
+            scrollbarSnapOnRelease: true,
         };
     }
     AppComponent.prototype.increasePerView = function () {
@@ -49399,6 +49411,9 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.toggleDirection = function () {
         this.config.direction = (this.config.direction == "horizontal") ? "vertical" : "horizontal";
+        this.config.scrollbar = (this.config.direction == "vertical") ? this.config.pagination : false;
+        this.config.nextButton = (this.config.direction == "horizontal") ? this.config.pagination : false;
+        this.config.prevButton = (this.config.direction == "horizontal") ? this.config.pagination : false;
         return false;
     };
     AppComponent.prototype.toggleAutoHeight = function () {
@@ -49407,8 +49422,9 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.toggleOverlayControls = function () {
         this.config.pagination = !this.config.pagination;
-        this.config.prevButton = !this.config.prevButton;
-        this.config.nextButton = !this.config.nextButton;
+        this.config.scrollbar = (this.config.direction == "vertical") ? this.config.pagination : false;
+        this.config.nextButton = (this.config.direction == "horizontal") ? this.config.pagination : false;
+        this.config.prevButton = (this.config.direction == "horizontal") ? this.config.pagination : false;
         return false;
     };
     AppComponent.prototype.toggleKeyboardControl = function () {
