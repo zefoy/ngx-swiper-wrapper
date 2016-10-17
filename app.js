@@ -33992,6 +33992,13 @@ var SwiperViewComponent = (function () {
                 _this.indexChange.emit(swiper.snapIndex);
             };
         }
+        if (!options['onScrollbarDragEnd']) {
+            options['onScrollbarDragEnd'] = function (swiper) {
+                _this.isAtLast = swiper.isEnd;
+                _this.isAtFirst = swiper.isBeginning;
+                _this.indexChange.emit(swiper.snapIndex);
+            };
+        }
         if (!options['paginationBulletRender']) {
             options['paginationBulletRender'] = function (index, className) {
                 if (index === 0) {
