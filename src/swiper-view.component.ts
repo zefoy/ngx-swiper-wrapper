@@ -22,6 +22,7 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
   private configDiff: any;
 
   private showButtons: boolean;
+  private showScrollbar: boolean;
   private showPagination: boolean;
 
   @Input() disabled: boolean = false;
@@ -34,6 +35,7 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
 
   ngOnInit() {
     this.showButtons = false;
+    this.showScrollbar = false;
     this.showPagination = false;
 
     let element = this.elementRef.nativeElement;
@@ -54,6 +56,12 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
       options.nextButton = '.swiper-next';
     }
 
+    if (options.scrollbar === true) {
+      this.showScrollbar = true;
+
+      options.scrollbar = '.swiper-scrollbar';
+    }
+
     if (options.pagination === true) {
       this.showPagination = true;
 
@@ -61,11 +69,11 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
     }
 
     if (!options['onSlideChangeStart']) {
-      options['onSlideChangeStart'] = (slider) => {
-        this.isAtLast = slider.isEnd;
-        this.isAtFirst = slider.isBeginning;
+      options['onSlideChangeStart'] = (swiper) => {
+        this.isAtLast = swiper.isEnd;
+        this.isAtFirst = swiper.isBeginning;
 
-        this.indexChange.emit(slider.snapIndex);
+        this.indexChange.emit(swiper.snapIndex);
       };
     }
 
@@ -98,6 +106,8 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
       this.ngOnDestroy();
 
       this.ngOnInit();
+
+      this.update();
     }
   }
 
@@ -121,6 +131,9 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
     setTimeout(() => {
       if (this.swiper) {
         this.swiper.update();
+
+        this.isAtLast = this.swiper.isEnd;
+        this.isAtFirst = this.swiper.isBeginning;
       }
     }, 0);
   }

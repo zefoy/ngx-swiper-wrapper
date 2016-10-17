@@ -15,13 +15,17 @@ export class AppComponent {
   private items = ["First slide", "Second slide", "Third slide", "Fourth slide", "Fifth slide", "Sixth slide"];
 
   private config: SwiperConfigInterface = {
+    scrollbar: false,
     direction: 'horizontal',
     pagination: true,
     prevButton: true,
     nextButton: true,
     slidesPerView: 1,
+    scrollbarHide: false,
     keyboardControl: true,
-    mousewheelControl: true
+    mousewheelControl: true,
+    scrollbarDraggable: true,
+    scrollbarSnapOnRelease: true,
   };
 
   increasePerView(): boolean {
@@ -43,6 +47,11 @@ export class AppComponent {
   toggleDirection(): boolean {
     this.config.direction = (this.config.direction == "horizontal") ? "vertical" : "horizontal";
 
+    this.config.scrollbar = (this.config.direction == "vertical") ? this.config.pagination : false;
+
+    this.config.nextButton = (this.config.direction == "horizontal") ? this.config.pagination : false;
+    this.config.prevButton = (this.config.direction == "horizontal") ? this.config.pagination : false;
+
     return false;
   }
 
@@ -54,8 +63,11 @@ export class AppComponent {
 
   toggleOverlayControls(): boolean {
     this.config.pagination = !this.config.pagination;
-    this.config.prevButton = !this.config.prevButton;
-    this.config.nextButton = !this.config.nextButton;
+
+    this.config.scrollbar = (this.config.direction == "vertical") ? this.config.pagination : false;
+
+    this.config.nextButton = (this.config.direction == "horizontal") ? this.config.pagination : false;
+    this.config.prevButton = (this.config.direction == "horizontal") ? this.config.pagination : false;
 
     return false;
   }

@@ -101,6 +101,28 @@
     height: 100%;
   }
 
+  .swiper-scrollbar {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    opacity: 1;
+    width: 8px;
+    height: 100%;
+
+    cursor: pointer;
+
+    transition:
+      width 250ms ease-in-out,
+      opacity 250ms ease-in-out !important;
+
+    &:hover {
+      width: 16px;
+    }
+  }
+
   .swiper-pagination {
     bottom: 8px;
 
@@ -119,7 +141,7 @@
 
       .swiper-pagination-bullet-last,
       .swiper-pagination-bullet-first {
-        margin: -1px 5px !important;
+        margin: -1px 1px !important;
         border: 1px solid rgba(0, 0, 0, 0.5);
       }
     }

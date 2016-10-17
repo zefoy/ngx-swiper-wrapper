@@ -1,3 +1,7 @@
+0.9.0 Feature release
+
+  - Added default scrollbar element
+
 0.8.1 Bug fix release
 
   - Fixed error when config was not used

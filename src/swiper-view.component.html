@@ -5,6 +5,8 @@
     </div>
   </div>
 
+  <div [hidden]="!showScrollbar" class="swiper-scrollbar"></div>
+
   <div [hidden]="!showButtons" class="swiper-prev" [ngClass]="{'disabled': isAtFirst }"></div>
   <div [hidden]="!showButtons" class="swiper-next" [ngClass]="{'disabled': isAtLast }"></div>
 
