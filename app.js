@@ -34269,7 +34269,7 @@ exports.provideSwiperConfig = provideSwiperConfig;
 /* 5 */
 /***/ function(module, exports) {
 
-module.exports = ".swiper-slide {\n  display: flex;\n  overflow: auto;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  height: 100%;\n  max-width: 100%;\n  max-height: 100%; }\n"
+module.exports = ".swiper-slide,\n.swiper-content {\n  display: flex;\n  overflow: auto;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  height: 100%;\n  max-width: 100%;\n  max-height: 100%; }\n"
 
 /***/ },
 /* 6 */
@@ -34287,7 +34287,7 @@ module.exports = "/**\n * Swiper 3.3.0\n * Most modern mobile touch slider and f
 /* 8 */
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"swiper-slide\">\n  <ng-content></ng-content>\n</div>\n"
+module.exports = "<div class=\"swiper-content\">\n  <ng-content></ng-content>\n</div>\n"
 
 /***/ },
 /* 9 */
