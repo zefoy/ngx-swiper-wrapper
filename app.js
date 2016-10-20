@@ -34219,17 +34219,26 @@ var common_1 = __webpack_require__(11);
 var swiper_item_component_1 = __webpack_require__(3);
 var swiper_view_component_1 = __webpack_require__(0);
 var swiper_interfaces_1 = __webpack_require__(1);
+exports.SWIPER_GUARD = new core_1.OpaqueToken('SWIPER_GUARD');
 exports.SWIPER_CONFIG = new core_1.OpaqueToken('SWIPER_CONFIG');
 var SwiperModule = (function () {
-    function SwiperModule(parentModule) {
-        if (parentModule) {
-            throw new Error("SwiperModule is already loaded.\n        Import it in the AppModule only!");
-        }
+    function SwiperModule(guard) {
     }
     SwiperModule.forRoot = function (config) {
         return {
             ngModule: SwiperModule,
             providers: [
+                {
+                    provide: exports.SWIPER_GUARD,
+                    useFactory: provideForRootGuard,
+                    deps: [
+                        [
+                            swiper_interfaces_1.SwiperConfig,
+                            new core_1.Optional(),
+                            new core_1.SkipSelf()
+                        ]
+                    ]
+                },
                 {
                     provide: exports.SWIPER_CONFIG,
                     useValue: config ? config : {}
@@ -34244,6 +34253,11 @@ var SwiperModule = (function () {
             ]
         };
     };
+    SwiperModule.forChild = function () {
+        return {
+            ngModule: SwiperModule
+        };
+    };
     SwiperModule = __decorate([
         core_1.NgModule({
             imports: [common_1.CommonModule],
@@ -34251,12 +34265,19 @@ var SwiperModule = (function () {
             exports: [common_1.CommonModule, swiper_item_component_1.SwiperItemComponent, swiper_view_component_1.SwiperViewComponent]
         }),
         __param(0, core_1.Optional()),
-        __param(0, core_1.SkipSelf()), 
-        __metadata('design:paramtypes', [SwiperModule])
+        __param(0, core_1.Inject(exports.SWIPER_GUARD)), 
+        __metadata('design:paramtypes', [Object])
     ], SwiperModule);
     return SwiperModule;
 }());
 exports.SwiperModule = SwiperModule;
+function provideForRootGuard(config) {
+    if (config) {
+        throw new Error("\n      Application called SwiperModule.forRoot() twice.\n      For submodules use SwiperModule.forChild() instead.\n    ");
+    }
+    return 'guarded';
+}
+exports.provideForRootGuard = provideForRootGuard;
 function provideSwiperConfig(configInterface) {
     if (configInterface === void 0) { configInterface = {}; }
     var config = new swiper_interfaces_1.SwiperConfig(configInterface);
