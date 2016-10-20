@@ -33971,19 +33971,19 @@ var SwiperViewComponent = (function () {
         options.assign(this.config); // Custom config
         if (options.prevButton === true) {
             this.showButtons = true;
-            options.prevButton = '.swiper-prev';
+            options.prevButton = element.querySelector('.swiper-prev');
         }
         if (options.nextButton === true) {
             this.showButtons = true;
-            options.nextButton = '.swiper-next';
+            options.nextButton = element.querySelector('.swiper-next');
         }
         if (options.scrollbar === true) {
             this.showScrollbar = true;
-            options.scrollbar = '.swiper-scrollbar';
+            options.scrollbar = element.querySelector('.swiper-scrollbar');
         }
         if (options.pagination === true) {
             this.showPagination = true;
-            options.pagination = '.swiper-pagination';
+            options.pagination = element.querySelector('.swiper-pagination');
         }
         if (!options['onSlideChangeStart']) {
             options['onSlideChangeStart'] = function (swiper) {
@@ -34029,7 +34029,10 @@ var SwiperViewComponent = (function () {
         }
     };
     SwiperViewComponent.prototype.ngOnDestroy = function () {
-        this.swiper.destroy(true, true);
+        if (this.swiper) {
+            this.swiper.destroy(true, true);
+            this.swiper = null;
+        }
     };
     SwiperViewComponent.prototype.ngOnChanges = function (changes) {
         if (this.swiper && changes['disabled']) {
@@ -34054,22 +34057,37 @@ var SwiperViewComponent = (function () {
         }, 0);
     };
     SwiperViewComponent.prototype.getIndex = function () {
-        return this.swiper.activeIndex;
+        if (!this.swiper) {
+            return -1;
+        }
+        else {
+            return this.swiper.activeIndex;
+        }
     };
     SwiperViewComponent.prototype.setIndex = function (index, speed, callbacks) {
-        this.swiper.slideTo(index, speed, callbacks);
+        if (this.swiper) {
+            this.swiper.slideTo(index, speed, callbacks);
+        }
     };
     SwiperViewComponent.prototype.prevItem = function (callbacks, speed) {
-        this.swiper.slidePrev(callbacks, speed);
+        if (this.swiper) {
+            this.swiper.slidePrev(callbacks, speed);
+        }
     };
     SwiperViewComponent.prototype.nextItem = function (callbacks, speed) {
-        this.swiper.slideNext(callbacks, speed);
+        if (this.swiper) {
+            this.swiper.slideNext(callbacks, speed);
+        }
     };
     SwiperViewComponent.prototype.stopPlay = function () {
-        this.swiper.stopAutoplay();
+        if (this.swiper) {
+            this.swiper.stopAutoplay();
+        }
     };
     SwiperViewComponent.prototype.startPlay = function () {
-        this.swiper.startAutoplay();
+        if (this.swiper) {
+            this.swiper.startAutoplay();
+        }
     };
     SwiperViewComponent.prototype.onIndexSelect = function (event) {
         this.setIndex(event.target.attributes.index.value);
@@ -34245,7 +34263,7 @@ var SwiperModule = (function () {
                 },
                 {
                     provide: swiper_interfaces_1.SwiperConfig,
-                    useFactory: provideSwiperConfig,
+                    useFactory: function () { return new swiper_interfaces_1.SwiperConfig(exports.SWIPER_CONFIG); },
                     deps: [
                         exports.SWIPER_CONFIG
                     ]
@@ -34278,12 +34296,6 @@ function provideForRootGuard(config) {
     return 'guarded';
 }
 exports.provideForRootGuard = provideForRootGuard;
-function provideSwiperConfig(configInterface) {
-    if (configInterface === void 0) { configInterface = {}; }
-    var config = new swiper_interfaces_1.SwiperConfig(configInterface);
-    return config;
-}
-exports.provideSwiperConfig = provideSwiperConfig;
 
 
 /***/ },
