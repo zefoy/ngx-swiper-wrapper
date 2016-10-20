@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders, OpaqueToken, Optional, SkipSelf } from "@angular/core";
+import { NgModule, ModuleWithProviders, OpaqueToken, Optional, SkipSelf, Inject } from "@angular/core";
 
 import { CommonModule } from '@angular/common';
 
@@ -7,6 +7,7 @@ import { SwiperViewComponent } from './swiper-view.component';
 
 import { SwiperConfig, SwiperConfigInterface} from './swiper.interfaces';
 
+export const SWIPER_GUARD = new OpaqueToken('SWIPER_GUARD');
 export const SWIPER_CONFIG = new OpaqueToken('SWIPER_CONFIG');
 
 @NgModule({
@@ -15,17 +16,23 @@ export const SWIPER_CONFIG = new OpaqueToken('SWIPER_CONFIG');
     exports: [CommonModule, SwiperItemComponent, SwiperViewComponent]
 })
 export class SwiperModule {
-  constructor (@Optional() @SkipSelf() parentModule: SwiperModule) {
-    if (parentModule) {
-      throw new Error(`SwiperModule is already loaded.
-        Import it in the AppModule only!`);
-    }
-  }
+  constructor (@Optional() @Inject(SWIPER_GUARD) guard: any) {}
 
   static forRoot(config: SwiperConfigInterface): ModuleWithProviders {
     return {
       ngModule: SwiperModule,
       providers: [
+        {
+          provide: SWIPER_GUARD,
+          useFactory: provideForRootGuard,
+          deps: [
+            [
+              SwiperConfig,
+              new Optional(),
+              new SkipSelf()
+            ]
+          ]
+        },
         {
           provide: SWIPER_CONFIG,
           useValue: config ? config : {}
@@ -40,6 +47,23 @@ export class SwiperModule {
       ]
     };
   }
+
+  static forChild(): ModuleWithProviders {
+    return {
+      ngModule: SwiperModule
+    };
+  }
+}
+
+export function provideForRootGuard(config: SwiperConfig): any {
+  if (config) {
+    throw new Error(`
+      Application called SwiperModule.forRoot() twice.
+      For submodules use SwiperModule.forChild() instead.
+    `);
+  }
+
+  return 'guarded';
 }
 
 export function provideSwiperConfig(configInterface: SwiperConfigInterface = {}) {

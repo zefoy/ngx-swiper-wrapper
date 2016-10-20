@@ -1,3 +1,7 @@
+0.9.3 Feature release
+
+  - Added support for using in submodules
+
 0.9.2 Bug fix release
 
   - Fixed slide to clicked slide functionality
