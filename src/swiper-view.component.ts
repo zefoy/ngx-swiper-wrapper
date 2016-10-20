@@ -47,25 +47,25 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
     if (options.prevButton === true) {
       this.showButtons = true;
 
-      options.prevButton = '.swiper-prev';
+      options.prevButton = element.querySelector('.swiper-prev');
     }
 
     if (options.nextButton === true) {
       this.showButtons = true;
 
-      options.nextButton = '.swiper-next';
+      options.nextButton = element.querySelector('.swiper-next');
     }
 
     if (options.scrollbar === true) {
       this.showScrollbar = true;
 
-      options.scrollbar = '.swiper-scrollbar';
+      options.scrollbar = element.querySelector('.swiper-scrollbar');
     }
 
     if (options.pagination === true) {
       this.showPagination = true;
 
-      options.pagination = '.swiper-pagination';
+      options.pagination = element.querySelector('.swiper-pagination');
     }
 
     if (!options['onSlideChangeStart']) {
@@ -110,7 +110,6 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
 
   ngDoCheck() {
     let changes = this.configDiff.diff(this.config);
-
     if (changes) {
       this.ngOnDestroy();
 
@@ -121,7 +120,10 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
   }
 
   ngOnDestroy() {
-    this.swiper.destroy(true, true);
+    if (this.swiper) {
+      this.swiper.destroy(true, true);
+      this.swiper = null;
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -148,27 +150,40 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
   }
 
   getIndex() {
+    if (!this.swiper) {
+      return -1;
+    }
     return this.swiper.activeIndex;
   }
 
   setIndex(index: number, speed?: number, callbacks?: boolean) {
-    this.swiper.slideTo(index, speed, callbacks);
+    if (this.swiper) {
+      this.swiper.slideTo(index, speed, callbacks);
+    }
   }
 
   prevItem(callbacks?: boolean, speed?: number) {
-    this.swiper.slidePrev(callbacks, speed);
+    if (this.swiper) {
+      this.swiper.slidePrev(callbacks, speed);
+    }
   }
 
   nextItem(callbacks?: boolean, speed?: number) {
-    this.swiper.slideNext(callbacks, speed);
+    if (this.swiper) {
+      this.swiper.slideNext(callbacks, speed);
+    }
   }
 
   stopPlay() {
-    this.swiper.stopAutoplay();
+    if (this.swiper) {
+      this.swiper.stopAutoplay();
+    }
   }
 
   startPlay() {
-    this.swiper.startAutoplay();
+    if (this.swiper) {
+      this.swiper.startAutoplay();
+    }
   }
 
   onIndexSelect(event: any) {
