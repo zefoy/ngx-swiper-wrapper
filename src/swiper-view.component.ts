@@ -110,6 +110,7 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
 
   ngDoCheck() {
     let changes = this.configDiff.diff(this.config);
+
     if (changes) {
       this.ngOnDestroy();
 
@@ -122,6 +123,7 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
   ngOnDestroy() {
     if (this.swiper) {
       this.swiper.destroy(true, true);
+
       this.swiper = null;
     }
   }
@@ -152,8 +154,9 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
   getIndex() {
     if (!this.swiper) {
       return -1;
+    } else {
+      return this.swiper.activeIndex;
     }
-    return this.swiper.activeIndex;
   }
 
   setIndex(index: number, speed?: number, callbacks?: boolean) {
