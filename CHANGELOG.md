@@ -1,3 +1,7 @@
+0.9.6 Bug fix release
+
+  - Fixed global configuration setting
+
 0.9.5 Feature release
 
   - Added support for vertical controls

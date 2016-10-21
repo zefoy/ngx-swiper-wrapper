@@ -39,7 +39,7 @@ export class SwiperModule {
         },
         {
           provide: SwiperConfig,
-          useFactory: () => new SwiperConfig(SWIPER_CONFIG),
+          useFactory: (config) => new SwiperConfig(config),
           deps: [
             SWIPER_CONFIG
           ]
