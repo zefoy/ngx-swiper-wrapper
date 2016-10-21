@@ -33969,14 +33969,6 @@ var SwiperViewComponent = (function () {
         var element = this.elementRef.nativeElement;
         var options = new swiper_interfaces_1.SwiperConfig(this.defaults);
         options.assign(this.config); // Custom config
-        if (options.prevButton === true) {
-            this.showButtons = true;
-            options.prevButton = element.querySelector('.swiper-prev');
-        }
-        if (options.nextButton === true) {
-            this.showButtons = true;
-            options.nextButton = element.querySelector('.swiper-next');
-        }
         if (options.scrollbar === true) {
             this.showScrollbar = true;
             options.scrollbar = element.querySelector('.swiper-scrollbar');
@@ -33984,6 +33976,14 @@ var SwiperViewComponent = (function () {
         if (options.pagination === true) {
             this.showPagination = true;
             options.pagination = element.querySelector('.swiper-pagination');
+        }
+        if (options.prevButton === true) {
+            this.showButtons = true;
+            options.prevButton = element.querySelector('.swiper-button-prev');
+        }
+        if (options.nextButton === true) {
+            this.showButtons = true;
+            options.nextButton = element.querySelector('.swiper-button-next');
         }
         if (!options['onSlideChangeStart']) {
             options['onSlideChangeStart'] = function (swiper) {
@@ -34001,17 +34001,19 @@ var SwiperViewComponent = (function () {
         }
         if (!options['paginationBulletRender']) {
             options['paginationBulletRender'] = function (index, className) {
-                if (index === 0) {
-                    return '<span class="swiper-pagination-handle" index=' + index + '>' +
-                        '<span class="' + className + ' ' + className + '-first"></span></span>';
-                }
-                else if (index === (_this.swiper.slides.length - 1)) {
-                    return '<span class="swiper-pagination-handle" index=' + index + '>' +
-                        '<span class="' + className + ' ' + className + '-last"></span></span>';
-                }
-                else {
-                    return '<span class="swiper-pagination-handle" index=' + index + '>' +
-                        '<span class="' + className + ' ' + className + '-middle"></span></span>';
+                if (_this.swiper) {
+                    if (index === 0) {
+                        return '<span class="swiper-pagination-handle" index=' + index + '>' +
+                            '<span class="' + className + ' ' + className + '-first"></span></span>';
+                    }
+                    else if (index === (_this.swiper.slides.length - 1)) {
+                        return '<span class="swiper-pagination-handle" index=' + index + '>' +
+                            '<span class="' + className + ' ' + className + '-last"></span></span>';
+                    }
+                    else {
+                        return '<span class="swiper-pagination-handle" index=' + index + '>' +
+                            '<span class="' + className + ' ' + className + '-middle"></span></span>';
+                    }
                 }
             };
         }
@@ -34021,11 +34023,14 @@ var SwiperViewComponent = (function () {
         }
     };
     SwiperViewComponent.prototype.ngDoCheck = function () {
+        var _this = this;
         var changes = this.configDiff.diff(this.config);
         if (changes) {
             this.ngOnDestroy();
-            this.ngOnInit();
-            this.update();
+            setTimeout(function () {
+                _this.ngOnInit();
+                _this.update();
+            }, 0);
         }
     };
     SwiperViewComponent.prototype.ngOnDestroy = function () {
@@ -34308,7 +34313,7 @@ module.exports = ".swiper-slide,\n.swiper-content {\n  display: flex;\n  overflo
 /* 6 */
 /***/ function(module, exports) {
 
-module.exports = ".swiper-container {\n  overflow: visible;\n  width: 100%;\n  height: 100%;\n  margin: 0; }\n  .swiper-container .swiper-prev {\n    left: 3%; }\n  .swiper-container .swiper-next {\n    right: 3%;\n    transform: rotate(180deg); }\n  .swiper-container .swiper-prev,\n  .swiper-container .swiper-next {\n    position: absolute;\n    z-index: 10;\n    top: 50%;\n    width: 40px;\n    height: 80px;\n    margin-top: -40px;\n    border: none;\n    cursor: pointer;\n    background-color: transparent; }\n    .swiper-container .swiper-prev::after, .swiper-container .swiper-prev::before,\n    .swiper-container .swiper-next::after,\n    .swiper-container .swiper-next::before {\n      content: ' ';\n      position: absolute;\n      top: 50%;\n      width: 40px;\n      height: 8px;\n      background-color: rgba(0, 0, 0, 0.2);\n      transition: background-color 500ms ease; }\n    .swiper-container .swiper-prev::after,\n    .swiper-container .swiper-next::after {\n      top: 55px;\n      transform: rotate(70deg) skew(-20deg); }\n    .swiper-container .swiper-prev::before,\n    .swiper-container .swiper-next::before {\n      top: 18px;\n      transform: rotate(-70deg) skew(20deg); }\n    .swiper-container .swiper-prev:hover::after, .swiper-container .swiper-prev:hover::before,\n    .swiper-container .swiper-next:hover::after,\n    .swiper-container .swiper-next:hover::before {\n      background-color: rgba(0, 0, 0, 0.5); }\n    .swiper-container .swiper-prev.disabled,\n    .swiper-container .swiper-next.disabled {\n      cursor: default; }\n      .swiper-container .swiper-prev.disabled::after, .swiper-container .swiper-prev.disabled::before,\n      .swiper-container .swiper-next.disabled::after,\n      .swiper-container .swiper-next.disabled::before {\n        background-color: rgba(0, 0, 0, 0.1); }\n  .swiper-container .swiper-more {\n    box-sizing: border-box;\n    width: 100%;\n    padding: 8px;\n    border: 1px solid white;\n    cursor: pointer;\n    color: #555;\n    text-align: center;\n    background-color: white;\n    transition: border-color 300ms ease, background-color 300ms ease; }\n    .swiper-container .swiper-more:hover {\n      border-color: #aaa;\n      color: #555;\n      font-weight: bold;\n      background-color: #eee; }\n  .swiper-container .swiper-content {\n    overflow: hidden;\n    height: 100%; }\n  .swiper-container .swiper-scrollbar {\n    position: absolute;\n    z-index: 10;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    opacity: 1;\n    width: 8px;\n    height: 100%;\n    cursor: pointer;\n    transition: width 250ms ease-in-out, opacity 250ms ease-in-out !important; }\n    .swiper-container .swiper-scrollbar:hover {\n      width: 16px; }\n  .swiper-container .swiper-pagination {\n    bottom: 8px;\n    width: 100%; }\n    .swiper-container .swiper-pagination .swiper-pagination-handle {\n      padding: 0 3px;\n      cursor: pointer; }\n      .swiper-container .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet {\n        margin: 0;\n        pointer-events: none; }\n      .swiper-container .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet-last,\n      .swiper-container .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet-first {\n        margin: -1px 1px !important;\n        border: 1px solid rgba(0, 0, 0, 0.5); }\n"
+module.exports = ".swiper-container {\n  width: 100%;\n  height: 100%; }\n  .swiper-container .swiper-content {\n    height: 100%; }\n    .swiper-container .swiper-content .swiper-scrollbar {\n      cursor: pointer; }\n    .swiper-container .swiper-content .swiper-pagination .swiper-pagination-handle {\n      margin: 2px;\n      cursor: pointer; }\n      .swiper-container .swiper-content .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet {\n        pointer-events: none; }\n      .swiper-container .swiper-content .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet-last,\n      .swiper-container .swiper-content .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet-first {\n        border: 1px solid rgba(0, 0, 0, 0.5); }\n    .swiper-container .swiper-content.swiper-container-vertical .swiper-button-prev {\n      top: 10px;\n      left: 50%;\n      margin-top: 0;\n      margin-left: -13px;\n      transform: rotate(90deg); }\n    .swiper-container .swiper-content.swiper-container-vertical .swiper-button-next {\n      top: auto;\n      bottom: 10px;\n      left: 50%;\n      margin-top: 0;\n      margin-left: -13px;\n      transform: rotate(90deg); }\n    .swiper-container .swiper-content.swiper-container-vertical .swiper-scrollbar {\n      width: 8px;\n      transition: width 250ms ease-in-out; }\n      .swiper-container .swiper-content.swiper-container-vertical .swiper-scrollbar:hover {\n        width: 16px; }\n    .swiper-container .swiper-content.swiper-container-vertical .swiper-pagination .swiper-pagination-handle {\n      display: block; }\n      .swiper-container .swiper-content.swiper-container-vertical .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet {\n        display: inline-block; }\n        .swiper-container .swiper-content.swiper-container-vertical .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet.swiper-pagination-bullet-last, .swiper-container .swiper-content.swiper-container-vertical .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet.swiper-pagination-bullet-first {\n          margin: 5px -1px; }\n    .swiper-container .swiper-content.swiper-container-horizontal .swiper-scrollbar {\n      height: 8px;\n      transition: height 250ms ease-in-out; }\n      .swiper-container .swiper-content.swiper-container-horizontal .swiper-scrollbar:hover {\n        height: 16px; }\n    .swiper-container .swiper-content.swiper-container-horizontal .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet.swiper-pagination-bullet-last, .swiper-container .swiper-content.swiper-container-horizontal .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet.swiper-pagination-bullet-first {\n      margin: -1px 5px; }\n"
 
 /***/ },
 /* 7 */
@@ -34326,7 +34331,7 @@ module.exports = "<div class=\"swiper-content\">\n  <ng-content></ng-content>\n<
 /* 9 */
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"swiper-container\">\n  <div class=\"swiper-content\">\n    <div class=\"swiper-wrapper\">\n      <ng-content></ng-content>\n    </div>\n  </div>\n\n  <div [hidden]=\"!showScrollbar\" class=\"swiper-scrollbar\"></div>\n\n  <div [hidden]=\"!showButtons\" class=\"swiper-prev\" [ngClass]=\"{'disabled': isAtFirst }\"></div>\n  <div [hidden]=\"!showButtons\" class=\"swiper-next\" [ngClass]=\"{'disabled': isAtLast }\"></div>\n\n  <div [hidden]=\"!showPagination\" class=\"swiper-pagination\" (click)=\"onIndexSelect($event)\"></div>\n</div>\n"
+module.exports = "<div class=\"swiper-container\">\n  <div class=\"swiper-content\">\n    <div class=\"swiper-wrapper\">\n      <ng-content></ng-content>\n    </div>\n\n    <div [hidden]=\"!showScrollbar\" class=\"swiper-scrollbar\"></div>\n\n    <div [hidden]=\"!showButtons\" class=\"swiper-button-prev\" [ngClass]=\"{'disabled': isAtFirst }\"></div>\n    <div [hidden]=\"!showButtons\" class=\"swiper-button-next\" [ngClass]=\"{'disabled': isAtLast }\"></div>\n\n    <div [hidden]=\"!showPagination\" class=\"swiper-pagination\" (click)=\"onIndexSelect($event)\"></div>\n  </div>\n</div>\n"
 
 /***/ },
 /* 10 */
@@ -49451,9 +49456,6 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.toggleDirection = function () {
         this.config.direction = (this.config.direction == "horizontal") ? "vertical" : "horizontal";
-        this.config.scrollbar = (this.config.direction == "vertical") ? this.config.pagination : false;
-        this.config.nextButton = (this.config.direction == "horizontal") ? this.config.pagination : false;
-        this.config.prevButton = (this.config.direction == "horizontal") ? this.config.pagination : false;
         return false;
     };
     AppComponent.prototype.toggleAutoHeight = function () {
@@ -49461,10 +49463,20 @@ var AppComponent = (function () {
         return false;
     };
     AppComponent.prototype.toggleOverlayControls = function () {
-        this.config.pagination = !this.config.pagination;
-        this.config.scrollbar = (this.config.direction == "vertical") ? this.config.pagination : false;
-        this.config.nextButton = (this.config.direction == "horizontal") ? this.config.pagination : false;
-        this.config.prevButton = (this.config.direction == "horizontal") ? this.config.pagination : false;
+        if (this.config.pagination) {
+            this.config.scrollbar = true;
+            this.config.pagination = false;
+            this.config.nextButton = false;
+            this.config.prevButton = false;
+        }
+        else if (this.config.scrollbar) {
+            this.config.scrollbar = false;
+        }
+        else {
+            this.config.pagination = true;
+            this.config.nextButton = true;
+            this.config.prevButton = true;
+        }
         return false;
     };
     AppComponent.prototype.toggleKeyboardControl = function () {
@@ -52552,7 +52564,7 @@ module.exports = ".app-title {\n  font-size: 24px;\n}\n\n.box-title {\n  font-si
 /* 525 */
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"box-container\">\n  <div class=\"app-title\">{{title}}</div>\n\n  <div class=\"info-container\">\n    You can change the settings of the Swiper area by clicking the buttons on the left panel.\n  </div>\n\n  <div class=\"horizontal-container\">\n    <div class=\"vertical-container\">\n      <div class=\"box-title\">Settings</div>\n\n      <div class=\"content-container\">\n        <div class=\"action-toggle-button\" (click)='toggleDirection()'>{{(config.direction == \"horizontal\") ? \"Change to vertical\" : \"Change to horizontal\"}}</div>\n\n        <div class=\"action-toggle-button\" (click)='increasePerView()' [class.disabled]=\"config.slidesPerView >= items.length\">Slides per view +</div>\n\n        <div class=\"action-toggle-button\" (click)='decreasePerView()' [class.disabled]=\"config.slidesPerView <= 1\">Slides per view -</div>\n\n        <div class=\"action-toggle-button\" (click)='toggleOverlayControls()'>{{config.pagination ? \"Disable controls\" : \"Enable controls\"}}</div>\n\n        <div class=\"action-toggle-button\" (click)='toggleKeyboardControl()'>{{config.keyboardControl ? \"Disable arrow keys\" : \"Enable arrow keys\"}}</div>\n\n        <div class=\"action-toggle-button\" (click)='toggleMousewheelControl()'>{{config.mousewheelControl ? \"Disable mouse wheel\" : \"Enable mouse wheel\"}}</div>\n      </div>\n    </div>\n\n    <div class=\"vertical-container\">\n      <div class=\"box-title\">Swiper</div>\n\n      <div class=\"content-container\">\n        <swiper-view overlay-controls [config]=\"config\" (indexChange)=\"onIndexChange($event)\">\n          <swiper-item *ngFor=\"let item of items\">\n            {{item}}\n          </swiper-item>\n        </swiper-view>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"box-container\">\n  <div class=\"app-title\">{{title}}</div>\n\n  <div class=\"info-container\">\n    You can change the settings of the Swiper area by clicking the buttons on the left panel.\n  </div>\n\n  <div class=\"horizontal-container\">\n    <div class=\"vertical-container\">\n      <div class=\"box-title\">Settings</div>\n\n      <div class=\"content-container\">\n        <div class=\"action-toggle-button\" (click)='toggleDirection()'>{{(config.direction == \"horizontal\") ? \"Change to vertical\" : \"Change to horizontal\"}}</div>\n\n        <div class=\"action-toggle-button\" (click)='increasePerView()' [class.disabled]=\"config.slidesPerView >= items.length\">Slides per view +</div>\n\n        <div class=\"action-toggle-button\" (click)='decreasePerView()' [class.disabled]=\"config.slidesPerView <= 1\">Slides per view -</div>\n\n        <div class=\"action-toggle-button\" (click)='toggleOverlayControls()'>Toggle Controls</div>\n\n        <div class=\"action-toggle-button\" (click)='toggleKeyboardControl()'>{{config.keyboardControl ? \"Disable arrow keys\" : \"Enable arrow keys\"}}</div>\n\n        <div class=\"action-toggle-button\" (click)='toggleMousewheelControl()'>{{config.mousewheelControl ? \"Disable mouse wheel\" : \"Enable mouse wheel\"}}</div>\n      </div>\n    </div>\n\n    <div class=\"vertical-container\">\n      <div class=\"box-title\">Swiper</div>\n\n      <div class=\"content-container\">\n        <swiper-view overlay-controls [config]=\"config\" (indexChange)=\"onIndexChange($event)\">\n          <swiper-item *ngFor=\"let item of items\">\n            {{item}}\n          </swiper-item>\n        </swiper-view>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ },
 /* 526 */
