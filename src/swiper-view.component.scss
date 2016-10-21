@@ -1,148 +1,99 @@
 .swiper-container {
-  overflow: visible;
   width: 100%;
   height: 100%;
-  margin: 0;
-
-  .swiper-prev {
-    left: 3%;
-  }
-
-  .swiper-next {
-    right: 3%;
-
-    transform: rotate(180deg);
-  }
-
-  .swiper-prev,
-  .swiper-next {
-    position: absolute;
-    z-index: 10;
-    top: 50%;
-
-    width: 40px;
-    height: 80px;
-    margin-top: -40px;
-    border: none;
-
-    cursor: pointer;
-    background-color: transparent;
-
-    &::after,
-    &::before {
-      content: ' ';
-
-      position: absolute;
-      top: 50%;
-
-      width: 40px;
-      height: 8px;
-
-      background-color: rgba(0, 0, 0, 0.2);
-
-      transition: background-color 500ms ease;
-    }
-
-    &::after {
-      top: 55px;
-
-      transform: rotate(70deg) skew(-20deg);
-    }
-
-    &::before {
-      top: 18px;
-
-      transform: rotate(-70deg) skew(20deg);
-    }
-
-    &:hover {
-      &::after,
-      &::before {
-        background-color: rgba(0, 0, 0, 0.5);
-      }
-    }
-
-    &.disabled {
-      cursor: default;
-
-      &::after,
-      &::before {
-        background-color: rgba(0, 0, 0, 0.1);
-      }
-    }
-  }
-
-  .swiper-more {
-    box-sizing: border-box;
-    width: 100%;
-    padding: 8px;
-    border: 1px solid white;
-
-    cursor: pointer;
-    color: #555;
-    text-align: center;
-    background-color: white;
-
-    transition:
-      border-color 300ms ease,
-      background-color 300ms ease;
-
-    &:hover {
-      border-color: #aaa;
-
-      color: #555;
-      font-weight: bold;
-      background-color: #eee;
-    }
-  }
 
   .swiper-content {
-    overflow: hidden;
-    height: 100%;
-  }
-
-  .swiper-scrollbar {
-    position: absolute;
-    z-index: 10;
-    top: 0;
-    right: 0;
-    bottom: 0;
-
-    opacity: 1;
-    width: 8px;
     height: 100%;
 
-    cursor: pointer;
-
-    transition:
-      width 250ms ease-in-out,
-      opacity 250ms ease-in-out !important;
-
-    &:hover {
-      width: 16px;
-    }
-  }
-
-  .swiper-pagination {
-    bottom: 8px;
-
-    width: 100%;
-
-    .swiper-pagination-handle {
-      padding: 0 3px;
-
+    .swiper-scrollbar {
       cursor: pointer;
+    }
 
-      .swiper-pagination-bullet {
-        margin: 0;
+    .swiper-pagination {
+      .swiper-pagination-handle {
+        margin: 2px;
 
-        pointer-events: none;
+        cursor: pointer;
+
+        .swiper-pagination-bullet {
+          pointer-events: none;
+        }
+
+        .swiper-pagination-bullet-last,
+        .swiper-pagination-bullet-first {
+          border: 1px solid rgba(0, 0, 0, 0.5);
+        }
+      }
+    }
+
+    &.swiper-container-vertical {
+      .swiper-button-prev {
+        top: 10px;
+        left: 50%;
+
+        margin-top: 0;
+        margin-left: -13px;
+
+        transform: rotate(90deg);
       }
 
-      .swiper-pagination-bullet-last,
-      .swiper-pagination-bullet-first {
-        margin: -1px 1px !important;
-        border: 1px solid rgba(0, 0, 0, 0.5);
+      .swiper-button-next {
+        top: auto;
+        bottom: 10px;
+        left: 50%;
+
+        margin-top: 0;
+        margin-left: -13px;
+
+        transform: rotate(90deg);
+      }
+
+      .swiper-scrollbar {
+        width: 8px;
+
+        transition: width 250ms ease-in-out;
+
+        &:hover {
+          width: 16px;
+        }
+      }
+
+      .swiper-pagination {
+        .swiper-pagination-handle {
+          display: block;
+
+          .swiper-pagination-bullet {
+            display: inline-block;
+
+            &.swiper-pagination-bullet-last,
+            &.swiper-pagination-bullet-first {
+              margin: 5px -1px;
+            }
+          }
+        }
+      }
+    }
+
+    &.swiper-container-horizontal {
+      .swiper-scrollbar {
+        height: 8px;
+
+        transition: height 250ms ease-in-out;
+
+        &:hover {
+          height: 16px;
+        }
+      }
+
+      .swiper-pagination {
+        .swiper-pagination-handle {
+          .swiper-pagination-bullet {
+            &.swiper-pagination-bullet-last,
+            &.swiper-pagination-bullet-first {
+              margin: -1px 5px;
+            }
+          }
+        }
       }
     }
   }

@@ -1,3 +1,7 @@
+0.9.5 Feature release
+
+  - Added support for vertical controls
+
 0.9.4 Feature release
 
   - Use separate controls for multiple swipers

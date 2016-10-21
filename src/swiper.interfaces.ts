@@ -19,11 +19,12 @@ export interface SwiperConfigInterface {
 
   freeMode?: boolean,
   freeModeSticky?: boolean,
+  freeModeMinimumVelocity?: number,
   freeModeMomentum?: boolean,
   freeModeMomentumRatio?: number,
   freeModeMomentumBounce?: boolean,
   freeModeMomentumBounceRatio?: number,
-  freeModeMinimumVelocity?: number,
+  freeModeMomentumVelocityRatio?: number,
 
   effect?: string,
   fade?: fadeObject,
@@ -54,7 +55,9 @@ export interface SwiperConfigInterface {
   followFinger?: boolean,
   onlyExternal?: boolean,
   simulateTouch?: boolean,
+  passiveListeners?: boolean,
   touchEventsTarget?: string,
+  touchReleaseOnEdges?: boolean,
   touchMoveStopPropagation?: boolean,
   iOSEdgeSwipeDetection?: boolean,
   iOSEdgeSwipeThreshold?: number,
@@ -105,8 +108,12 @@ export interface SwiperConfigInterface {
   mousewheelSensitivity?: number,
   mousewheelForceToAxis?: boolean,
   mousewheelReleaseOnEdges?: boolean,
+  mousewheelEventsTarged?: any | string,
 
+  history?: string,
   hashnav?: boolean,
+  replaceState?: boolean,
+  hashnavWatchState?: boolean,
 
   preloadImages?: boolean,
   updateOnImagesReady?: boolean,
@@ -119,9 +126,15 @@ export interface SwiperConfigInterface {
   loopedSlides?: number,
   loopAdditionalSlides?: number,
 
+  zoom?: boolean,
+  zoomMin?: number,
+  zoomMax?: number,
+  zoomToggle?: boolean,
+
   control?: any,
   controlInverse?: boolean,
   controlBy?: string,
+  normalizeSlideIndex?: boolean,
 
   observer?: boolean,
   observeParents?: boolean,
@@ -137,11 +150,24 @@ export interface SwiperConfigInterface {
   wrapperClass?: string,
   bulletClass?: string,
   bulletActiveClass?: string,
+  notificationClass?: string,
   paginationHiddenClass?: string,
   paginationCurrentClass?: string,
   paginationTotalClass?: string,
+  paginationModifierClass?: string,
+  paginationClickableClass?: string,
   paginationProgressbarClass?: string,
   buttonDisabledClass?: string,
+  containerModifierClass?: string,
+  slideDuplicatedActiveClass?: string,
+  slideDuplicatedNextClass?: string,
+  slideDuplicatedPrevClass?: string,
+  lazyLoadingClass?: string,
+  lazyStatusLoadingClass?: string,
+  lazyStatusLoadedClass?: string,
+  lazyPreloaderClass?: string,
+  preloaderClass?: string,
+  zoomContainerClass?: string,
 
   runCallbacksOnInit?: boolean,
   onInit?: any,
@@ -173,7 +199,8 @@ export interface SwiperConfigInterface {
   onAutoplayStop?: any,
   onLazyImageLoad?: any,
   onLazyImageReady?: any,
-  onPaginationRendered?: any
+  onPaginationRendered?: any,
+  onScroll?: any
 }
 
 export interface fadeObjectInterface {
@@ -245,11 +272,12 @@ export class SwiperConfig implements SwiperConfigInterface {
 
   freeMode: boolean;
   freeModeSticky: boolean;
+  freeModeMinimumVelocity: number;
   freeModeMomentum: boolean;
   freeModeMomentumRatio: number;
   freeModeMomentumBounce: boolean;
   freeModeMomentumBounceRatio: number;
-  freeModeMinimumVelocity: number;
+  freeModeMomentumVelocityRatio: number;
 
   effect: string;
   fade: fadeObject;
@@ -280,7 +308,9 @@ export class SwiperConfig implements SwiperConfigInterface {
   followFinger: boolean;
   onlyExternal: boolean;
   simulateTouch: boolean;
+  passiveListeners: boolean;
   touchEventsTarget: string;
+  touchReleaseOnEdges: boolean;
   touchMoveStopPropagation: boolean;
   iOSEdgeSwipeDetection: boolean;
   iOSEdgeSwipeThreshold: number;
@@ -331,8 +361,12 @@ export class SwiperConfig implements SwiperConfigInterface {
   mousewheelSensitivity: number;
   mousewheelForceToAxis: boolean;
   mousewheelReleaseOnEdges: boolean;
+  mousewheelEventsTarged: any | string;
 
+  history: string;
   hashnav: boolean;
+  replaceState: boolean;
+  hashnavWatchState: boolean;
 
   preloadImages: boolean;
   updateOnImagesReady: boolean;
@@ -345,9 +379,15 @@ export class SwiperConfig implements SwiperConfigInterface {
   loopedSlides: number;
   loopAdditionalSlides: number;
 
+  zoom: boolean;
+  zoomMin: number;
+  zoomMax: number;
+  zoomToggle: boolean;
+
   control: any;
   controlInverse: boolean;
   controlBy: string;
+  normalizeSlideIndex: boolean;
 
   observer: boolean;
   observeParents: boolean;
@@ -363,11 +403,24 @@ export class SwiperConfig implements SwiperConfigInterface {
   wrapperClass: string;
   bulletClass: string;
   bulletActiveClass: string;
+  notificationClass: string;
   paginationHiddenClass: string;
   paginationCurrentClass: string;
   paginationTotalClass: string;
+  paginationModifierClass: string;
+  paginationClickableClass: string;
   paginationProgressbarClass: string;
   buttonDisabledClass: string;
+  containerModifierClass: string;
+  slideDuplicatedActiveClass: string;
+  slideDuplicatedNextClass: string;
+  slideDuplicatedPrevClass: string;
+  lazyLoadingClass: string;
+  lazyStatusLoadingClass: string;
+  lazyStatusLoadedClass: string;
+  lazyPreloaderClass: string;
+  preloaderClass: string;
+  zoomContainerClass: string;
 
   runCallbacksOnInit: boolean;
   onInit: any;
@@ -400,6 +453,7 @@ export class SwiperConfig implements SwiperConfigInterface {
   onLazyImageLoad: any;
   onLazyImageReady: any;
   onPaginationRendered: any;
+  onScroll: any;
 
   constructor(config: SwiperConfigInterface = {}) {
      this.assign(config);

@@ -44,18 +44,6 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
 
     options.assign(this.config); // Custom config
 
-    if (options.prevButton === true) {
-      this.showButtons = true;
-
-      options.prevButton = element.querySelector('.swiper-prev');
-    }
-
-    if (options.nextButton === true) {
-      this.showButtons = true;
-
-      options.nextButton = element.querySelector('.swiper-next');
-    }
-
     if (options.scrollbar === true) {
       this.showScrollbar = true;
 
@@ -66,6 +54,18 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
       this.showPagination = true;
 
       options.pagination = element.querySelector('.swiper-pagination');
+    }
+
+    if (options.prevButton === true) {
+      this.showButtons = true;
+
+      options.prevButton = element.querySelector('.swiper-button-prev');
+    }
+
+    if (options.nextButton === true) {
+      this.showButtons = true;
+
+      options.nextButton = element.querySelector('.swiper-button-next');
     }
 
     if (!options['onSlideChangeStart']) {
@@ -88,15 +88,17 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
 
     if (!options['paginationBulletRender']) {
       options['paginationBulletRender'] = (index, className) => {
-        if (index === 0) {
-          return '<span class="swiper-pagination-handle" index=' + index + '>' +
-            '<span class="' + className + ' ' + className + '-first"></span></span>';
-        } else if (index === (this.swiper.slides.length - 1)) {
-          return '<span class="swiper-pagination-handle" index=' + index + '>' +
-            '<span class="' + className + ' ' + className + '-last"></span></span>';
-        } else {
-          return '<span class="swiper-pagination-handle" index=' + index + '>' +
-            '<span class="' + className + ' ' + className + '-middle"></span></span>';
+        if (this.swiper) {
+          if (index === 0) {
+            return '<span class="swiper-pagination-handle" index=' + index + '>' +
+              '<span class="' + className + ' ' + className + '-first"></span></span>';
+          } else if (index === (this.swiper.slides.length - 1)) {
+            return '<span class="swiper-pagination-handle" index=' + index + '>' +
+              '<span class="' + className + ' ' + className + '-last"></span></span>';
+          } else {
+            return '<span class="swiper-pagination-handle" index=' + index + '>' +
+              '<span class="' + className + ' ' + className + '-middle"></span></span>';
+          }
         }
       };
     }
@@ -114,9 +116,11 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
     if (changes) {
       this.ngOnDestroy();
 
-      this.ngOnInit();
+      setTimeout(() => {
+        this.ngOnInit();
 
-      this.update();
+        this.update();
+      }, 0);
     }
   }
 
