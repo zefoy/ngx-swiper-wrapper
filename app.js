@@ -34268,7 +34268,7 @@ var SwiperModule = (function () {
                 },
                 {
                     provide: swiper_interfaces_1.SwiperConfig,
-                    useFactory: function () { return new swiper_interfaces_1.SwiperConfig(exports.SWIPER_CONFIG); },
+                    useFactory: function (config) { return new swiper_interfaces_1.SwiperConfig(config); },
                     deps: [
                         exports.SWIPER_CONFIG
                     ]
