@@ -1,3 +1,7 @@
+1.0.0 Cleanup release
+
+  - Small cleanup for the code
+
 0.9.6 Bug fix release
 
   - Fixed global configuration setting
