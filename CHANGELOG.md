@@ -1,3 +1,7 @@
+1.1.0 Feature release
+
+  - Updated to using Swiper 3.4.0
+
 1.0.1 Buf fix release
 
   - Updated to newer Swiper to fix bugs
