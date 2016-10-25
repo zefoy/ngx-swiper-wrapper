@@ -34023,14 +34023,11 @@ var SwiperViewComponent = (function () {
         }
     };
     SwiperViewComponent.prototype.ngDoCheck = function () {
-        var _this = this;
         var changes = this.configDiff.diff(this.config);
         if (changes) {
             this.ngOnDestroy();
-            setTimeout(function () {
-                _this.ngOnInit();
-                _this.update();
-            }, 0);
+            this.ngOnInit();
+            this.update();
         }
     };
     SwiperViewComponent.prototype.ngOnDestroy = function () {
