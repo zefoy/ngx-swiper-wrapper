@@ -1,3 +1,7 @@
+1.0.1 Buf fix release
+
+  - Updated to newer Swiper to fix bugs
+
 1.0.0 Cleanup release
 
   - Small cleanup for the code
