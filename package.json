@@ -27,7 +27,7 @@
     "url": "https://github.com/zefoy/angular2-swiper-wrapper.git"
   },
   "dependencies": {
-    "swiper": "3.3.0"
+    "swiper": "3.3.1"
   },
   "devDependencies": {
     "@angular/common": "2.0.0",
