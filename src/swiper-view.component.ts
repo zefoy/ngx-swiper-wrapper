@@ -115,8 +115,14 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
 
     if (changes) {
       this.ngOnDestroy();
-      this.ngOnInit();
-      this.update();
+
+      // This is needed for the styles to update properly
+
+      setTimeout(() => {
+        this.ngOnInit();
+
+        this.update();
+      }, 0);
     }
   }
 
