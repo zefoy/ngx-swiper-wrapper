@@ -17,6 +17,7 @@
   },
   "scripts": {
     "clean": "rm -rf lib node_modules",
+    "patch": "sed -i s/s.draggable/sb.draggable/g lib/index.js*",
     "deploy": "rm -rf lib/out-tsc && npm publish",
     "build": "webpack --config config/webpack.config.js",
     "start": "echo \"Building the library\" && npm run build",
