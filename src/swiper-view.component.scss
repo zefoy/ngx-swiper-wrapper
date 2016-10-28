@@ -10,10 +10,13 @@
     }
 
     .swiper-pagination {
+      pointer-events: none;
+
       .swiper-pagination-handle {
         margin: 2px;
 
         cursor: pointer;
+        pointer-events: all;
 
         .swiper-pagination-bullet {
           pointer-events: none;

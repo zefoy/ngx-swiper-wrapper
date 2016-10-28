@@ -87,7 +87,7 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
     }
 
     if (!options['paginationBulletRender']) {
-      options['paginationBulletRender'] = (index, className) => {
+      options['paginationBulletRender'] = (swiper, index, className) => {
         if (this.swiper) {
           if (index === 0) {
             return '<span class="swiper-pagination-handle" index=' + index + '>' +
