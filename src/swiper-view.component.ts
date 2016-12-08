@@ -2,7 +2,7 @@ declare var require: any;
 
 const Swiper = require('swiper');
 
-import { Component, OnInit, DoCheck, OnDestroy, OnChanges, SimpleChanges, ElementRef, Optional, Injectable, Input, Output, EventEmitter, KeyValueDiffers, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, DoCheck, OnDestroy, OnChanges, SimpleChanges, ElementRef, Optional, Injectable, Input, Output, EventEmitter, ViewChild, KeyValueDiffers, ViewEncapsulation, NgZone } from '@angular/core';
 
 import { SwiperConfig, SwiperConfigInterface } from './swiper.interfaces';
 
@@ -20,6 +20,9 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
   public isAtFirst: boolean;
 
   private configDiff: any;
+  private childsDiff: number;
+
+  private initialIdx: number;
 
   private showButtons: boolean;
   private showScrollbar: boolean;
@@ -29,9 +32,13 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
 
   @Input() config: SwiperConfigInterface;
 
+  @Input() runInsideAngular: boolean = true;
+
   @Output() indexChange = new EventEmitter<number>();
 
-  constructor(private elementRef: ElementRef, private differs : KeyValueDiffers, @Optional() private defaults: SwiperConfig) {}
+  @ViewChild('swiperItems') swiperItems: ElementRef = null;
+
+  constructor(private zone: NgZone, private elementRef: ElementRef, private differs : KeyValueDiffers, @Optional() private defaults: SwiperConfig) {}
 
   ngOnInit() {
     this.showButtons = false;
@@ -43,6 +50,10 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
     let options = new SwiperConfig(this.defaults);
 
     options.assign(this.config); // Custom config
+
+    if (this.initialIdx != null) {
+      options.initialSlide = this.initialIdx;
+    }
 
     if (options.scrollbar === true) {
       this.showScrollbar = true;
@@ -70,19 +81,23 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
 
     if (!options['onSlideChangeStart']) {
       options['onSlideChangeStart'] = (swiper) => {
-        this.isAtLast = swiper.isEnd;
-        this.isAtFirst = swiper.isBeginning;
+        this.zone.run(() => {
+          this.isAtLast = swiper.isEnd;
+          this.isAtFirst = swiper.isBeginning;
 
-        this.indexChange.emit(swiper.snapIndex);
+          this.indexChange.emit(swiper.snapIndex);
+        });
       };
     }
 
     if (!options['onScrollbarDragEnd']) {
       options['onScrollbarDragEnd'] = (swiper) => {
-        this.isAtLast = swiper.isEnd;
-        this.isAtFirst = swiper.isBeginning;
+        this.zone.run(() => {
+          this.isAtLast = swiper.isEnd;
+          this.isAtFirst = swiper.isBeginning;
 
-        this.indexChange.emit(swiper.snapIndex);
+          this.indexChange.emit(swiper.snapIndex);
+        });
       };
     }
 
@@ -103,7 +118,13 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
       };
     }
 
-    this.swiper = new Swiper(element.children[0].children[0], options);
+    if (this.runInsideAngular) {
+      this.swiper = new Swiper(element.children[0].children[0], options);
+    } else {
+      this.zone.runOutsideAngular(() => {
+        this.swiper = new Swiper(element.children[0].children[0], options);
+      });
+    }
 
     if (!this.configDiff) {
       this.configDiff = this.differs.find(this.config || {}).create(null);
@@ -113,7 +134,17 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
   ngDoCheck() {
     let changes = this.configDiff.diff(this.config || {});
 
+    let children = this.swiperItems.nativeElement.children.length;
+
     if (changes) {
+      this.initialIdx = this.getIndex();
+
+      changes.forEachAddedItem((changed) => {
+        if (changed.key === 'initialSlide') {
+          this.initialIdx = this.config.initialSlide;
+        }
+      });
+
       this.ngOnDestroy();
 
       // This is needed for the styles to update properly
@@ -123,6 +154,10 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
 
         this.update();
       }, 0);
+    } else if (children !== this.childsDiff) {
+      this.childsDiff = children;
+
+      this.update();
     }
   }
 
@@ -158,13 +193,17 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
   }
 
   getIndex() {
-    if (this.swiper) {
+    if (!this.swiper) {
+      return this.initialIdx;
+    } else {
       return this.swiper.activeIndex;
     }
   }
 
   setIndex(index: number, speed?: number, callbacks?: boolean) {
-    if (this.swiper) {
+    if (!this.swiper) {
+      this.initialIdx = index;
+    } else {
       this.swiper.slideTo(index, speed, callbacks);
     }
   }

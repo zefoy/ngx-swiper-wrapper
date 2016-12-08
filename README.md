@@ -53,20 +53,22 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
 ```
 
 ```javascript
-[config]         // Custom config to override the global defaults.
+[config]            // Custom config to override the global defaults.
 
-(indexChange)    // Event handler for the swiper index change.
+(indexChange)       // Event handler for the swiper index change event.
+
+[runInsideAngular]  // Run Swiper initialization inside the angular zone.
 ```
 
 ##### Available configuration options (custom / global configuration):
 
 ```javascript
-direction        // Direction of the swiper (Default: 'horizontal').
-threshold        // Distance needed for the swipe action (Default: 0).
-spaceBetween     // Space in pixels between the swiper items (Default: 0).
-slidesPerView    // Number of the items per view or 'auto' (Default: 1).
-centeredSlides   // Align active item on center not left (Default: false).
-keyboardControl  // Enables navigation through arrow keys (Default: false).
+direction           // Direction of the swiper (Default: 'horizontal').
+threshold           // Distance needed for the swipe action (Default: 0).
+spaceBetween        // Space in pixels between the swiper items (Default: 0).
+slidesPerView       // Number of the items per view or 'auto' (Default: 1).
+centeredSlides      // Align active item on center not left (Default: false).
+keyboardControl     // Enables navigation through arrow keys (Default: false).
 ```
 
 For more detailed documentation with all the supported options see [swiper documentation](http://idangero.us/swiper/api/).

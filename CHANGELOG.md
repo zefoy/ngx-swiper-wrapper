@@ -1,3 +1,7 @@
+1.2.0 Feature release
+
+  - Optimizations and index handling fixes
+
 1.1.0 Feature release
 
   - Updated to using Swiper 3.4.0
