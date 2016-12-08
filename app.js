@@ -33954,12 +33954,15 @@ var Swiper = __webpack_require__(10);
 var core_1 = __webpack_require__(2);
 var swiper_interfaces_1 = __webpack_require__(1);
 var SwiperViewComponent = (function () {
-    function SwiperViewComponent(elementRef, differs, defaults) {
+    function SwiperViewComponent(zone, elementRef, differs, defaults) {
+        this.zone = zone;
         this.elementRef = elementRef;
         this.differs = differs;
         this.defaults = defaults;
         this.disabled = false;
+        this.runInsideAngular = true;
         this.indexChange = new core_1.EventEmitter();
+        this.swiperItems = null;
     }
     SwiperViewComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -33969,6 +33972,9 @@ var SwiperViewComponent = (function () {
         var element = this.elementRef.nativeElement;
         var options = new swiper_interfaces_1.SwiperConfig(this.defaults);
         options.assign(this.config); // Custom config
+        if (this.initialIdx != null) {
+            options.initialSlide = this.initialIdx;
+        }
         if (options.scrollbar === true) {
             this.showScrollbar = true;
             options.scrollbar = element.querySelector('.swiper-scrollbar');
@@ -33987,16 +33993,20 @@ var SwiperViewComponent = (function () {
         }
         if (!options['onSlideChangeStart']) {
             options['onSlideChangeStart'] = function (swiper) {
-                _this.isAtLast = swiper.isEnd;
-                _this.isAtFirst = swiper.isBeginning;
-                _this.indexChange.emit(swiper.snapIndex);
+                _this.zone.run(function () {
+                    _this.isAtLast = swiper.isEnd;
+                    _this.isAtFirst = swiper.isBeginning;
+                    _this.indexChange.emit(swiper.snapIndex);
+                });
             };
         }
         if (!options['onScrollbarDragEnd']) {
             options['onScrollbarDragEnd'] = function (swiper) {
-                _this.isAtLast = swiper.isEnd;
-                _this.isAtFirst = swiper.isBeginning;
-                _this.indexChange.emit(swiper.snapIndex);
+                _this.zone.run(function () {
+                    _this.isAtLast = swiper.isEnd;
+                    _this.isAtFirst = swiper.isBeginning;
+                    _this.indexChange.emit(swiper.snapIndex);
+                });
             };
         }
         if (!options['paginationBulletRender']) {
@@ -34017,21 +34027,39 @@ var SwiperViewComponent = (function () {
                 }
             };
         }
-        this.swiper = new Swiper(element.children[0].children[0], options);
+        if (this.runInsideAngular) {
+            this.swiper = new Swiper(element.children[0].children[0], options);
+        }
+        else {
+            this.zone.runOutsideAngular(function () {
+                _this.swiper = new Swiper(element.children[0].children[0], options);
+            });
+        }
         if (!this.configDiff) {
             this.configDiff = this.differs.find(this.config || {}).create(null);
         }
     };
     SwiperViewComponent.prototype.ngDoCheck = function () {
         var _this = this;
-        var changes = this.configDiff.diff(this.config);
+        var changes = this.configDiff.diff(this.config || {});
+        var children = this.swiperItems.nativeElement.children.length;
         if (changes) {
+            this.initialIdx = this.getIndex();
+            changes.forEachAddedItem(function (changed) {
+                if (changed.key === 'initialSlide') {
+                    _this.initialIdx = _this.config.initialSlide;
+                }
+            });
             this.ngOnDestroy();
             // This is needed for the styles to update properly
             setTimeout(function () {
                 _this.ngOnInit();
                 _this.update();
             }, 0);
+        }
+        else if (children !== this.childsDiff) {
+            this.childsDiff = children;
+            this.update();
         }
     };
     SwiperViewComponent.prototype.ngOnDestroy = function () {
@@ -34064,14 +34092,17 @@ var SwiperViewComponent = (function () {
     };
     SwiperViewComponent.prototype.getIndex = function () {
         if (!this.swiper) {
-            return -1;
+            return this.initialIdx;
         }
         else {
             return this.swiper.activeIndex;
         }
     };
     SwiperViewComponent.prototype.setIndex = function (index, speed, callbacks) {
-        if (this.swiper) {
+        if (!this.swiper) {
+            this.initialIdx = index;
+        }
+        else {
             this.swiper.slideTo(index, speed, callbacks);
         }
     };
@@ -34107,9 +34138,17 @@ var SwiperViewComponent = (function () {
         __metadata('design:type', Object)
     ], SwiperViewComponent.prototype, "config", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], SwiperViewComponent.prototype, "runInsideAngular", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
     ], SwiperViewComponent.prototype, "indexChange", void 0);
+    __decorate([
+        core_1.ViewChild('swiperItems'), 
+        __metadata('design:type', core_1.ElementRef)
+    ], SwiperViewComponent.prototype, "swiperItems", void 0);
     SwiperViewComponent = __decorate([
         core_1.Injectable(),
         core_1.Component({
@@ -34118,8 +34157,8 @@ var SwiperViewComponent = (function () {
             styles: [__webpack_require__(6), __webpack_require__(7)],
             encapsulation: core_1.ViewEncapsulation.None
         }),
-        __param(2, core_1.Optional()), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.KeyValueDiffers, swiper_interfaces_1.SwiperConfig])
+        __param(3, core_1.Optional()), 
+        __metadata('design:paramtypes', [core_1.NgZone, core_1.ElementRef, core_1.KeyValueDiffers, swiper_interfaces_1.SwiperConfig])
     ], SwiperViewComponent);
     return SwiperViewComponent;
 }());
@@ -34332,7 +34371,7 @@ module.exports = "<div class=\"swiper-content\">\n  <ng-content></ng-content>\n<
 /* 9 */
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"swiper-container\">\n  <div class=\"swiper-content\">\n    <div class=\"swiper-wrapper\">\n      <ng-content></ng-content>\n    </div>\n\n    <div [hidden]=\"!showScrollbar\" class=\"swiper-scrollbar\"></div>\n\n    <div [hidden]=\"!showButtons\" class=\"swiper-button-prev\" [ngClass]=\"{'disabled': isAtFirst }\"></div>\n    <div [hidden]=\"!showButtons\" class=\"swiper-button-next\" [ngClass]=\"{'disabled': isAtLast }\"></div>\n\n    <div [hidden]=\"!showPagination\" class=\"swiper-pagination\" (click)=\"onIndexSelect($event)\"></div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"swiper-container\">\n  <div class=\"swiper-content\">\n    <div #swiperItems class=\"swiper-wrapper\">\n      <ng-content></ng-content>\n    </div>\n\n    <div [hidden]=\"!showScrollbar\" class=\"swiper-scrollbar\"></div>\n\n    <div [hidden]=\"!showButtons\" class=\"swiper-button-prev\" [ngClass]=\"{'disabled': isAtFirst }\"></div>\n    <div [hidden]=\"!showButtons\" class=\"swiper-button-next\" [ngClass]=\"{'disabled': isAtLast }\"></div>\n\n    <div [hidden]=\"!showPagination\" class=\"swiper-pagination\" (click)=\"onIndexSelect($event)\"></div>\n  </div>\n</div>\n"
 
 /***/ },
 /* 10 */
@@ -39633,7 +39672,7 @@ else if (typeof define === 'function' && define.amd) {
         return window.Swiper;
     });
 }
-//# sourceMappingURL=maps/swiper.js.map
+
 
 
 /***/ },
@@ -39658,9 +39697,8 @@ __export(__webpack_require__(0));
 
 
 /***/ }
-/******/ ])
+/******/ ]);
 });
-;
 //# sourceMappingURL=index.js.map
 
 /***/ },
