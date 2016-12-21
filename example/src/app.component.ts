@@ -12,20 +12,23 @@ export class AppComponent {
 
   @ViewChild(SwiperViewComponent) swiperView: SwiperViewComponent;
 
+  exampleType: string = 'component';
+
   private items = ["First slide", "Second slide", "Third slide", "Fourth slide", "Fifth slide", "Sixth slide"];
 
   private config: SwiperConfigInterface = {
     scrollbar: false,
     direction: 'horizontal',
-    pagination: true,
-    prevButton: true,
-    nextButton: true,
     slidesPerView: 1,
     scrollbarHide: false,
     keyboardControl: true,
     mousewheelControl: true,
     scrollbarDraggable: true,
     scrollbarSnapOnRelease: true,
+    pagination: '.swiper-pagination',
+    paginationClickable: true,
+    nextButton: '.swiper-button-next',
+    prevButton: '.swiper-button-prev'
   };
 
   increasePerView(): boolean {
@@ -50,6 +53,10 @@ export class AppComponent {
     return false;
   }
 
+  toggleExampleType() {
+    this.exampleType = this.exampleType == 'component' ? 'directive' : 'component';
+  }
+
   toggleAutoHeight(): boolean {
     this.config.autoHeight = !this.config.autoHeight;
 
@@ -59,15 +66,15 @@ export class AppComponent {
   toggleOverlayControls(): boolean {
     if (this.config.pagination) {
       this.config.scrollbar = true;
-      this.config.pagination = false;
-      this.config.nextButton = false;
-      this.config.prevButton = false;
+      this.config.pagination = null;
+      this.config.nextButton = null;
+      this.config.prevButton = null;
     } else if (this.config.scrollbar) {
-      this.config.scrollbar = false;
+      this.config.scrollbar = null;
     } else {
-      this.config.pagination = true;
-      this.config.nextButton = true;
-      this.config.prevButton = true;
+      this.config.pagination = 'swiper-pagination';
+      this.config.nextButton = 'swiper-button-next';
+      this.config.prevButton = 'swiper-button-prev';
     }
 
     return false;

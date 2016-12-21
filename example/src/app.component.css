@@ -96,7 +96,23 @@
   background-color: #eee;
 }
 
-swiper-view {
+.action-button-container {
+  display: flex;
+  flex-direction: row;
+  min-height: 32px;
+  margin: 8px 0;
+}
+
+.action-button-container .action-toggle-button {
+  margin: 0;
+}
+
+.action-button-container .action-toggle-button ~ .action-toggle-button {
+  margin-left: 10px;
+}
+
+swiper-view,
+.swiper-container {
   position: absolute;
   top: 0;
   right: 0;
@@ -105,6 +121,9 @@ swiper-view {
 }
 
 .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   background-color: #eee;
 }

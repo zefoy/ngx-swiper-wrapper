@@ -55,27 +55,25 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
       options.initialSlide = this.initialIdx;
     }
 
-    if (options.scrollbar === true) {
+    if (options.scrollbar === true || options.pagination === '.swiper-scrollbar') {
       this.showScrollbar = true;
 
       options.scrollbar = element.querySelector('.swiper-scrollbar');
     }
 
-    if (options.pagination === true) {
+    if (options.pagination === true || options.pagination === '.swiper-pagination') {
       this.showPagination = true;
 
       options.pagination = element.querySelector('.swiper-pagination');
     }
 
-    if (options.prevButton === true) {
+    if (options.prevButton === true || options.prevButton === '.swiper-button-prev') {
       this.showButtons = true;
 
       options.prevButton = element.querySelector('.swiper-button-prev');
     }
-
-    if (options.nextButton === true) {
+    if (options.nextButton === true || options.nextButton === '.swiper-button-next') {
       this.showButtons = true;
-
       options.nextButton = element.querySelector('.swiper-button-next');
     }
 
