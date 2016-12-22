@@ -94,4 +94,8 @@ export class AppComponent {
   onIndexChange(index: number) {
     console.log("Swiper index: " + index);
   }
+
+  onReachEnd() {
+    console.log("Swiper reached the end!");
+  }
 }

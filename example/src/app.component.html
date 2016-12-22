@@ -32,13 +32,13 @@
       <div class="box-title">Swiper</div>
 
       <div class="content-container">
-        <swiper-view *ngIf="exampleType == 'component'" overlay-controls [config]="config" (indexChange)="onIndexChange($event)">
+        <swiper-view *ngIf="exampleType == 'component'" overlay-controls [config]="config" (indexChange)="onIndexChange($event)" (reachEnd)="onReachEnd()">
           <swiper-item *ngFor="let item of items">
             {{item}}
           </swiper-item>
         </swiper-view>
 
-        <div *ngIf="exampleType == 'directive'" class="swiper-container" [swiper]="config" (indexChange)="onIndexChange($event)">
+        <div *ngIf="exampleType == 'directive'" class="swiper-container" [swiper]="config" (indexChange)="onIndexChange($event)" (reachEnd)="onReachEnd()">
             <div class="swiper-wrapper">
                 <div *ngFor="let item of items" class="swiper-slide">{{item}}</div>
             </div>
