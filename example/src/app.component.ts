@@ -17,7 +17,7 @@ export class AppComponent {
   private items = ["First slide", "Second slide", "Third slide", "Fourth slide", "Fifth slide", "Sixth slide"];
 
   private config: SwiperConfigInterface = {
-    scrollbar: false,
+    scrollbar: null,
     direction: 'horizontal',
     slidesPerView: 1,
     scrollbarHide: false,
@@ -65,18 +65,17 @@ export class AppComponent {
 
   toggleOverlayControls(): boolean {
     if (this.config.pagination) {
-      this.config.scrollbar = true;
+      this.config.scrollbar = '.swiper-scrollbar';
       this.config.pagination = null;
       this.config.nextButton = null;
       this.config.prevButton = null;
     } else if (this.config.scrollbar) {
       this.config.scrollbar = null;
     } else {
-      this.config.pagination = 'swiper-pagination';
-      this.config.nextButton = 'swiper-button-next';
-      this.config.prevButton = 'swiper-button-prev';
+      this.config.pagination = '.swiper-pagination';
+      this.config.nextButton = '.swiper-button-next';
+      this.config.prevButton = '.swiper-button-prev';
     }
-
     return false;
   }
 

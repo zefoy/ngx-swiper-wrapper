@@ -64,10 +64,10 @@ export class SwiperViewDirective implements OnInit, DoCheck, OnDestroy, OnChange
     }
 
     if (this.runInsideAngular) {
-        this.swiper = new Swiper(element, options);
+      this.swiper = new Swiper(element, options);
     } else {
       this.zone.runOutsideAngular(() => {
-          this.swiper = new Swiper(element, options);
+        this.swiper = new Swiper(element, options);
       });
     }
 
@@ -81,7 +81,6 @@ export class SwiperViewDirective implements OnInit, DoCheck, OnDestroy, OnChange
 
     if (changes) {
       this.ngOnDestroy();
-
       // This is needed for the styles to update properly
 
       setTimeout(() => {

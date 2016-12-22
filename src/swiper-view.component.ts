@@ -55,9 +55,8 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
       options.initialSlide = this.initialIdx;
     }
 
-    if (options.scrollbar === true || options.pagination === '.swiper-scrollbar') {
+    if (options.scrollbar === true || options.scrollbar === '.swiper-scrollbar') {
       this.showScrollbar = true;
-
       options.scrollbar = element.querySelector('.swiper-scrollbar');
     }
 
@@ -74,6 +73,7 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
     }
     if (options.nextButton === true || options.nextButton === '.swiper-button-next') {
       this.showButtons = true;
+
       options.nextButton = element.querySelector('.swiper-button-next');
     }
 

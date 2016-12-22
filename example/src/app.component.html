@@ -43,12 +43,12 @@
                 <div *ngFor="let item of items" class="swiper-slide">{{item}}</div>
             </div>
 
-            <div class="swiper-scrollbar"></div>
+            <div [hidden]="config.scrollbar != '.swiper-scrollbar'" class="swiper-scrollbar"></div>
 
-            <div class="swiper-pagination"></div>
+            <div [hidden]="config.pagination != '.swiper-pagination'" class="swiper-pagination"></div>
 
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <div [hidden]="config.prevButton != '.swiper-button-prev'" class="swiper-button-prev"></div>
+            <div [hidden]="config.nextButton != '.swiper-button-next'" class="swiper-button-next"></div>
         </div>
       </div>
     </div>
