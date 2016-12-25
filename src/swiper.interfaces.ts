@@ -465,3 +465,38 @@ export class SwiperConfig implements SwiperConfigInterface {
      }
    }
 }
+
+// List of events available at: http://idangero.us/swiper/api/#emitter
+export const SwiperEvents = [
+  'init',
+  'slideChangeStart',
+  'slideChangeEnd',
+  'slideNextStart',
+  'slideNextEnd',
+  'slidePrevStart',
+  'slidePrevEnd',
+  'transitionStart',
+  'transitionEnd',
+  'touchStart',
+  'touchMove',
+  'touchMoveOpposite',
+  'sliderMove',
+  'touchEnd',
+  'click',
+  'tap',
+  'doubleTap',
+  'imagesReady',
+  'progress',
+  'reachBeginning',
+  'reachEnd',
+  'destroy',
+  'setTranslate',
+  'setTransition',
+  'autoplay',
+  'autoplayStart',
+  'autoplayStop',
+  'lazyImageLoad',
+  'lazyImageReady',
+  'paginationRendered',
+  'scroll'
+]

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { SwiperItemComponent } from './swiper-item.component';
 import { SwiperViewComponent } from './swiper-view.component';
+import { SwiperViewDirective } from './swiper.directive';
 
 import { SwiperConfig, SwiperConfigInterface} from './swiper.interfaces';
 
@@ -12,8 +13,8 @@ export const SWIPER_CONFIG = new OpaqueToken('SWIPER_CONFIG');
 
 @NgModule({
     imports: [CommonModule],
-    declarations: [SwiperItemComponent, SwiperViewComponent],
-    exports: [CommonModule, SwiperItemComponent, SwiperViewComponent]
+    declarations: [SwiperItemComponent, SwiperViewComponent, SwiperViewDirective],
+    exports: [CommonModule, SwiperItemComponent, SwiperViewComponent, SwiperViewDirective]
 })
 export class SwiperModule {
   constructor (@Optional() @Inject(SWIPER_GUARD) guard: any) {}
