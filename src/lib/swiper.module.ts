@@ -40,7 +40,7 @@ export class SwiperModule {
         },
         {
           provide: SwiperConfig,
-          useFactory: (config) => new SwiperConfig(config),
+          useFactory: provideDefaultConfig,
           deps: [
             SWIPER_CONFIG
           ]
@@ -65,4 +65,8 @@ export function provideForRootGuard(config: SwiperConfig): any {
   }
 
   return 'guarded';
+}
+
+export function provideDefaultConfig(config: SwiperConfigInterface): SwiperConfig {
+  return new SwiperConfig(config);
 }

@@ -3,16 +3,22 @@ var webpack = require('webpack');
 
 module.exports = {
   devtool: 'cheap-module-source-map',
-  entry: './src/index.ts',
+  performance: {
+    hints: false
+  },
+  entry: {
+    'angular2-swiper-wrapper.umd': './src/index.ts',
+    'angular2-swiper-wrapper.umd.min': './src/index.ts'
+  },
   output: {
-    path: './lib',
-    filename: 'index.js',
+    path: './bundles',
+    filename: '[name].js',
     library: 'angular2-swiper-wrapper',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         loaders: [
@@ -22,7 +28,8 @@ module.exports = {
       {
         test: /\.ts$/,
         loaders: [
-          'awesome-typescript-loader',
+          'string-replace-loader?search=component\.css&replace=component\.scss',
+          'awesome-typescript-loader?tsconfig=src/tsconfig.json&declaration=false',
           'angular2-template-loader'
         ]
       },
@@ -40,6 +47,12 @@ module.exports = {
     extensions: ['.js', '.ts'],
     modules: [ '../src', path.join(__dirname, "../node_modules") ]
   },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      include: /\.min\.js$/,
+      minimize: true
+    })
+  ],
   externals: [
     "@angular/common",
     "@angular/compiler",

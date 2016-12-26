@@ -9,9 +9,12 @@ import { SwiperConfig, SwiperConfigInterface, SwiperEvents } from './swiper.inte
 @Injectable()
 @Component({
   selector: 'swiper-view',
-  template: require('swiper-view.component.html'),
-  styles: [require('swiper-view.component.scss'), require('swiper/dist/css/swiper.min.css')],
-  encapsulation: ViewEncapsulation.None
+  templateUrl: './swiper-view.component.html',
+  styleUrls: ['./swiper-view.component.css', '../../node_modules/swiper/dist/css/swiper.min.css'],
+  encapsulation: ViewEncapsulation.None,
+  host: {
+    style: 'display: block;'
+  }   
 })
 export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
   public swiper: any;

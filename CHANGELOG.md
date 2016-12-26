@@ -1,3 +1,11 @@
+2.0.0 Feature release
+
+  - Added minified bundle library
+
+  - Added support for AOT compilation
+
+  - Added support for using via directive
+
 1.2.1 Bug fix release
 
   - Updated to using Swiper 3.4.1

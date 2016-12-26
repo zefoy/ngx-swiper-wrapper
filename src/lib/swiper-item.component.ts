@@ -7,8 +7,11 @@ import { SwiperViewComponent } from './swiper-view.component';
 @Injectable()
 @Component({
   selector: 'swiper-item',
-  template: require('swiper-item.component.html'),
-  styles: [require('swiper-item.component.scss')]
+  templateUrl: './swiper-item.component.html',
+  styleUrls: ['./swiper-item.component.css'],
+  host: {
+    style: 'display: block;'
+  }
 })
 export class SwiperItemComponent {
   constructor( @Inject(ElementRef) elementRef: ElementRef, @Host() @Inject(SwiperViewComponent) swiper: SwiperViewComponent
