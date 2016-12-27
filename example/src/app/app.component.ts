@@ -8,13 +8,14 @@ import { SwiperComponent, SwiperConfigInterface } from 'angular2-swiper-wrapper'
   styleUrls: ['app.component.css']
 })
 export class AppComponent {
-  private title = 'Simple example app for the angular2-swiper-wrapper';
-
-  @ViewChild(SwiperComponent) swiperView: SwiperComponent;
-
-  exampleType: string = 'component';
-
-  private items = ["First slide", "Second slide", "Third slide", "Fourth slide", "Fifth slide", "Sixth slide"];
+  private items = [
+    'First slide',
+    'Second slide',
+    'Third slide',
+    'Fourth slide',
+    'Fifth slide',
+    'Sixth slide'
+  ];
 
   private config: SwiperConfigInterface = {
     scrollbar: null,
@@ -30,6 +31,10 @@ export class AppComponent {
     nextButton: '.swiper-button-next',
     prevButton: '.swiper-button-prev'
   };
+
+  private exampleType: string = 'component';
+
+  @ViewChild(SwiperComponent) swiperView: SwiperComponent;
 
   increasePerView(): boolean {
     if (this.config.slidesPerView < this.items.length) {

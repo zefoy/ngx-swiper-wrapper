@@ -203,7 +203,13 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
 
   ngOnDestroy() {
     if (this.swiper) {
-      this.swiper.destroy(true, true);
+      if (this.runInsideAngular) {
+        this.swiper.destroy(true, true);
+      } else {
+        this.zone.runOutsideAngular(() => {
+          this.swiper.destroy(true, true);
+        });
+      }
 
       this.swiper = null;
     }
@@ -213,9 +219,21 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
     if (this.swiper && changes['disabled']) {
       if (changes['disabled'].currentValue != changes['disabled'].previousValue) {
         if (changes['disabled'].currentValue === true) {
-          this.swiper.lockSwipes();
+          if (this.runInsideAngular) {
+            this.swiper.lockSwipes();
+          } else {
+            this.zone.runOutsideAngular(() => {
+              this.swiper.lockSwipes();
+            });
+          }
         } else if (changes['disabled'].currentValue === false) {
-          this.swiper.unlockSwipes();
+          if (this.runInsideAngular) {
+            this.swiper.unlockSwipes();
+          } else {
+            this.zone.runOutsideAngular(() => {
+              this.swiper.unlockSwipes();
+            });
+          }
         }
       }
     }
@@ -230,7 +248,13 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
           this.swiperWrapper.nativeElement.children[i].classList.add('swiper-slide');
         }
 
-        this.swiper.update();
+        if (this.runInsideAngular) {
+          this.swiper.update();
+        } else {
+          this.zone.runOutsideAngular(() => {
+            this.swiper.update();
+          });
+        }
 
         this.isAtFirst = this.swiper.isBeginning;
         this.isAtLast = this.swiper.isEnd;
@@ -250,31 +274,61 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
     if (!this.swiper) {
       this.initialIdx = index;
     } else {
-      this.swiper.slideTo(index, speed, callbacks);
+      if (this.runInsideAngular) {
+        this.swiper.slideTo(index, speed, callbacks);
+      } else {
+        this.zone.runOutsideAngular(() => {
+          this.swiper.slideTo(index, speed, callbacks);
+        });
+      }
     }
   }
 
   prevSlide(callbacks?: boolean, speed?: number) {
     if (this.swiper) {
-      this.swiper.slidePrev(callbacks, speed);
+      if (this.runInsideAngular) {
+        this.swiper.slidePrev(callbacks, speed);
+      } else {
+        this.zone.runOutsideAngular(() => {
+          this.swiper.slidePrev(callbacks, speed);
+        });
+      }
     }
   }
 
   nextSlide(callbacks?: boolean, speed?: number) {
     if (this.swiper) {
-      this.swiper.slideNext(callbacks, speed);
+      if (this.runInsideAngular) {
+        this.swiper.slideNext(callbacks, speed);
+      } else {
+        this.zone.runOutsideAngular(() => {
+          this.swiper.slideNext(callbacks, speed);
+        });
+      }
     }
   }
 
   stopPlay() {
     if (this.swiper) {
-      this.swiper.stopAutoplay();
+      if (this.runInsideAngular) {
+        this.swiper.stopAutoplay();
+      } else {
+        this.zone.runOutsideAngular(() => {
+          this.swiper.stopAutoplay();
+        });
+      }
     }
   }
 
   startPlay() {
     if (this.swiper) {
-      this.swiper.startAutoplay();
+      if (this.runInsideAngular) {
+        this.swiper.startAutoplay();
+      } else {
+        this.zone.runOutsideAngular(() => {
+          this.swiper.startAutoplay();
+        });
+      }
     }
   }
 
