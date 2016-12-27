@@ -242,12 +242,14 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
   }
 
   update() {
+    if (this.swiperWrapper) {
+      for (let i = 0; i < this.swiperWrapper.nativeElement.children.length; i++) {
+        this.swiperWrapper.nativeElement.children[i].classList.add('swiper-slide');
+      }
+    }
+
     setTimeout(() => {
       if (this.swiper) {
-        for (let i = 0; i < this.swiperWrapper.nativeElement.children.length; i++) {
-          this.swiperWrapper.nativeElement.children[i].classList.add('swiper-slide');
-        }
-
         if (this.runInsideAngular) {
           this.swiper.update();
         } else {
