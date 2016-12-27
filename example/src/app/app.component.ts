@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { SwiperViewComponent, SwiperConfigInterface } from 'angular2-swiper-wrapper';
+import { SwiperComponent, SwiperConfigInterface } from 'angular2-swiper-wrapper';
 
 @Component({
   selector: 'my-app',
@@ -10,7 +10,7 @@ import { SwiperViewComponent, SwiperConfigInterface } from 'angular2-swiper-wrap
 export class AppComponent {
   private title = 'Simple example app for the angular2-swiper-wrapper';
 
-  @ViewChild(SwiperViewComponent) swiperView: SwiperViewComponent;
+  @ViewChild(SwiperComponent) swiperView: SwiperComponent;
 
   exampleType: string = 'component';
 

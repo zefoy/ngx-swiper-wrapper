@@ -1,0 +1,12 @@
+<div class="swiper-container">
+  <div #swiperWrapper class="swiper-wrapper">
+    <ng-content></ng-content>
+  </div>
+
+  <div [hidden]="!showScrollbar" class="swiper-scrollbar"></div>
+
+  <div [hidden]="!showButtons" class="swiper-button-prev" [ngClass]="{'disabled': isAtFirst }"></div>
+  <div [hidden]="!showButtons" class="swiper-button-next" [ngClass]="{'disabled': isAtLast }"></div>
+
+  <div [hidden]="!showPagination" class="swiper-pagination" (click)="onIndexSelect($event)"></div>
+</div>

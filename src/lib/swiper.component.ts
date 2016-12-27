@@ -1,22 +1,18 @@
-declare var require: any;
+import * as Swiper from 'swiper';
 
-const Swiper = require('swiper');
-
-import { Component, OnInit, DoCheck, OnDestroy, OnChanges, SimpleChanges, ElementRef, Optional, Injectable, Input, Output, EventEmitter, ViewChild, KeyValueDiffers, ViewEncapsulation, NgZone } from '@angular/core';
+import { NgZone, SimpleChanges, KeyValueDiffers } from '@angular/core';
+import { Component, Optional, OnInit, DoCheck, OnDestroy, OnChanges } from '@angular/core';
+import { Input, Output, ViewChild, HostBinding, EventEmitter, ElementRef, ViewEncapsulation } from '@angular/core';
 
 import { SwiperConfig, SwiperConfigInterface, SwiperEvents } from './swiper.interfaces';
 
-@Injectable()
 @Component({
-  selector: 'swiper-view',
-  templateUrl: './swiper-view.component.html',
-  styleUrls: ['./swiper-view.component.css', '../../node_modules/swiper/dist/css/swiper.min.css'],
-  encapsulation: ViewEncapsulation.None,
-  host: {
-    style: 'display: block;'
-  }   
+  selector: 'swiper',
+  templateUrl: './swiper.component.html',
+  styleUrls: ['./swiper.component.css', '../../node_modules/swiper/dist/css/swiper.min.css'],
+  encapsulation: ViewEncapsulation.None
 })
-export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
+export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
   public swiper: any;
 
   public isAtLast: boolean;
@@ -35,7 +31,7 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
 
   @Input() config: SwiperConfigInterface;
 
-  @Input() runInsideAngular: boolean = true;
+  @Input() runInsideAngular: boolean = false;
 
   @Output() indexChange = new EventEmitter<number>();
 
@@ -71,9 +67,12 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
   @Output('paginationRendered') s_paginationRendered  = new EventEmitter<any>();
   @Output('scroll'            ) s_scroll              = new EventEmitter<any>();
 
-  @ViewChild('swiperItems') swiperItems: ElementRef = null;
+  @ViewChild('swiperWrapper') swiperWrapper: ElementRef = null;
 
-  constructor(private zone: NgZone, private elementRef: ElementRef, private differs : KeyValueDiffers, @Optional() private defaults: SwiperConfig) {}
+  @HostBinding('class.swiper') @Input() useSwiperClass: boolean = true;
+
+  constructor(private zone: NgZone, private elementRef: ElementRef, private differs: KeyValueDiffers,
+    @Optional() private defaults: SwiperConfig) {}
 
   ngOnInit() {
     this.showButtons = false;
@@ -90,23 +89,23 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
       options.initialSlide = this.initialIdx;
     }
 
-    if (options.scrollbar === true || options.scrollbar === '.swiper-scrollbar') {
+    if (options.scrollbar === true || options.scrollbar === '.swiper-scrollbar') {
       this.showScrollbar = true;
       options.scrollbar = element.querySelector('.swiper-scrollbar');
     }
 
-    if (options.pagination === true || options.pagination === '.swiper-pagination') {
+    if (options.pagination === true || options.pagination === '.swiper-pagination') {
       this.showPagination = true;
 
       options.pagination = element.querySelector('.swiper-pagination');
     }
 
-    if (options.prevButton === true || options.prevButton === '.swiper-button-prev') {
+    if (options.prevButton === true || options.prevButton === '.swiper-button-prev') {
       this.showButtons = true;
 
       options.prevButton = element.querySelector('.swiper-button-prev');
     }
-    if (options.nextButton === true || options.nextButton === '.swiper-button-next') {
+    if (options.nextButton === true || options.nextButton === '.swiper-button-next') {
       this.showButtons = true;
 
       options.nextButton = element.querySelector('.swiper-button-next');
@@ -152,31 +151,31 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
     }
 
     if (this.runInsideAngular) {
-      this.swiper = new Swiper(element.children[0].children[0], options);
+      this.swiper = new Swiper(element.children[0], options);
     } else {
       this.zone.runOutsideAngular(() => {
-        this.swiper = new Swiper(element.children[0].children[0], options);
+        this.swiper = new Swiper(element.children[0], options);
       });
     }
 
-    if (!this.configDiff) {
-      this.configDiff = this.differs.find(this.config || {}).create(null);
-    }
-
-    // trigger native swiper events
-    SwiperEvents.forEach((eventName)=>{
+    // Add native swiper event handling
+    SwiperEvents.forEach((eventName) => {
       let self = this;
 
       this.swiper.on(eventName, function(event) {
         self[`s_${eventName}`].emit(event);
       });
     });
+
+    if (!this.configDiff) {
+      this.configDiff = this.differs.find(this.config || {}).create(null);
+    }
   }
 
   ngDoCheck() {
     let changes = this.configDiff.diff(this.config || {});
 
-    let children = this.swiperItems.nativeElement.children.length;
+    let children = this.swiperWrapper.nativeElement.children.length;
 
     if (changes) {
       this.initialIdx = this.getIndex();
@@ -189,8 +188,7 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
 
       this.ngOnDestroy();
 
-      // This is needed for the styles to update properly
-
+      // Timeout is needed for the styles to update properly
       setTimeout(() => {
         this.ngOnInit();
 
@@ -221,15 +219,21 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
         }
       }
     }
+
+    this.update();
   }
 
   update() {
     setTimeout(() => {
       if (this.swiper) {
+        for (let i = 0; i < this.swiperWrapper.nativeElement.children.length; i++) {
+          this.swiperWrapper.nativeElement.children[i].classList.add('swiper-slide');
+        }
+
         this.swiper.update();
 
-        this.isAtLast = this.swiper.isEnd;
         this.isAtFirst = this.swiper.isBeginning;
+        this.isAtLast = this.swiper.isEnd;
       }
     }, 0);
   }
@@ -250,13 +254,13 @@ export class SwiperViewComponent implements OnInit, DoCheck, OnDestroy, OnChange
     }
   }
 
-  prevItem(callbacks?: boolean, speed?: number) {
+  prevSlide(callbacks?: boolean, speed?: number) {
     if (this.swiper) {
       this.swiper.slidePrev(callbacks, speed);
     }
   }
 
-  nextItem(callbacks?: boolean, speed?: number) {
+  nextSlide(callbacks?: boolean, speed?: number) {
     if (this.swiper) {
       this.swiper.slideNext(callbacks, speed);
     }

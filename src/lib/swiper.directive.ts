@@ -1,26 +1,24 @@
-declare var require: any;
+import * as Swiper from 'swiper';
 
-const Swiper = require('swiper');
-
-import { Directive, OnInit, DoCheck, OnDestroy, OnChanges, SimpleChanges, ElementRef, Optional, Injectable, Input, Output, EventEmitter, ViewChild, KeyValueDiffers, ViewEncapsulation, NgZone } from '@angular/core';
+import { NgZone, SimpleChanges, KeyValueDiffers } from '@angular/core';
+import { Input, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Directive, Optional, OnInit, DoCheck, OnDestroy, OnChanges } from '@angular/core';
 
 import { SwiperConfig, SwiperConfigInterface, SwiperEvents } from './swiper.interfaces';
 
 @Directive({
   selector: '[swiper]'
 })
-export class SwiperViewDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
+export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
   public swiper: any;
 
   private configDiff: any;
 
   @Input() disabled: boolean = false;
 
+  @Input() runInsideAngular: boolean = false;
+
   @Input('swiper') config: SwiperConfigInterface;
-
-  @Input() runInsideAngular: boolean = true;
-
-  @Output() indexChange = new EventEmitter<number>();
 
   @Output('init'              ) s_init                = new EventEmitter<any>();
   @Output('slideChangeStart'  ) s_slideChangeStart    = new EventEmitter<any>();
@@ -54,46 +52,14 @@ export class SwiperViewDirective implements OnInit, DoCheck, OnDestroy, OnChange
   @Output('paginationRendered') s_paginationRendered  = new EventEmitter<any>();
   @Output('scroll'            ) s_scroll              = new EventEmitter<any>();
 
-  constructor(private zone: NgZone, private elementRef: ElementRef, private differs : KeyValueDiffers, @Optional() private defaults: SwiperConfig) {}
+  constructor(private zone: NgZone, private elementRef: ElementRef, private differs : KeyValueDiffers,
+    @Optional() private defaults: SwiperConfig) {}
 
   ngOnInit() {
     let element = this.elementRef.nativeElement;
     let options = new SwiperConfig(this.defaults);
 
     options.assign(this.config); // Custom config
-
-    if (!options['onSlideChangeStart']) {
-      options['onSlideChangeStart'] = (swiper) => {
-        this.zone.run(() => {
-          this.indexChange.emit(swiper.snapIndex);
-        });
-      };
-    }
-
-    if (!options['onScrollbarDragEnd']) {
-      options['onScrollbarDragEnd'] = (swiper) => {
-        this.zone.run(() => {
-          this.indexChange.emit(swiper.snapIndex);
-        });
-      };
-    }
-
-    if (!options['paginationBulletRender']) {
-      options['paginationBulletRender'] = (swiper, index, className) => {
-        if (this.swiper) {
-          if (index === 0) {
-            return '<span class="swiper-pagination-handle" index=' + index + '>' +
-              '<span class="' + className + ' ' + className + '-first"></span></span>';
-          } else if (index === (this.swiper.slides.length - 1)) {
-            return '<span class="swiper-pagination-handle" index=' + index + '>' +
-              '<span class="' + className + ' ' + className + '-last"></span></span>';
-          } else {
-            return '<span class="swiper-pagination-handle" index=' + index + '>' +
-              '<span class="' + className + ' ' + className + '-middle"></span></span>';
-          }
-        }
-      };
-    }
 
     if (this.runInsideAngular) {
       this.swiper = new Swiper(element, options);
@@ -103,8 +69,8 @@ export class SwiperViewDirective implements OnInit, DoCheck, OnDestroy, OnChange
       });
     }
 
-    // trigger native swiper events
-    SwiperEvents.forEach((eventName)=>{
+    // Add native swiper event handling
+    SwiperEvents.forEach((eventName) => {
       let self = this;
 
       this.swiper.on(eventName, function(event) {

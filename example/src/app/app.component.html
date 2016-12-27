@@ -15,9 +15,9 @@
         <div class="action-toggle-button" (click)='toggleDirection()'>{{(config.direction == "horizontal") ? "Change to vertical" : "Change to horizontal"}}</div>
 
         <div class="action-button-container">
-          <div class="action-toggle-button" (click)='increasePerView()' [class.disabled]="config.slidesPerView >= items.length">Slides per view +</div>
+          <div class="action-toggle-button" (click)='increasePerView()' [class.disabled]="config.slidesPerView >= items.length">Slides +</div>
 
-          <div class="action-toggle-button" (click)='decreasePerView()' [class.disabled]="config.slidesPerView <= 1">Slides per view -</div>
+          <div class="action-toggle-button" (click)='decreasePerView()' [class.disabled]="config.slidesPerView <= 1">Slides -</div>
         </div>
 
         <div class="action-toggle-button" (click)='toggleOverlayControls()'>Toggle Controls</div>
@@ -32,15 +32,17 @@
       <div class="box-title">Swiper</div>
 
       <div class="content-container">
-        <swiper-view *ngIf="exampleType == 'component'" overlay-controls [config]="config" (indexChange)="onIndexChange($event)" (reachEnd)="onReachEnd()">
-          <swiper-item *ngFor="let item of items">
+        <swiper *ngIf="exampleType == 'component'" overlay-controls [config]="config" (indexChange)="onIndexChange($event)" (reachEnd)="onReachEnd()">
+          <div *ngFor="let item of items">
             {{item}}
-          </swiper-item>
-        </swiper-view>
+          </div>
+        </swiper>
 
         <div *ngIf="exampleType == 'directive'" class="swiper-container" [swiper]="config" (indexChange)="onIndexChange($event)" (reachEnd)="onReachEnd()">
             <div class="swiper-wrapper">
-                <div *ngFor="let item of items" class="swiper-slide">{{item}}</div>
+              <div *ngFor="let item of items" class="swiper-slide">
+                {{item}}
+              </div>
             </div>
 
             <div [hidden]="config.scrollbar != '.swiper-scrollbar'" class="swiper-scrollbar"></div>

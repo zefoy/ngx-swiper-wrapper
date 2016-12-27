@@ -20,10 +20,9 @@
   "files": [
     "index.ts",
     "lib/swiper.module.ts",
+    "lib/swiper.component.ts",
     "lib/swiper.directive.ts",
-    "lib/swiper.interfaces.ts",
-    "lib/swiper-item.component.ts",
-    "lib/swiper-view.component.ts"
+    "lib/swiper.interfaces.ts"
   ],
   "angularCompilerOptions": {
     "skipMetadataEmit" : false,

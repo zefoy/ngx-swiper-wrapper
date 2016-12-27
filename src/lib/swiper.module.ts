@@ -2,9 +2,8 @@ import { NgModule, ModuleWithProviders, OpaqueToken, Optional, SkipSelf, Inject 
 
 import { CommonModule } from '@angular/common';
 
-import { SwiperItemComponent } from './swiper-item.component';
-import { SwiperViewComponent } from './swiper-view.component';
-import { SwiperViewDirective } from './swiper.directive';
+import { SwiperComponent } from './swiper.component';
+import { SwiperDirective } from './swiper.directive';
 
 import { SwiperConfig, SwiperConfigInterface} from './swiper.interfaces';
 
@@ -13,8 +12,8 @@ export const SWIPER_CONFIG = new OpaqueToken('SWIPER_CONFIG');
 
 @NgModule({
     imports: [CommonModule],
-    declarations: [SwiperItemComponent, SwiperViewComponent, SwiperViewDirective],
-    exports: [CommonModule, SwiperItemComponent, SwiperViewComponent, SwiperViewDirective]
+    declarations: [SwiperComponent, SwiperDirective],
+    exports: [CommonModule, SwiperComponent, SwiperDirective]
 })
 export class SwiperModule {
   constructor (@Optional() @Inject(SWIPER_GUARD) guard: any) {}

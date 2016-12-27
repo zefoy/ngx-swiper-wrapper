@@ -1,3 +1,39 @@
+// http://idangero.us/swiper/api/#emitter
+
+export const SwiperEvents = [
+  'init',
+  'slideChangeStart',
+  'slideChangeEnd',
+  'slideNextStart',
+  'slideNextEnd',
+  'slidePrevStart',
+  'slidePrevEnd',
+  'transitionStart',
+  'transitionEnd',
+  'touchStart',
+  'touchMove',
+  'touchMoveOpposite',
+  'sliderMove',
+  'touchEnd',
+  'click',
+  'tap',
+  'doubleTap',
+  'imagesReady',
+  'progress',
+  'reachBeginning',
+  'reachEnd',
+  'destroy',
+  'setTranslate',
+  'setTransition',
+  'autoplay',
+  'autoplayStart',
+  'autoplayStop',
+  'lazyImageLoad',
+  'lazyImageReady',
+  'paginationRendered',
+  'scroll'
+];
+
 export interface SwiperConfigInterface {
   nested?: boolean,
   direction?: string,
@@ -460,43 +496,8 @@ export class SwiperConfig implements SwiperConfigInterface {
    }
 
    public assign(config: SwiperConfigInterface = {}) {
-     for (var key in config) {
+     for (let key in config) {
        this[key] = config[key];
      }
    }
 }
-
-// List of events available at: http://idangero.us/swiper/api/#emitter
-export const SwiperEvents = [
-  'init',
-  'slideChangeStart',
-  'slideChangeEnd',
-  'slideNextStart',
-  'slideNextEnd',
-  'slidePrevStart',
-  'slidePrevEnd',
-  'transitionStart',
-  'transitionEnd',
-  'touchStart',
-  'touchMove',
-  'touchMoveOpposite',
-  'sliderMove',
-  'touchEnd',
-  'click',
-  'tap',
-  'doubleTap',
-  'imagesReady',
-  'progress',
-  'reachBeginning',
-  'reachEnd',
-  'destroy',
-  'setTranslate',
-  'setTransition',
-  'autoplay',
-  'autoplayStart',
-  'autoplayStop',
-  'lazyImageLoad',
-  'lazyImageReady',
-  'paginationRendered',
-  'scroll'
-]
