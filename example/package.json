@@ -2,7 +2,7 @@
   "name": "angular2-swiper-wrapper-example",
   "description": "Example app for the angular2-swiper-wrapper",
   "license": "MIT",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "tslint": {
     "extends": "./tslint.json"
   },
@@ -18,8 +18,7 @@
     "deploy": "rm -rf dist && deploy-to-git",
     "lint:ts": "tslint 'src/**/*.ts'",
     "lint:css": "stylelint 'src/**/*.css' --syntax css",
-    "build:jit": "webpack --config config/webpack-deploy.config.js",
-    "postinstall": "sed -i s/s.draggable/sb.draggable/g node_modules/swiper/dist/js/swiper.js"
+    "build:jit": "webpack --config config/webpack-deploy.config.js"
   },
   "config": {
     "deployToGit": {

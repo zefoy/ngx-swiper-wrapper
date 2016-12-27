@@ -3,7 +3,7 @@
   "description": "Angular 2 wrapper library for Swiper",
   "bugs": "https://github.com/zefoy/angular2-swiper-wrapper/issues",
   "license": "MIT",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "bundles/angular2-swiper-wrapper.umd.js",
   "module": "./dist/index.js",
   "typings": "./dist/index.d.ts",
@@ -28,8 +28,7 @@
     "build:css": "node-sass src/ -o dist/ --source-map=true",
     "build:html": "cp -f src/lib/*.html dist/lib/ >/dev/null 2>&1",
     "build:umd": "webpack --config config/webpack.config.js",
-    "build:aot": "npm run build:js && npm run build:css && npm run build:html",
-    "postinstall": "sed -i s/s.draggable/sb.draggable/g node_modules/swiper/dist/js/swiper.js"
+    "build:aot": "npm run build:js && npm run build:css && npm run build:html"
   },
   "repository": {
     "type": "git",
