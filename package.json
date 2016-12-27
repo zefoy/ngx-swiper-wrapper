@@ -29,7 +29,7 @@
     "build:html": "cp -f src/lib/*.html dist/lib/ >/dev/null 2>&1",
     "build:umd": "webpack --config config/webpack.config.js",
     "build:aot": "npm run build:js && npm run build:css && npm run build:html",
-    "patch": "sed -i s/s.draggable/sb.draggable/g bundles/aa"
+    "postinstall": "sed -i s/s.draggable/sb.draggable/g node_modules/swiper/dist/js/swiper.js"
   },
   "repository": {
     "type": "git",
