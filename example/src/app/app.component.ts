@@ -8,7 +8,7 @@ import { SwiperComponent, SwiperConfigInterface } from 'angular2-swiper-wrapper'
   styleUrls: ['app.component.css']
 })
 export class AppComponent {
-  private items = [
+  private slides = [
     'First slide',
     'Second slide',
     'Third slide',
@@ -16,6 +16,8 @@ export class AppComponent {
     'Fifth slide',
     'Sixth slide'
   ];
+
+  private type: string = 'component';
 
   private config: SwiperConfigInterface = {
     scrollbar: null,
@@ -32,43 +34,31 @@ export class AppComponent {
     prevButton: '.swiper-button-prev'
   };
 
-  private exampleType: string = 'component';
-
   @ViewChild(SwiperComponent) swiperView: SwiperComponent;
 
-  increasePerView(): boolean {
-    if (this.config.slidesPerView < this.items.length) {
-      this.config.slidesPerView = +this.config.slidesPerView + 1;
-    }
-
-    return false;
-  }
-
-  decreasePerView(): boolean {
-    if (this.config.slidesPerView > 1) {
-      this.config.slidesPerView = +this.config.slidesPerView - 1;
-    }
-
-    return false;
+  toggleType() {
+    this.type = this.type == 'component' ? 'directive' : 'component';
   }
 
   toggleDirection(): boolean {
-    this.config.direction = (this.config.direction == "horizontal") ? "vertical" : "horizontal";
+    this.config.direction = (this.config.direction == 'horizontal') ? 'vertical' : 'horizontal';
 
     return false;
   }
 
-  toggleExampleType() {
-    this.exampleType = this.exampleType == 'component' ? 'directive' : 'component';
-  }
-
-  toggleAutoHeight(): boolean {
+  toggleAutoHeight() {
     this.config.autoHeight = !this.config.autoHeight;
-
-    return false;
   }
 
-  toggleOverlayControls(): boolean {
+  toggleSlidesPerView() {
+    if (this.config.slidesPerView != 1) {
+      this.config.slidesPerView = 1;
+    } else {
+      this.config.slidesPerView = +this.config.slidesPerView + 1;
+    }
+  }
+
+  toggleOverlayControls() {
     if (this.config.pagination) {
       this.config.scrollbar = '.swiper-scrollbar';
       this.config.pagination = null;
@@ -81,26 +71,21 @@ export class AppComponent {
       this.config.nextButton = '.swiper-button-next';
       this.config.prevButton = '.swiper-button-prev';
     }
-    return false;
   }
 
-  toggleKeyboardControl(): boolean {
+  toggleKeyboardControl() {
     this.config.keyboardControl = !this.config.keyboardControl;
-
-    return false;
   }
 
-  toggleMousewheelControl(): boolean {
+  toggleMouseWheelControl() {
     this.config.mousewheelControl = !this.config.mousewheelControl;
+  }
 
-    return false;
+  onReachEnd(event: any) {
+    console.log('Swiper at the end!');
   }
 
   onIndexChange(index: number) {
-    console.log("Swiper index: " + index);
-  }
-
-  onReachEnd() {
-    console.log("Swiper reached the end!");
+    console.log('Swiper index: ' + index);
   }
 }

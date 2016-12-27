@@ -96,21 +96,6 @@
   background-color: #eee;
 }
 
-.action-button-container {
-  display: flex;
-  flex-direction: row;
-  min-height: 32px;
-  margin: 8px 0;
-}
-
-.action-button-container .action-toggle-button {
-  margin: 0;
-}
-
-.action-button-container .action-toggle-button ~ .action-toggle-button {
-  margin-left: 10px;
-}
-
 .swiper,
 .swiper-container {
   position: absolute;
