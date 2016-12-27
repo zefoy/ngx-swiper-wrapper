@@ -88,8 +88,8 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
 
     if (changes) {
       this.ngOnDestroy();
-      // This is needed for the styles to update properly
 
+      // This is needed for the styles to update properly
       setTimeout(() => {
         this.ngOnInit();
 
@@ -100,7 +100,13 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
 
   ngOnDestroy() {
     if (this.swiper) {
-      this.swiper.destroy(true, true);
+      if (this.runInsideAngular) {
+        this.swiper.destroy(true, true);
+      } else {
+        this.zone.runOutsideAngular(() => {
+          this.swiper.destroy(true, true);
+        });
+      }
 
       this.swiper = null;
     }
@@ -121,7 +127,13 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
   update() {
     setTimeout(() => {
       if (this.swiper) {
-        this.swiper.update();
+        if (this.runInsideAngular) {
+          this.swiper.update();
+        } else {
+          this.zone.runOutsideAngular(() => {
+            this.swiper.update();
+          });
+        }
       }
     }, 0);
   }
