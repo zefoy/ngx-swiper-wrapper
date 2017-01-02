@@ -9,7 +9,7 @@ import { SwiperConfig, SwiperConfigInterface, SwiperEvents } from './swiper.inte
 @Component({
   selector: 'swiper',
   templateUrl: './swiper.component.html',
-  styleUrls: ['./swiper.component.css', '../../node_modules/swiper/dist/css/swiper.min.css'],
+  styleUrls: ['./swiper.component.css'],
   encapsulation: ViewEncapsulation.None
 })
 export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
