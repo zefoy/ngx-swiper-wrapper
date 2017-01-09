@@ -1,3 +1,7 @@
+2.1.0 Bug fix release
+
+  - Fixed styling for nested components
+
 2.0.3 Bug fix release
 
   - Removed unneeded component styles

@@ -6,7 +6,6 @@
     height: 100%;
 
     .swiper-slide {
-      display: flex;
       overflow: auto;
       width: 100%;
       height: 100%;
@@ -39,7 +38,7 @@
     }
 
     &.swiper-container-vertical {
-      .swiper-button-prev {
+      & > .swiper-button-prev {
         top: 10px;
         left: 50%;
 
@@ -49,7 +48,7 @@
         transform: rotate(90deg);
       }
 
-      .swiper-button-next {
+      & > .swiper-button-next {
         top: auto;
         bottom: 10px;
         left: 50%;
@@ -60,7 +59,7 @@
         transform: rotate(90deg);
       }
 
-      .swiper-scrollbar {
+      & > .swiper-scrollbar {
         width: 8px;
 
         transition: width 250ms ease-in-out;
@@ -70,7 +69,7 @@
         }
       }
 
-      .swiper-pagination {
+      & > .swiper-pagination {
         .swiper-pagination-handle {
           display: block;
 
@@ -87,7 +86,7 @@
     }
 
     &.swiper-container-horizontal {
-      .swiper-scrollbar {
+      & > .swiper-scrollbar {
         height: 8px;
 
         transition: height 250ms ease-in-out;
@@ -97,7 +96,7 @@
         }
       }
 
-      .swiper-pagination {
+      & > .swiper-pagination {
         .swiper-pagination-handle {
           .swiper-pagination-bullet {
             &.swiper-pagination-bullet-last,
