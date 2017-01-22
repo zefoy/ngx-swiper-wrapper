@@ -21,12 +21,14 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
   private configDiff: any;
   private childsDiff: number;
 
-  private initialIdx: number;
+  private initialIndex: number;
 
   private showButtons: boolean;
   private showScrollbar: boolean;
   private showPagination: boolean;
 
+  @HostBinding('hidden')
+  @Input() hidden: boolean = false;
   @Input() disabled: boolean = false;
 
   @Input() config: SwiperConfigInterface;
@@ -85,8 +87,8 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
 
     options.assign(this.config); // Custom config
 
-    if (this.initialIdx != null) {
-      options.initialSlide = this.initialIdx;
+    if (this.initialIndex != null) {
+      options.initialSlide = this.initialIndex;
     }
 
     if (options.scrollbar === true || options.scrollbar === '.swiper-scrollbar') {
@@ -178,11 +180,11 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
     let children = this.swiperWrapper.nativeElement.children.length;
 
     if (changes) {
-      this.initialIdx = this.getIndex();
+      this.initialIndex = this.getIndex();
 
       changes.forEachAddedItem((changed) => {
         if (changed.key === 'initialSlide') {
-          this.initialIdx = this.config.initialSlide;
+          this.initialIndex = this.config.initialSlide;
         }
       });
 
@@ -216,7 +218,19 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.swiper && changes['disabled']) {
+    if (this.swiper && changes['hidden'] && this.hidden) {
+      // For some reason resize causes Swiper to change index when hidden
+      this.initialIndex = this.swiper.activeIndex || 0;
+    }
+
+    if (this.swiper && changes['hidden'] && !this.hidden) {
+      // For some reason resize causes Swiper to change index when hidden
+      this.swiper.activeIndex = this.initialIndex || 0;
+
+      this.update(true);
+    }
+
+    if (this.swiper && changes['disabled'] && !this.hidden) {
       if (changes['disabled'].currentValue != changes['disabled'].previousValue) {
         if (changes['disabled'].currentValue === true) {
           if (this.runInsideAngular) {
@@ -236,12 +250,13 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
           }
         }
       }
+
+      this.update(false);
     }
 
-    this.update();
   }
 
-  update() {
+  update(updateTranslate?: boolean) {
     if (this.swiperWrapper) {
       for (let i = 0; i < this.swiperWrapper.nativeElement.children.length; i++) {
         this.swiperWrapper.nativeElement.children[i].classList.add('swiper-slide');
@@ -251,10 +266,22 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
     setTimeout(() => {
       if (this.swiper) {
         if (this.runInsideAngular) {
-          this.swiper.update();
+            this.swiper.update();
+
+            if (updateTranslate) {
+              setTimeout(() => {
+                this.swiper.update(true);
+              }, 0);
+            }
         } else {
           this.zone.runOutsideAngular(() => {
             this.swiper.update();
+
+            if (updateTranslate) {
+              setTimeout(() => {
+                this.swiper.update(true);
+              }, 0);
+            }
           });
         }
 
@@ -266,7 +293,7 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
 
   getIndex() {
     if (!this.swiper) {
-      return this.initialIdx;
+      return this.initialIndex;
     } else {
       return this.swiper.activeIndex;
     }
@@ -274,7 +301,7 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
 
   setIndex(index: number, speed?: number, callbacks?: boolean) {
     if (!this.swiper) {
-      this.initialIdx = index;
+      this.initialIndex = index;
     } else {
       if (this.runInsideAngular) {
         this.swiper.slideTo(index, speed, callbacks);

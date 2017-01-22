@@ -44,12 +44,18 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
 
 ##### Use it in your html template (with custom configuration):
 
+This library provides two ways to create a Swiper element, simple component and custom directive.
+
+**COMPONENT USAGE**
+
+Simply replace the element that would oridinarily be passed to `Swiper` with the swiper component.
+
 ```html
-  <swiper [config]="config" (indexChange)="onIndexChange($event)">
-    <div>
-      Swiper content
-    </div>
-  </swiper>
+<swiper [config]="config" (indexChange)="onIndexChange($event)">
+  <div>
+    Swiper content
+  </div>
+</swiper>
 ```
 
 ```javascript
@@ -57,7 +63,42 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
 
 (indexChange)       // Event handler for the swiper index change event.
 
-[runInsideAngular]  // Run Swiper initialization inside the angular zone.
+[runInsideAngular]  // Run Swiper function calls inside the angular zone.
+```
+
+**DIRECTIVE USAGE**
+
+When using only the directive you need to provide your own theming or import the default theme:
+
+```css
+@import 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/css/swiper.min.css';
+```
+
+Swiper directive can be used in correctly structured div element with optional custom configuration:
+
+```html
+<div [swiper]="config" class="swiper-container" (indexChange)="onIndexChange($event)">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      Swiper content
+    </div>
+  </div>
+
+  <div class="swiper-scrollbar"></div>
+
+  <div class="swiper-pagination"></div>
+
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
+```
+
+```javascript
+[swiper]            // Can be used to provide optional custom config.
+
+(indexChange)       // Event handler for the swiper index change event.
+
+[runInsideAngular]  // Run Swiper function calls inside the angular zone.
 ```
 
 ##### Available configuration options (custom / global configuration):

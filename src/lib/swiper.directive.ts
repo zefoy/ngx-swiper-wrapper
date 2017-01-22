@@ -124,14 +124,14 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
     }
   }
 
-  update() {
+  update(updateTranslate?: boolean) {
     setTimeout(() => {
       if (this.swiper) {
         if (this.runInsideAngular) {
-          this.swiper.update();
+          this.swiper.update(updateTranslate);
         } else {
           this.zone.runOutsideAngular(() => {
-            this.swiper.update();
+            this.swiper.update(updateTranslate);
           });
         }
       }

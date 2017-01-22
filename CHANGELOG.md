@@ -1,3 +1,9 @@
+2.2.0 Bug fix release
+
+  - Fixed hidden and fxlayout attributes
+
+  - Added updateTranslate param for update
+
 2.1.0 Bug fix release
 
   - Fixed styling for nested components
