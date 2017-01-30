@@ -4,7 +4,7 @@
 
 This is an Angular 2 wrapper library for [swiper](http://idangero.us/swiper/).
 
-See a live example application <a href="https://zefoy.github.io/angular2-swiper-wrapper/">here</a>.
+See a live example application <a href="https://zefoy.github.io/ngx-swiper-wrapper/">here</a>.
 
 ### Building the library
 
