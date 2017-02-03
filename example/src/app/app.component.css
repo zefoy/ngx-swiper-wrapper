@@ -7,9 +7,7 @@
 }
 
 .box-container {
-  display: flex;
   box-sizing: border-box;
-  flex-direction: column;
   width: 800px;
   height: 500px;
   max-width: 90%;
@@ -17,7 +15,6 @@
   padding: 24px;
   margin: 24px auto;
   border-radius: 4px;
-
   color: #555;
   font-family: sans-serif;
   box-shadow:
@@ -28,57 +25,25 @@
 
 .info-container {
   padding: 12px 16px;
-
   line-height: 24px;
 }
 
 .content-container {
   position: relative;
-
-  display: flex;
   overflow: auto;
-  flex: 1 1 auto;
-  flex-direction: column;
-  align-items: stretch;
   padding: 16px 24px;
   margin: 8px 16px;
   border-radius: 4px;
-
   background-color: #fff;
 }
 
-.vertical-container {
-  display: flex;
-  flex: 1 1 50%;
-  flex-direction: column;
-  align-items: stretch;
-}
-
-.horizontal-container {
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: row;
-  align-items: stretch;
-}
-
-@media all and (max-width: 800px) {
-  .horizontal-container {
-    flex-direction: column;
-  }
-}
-
 .action-toggle-button {
-  display: flex;
   box-sizing: border-box;
-  flex: 1 1 auto;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   padding: 16px;
   margin: 8px 0;
   border-radius: 4px;
   border: 1px solid #555;
-
   cursor: pointer;
   font-size: 14px;
   font-weight: bold;
@@ -106,10 +71,6 @@
 }
 
 .swiper-slide {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   background-color: #eee;
 }

@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 
 import { BrowserModule } from '@angular/platform-browser';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 import { SwiperModule, SwiperConfigInterface } from 'angular2-swiper-wrapper';
 
 import { AppComponent } from './app.component';
@@ -24,6 +26,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
   ],
   imports: [
     BrowserModule,
+    FlexLayoutModule,
     SwiperModule.forRoot(SWIPER_CONFIG)
   ]
 })
