@@ -1,3 +1,11 @@
+2.2.2 Bug fix release
+
+  - Added more checks to avoid possible errors
+
+2.2.1 Bug fix release
+
+  - Fixed possible error when updating swiper
+
 2.2.0 Bug fix release
 
   - Fixed hidden and fxlayout attributes

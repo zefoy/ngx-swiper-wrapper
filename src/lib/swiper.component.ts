@@ -270,7 +270,9 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
 
             if (updateTranslate) {
               setTimeout(() => {
-                this.swiper.update(true);
+                if (this.swiper) {
+                  this.swiper.update(true);
+                }
               }, 0);
             }
         } else {
@@ -279,7 +281,9 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
 
             if (updateTranslate) {
               setTimeout(() => {
-                this.swiper.update(true);
+                if (this.swiper) {
+                  this.swiper.update(true);
+                }
               }, 0);
             }
           });
