@@ -1,3 +1,7 @@
+2.2.3 Bug fix release
+
+  - Fixed setting active index when hidden
+
 2.2.2 Bug fix release
 
   - Added more checks to avoid possible errors

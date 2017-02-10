@@ -304,7 +304,7 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
   }
 
   setIndex(index: number, speed?: number, callbacks?: boolean) {
-    if (!this.swiper) {
+    if (!this.swiper || this.hidden) {
       this.initialIndex = index;
     } else {
       if (this.runInsideAngular) {
