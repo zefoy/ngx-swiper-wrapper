@@ -18,7 +18,7 @@
     "deploy": "rm -rf dist && deploy-to-git",
     "lint:ts": "tslint 'src/**/*.ts'",
     "lint:css": "stylelint 'src/**/*.css' --syntax css",
-    "start:sjs": "lite-server -c config/lite-devel-bs-config.js",
+    "start:sjs": "lite-server -c config/lite-server-bs-config.js",
     "build:aot": "webpack --config config/webpack-build-aot.config.js",
     "build:jit": "webpack --config config/webpack-build-jit.config.js"
   },
