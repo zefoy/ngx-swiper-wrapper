@@ -1,9 +1,9 @@
 {
-  "name": "angular2-swiper-wrapper",
-  "description": "Angular 2 wrapper library for Swiper",
+  "name": "ngx-swiper-wrapper",
+  "description": "Angular wrapper library for Swiper",
   "bugs": "https://github.com/zefoy/angular2-swiper-wrapper/issues",
   "license": "MIT",
-  "version": "2.2.3",
+  "version": "2.2.5",
   "main": "bundles/angular2-swiper-wrapper.umd.js",
   "module": "./dist/index.js",
   "typings": "./dist/index.d.ts",
@@ -65,11 +65,7 @@
     "zone.js": "~0.7.0"
   },
   "peerDependencies": {
-    "@angular/common": "^2.0.0",
-    "@angular/core": "^2.0.0",
-    "@angular/platform-browser": "^2.0.0",
-    "core-js": "^2.4.0",
-    "rxjs": "^5.0.0",
-    "zone.js": "^0.7.0"
+    "@angular/common": ">=2.0.0",
+    "@angular/core": ">=2.0.0"
   }
 }
