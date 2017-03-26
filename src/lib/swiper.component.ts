@@ -253,7 +253,6 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
 
       this.update(false);
     }
-
   }
 
   update(updateTranslate?: boolean) {
