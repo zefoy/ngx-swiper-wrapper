@@ -2,7 +2,7 @@
 
 <a href="https://badge.fury.io/js/angular2-swiper-wrapper"><img src="https://badge.fury.io/js/angular2-swiper-wrapper.svg" align="right" alt="npm version" height="18"></a>
 
-This is an Angular 2 wrapper library for [swiper](http://idangero.us/swiper/).
+This is an Angular 2 wrapper library for [Swiper](http://idangero.us/swiper/).
 
 See a live example application <a href="https://zefoy.github.io/ngx-swiper-wrapper/">here</a>.
 
