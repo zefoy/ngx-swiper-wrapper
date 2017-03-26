@@ -1,3 +1,11 @@
+2.5.0 Last 2.x release
+
+  - Preparing for moving to Angular 4.x
+
+2.2.5 Name change release
+
+  - Changed from angular2 to ngx prefix
+
 2.2.3 Bug fix release
 
   - Fixed setting active index when hidden

@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { SwiperComponent, SwiperConfigInterface } from 'angular2-swiper-wrapper';
+import { SwiperComponent, SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 @Component({
   moduleId: module.id + '',

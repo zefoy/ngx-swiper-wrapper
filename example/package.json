@@ -2,7 +2,7 @@
   "name": "angular2-swiper-wrapper-example",
   "description": "Example app for the angular2-swiper-wrapper",
   "license": "MIT",
-  "version": "2.2.3",
+  "version": "2.5.0",
   "tslint": {
     "extends": "./tslint.json"
   },

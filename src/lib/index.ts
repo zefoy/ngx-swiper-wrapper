@@ -1,5 +1,7 @@
 export { SwiperComponent } from './swiper.component';
+
 export { SwiperDirective } from './swiper.directive';
+
 export {
   coverflowObject, coverflowObjectInterface,
   cubeObject, cubeObjectInterface,
@@ -8,6 +10,7 @@ export {
   SwiperConfig, SwiperConfigInterface,
   SwiperEvents
 } from './swiper.interfaces';
+
 export {
   provideDefaultConfig, provideForRootGuard,
   SWIPER_CONFIG, SWIPER_GUARD,
