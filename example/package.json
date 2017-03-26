@@ -39,7 +39,7 @@
     "@angular/common": "~2.4.0",
     "@angular/compiler": "~2.4.0",
     "@angular/core": "~2.4.0",
-    "@angular/flex-layout": "~2.0.0-beta.4",
+    "@angular/flex-layout": "~2.0.0-beta.5",
     "@angular/http": "~2.4.0",
     "@angular/platform-browser": "~2.4.0",
     "@angular/platform-browser-dynamic": "~2.4.0",
