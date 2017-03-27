@@ -1,8 +1,8 @@
-# Angular 2 Swiper Wrapper
+# Angular Swiper Wrapper
 
-<a href="https://badge.fury.io/js/angular2-swiper-wrapper"><img src="https://badge.fury.io/js/angular2-swiper-wrapper.svg" align="right" alt="npm version" height="18"></a>
+<a href="https://badge.fury.io/js/ngx-swiper-wrapper"><img src="https://badge.fury.io/js/ngx-swiper-wrapper.svg" align="right" alt="npm version" height="18"></a>
 
-This is an Angular 2 wrapper library for [Swiper](http://idangero.us/swiper/).
+This is an Angular wrapper library for the [Swiper](http://idangero.us/swiper/).
 
 See a live example application <a href="https://zefoy.github.io/ngx-swiper-wrapper/">here</a>.
 
@@ -19,13 +19,13 @@ See a live example application <a href="https://zefoy.github.io/ngx-swiper-wrapp
 
 ### Installing and usage
 
-    npm install angular2-swiper-wrapper --save-dev
+    npm install ngx-swiper-wrapper --save-dev
 
 ##### Load the module for your app (with global configuration):
 
 ```javascript
-import { SwiperModule } from 'angular2-swiper-wrapper';
-import { SwiperConfigInterface } from 'angular2-swiper-wrapper';
+import { SwiperModule } from 'ngx-swiper-wrapper';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
