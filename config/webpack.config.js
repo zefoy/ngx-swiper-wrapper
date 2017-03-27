@@ -7,13 +7,13 @@ module.exports = {
     hints: false
   },
   entry: {
-    'angular2-swiper-wrapper.umd': './src/index.ts',
-    'angular2-swiper-wrapper.umd.min': './src/index.ts'
+    'ngx-swiper-wrapper.umd': './src/index.ts',
+    'ngx-swiper-wrapper.umd.min': './src/index.ts'
   },
   output: {
     path: './bundles',
     filename: '[name].js',
-    library: 'angular2-swiper-wrapper',
+    library: 'ngx-swiper-wrapper',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },

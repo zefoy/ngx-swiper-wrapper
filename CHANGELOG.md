@@ -1,3 +1,7 @@
+2.5.2 Bug fix release
+
+  - Fixed umd bundle to use the new name
+
 2.5.1 Bug fix release
 
   - Fixed problems from the name change

@@ -27,7 +27,7 @@
       'rxjs': 'npm:rxjs',
       'ts': 'npm:plugin-typescript/lib/plugin.js',
       'typescript': 'npm:typescript/lib/typescript.js',
-      'angular2-swiper-wrapper': 'node_modules/angular2-swiper-wrapper'
+      'ngx-swiper-wrapper': 'node_modules/ngx-swiper-wrapper'
     },
     packages: {
       'app': {
@@ -42,8 +42,8 @@
       'rxjs': {
         defaultExtension: 'js'
       },
-      'angular2-swiper-wrapper': {
-        main: 'bundles/angular2-swiper-wrapper.umd.js',
+      'ngx-swiper-wrapper': {
+        main: 'bundles/ngx-swiper-wrapper.umd.js',
         defaultExtension: 'js'
       }
     }
