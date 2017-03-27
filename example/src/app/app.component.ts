@@ -9,7 +9,7 @@ import { SwiperComponent, SwiperConfigInterface } from 'ngx-swiper-wrapper';
   styleUrls: ['app.component.css']
 })
 export class AppComponent {
-  private slides = [
+  public slides = [
     'First slide',
     'Second slide',
     'Third slide',
@@ -18,9 +18,9 @@ export class AppComponent {
     'Sixth slide'
   ];
 
-  private type: string = 'component';
+  public type: string = 'component';
 
-  private config: SwiperConfigInterface = {
+  public config: SwiperConfigInterface = {
     scrollbar: null,
     direction: 'horizontal',
     slidesPerView: 1,

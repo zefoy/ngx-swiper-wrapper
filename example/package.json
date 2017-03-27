@@ -2,7 +2,7 @@
   "name": "ngx-swiper-wrapper-example",
   "description": "Example app for the ngx-swiper-wrapper",
   "license": "MIT",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "tslint": {
     "extends": "./tslint.json"
   },

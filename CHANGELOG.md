@@ -1,3 +1,7 @@
+2.5.1 Bug fix release
+
+  - Fixed problems from the name change
+
 2.5.0 Last 2.x release
 
   - Preparing for moving to Angular 4.x
