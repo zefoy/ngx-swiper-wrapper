@@ -21,8 +21,7 @@
     "lint": "npm run lint:js && npm run lint:scss",
     "build": "npm run build:umd && npm run build:aot",
     "deploy": "npm run build && npm run inline && npm publish",
-    "inline": "ng2-inline --compress -b dist/lib -o ./ 'dist/lib/*.js'",
-    "release": "npm version -m 'New release with version %s'",
+    "inline": "ng2-inline --compress -b dist/lib/ -o ./ 'dist/lib/*.js'",
     "lint:ts": "tslint 'src/**/*.ts'",
     "lint:scss": "stylelint 'src/**/*.scss' --syntax scss",
     "build:js": "ngc -p src/tsconfig.json",
@@ -36,7 +35,7 @@
     "url": "https://github.com/zefoy/ngx-swiper-wrapper.git"
   },
   "dependencies": {
-    "swiper": "~3.4.0"
+    "swiper": "^3.0.0"
   },
   "devDependencies": {
     "@angular/common": "^4.0.0",
@@ -62,6 +61,7 @@
     "stylelint-config-standard": "~13.0.0",
     "tslint": "~4.5.0",
     "typescript": "~2.1.0",
+    "watch": "~1.0.0",
     "webpack": "~2.3.0",
     "zone.js": "~0.8.0"
   },

@@ -31,7 +31,7 @@
 .content-container {
   position: relative;
   overflow: auto;
-  padding: 16px 24px;
+  padding: 16px;
   margin: 8px 16px;
   border-radius: 4px;
   background-color: #fff;
@@ -39,9 +39,9 @@
 
 .action-toggle-button {
   box-sizing: border-box;
-  width: 100%;
+  width: calc(100% - 16px);
   padding: 16px;
-  margin: 8px 0;
+  margin: 8px;
   border-radius: 4px;
   border: 1px solid #555;
   cursor: pointer;
