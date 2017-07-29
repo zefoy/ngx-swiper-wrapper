@@ -62,7 +62,7 @@ Simply replace the element that would oridinarily be passed to `Swiper` with the
 [config]            // Custom config to override the global defaults.
 [disabled]          // Disables changing of slides (locks the Swiper).
 
-(indexChange)       // Event handler for the swiper index change event.
+(indexChange)       // Event handler for the Swiper index change event.
 
 [runInsideAngular]  // Run Swiper function calls inside the angular zone.
 ```
@@ -98,7 +98,7 @@ Swiper directive can be used in correctly structured div element with optional c
 [swiper]            // Can be used to provide optional custom config.
 [disabled]          // Disables changing of slides (locks the Swiper).
 
-(indexChange)       // Event handler for the swiper index change event.
+(indexChange)       // Event handler for the Swiper index change event.
 
 [runInsideAngular]  // Run Swiper function calls inside the angular zone.
 ```

@@ -236,7 +236,8 @@ export interface SwiperConfigInterface {
   onLazyImageLoad?: any,
   onLazyImageReady?: any,
   onPaginationRendered?: any,
-  onScroll?: any
+  onScroll?: any,
+  onScrollbarDragEnd?: any
 }
 
 export interface fadeObjectInterface {
@@ -490,6 +491,7 @@ export class SwiperConfig implements SwiperConfigInterface {
   onLazyImageReady: any;
   onPaginationRendered: any;
   onScroll: any;
+  onScrollbarDragEnd: any;
 
   constructor(config: SwiperConfigInterface = {}) {
      this.assign(config);
