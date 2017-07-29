@@ -60,6 +60,7 @@ Simply replace the element that would oridinarily be passed to `Swiper` with the
 
 ```javascript
 [config]            // Custom config to override the global defaults.
+[disabled]          // Disables changing of slides (locks the Swiper).
 
 (indexChange)       // Event handler for the swiper index change event.
 
@@ -95,6 +96,7 @@ Swiper directive can be used in correctly structured div element with optional c
 
 ```javascript
 [swiper]            // Can be used to provide optional custom config.
+[disabled]          // Disables changing of slides (locks the Swiper).
 
 (indexChange)       // Event handler for the swiper index change event.
 
@@ -113,3 +115,20 @@ keyboardControl     // Enables navigation through arrow keys (Default: false).
 ```
 
 For more detailed documentation with all the supported options see [swiper documentation](http://idangero.us/swiper/api/).
+
+##### Available control / helper functions (provided by the directive):
+
+```javascript
+update(updateTranslate)           // Updates Swiper elements / classes /etc.
+
+getIndex()                        // Returns the current Swiper slide index.
+setIndex(index, speed?, silent?)  // Runs transition to slide with given index.
+
+nextSlide(speed?, silent?)        // Runs transition to the next slide index.
+prevSlide(speed?, silent?)        // Runs transition to the previous slide index.
+
+stopAutoplay(reset?)              // Stops and optionally resets the autoplay.
+startAutoplay(reset?)             // Starts and optionally resets the autoplay.
+```
+
+Above functions can be accessed through the directive reference (available as directiveRef in the component).
