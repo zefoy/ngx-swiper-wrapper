@@ -316,7 +316,7 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
       this.initialIndex = index;
     } else {
       let realIndex: number = index * this.swiper.params.slidesPerGroup;
-      if (this.swiper.params.loop) index = index + this.swiper.loopedSlides;
+      if (this.swiper.params.loop) realIndex += this.swiper.loopedSlides;
 
       if (this.runInsideAngular) {
         this.swiper.slideTo(realIndex, speed, callbacks);
