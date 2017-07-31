@@ -1,4 +1,4 @@
-import { Component, Optional, OnInit, Input, HostBinding, Output, EventEmitter, ViewChild, ViewChildren, QueryList, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, Optional, DoCheck, Input, HostBinding, Output, EventEmitter, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 
 import { SwiperDirective } from './swiper.directive';
 
@@ -10,9 +10,11 @@ import { SwiperConfig, SwiperConfigInterface } from './swiper.interfaces';
   styleUrls: ['./swiper.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class SwiperComponent implements OnInit {
+export class SwiperComponent implements DoCheck {
   public isAtLast: boolean;
   public isAtFirst: boolean;
+
+  private childrenDiff: number;
 
   @HostBinding('hidden')
   @Input() hidden: boolean = false;
@@ -28,95 +30,109 @@ export class SwiperComponent implements OnInit {
 
   @Output() indexChange = new EventEmitter<number>();
 
+  @ViewChild('swiperSlides') swiperSlides: ElementRef;
+
   @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
 
-  @ViewChildren('swiperSlides') swiperSlides: QueryList<ElementRef>;
+  @Output('init'                   ) S_INIT                = new EventEmitter<any>();
+  @Output('destroy'                ) S_DESTROY             = new EventEmitter<any>();
 
-  @Output('init'              ) S_INIT                = new EventEmitter<any>();
-  @Output('slideChangeStart'  ) S_SLIDECHANGESTART    = new EventEmitter<any>();
-  @Output('slideChangeEnd'    ) S_SLIDECHANGEEND      = new EventEmitter<any>();
-  @Output('slideNextStart'    ) S_SLIDENEXTSTART      = new EventEmitter<any>();
-  @Output('slideNextEnd'      ) S_SLIDENEXTEND        = new EventEmitter<any>();
-  @Output('slidePrevStart'    ) S_SLIDEPREVSTART      = new EventEmitter<any>();
-  @Output('slidePrevEnd'      ) S_SLIDEPREVEND        = new EventEmitter<any>();
-  @Output('transitionStart'   ) S_TRANSITIONSTART     = new EventEmitter<any>();
-  @Output('transitionEnd'     ) S_TRANSITIONEND       = new EventEmitter<any>();
-  @Output('touchStart'        ) S_TOUCHSTART          = new EventEmitter<any>();
-  @Output('touchMove'         ) S_TOUCHMOVE           = new EventEmitter<any>();
-  @Output('touchMoveOpposite' ) S_TOUCHMOVEOPPOSITE   = new EventEmitter<any>();
-  @Output('sliderMove'        ) S_SLIDERMOVE          = new EventEmitter<any>();
-  @Output('touchEnd'          ) S_TOUCHEND            = new EventEmitter<any>();
-  @Output('click'             ) S_CLICK               = new EventEmitter<any>();
-  @Output('tap'               ) S_TAP                 = new EventEmitter<any>();
-  @Output('doubleTap'         ) S_DOUBLETAP           = new EventEmitter<any>();
-  @Output('imagesReady'       ) S_IMAGESREADY         = new EventEmitter<any>();
-  @Output('progress'          ) S_PROGRESS            = new EventEmitter<any>();
-  @Output('reachBeginning'    ) S_REACHBEGINNING      = new EventEmitter<any>();
-  @Output('reachEnd'          ) S_REACHEND            = new EventEmitter<any>();
-  @Output('destroy'           ) S_DESTROY             = new EventEmitter<any>();
-  @Output('setTranslate'      ) S_SETTRANSLATE        = new EventEmitter<any>();
-  @Output('setTransition'     ) S_SETTRANSITION       = new EventEmitter<any>();
-  @Output('autoplay'          ) S_AUTOPLAY            = new EventEmitter<any>();
-  @Output('autoplayStart'     ) S_AUTOPLAYSTART       = new EventEmitter<any>();
-  @Output('autoplayStop'      ) S_AUTOPLAYSTOP        = new EventEmitter<any>();
-  @Output('lazyImageLoad'     ) S_LAZYIMAGELOAD       = new EventEmitter<any>();
-  @Output('lazyImageReady'    ) S_LAZYIMAGEREADY      = new EventEmitter<any>();
-  @Output('paginationRendered') S_PAGINATIONRENDERED  = new EventEmitter<any>();
-  @Output('scroll'            ) S_SCROLL              = new EventEmitter<any>();
+  @Output('scroll'                 ) S_SCROLL              = new EventEmitter<any>();
+  @Output('progress'               ) S_PROGRESS            = new EventEmitter<any>();
+
+  @Output('setTranslate'           ) S_SETTRANSLATE        = new EventEmitter<any>();
+  @Output('setTransition'          ) S_SETTRANSITION       = new EventEmitter<any>();
+
+  @Output('autoplay'               ) S_AUTOPLAY            = new EventEmitter<any>();
+  @Output('autoplayStart'          ) S_AUTOPLAYSTART       = new EventEmitter<any>();
+  @Output('autoplayStop'           ) S_AUTOPLAYSTOP        = new EventEmitter<any>();
+
+  @Output('reachBeginning'         ) S_REACHBEGINNING      = new EventEmitter<any>();
+  @Output('reachEnd'               ) S_REACHEND            = new EventEmitter<any>();
+
+  @Output('slideChangeStart'       ) S_SLIDECHANGESTART    = new EventEmitter<any>();
+  @Output('slideChangeEnd'         ) S_SLIDECHANGEEND      = new EventEmitter<any>();
+  @Output('slideNextStart'         ) S_SLIDENEXTSTART      = new EventEmitter<any>();
+  @Output('slideNextEnd'           ) S_SLIDENEXTEND        = new EventEmitter<any>();
+  @Output('slidePrevStart'         ) S_SLIDEPREVSTART      = new EventEmitter<any>();
+  @Output('slidePrevEnd'           ) S_SLIDEPREVEND        = new EventEmitter<any>();
+
+  @Output('sliderMove'             ) S_SLIDERMOVE          = new EventEmitter<any>();
+
+  @Output('swiperClick'            ) S_CLICK               = new EventEmitter<any>();
+  @Output('swiperTap'              ) S_TAP                 = new EventEmitter<any>();
+  @Output('swiperDoubleTap'        ) S_DOUBLETAP           = new EventEmitter<any>();
+  @Output('swiperTouchStart'       ) S_TOUCHSTART          = new EventEmitter<any>();
+  @Output('swiperTouchMove'        ) S_TOUCHMOVE           = new EventEmitter<any>();
+  @Output('swiperTouchMoveOpposite') S_TOUCHMOVEOPPOSITE   = new EventEmitter<any>();
+  @Output('swiperTouchEnd'         ) S_TOUCHEND            = new EventEmitter<any>();
+  @Output('swiperTransitionStart'  ) S_TRANSITIONSTART     = new EventEmitter<any>();
+  @Output('swiperTransitionEnd'    ) S_TRANSITIONEND       = new EventEmitter<any>();
+
+  @Output('imagesReady'            ) S_IMAGESREADY         = new EventEmitter<any>();
+
+  @Output('lazyImageLoad'          ) S_LAZYIMAGELOAD       = new EventEmitter<any>();
+  @Output('lazyImageReady'         ) S_LAZYIMAGEREADY      = new EventEmitter<any>();
+
+  @Output('paginationRendered'     ) S_PAGINATIONRENDERED  = new EventEmitter<any>();
 
   constructor(private elementRef: ElementRef, @Optional() private defaults: SwiperConfig) {}
 
-  ngOnInit() {
-    this.config = this.config || {};
+  ngDoCheck() {
+    if (this.swiperSlides) {
+      let children = this.swiperSlides.nativeElement.children.length;
 
-    let element = this.elementRef.nativeElement;
+      if (children !== this.childrenDiff) {
+        this.childrenDiff = children;
+
+        for (let i = 0; i < this.swiperSlides.nativeElement.children.length; i++) {
+          this.swiperSlides.nativeElement.children[i].classList.add('swiper-slide');
+        }
+
+        this.directiveRef.update();
+      }
+    }
+  }
+
+  getConfig() {
+    this.config = this.config || {};
 
     let options = new SwiperConfig(this.defaults);
 
     options.assign(this.config); // Custom config
 
-    this.swiperSlides.changes.subscribe((changes: any) => {
-      console.log(changes);
-
-      /*if (this.swiperWrapper) {
-        for (let i = 0; i < this.swiperWrapper.nativeElement.children.length; i++) {
-          this.swiperWrapper.nativeElement.children[i].classList.add('swiper-slide');
-        }
-      }*/
-    });
-
-    if (options.scrollbar === true || options.scrollbar === '.swiper-scrollbar') {
-      this.config.scrollbar = element.querySelector('.swiper-scrollbar');
+    if (options.scrollbar === true) {
+      options.scrollbar = '.swiper-scrollbar';
     }
 
-    if (options.pagination === true || options.pagination === '.swiper-pagination') {
-      this.config.pagination = element.querySelector('.swiper-pagination');
+    if (options.pagination === true) {
+      options.pagination = '.swiper-pagination';
     }
 
-    if (options.prevButton === true || options.prevButton === '.swiper-button-prev') {
-      this.config.prevButton = element.querySelector('.swiper-button-prev');
+    if (options.prevButton === true) {
+      options.prevButton = '.swiper-button-prev';
     }
 
-    if (options.nextButton === true || options.nextButton === '.swiper-button-next') {
-      this.config.nextButton = element.querySelector('.swiper-button-next');
+    if (options.nextButton === true) {
+      options.nextButton = '.swiper-button-next';
     }
 
     if (options.pagination === true && options.paginationBulletRender === undefined) {
-      this.config.paginationBulletRender = (swiper, index, className) => {
-        if (this.directiveRef.swiper) {
-          if (index === 0) {
-            return '<span class="swiper-pagination-handle" index=' + index + '>' +
-              '<span class="' + className + ' ' + className + '-first"></span></span>';
-          } else if (index === (swiper.slides.length - 1)) {
-            return '<span class="swiper-pagination-handle" index=' + index + '>' +
-              '<span class="' + className + ' ' + className + '-last"></span></span>';
-          } else {
-            return '<span class="swiper-pagination-handle" index=' + index + '>' +
-              '<span class="' + className + ' ' + className + '-middle"></span></span>';
-          }
+      options.paginationBulletRender = (swiper, index, className) => {
+        if (index === 0) {
+          return '<span class="swiper-pagination-handle" index=' + index + '>' +
+            '<span class="' + className + ' ' + className + '-first"></span></span>';
+        } else if (index === (swiper.slides.length - 1)) {
+          return '<span class="swiper-pagination-handle" index=' + index + '>' +
+            '<span class="' + className + ' ' + className + '-last"></span></span>';
+        } else {
+          return '<span class="swiper-pagination-handle" index=' + index + '>' +
+            '<span class="' + className + ' ' + className + '-middle"></span></span>';
         }
       };
     }
+
+    return options;
   }
 
   update(updateTranslate?: boolean) {
@@ -162,10 +178,11 @@ export class SwiperComponent implements OnInit {
   }
 
   onIndexSelect(event: Event) {
-    this.setIndex(event.target['attributes']['index']['value']);
+    this.directiveRef.setIndex(event.target['attributes']['index']['value']);
   }
 
   onIndexUpdate(swiper: any, event: string) {
+    console.log(swiper);
     this.isAtLast = swiper.isEnd;
     this.isAtFirst = swiper.isBeginning;
 

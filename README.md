@@ -60,11 +60,17 @@ Simply replace the element that would oridinarily be passed to `Swiper` with the
 
 ```javascript
 [config]            // Custom config to override the global defaults.
-[disabled]          // Disables changing of slides (locks the Swiper).
+[disabled]          // Disables changing of slides (locks the swiper).
 
-(indexChange)       // Event handler for the Swiper index change event.
+[useSwiperClass]    // Use swiper class (needed by the default styles).
 
-[runInsideAngular]  // Run Swiper function calls inside the angular zone.
+[runInsideAngular]  // Run swiper function calls inside the angular zone.
+
+(indexChange)       // Event handler for the swiper index change event.
+
+(<swiper-event>)    // All swiper events / callbacks work as bindings.
+                    // Conflicting events are prefixed with 'swiper': 
+                    // click, tap, doubleTap, touch*, transition*
 ```
 
 **DIRECTIVE USAGE**
@@ -96,11 +102,17 @@ Swiper directive can be used in correctly structured div element with optional c
 
 ```javascript
 [swiper]            // Can be used to provide optional custom config.
-[disabled]          // Disables changing of slides (locks the Swiper).
+[disabled]          // Disables changing of slides (locks the swiper).
 
-(indexChange)       // Event handler for the Swiper index change event.
+[useSwiperClass]    // Use swiper class (needed by the default styles).
 
-[runInsideAngular]  // Run Swiper function calls inside the angular zone.
+[runInsideAngular]  // Run swiper function calls inside the angular zone.
+
+(indexChange)       // Event handler for the swiper index change event.
+
+(<swiper-event>)    // All swiper events / callbacks work as bindings.
+                    // Conflicting events are prefixed with 'swiper': 
+                    // click, tap, doubleTap, touch*, transition*
 ```
 
 ##### Available configuration options (custom / global configuration):
@@ -114,7 +126,7 @@ centeredSlides      // Align active item on center not left (Default: false).
 keyboardControl     // Enables navigation through arrow keys (Default: false).
 ```
 
-For more detailed documentation with all the supported options see [swiper documentation](http://idangero.us/swiper/api/).
+For more detailed documentation with all the supported events / options see [swiper documentation](http://idangero.us/swiper/api/).
 
 ##### Available control / helper functions (provided by the directive):
 

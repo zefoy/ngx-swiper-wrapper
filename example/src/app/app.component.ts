@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { SwiperComponent, SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { SwiperComponent, SwiperDirective, SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 @Component({
   moduleId: module.id + '',
@@ -35,7 +35,10 @@ export class AppComponent {
     prevButton: '.swiper-button-prev'
   };
 
-  @ViewChild(SwiperComponent) swiperView: SwiperComponent;
+  @ViewChild(SwiperComponent) componentRef: SwiperComponent;
+  @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
+
+  constructor() {}
 
   toggleType() {
     this.type = this.type == 'component' ? 'directive' : 'component';
@@ -45,10 +48,6 @@ export class AppComponent {
     this.config.direction = (this.config.direction == 'horizontal') ? 'vertical' : 'horizontal';
 
     return false;
-  }
-
-  toggleAutoHeight() {
-    this.config.autoHeight = !this.config.autoHeight;
   }
 
   toggleSlidesPerView() {

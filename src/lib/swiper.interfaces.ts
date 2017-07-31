@@ -2,36 +2,46 @@
 
 export const SwiperEvents = [
   'init',
-  'slideChangeStart',
+  'destroy',
+
+  'scroll',
+  'progress',
+
+  'setTranslate',
+  'setTransition',
+
+  'autoplay',
+  'autoplayStart',
+  'autoplayStop',
+
+  'reachBeginning',
+  'reachEnd',
+
   'slideChangeEnd',
+  'slideChangeStart',
   'slideNextStart',
   'slideNextEnd',
   'slidePrevStart',
   'slidePrevEnd',
-  'transitionStart',
-  'transitionEnd',
-  'touchStart',
-  'touchMove',
-  'touchMoveOpposite',
+
   'sliderMove',
-  'touchEnd',
-  'click',
-  'tap',
-  'doubleTap',
+
+  'swiperClick',
+  'swiperTap',
+  'swiperDoubleTap',
+  'swiperTouchStart',
+  'swiperTouchMove',
+  'swiperTouchMoveOpposite',
+  'swiperTouchEnd',
+  'swiperTransitionStart',
+  'swiperTransitionEnd',
+
   'imagesReady',
-  'progress',
-  'reachBeginning',
-  'reachEnd',
-  'destroy',
-  'setTranslate',
-  'setTransition',
-  'autoplay',
-  'autoplayStart',
-  'autoplayStop',
+
   'lazyImageLoad',
   'lazyImageReady',
-  'paginationRendered',
-  'scroll'
+
+  'paginationRendered'
 ];
 
 export interface SwiperConfigInterface {

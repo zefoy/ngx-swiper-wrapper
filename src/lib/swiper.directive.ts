@@ -13,7 +13,6 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
   public swiper: any;
 
   private configDiff: any;
-  private slidesDiff: number;
 
   private initialIndex: number;
 
@@ -30,40 +29,49 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
 
   @Output() indexChange = new EventEmitter<number>();
 
-  @Output('init'              ) S_INIT                = new EventEmitter<any>();
-  @Output('slideChangeStart'  ) S_SLIDECHANGESTART    = new EventEmitter<any>();
-  @Output('slideChangeEnd'    ) S_SLIDECHANGEEND      = new EventEmitter<any>();
-  @Output('slideNextStart'    ) S_SLIDENEXTSTART      = new EventEmitter<any>();
-  @Output('slideNextEnd'      ) S_SLIDENEXTEND        = new EventEmitter<any>();
-  @Output('slidePrevStart'    ) S_SLIDEPREVSTART      = new EventEmitter<any>();
-  @Output('slidePrevEnd'      ) S_SLIDEPREVEND        = new EventEmitter<any>();
-  @Output('transitionStart'   ) S_TRANSITIONSTART     = new EventEmitter<any>();
-  @Output('transitionEnd'     ) S_TRANSITIONEND       = new EventEmitter<any>();
-  @Output('touchStart'        ) S_TOUCHSTART          = new EventEmitter<any>();
-  @Output('touchMove'         ) S_TOUCHMOVE           = new EventEmitter<any>();
-  @Output('touchMoveOpposite' ) S_TOUCHMOVEOPPOSITE   = new EventEmitter<any>();
-  @Output('sliderMove'        ) S_SLIDERMOVE          = new EventEmitter<any>();
-  @Output('touchEnd'          ) S_TOUCHEND            = new EventEmitter<any>();
-  @Output('click'             ) S_CLICK               = new EventEmitter<any>();
-  @Output('tap'               ) S_TAP                 = new EventEmitter<any>();
-  @Output('doubleTap'         ) S_DOUBLETAP           = new EventEmitter<any>();
-  @Output('imagesReady'       ) S_IMAGESREADY         = new EventEmitter<any>();
-  @Output('progress'          ) S_PROGRESS            = new EventEmitter<any>();
-  @Output('reachBeginning'    ) S_REACHBEGINNING      = new EventEmitter<any>();
-  @Output('reachEnd'          ) S_REACHEND            = new EventEmitter<any>();
-  @Output('destroy'           ) S_DESTROY             = new EventEmitter<any>();
-  @Output('setTranslate'      ) S_SETTRANSLATE        = new EventEmitter<any>();
-  @Output('setTransition'     ) S_SETTRANSITION       = new EventEmitter<any>();
-  @Output('autoplay'          ) S_AUTOPLAY            = new EventEmitter<any>();
-  @Output('autoplayStart'     ) S_AUTOPLAYSTART       = new EventEmitter<any>();
-  @Output('autoplayStop'      ) S_AUTOPLAYSTOP        = new EventEmitter<any>();
-  @Output('lazyImageLoad'     ) S_LAZYIMAGELOAD       = new EventEmitter<any>();
-  @Output('lazyImageReady'    ) S_LAZYIMAGEREADY      = new EventEmitter<any>();
-  @Output('paginationRendered') S_PAGINATIONRENDERED  = new EventEmitter<any>();
-  @Output('scroll'            ) S_SCROLL              = new EventEmitter<any>();
+  @Output('init'                   ) S_INIT                = new EventEmitter<any>();
+  @Output('destroy'                ) S_DESTROY             = new EventEmitter<any>();
 
-  constructor(private zone: NgZone, private elementRef: ElementRef, private differs: KeyValueDiffers,
-    @Optional() private defaults: SwiperConfig) {}
+  @Output('scroll'                 ) S_SCROLL              = new EventEmitter<any>();
+  @Output('progress'               ) S_PROGRESS            = new EventEmitter<any>();
+
+  @Output('setTranslate'           ) S_SETTRANSLATE        = new EventEmitter<any>();
+  @Output('setTransition'          ) S_SETTRANSITION       = new EventEmitter<any>();
+
+  @Output('autoplay'               ) S_AUTOPLAY            = new EventEmitter<any>();
+  @Output('autoplayStart'          ) S_AUTOPLAYSTART       = new EventEmitter<any>();
+  @Output('autoplayStop'           ) S_AUTOPLAYSTOP        = new EventEmitter<any>();
+
+  @Output('reachBeginning'         ) S_REACHBEGINNING      = new EventEmitter<any>();
+  @Output('reachEnd'               ) S_REACHEND            = new EventEmitter<any>();
+
+  @Output('slideChangeStart'       ) S_SLIDECHANGESTART    = new EventEmitter<any>();
+  @Output('slideChangeEnd'         ) S_SLIDECHANGEEND      = new EventEmitter<any>();
+  @Output('slideNextStart'         ) S_SLIDENEXTSTART      = new EventEmitter<any>();
+  @Output('slideNextEnd'           ) S_SLIDENEXTEND        = new EventEmitter<any>();
+  @Output('slidePrevStart'         ) S_SLIDEPREVSTART      = new EventEmitter<any>();
+  @Output('slidePrevEnd'           ) S_SLIDEPREVEND        = new EventEmitter<any>();
+
+  @Output('sliderMove'             ) S_SLIDERMOVE          = new EventEmitter<any>();
+
+  @Output('swiperClick'            ) S_CLICK               = new EventEmitter<any>();
+  @Output('swiperTap'              ) S_TAP                 = new EventEmitter<any>();
+  @Output('swiperDoubleTap'        ) S_DOUBLETAP           = new EventEmitter<any>();
+  @Output('swiperTouchStart'       ) S_TOUCHSTART          = new EventEmitter<any>();
+  @Output('swiperTouchMove'        ) S_TOUCHMOVE           = new EventEmitter<any>();
+  @Output('swiperTouchMoveOpposite') S_TOUCHMOVEOPPOSITE   = new EventEmitter<any>();
+  @Output('swiperTouchEnd'         ) S_TOUCHEND            = new EventEmitter<any>();
+  @Output('swiperTransitionStart'  ) S_TRANSITIONSTART     = new EventEmitter<any>();
+  @Output('swiperTransitionEnd'    ) S_TRANSITIONEND       = new EventEmitter<any>();
+
+  @Output('imagesReady'            ) S_IMAGESREADY         = new EventEmitter<any>();
+
+  @Output('lazyImageLoad'          ) S_LAZYIMAGELOAD       = new EventEmitter<any>();
+  @Output('lazyImageReady'         ) S_LAZYIMAGEREADY      = new EventEmitter<any>();
+
+  @Output('paginationRendered'     ) S_PAGINATIONRENDERED  = new EventEmitter<any>();
+
+  constructor(private zone: NgZone, private elementRef: ElementRef, private differs: KeyValueDiffers, @Optional() private defaults: SwiperConfig) {}
 
   ngOnInit() {
     let element = this.elementRef.nativeElement;
@@ -103,7 +111,7 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
       options.scrollbar = element.querySelector(options.scrollbar);
     }
 
-    if (typeof this.config.pagination === 'string') {
+    if (typeof options.pagination === 'string') {
       options.pagination = element.querySelector(options.pagination);
     }
 
@@ -125,23 +133,29 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
 
     // Add native swiper event handling
     SwiperEvents.forEach((eventName) => {
+      eventName = eventName.replace('swiper', '');
+
+      eventName = eventName.charAt(0).toLowerCase() + eventName.slice(1);
+
       this.swiper.on(eventName, (...args) => {
         if (args.length === 1) {
           args = args[0];
         }
 
-        self[`S_${eventName.toUpperCase()}`].emit(args);
+        if (self[`S_${eventName.toUpperCase()}`]) {
+          self[`S_${eventName.toUpperCase()}`].emit(args);
+        }
       });
     });
 
     if (!this.configDiff) {
       this.configDiff = this.differs.find(this.config || {}).create(null);
     }
+
+    this.update();
   }
 
   ngDoCheck() {
-    let slides = this.swiper.slides.length;
-
     let changes = this.configDiff.diff(this.config || {});
 
     if (changes) {
@@ -158,13 +172,7 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
       // Timeout is needed for the styles to update properly
       setTimeout(() => {
         this.ngOnInit();
-
-        this.update();
       }, 0);
-    } else if (slides !== this.slidesDiff) {
-      this.slidesDiff = slides;
-
-      this.update();
     }
   }
 
@@ -237,7 +245,21 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
     if (!this.swiper) {
       return this.initialIndex;
     } else {
-      return this.swiper.activeIndex;
+      let index = this.swiper.activeIndex;
+
+      if (this.swiper.params.loop) {
+        const numSlides = this.swiper.slides.length - 2 * this.swiper.loopedSlides;
+
+        index -= this.swiper.loopedSlides;
+
+        if (index < 0) {
+          index += numSlides;
+        } else if (index >= numSlides) {
+          index -= numSlides;
+        }
+      }
+
+      return index;
     }
   }
 
@@ -245,6 +267,12 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
     if (!this.swiper || this.hidden) {
       this.initialIndex = index;
     } else {
+      let realIndex = index * this.swiper.params.slidesPerGroup;
+
+      if (this.swiper.params.loop) {
+        realIndex += this.swiper.loopedSlides;
+      }
+
       if (this.runInsideAngular) {
         this.swiper.slideTo(index, speed || 0, !silent);
       } else {

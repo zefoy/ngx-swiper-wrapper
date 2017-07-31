@@ -28,16 +28,20 @@
   line-height: 24px;
 }
 
+.action-container {
+  padding: 16px;
+}
+
+.action-container,
 .content-container {
   position: relative;
   overflow: auto;
-  padding: 16px;
   margin: 8px 16px;
   border-radius: 4px;
   background-color: #fff;
 }
 
-.action-toggle-button {
+.action-button {
   box-sizing: border-box;
   width: calc(100% - 16px);
   padding: 16px;
@@ -50,18 +54,17 @@
   text-align: center;
 }
 
-.action-toggle-button:hover {
+.action-button:hover {
   color: #fff;
   background-color: #555;
 }
 
-.action-toggle-button.disabled {
+.action-button.disabled {
   cursor: default;
   color: #aaa;
   background-color: #eee;
 }
 
-.swiper,
 .swiper-container {
   position: absolute;
   top: 0;
@@ -71,7 +74,7 @@
 }
 
 .swiper-slide {
-  width: 100%;
+  color: #aaa;
   background-color: #eee;
 }
 

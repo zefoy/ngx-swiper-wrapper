@@ -9,18 +9,18 @@
     <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="25%" fxFlex.gt-xs="50%">
       <div class="box-title">Settings</div>
 
-      <div class="content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex>
-        <div class="action-toggle-button" fxLayout="column" fxLayoutAlign="center" fxFlex (click)='toggleType()'>{{(type == "component") ? "Switch to directive" : "Switch to component"}}</div>
+      <div class="action-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex>
+        <div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex (click)='toggleType()'>{{(type == "component") ? "Switch to directive" : "Switch to component"}}</div>
 
-        <div class="action-toggle-button" fxLayout="column" fxLayoutAlign="center" fxFlex (click)='toggleDirection()'>{{(config.direction == "horizontal") ? "Change to vertical" : "Change to horizontal"}}</div>
+        <div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex (click)='toggleDirection()'>{{(config.direction == "horizontal") ? "Change to vertical" : "Change to horizontal"}}</div>
 
-        <div class="action-toggle-button" fxLayout="column" fxLayoutAlign="center" fxFlex (click)='toggleSlidesPerView()'>Toggle slides per view</div>
+        <div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex (click)='toggleSlidesPerView()'>Toggle slides per view</div>
 
-        <div class="action-toggle-button" fxLayout="column" fxLayoutAlign="center" fxFlex (click)='toggleOverlayControls()'>Toggle overlay controls</div>
+        <div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex (click)='toggleOverlayControls()'>Toggle overlay controls</div>
 
-        <div class="action-toggle-button" fxLayout="column" fxLayoutAlign="center" fxFlex (click)='toggleKeyboardControl()'>{{config.keyboardControl ? "Disable arrow keys" : "Enable arrow keys"}}</div>
+        <div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex (click)='toggleKeyboardControl()'>{{config.keyboardControl ? "Disable arrow keys" : "Enable arrow keys"}}</div>
 
-        <div class="action-toggle-button" fxLayout="column" fxLayoutAlign="center" fxFlex (click)='toggleMouseWheelControl()'>{{config.mousewheelControl ? "Disable mouse wheel" : "Enable mouse wheel"}}</div>
+        <div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex (click)='toggleMouseWheelControl()'>{{config.mousewheelControl ? "Disable mouse wheel" : "Enable mouse wheel"}}</div>
       </div>
     </div>
 
@@ -28,8 +28,8 @@
       <div class="box-title">Swiper</div>
 
       <div class="content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex>
-        <swiper *ngIf="type == 'component'" overlay-controls [config]="config" (indexChange)="onIndexChange($event)" (reachEnd)="onReachEnd($event)">
-          <div *ngFor="let slide of slides" class="swiper-slide" fxLayout="column" fxLayoutAlign="center center">
+        <swiper *ngIf="type == 'component'" overlay-controls [config]="config" (indexChange)="onIndexChange($event)" (reachEnd)="onReachEnd($event)" fxFlex>
+          <div *ngFor="let slide of slides" fxLayout="column" fxLayoutAlign="center center">
             {{slide}}
           </div>
         </swiper>
