@@ -365,6 +365,8 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
   }
 
   onIndexSelect(event: any) {
-    this.setIndex(event.target.attributes.index.value);
+    let index: number = event.target.attributes.index.value * this.swiper.params.slidesPerGroup;
+    if (this.swiper.params.loop) index = index + this.swiper.loopedSlides;
+    this.setIndex(index);
   }
 }
