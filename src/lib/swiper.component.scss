@@ -13,31 +13,29 @@ swiper {
       place-content: inherit;
       -webkit-box-pack: inherit;
       -webkit-box-align: inherit;
-/*
+
       & > .swiper {
-        &,
-        .swiper-slide {
-          display: flex;
-          flex: 1 1 auto;
-          -webkit-box-flex: 1;
-          -ms-flex: 1 1 auto;
-          flex-direction: inherit;
-          -webkit-box-orient: inherit;
-          -webkit-box-direction: inherit;
-          align-item: inherit;
-          place-content: inherit;
-          -webkit-box-pack: inherit;
-          -webkit-box-align: inherit;
-        }
-      }*/
+        display: flex;
+        flex: 1 1 auto;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex-direction: inherit;
+        -webkit-box-orient: inherit;
+        -webkit-box-direction: inherit;
+        align-item: inherit;
+        place-content: inherit;
+        -webkit-box-pack: inherit;
+        -webkit-box-align: inherit;
+      }
     }
 
-    .swiper {
+    & > .swiper {
       width: 100%;
       height: 100%;
 
       .swiper-wrapper {
         .swiper-slide {
+          overflow: auto;
           width: 100%;
           height: 100%;
           max-width: 100%;

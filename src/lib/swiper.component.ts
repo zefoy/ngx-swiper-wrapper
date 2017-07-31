@@ -16,6 +16,8 @@ export class SwiperComponent implements DoCheck {
 
   private childrenDiff: number;
 
+  private paginationBulletRender: Function;
+
   @HostBinding('hidden')
   @Input() hidden: boolean = false;
   @Input() disabled: boolean = false;
@@ -76,7 +78,20 @@ export class SwiperComponent implements DoCheck {
 
   @Output('paginationRendered'     ) S_PAGINATIONRENDERED  = new EventEmitter<any>();
 
-  constructor(private elementRef: ElementRef, @Optional() private defaults: SwiperConfig) {}
+  constructor(private elementRef: ElementRef, @Optional() private defaults: SwiperConfig) {
+    this.paginationBulletRender = (swiper, index, className) => {
+      if (index === 0) {
+        return '<span class="swiper-pagination-handle" index=' + index + '>' +
+          '<span class="' + className + ' ' + className + '-first"></span></span>';
+      } else if (index === (swiper.slides.length - 1)) {
+        return '<span class="swiper-pagination-handle" index=' + index + '>' +
+          '<span class="' + className + ' ' + className + '-last"></span></span>';
+      } else {
+        return '<span class="swiper-pagination-handle" index=' + index + '>' +
+          '<span class="' + className + ' ' + className + '-middle"></span></span>';
+      }
+    };
+  }
 
   ngDoCheck() {
     if (this.swiperSlides) {
@@ -117,19 +132,8 @@ export class SwiperComponent implements DoCheck {
       options.nextButton = '.swiper-button-next';
     }
 
-    if (options.pagination === true && options.paginationBulletRender === undefined) {
-      options.paginationBulletRender = (swiper, index, className) => {
-        if (index === 0) {
-          return '<span class="swiper-pagination-handle" index=' + index + '>' +
-            '<span class="' + className + ' ' + className + '-first"></span></span>';
-        } else if (index === (swiper.slides.length - 1)) {
-          return '<span class="swiper-pagination-handle" index=' + index + '>' +
-            '<span class="' + className + ' ' + className + '-last"></span></span>';
-        } else {
-          return '<span class="swiper-pagination-handle" index=' + index + '>' +
-            '<span class="' + className + ' ' + className + '-middle"></span></span>';
-        }
-      };
+    if (options.pagination === '.swiper-pagination' && !options.paginationBulletRender) {
+      options.paginationBulletRender = this.paginationBulletRender;
     }
 
     return options;
@@ -182,7 +186,6 @@ export class SwiperComponent implements DoCheck {
   }
 
   onIndexUpdate(swiper: any, event: string) {
-    console.log(swiper);
     this.isAtLast = swiper.isEnd;
     this.isAtFirst = swiper.isBeginning;
 
