@@ -143,4 +143,4 @@ stopAutoplay(reset?)              // Stops and optionally resets the autoplay.
 startAutoplay(reset?)             // Starts and optionally resets the autoplay.
 ```
 
-Above functions can be accessed through the directive reference (available as directiveRef in the component).
+Above functions can be accessed through the component reference (available as componentRef in the component).
