@@ -297,8 +297,17 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
   getIndex() {
     if (!this.swiper) {
       return this.initialIndex;
-    } else {
-      return this.swiper.activeIndex;
+    } else
+    {
+      let index = this.swiper.activeIndex;
+      if (this.swiper.params.loop)
+      {
+        const numSlides = this.swiper.slides.length - 2 * this.swiper.loopedSlides;
+        index -= this.swiper.loopedSlides;
+        if (index < 0) index += numSlides;
+        else if (index >= numSlides) index -= numSlides;
+      }
+      return index;
     }
   }
 
@@ -306,11 +315,14 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
     if (!this.swiper || this.hidden) {
       this.initialIndex = index;
     } else {
+      let realIndex: number = index * this.swiper.params.slidesPerGroup;
+      if (this.swiper.params.loop) realIndex += this.swiper.loopedSlides;
+
       if (this.runInsideAngular) {
-        this.swiper.slideTo(index, speed, callbacks);
+        this.swiper.slideTo(realIndex, speed, callbacks);
       } else {
         this.zone.runOutsideAngular(() => {
-          this.swiper.slideTo(index, speed, callbacks);
+          this.swiper.slideTo(realIndex, speed, callbacks);
         });
       }
     }
@@ -365,6 +377,6 @@ export class SwiperComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
   }
 
   onIndexSelect(event: any) {
-    this.setIndex(event.target.attributes.index.value);
+      this.setIndex(parseInt(event.target.attributes.index.value));
   }
 }
