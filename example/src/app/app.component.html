@@ -28,13 +28,13 @@
       <div class="box-title">Swiper</div>
 
       <div class="content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex>
-        <swiper *ngIf="type == 'component'" overlay-controls [config]="config" (indexChange)="onIndexChange($event)" (reachEnd)="onReachEnd($event)" fxFlex>
+        <swiper *ngIf="type == 'component' && show" overlay-controls [config]="config" (indexChange)="onIndexChange($event)" fxFlex>
           <div *ngFor="let slide of slides" fxLayout="column" fxLayoutAlign="center center">
             {{slide}}
           </div>
         </swiper>
 
-        <div *ngIf="type == 'directive'" class="swiper-container" [swiper]="config" (indexChange)="onIndexChange($event)" (reachEnd)="onReachEnd($event)">
+        <div *ngIf="type == 'directive' && show" class="swiper-container" [swiper]="config" (indexChange)="onIndexChange($event)">
           <div class="swiper-wrapper">
             <div *ngFor="let slide of slides" class="swiper-slide" fxLayout="column" fxLayoutAlign="center center">
               {{slide}}

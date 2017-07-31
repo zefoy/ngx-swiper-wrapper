@@ -1,8 +1,8 @@
 import * as Swiper from 'swiper';
 
 import { NgZone, SimpleChanges, KeyValueDiffers } from '@angular/core';
-import { Input, HostBinding, Output, EventEmitter, ElementRef } from '@angular/core';
 import { Directive, Optional, OnInit, DoCheck, OnDestroy, OnChanges } from '@angular/core';
+import { Input, HostBinding, Output, EventEmitter, ElementRef } from '@angular/core';
 
 import { SwiperConfig, SwiperConfigInterface, SwiperEvents } from './swiper.interfaces';
 
@@ -178,53 +178,11 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
 
   ngOnDestroy() {
     if (this.swiper) {
-      // Remove classes manually since Swiper wipes all the styles
-
-      this.swiper.container.removeClass(this.swiper.classNames.join(' '));
-
-      if (this.swiper.slides && this.swiper.slides.length) {
-        this.swiper.slides
-          .removeClass([
-            this.swiper.params.slideVisibleClass,
-            this.swiper.params.slideActiveClass,
-            this.swiper.params.slideNextClass,
-            this.swiper.params.slidePrevClass
-          ].join(' '))
-          .removeAttr('data-swiper-column')
-          .removeAttr('data-swiper-row');
-      }
-
-      if (this.swiper.params.scrollbar && this.swiper.scrollbar) {
-        if (this.swiper.scrollbar.drag && this.swiper.scrollbar.drag.length) {
-          this.swiper.scrollbar.drag.removeAttr('style');
-        }
-
-        if (this.swiper.scrollbar.track && this.swiper.scrollbar.track.length) {
-          this.swiper.scrollbar.track.removeAttr('style');
-        }
-      }
-
-      if (this.swiper.bullets && this.swiper.bullets.length) {
-        this.swiper.bullets.removeClass(this.swiper.params.bulletActiveClass);
-      }
-
-      if (this.swiper.paginationContainer && this.swiper.paginationContainer.length) {
-        this.swiper.paginationContainer.removeClass(this.swiper.params.paginationHiddenClass);
-      }
-
-      if (this.swiper.params.prevButton && this.swiper.params.prevButton.classList) {
-        this.swiper.params.prevButton.classList.remove(this.swiper.params.buttonDisabledClass);
-      }
-
-      if (this.swiper.params.nextButton && this.swiper.params.nextButton.classList) {
-        this.swiper.params.nextButton.classList.remove(this.swiper.params.buttonDisabledClass);
-      }
-
       if (this.runInsideAngular) {
-        this.swiper.destroy(true, false);
+        this.swiper.destroy(true, true);
       } else {
         this.zone.runOutsideAngular(() => {
-          this.swiper.destroy(true, false);
+          this.swiper.destroy(true, true);
         });
       }
 
@@ -272,10 +230,22 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
     setTimeout(() => {
       if (this.swiper) {
         if (this.runInsideAngular) {
-          this.swiper.update(updateTranslate);
+          this.swiper.update();
+
+          if (updateTranslate) {
+            setTimeout(() => {
+              this.swiper.update(true);
+            }, 0);
+          }
         } else {
           this.zone.runOutsideAngular(() => {
-            this.swiper.update(updateTranslate);
+            this.swiper.update();
+
+            if (updateTranslate) {
+              setTimeout(() => {
+                this.swiper.update(true);
+              }, 0);
+            }
           });
         }
       }

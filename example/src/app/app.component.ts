@@ -9,6 +9,8 @@ import { SwiperComponent, SwiperDirective, SwiperConfigInterface } from 'ngx-swi
   styleUrls: ['app.component.css']
 })
 export class AppComponent {
+  public show: boolean = true;
+
   public slides = [
     'First slide',
     'Second slide',
@@ -44,45 +46,69 @@ export class AppComponent {
     this.type = this.type == 'component' ? 'directive' : 'component';
   }
 
-  toggleDirection(): boolean {
-    this.config.direction = (this.config.direction == 'horizontal') ? 'vertical' : 'horizontal';
+  toggleDirection() {
+    this.show = false;
 
-    return false;
+    setTimeout(() => {
+      this.config.direction = (this.config.direction == 'horizontal') ? 'vertical' : 'horizontal';
+
+      this.show = true;
+    }, 0);
   }
 
   toggleSlidesPerView() {
-    if (this.config.slidesPerView != 1) {
-      this.config.slidesPerView = 1;
-    } else {
-      this.config.slidesPerView = +this.config.slidesPerView + 1;
-    }
+    this.show = false;
+
+    setTimeout(() => {
+      if (this.config.slidesPerView != 1) {
+        this.config.slidesPerView = 1;
+      } else {
+        this.config.slidesPerView = +this.config.slidesPerView + 1;
+      }
+
+      this.show = true;
+    }, 0);
   }
 
   toggleOverlayControls() {
-    if (this.config.pagination) {
-      this.config.scrollbar = '.swiper-scrollbar';
-      this.config.pagination = null;
-      this.config.nextButton = null;
-      this.config.prevButton = null;
-    } else if (this.config.scrollbar) {
-      this.config.scrollbar = null;
-    } else {
-      this.config.pagination = '.swiper-pagination';
-      this.config.nextButton = '.swiper-button-next';
-      this.config.prevButton = '.swiper-button-prev';
-    }
+    this.show = false;
+
+    setTimeout(() => {
+      if (this.config.pagination) {
+        this.config.scrollbar = '.swiper-scrollbar';
+        this.config.pagination = null;
+        this.config.nextButton = null;
+        this.config.prevButton = null;
+      } else if (this.config.scrollbar) {
+        this.config.scrollbar = null;
+      } else {
+        this.config.pagination = '.swiper-pagination';
+        this.config.nextButton = '.swiper-button-next';
+        this.config.prevButton = '.swiper-button-prev';
+      }
+
+      this.show = true;
+    }, 0);
   }
 
   toggleKeyboardControl() {
-    this.config.keyboardControl = !this.config.keyboardControl;
+    this.show = false;
+
+    setTimeout(() => {
+      this.config.keyboardControl = !this.config.keyboardControl;
+
+      this.show = true;
+    }, 0);
   }
 
   toggleMouseWheelControl() {
-    this.config.mousewheelControl = !this.config.mousewheelControl;
-  }
+    this.show = false;
 
-  onReachEnd(event: any) {
-    console.log('Swiper at the end!');
+    setTimeout(() => {
+      this.config.mousewheelControl = !this.config.mousewheelControl;
+
+      this.show = true;
+    }, 0);
   }
 
   onIndexChange(index: number) {
