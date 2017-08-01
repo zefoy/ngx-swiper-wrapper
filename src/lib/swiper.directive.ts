@@ -18,6 +18,7 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
 
   @HostBinding('hidden')
   @Input() hidden: boolean = false;
+
   @Input() disabled: boolean = false;
 
   @HostBinding('class.swiper')
@@ -80,6 +81,10 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
 
     options.assign(this.config); // Custom config
 
+    if (this.initialIndex != null) {
+      options.initialSlide = this.initialIndex;
+    }
+
     let onSlideChangeStart = options.onSlideChangeStart;
     let onScrollbarDragEnd = options.onScrollbarDragEnd;
 
@@ -103,9 +108,6 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
       });
     };
 
-    if (this.initialIndex != null) {
-      options.initialSlide = this.initialIndex;
-    }
 
     if (typeof options.scrollbar === 'string') {
       options.scrollbar = element.querySelector(options.scrollbar);
@@ -151,8 +153,6 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
     if (!this.configDiff) {
       this.configDiff = this.differs.find(this.config || {}).create(null);
     }
-
-    this.update();
   }
 
   ngDoCheck() {
@@ -259,14 +259,14 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
       let index = this.swiper.activeIndex;
 
       if (this.swiper.params.loop) {
-        const numSlides = this.swiper.slides.length - 2 * this.swiper.loopedSlides;
+        const slidesCount = this.swiper.slides.length - 2 * this.swiper.loopedSlides;
 
         index -= this.swiper.loopedSlides;
 
         if (index < 0) {
-          index += numSlides;
-        } else if (index >= numSlides) {
-          index -= numSlides;
+          index += slidesCount;
+        } else if (index >= slidesCount) {
+          index -= slidesCount;
         }
       }
 

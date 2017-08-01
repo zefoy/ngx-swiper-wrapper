@@ -20,6 +20,7 @@ export class SwiperComponent implements DoCheck {
 
   @HostBinding('hidden')
   @Input() hidden: boolean = false;
+
   @Input() disabled: boolean = false;
 
   @Input() config: SwiperConfigInterface;
@@ -78,20 +79,7 @@ export class SwiperComponent implements DoCheck {
 
   @Output('paginationRendered'     ) S_PAGINATIONRENDERED  = new EventEmitter<any>();
 
-  constructor(private elementRef: ElementRef, @Optional() private defaults: SwiperConfig) {
-    this.paginationBulletRender = (swiper, index, className) => {
-      if (index === 0) {
-        return '<span class="swiper-pagination-handle" index=' + index + '>' +
-          '<span class="' + className + ' ' + className + '-first"></span></span>';
-      } else if (index === (swiper.slides.length - 1)) {
-        return '<span class="swiper-pagination-handle" index=' + index + '>' +
-          '<span class="' + className + ' ' + className + '-last"></span></span>';
-      } else {
-        return '<span class="swiper-pagination-handle" index=' + index + '>' +
-          '<span class="' + className + ' ' + className + '-middle"></span></span>';
-      }
-    };
-  }
+  constructor(private elementRef: ElementRef, @Optional() private defaults: SwiperConfig) {}
 
   ngDoCheck() {
     if (this.swiperSlides) {
@@ -133,6 +121,21 @@ export class SwiperComponent implements DoCheck {
     }
 
     if (options.pagination === '.swiper-pagination' && !options.paginationBulletRender) {
+      if (!this.paginationBulletRender) {
+        this.paginationBulletRender = (swiper, index, className) => {
+          if (index === 0) {
+            return '<span class="swiper-pagination-handle" index=' + index + '>' +
+              '<span class="' + className + ' ' + className + '-first"></span></span>';
+          } else if (index === (swiper.slides.length - 1)) {
+            return '<span class="swiper-pagination-handle" index=' + index + '>' +
+              '<span class="' + className + ' ' + className + '-last"></span></span>';
+          } else {
+            return '<span class="swiper-pagination-handle" index=' + index + '>' +
+              '<span class="' + className + ' ' + className + '-middle"></span></span>';
+          }
+        };
+      }
+
       options.paginationBulletRender = this.paginationBulletRender;
     }
 

@@ -1,12 +1,12 @@
-<div class="box-container" fxLayout="column">
+<div class="box-container" fxLayout="column" [ngStyle.lt-sm]="'min-height: 800px;'">
   <div class="app-title">Simple example app for the ngx-swiper-wrapper</div>
 
   <div class="info-container">
     You can change the settings of the Swiper area by clicking the buttons on the left panel.
   </div>
 
-  <div class="horizontal-container" fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="stretch" fxFlex>
-    <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="25%" fxFlex.gt-xs="50%">
+  <div class="horizontal-container" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="stretch" fxFlex>
+    <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="50%">
       <div class="box-title">Settings</div>
 
       <div class="action-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex>
@@ -24,20 +24,20 @@
       </div>
     </div>
 
-    <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="75%" fxFlex.gt-xs="50%">
+    <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="50%">
       <div class="box-title">Swiper</div>
 
       <div class="content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex>
         <swiper *ngIf="type == 'component' && show" overlay-controls [config]="config" (indexChange)="onIndexChange($event)" fxFlex>
-          <div *ngFor="let slide of slides" fxLayout="column" fxLayoutAlign="center center">
-            {{slide}}
+          <div *ngFor="let slide of slides" class="swiper-slide">
+            <div class="swiper-slide-content" fxLayout="column" fxLayoutAlign="center center">{{slide}}</div>
           </div>
         </swiper>
 
         <div *ngIf="type == 'directive' && show" class="swiper-container" [swiper]="config" (indexChange)="onIndexChange($event)">
           <div class="swiper-wrapper">
-            <div *ngFor="let slide of slides" class="swiper-slide" fxLayout="column" fxLayoutAlign="center center">
-              {{slide}}
+            <div *ngFor="let slide of slides" class="swiper-slide">
+              <div class="swiper-slide-content" fxLayout="column" fxLayoutAlign="center center">{{slide}}</div>
             </div>
           </div>
 

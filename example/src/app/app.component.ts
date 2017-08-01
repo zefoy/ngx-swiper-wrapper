@@ -47,68 +47,38 @@ export class AppComponent {
   }
 
   toggleDirection() {
-    this.show = false;
-
-    setTimeout(() => {
-      this.config.direction = (this.config.direction == 'horizontal') ? 'vertical' : 'horizontal';
-
-      this.show = true;
-    }, 0);
+    this.config.direction = (this.config.direction == 'horizontal') ? 'vertical' : 'horizontal';
   }
 
   toggleSlidesPerView() {
-    this.show = false;
-
-    setTimeout(() => {
-      if (this.config.slidesPerView != 1) {
-        this.config.slidesPerView = 1;
-      } else {
-        this.config.slidesPerView = +this.config.slidesPerView + 1;
-      }
-
-      this.show = true;
-    }, 0);
+    if (this.config.slidesPerView != 1) {
+      this.config.slidesPerView = 1;
+    } else {
+      this.config.slidesPerView = +this.config.slidesPerView + 1;
+    }
   }
 
   toggleOverlayControls() {
-    this.show = false;
-
-    setTimeout(() => {
-      if (this.config.pagination) {
-        this.config.scrollbar = '.swiper-scrollbar';
-        this.config.pagination = null;
-        this.config.nextButton = null;
-        this.config.prevButton = null;
-      } else if (this.config.scrollbar) {
-        this.config.scrollbar = null;
-      } else {
-        this.config.pagination = '.swiper-pagination';
-        this.config.nextButton = '.swiper-button-next';
-        this.config.prevButton = '.swiper-button-prev';
-      }
-
-      this.show = true;
-    }, 0);
+    if (this.config.pagination) {
+      this.config.scrollbar = '.swiper-scrollbar';
+      this.config.pagination = null;
+      this.config.nextButton = null;
+      this.config.prevButton = null;
+    } else if (this.config.scrollbar) {
+      this.config.scrollbar = null;
+    } else {
+      this.config.pagination = '.swiper-pagination';
+      this.config.nextButton = '.swiper-button-next';
+      this.config.prevButton = '.swiper-button-prev';
+    }
   }
 
   toggleKeyboardControl() {
-    this.show = false;
-
-    setTimeout(() => {
-      this.config.keyboardControl = !this.config.keyboardControl;
-
-      this.show = true;
-    }, 0);
+    this.config.keyboardControl = !this.config.keyboardControl;
   }
 
   toggleMouseWheelControl() {
-    this.show = false;
-
-    setTimeout(() => {
-      this.config.mousewheelControl = !this.config.mousewheelControl;
-
-      this.show = true;
-    }, 0);
+    this.config.mousewheelControl = !this.config.mousewheelControl;
   }
 
   onIndexChange(index: number) {

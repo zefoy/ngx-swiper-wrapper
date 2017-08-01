@@ -15,8 +15,8 @@
   padding: 24px;
   margin: 24px auto;
   border-radius: 4px;
+
   color: #555;
-  font-family: sans-serif;
   box-shadow:
     0 6px 20px rgba(0, 0, 0, 0.18),
     0 6px 6px rgba(0, 0, 0, 0.25);
@@ -25,6 +25,7 @@
 
 .info-container {
   padding: 12px 16px;
+
   line-height: 24px;
 }
 
@@ -35,34 +36,33 @@
 .action-container,
 .content-container {
   position: relative;
+
   overflow: auto;
   margin: 8px 16px;
   border-radius: 4px;
+
   background-color: #fff;
 }
 
 .action-button {
   box-sizing: border-box;
   width: calc(100% - 16px);
-  padding: 16px;
+  min-height: 35px;
+  padding: 4px 16px;
   margin: 8px;
   border-radius: 4px;
   border: 1px solid #555;
+
   cursor: pointer;
   font-size: 14px;
   font-weight: bold;
+  line-height: 14px;
   text-align: center;
 }
 
 .action-button:hover {
   color: #fff;
   background-color: #555;
-}
-
-.action-button.disabled {
-  cursor: default;
-  color: #aaa;
-  background-color: #eee;
 }
 
 .swiper-container {
