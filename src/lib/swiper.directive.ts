@@ -16,7 +16,9 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
 
   private initialIndex: number;
 
-  @HostBinding('hidden')
+  @Input() fxShow: boolean = true;
+  @Input() fxHide: boolean = false;
+
   @Input() hidden: boolean = false;
 
   @Input() disabled: boolean = false;
@@ -144,8 +146,8 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
           args = args[0];
         }
 
-        if (self[`S_${eventName.toUpperCase()}`]) {
-          self[`S_${eventName.toUpperCase()}`].emit(args);
+        if (this[`S_${eventName.toUpperCase()}`]) {
+          this[`S_${eventName.toUpperCase()}`].emit(args);
         }
       });
     });
@@ -191,12 +193,16 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.swiper && changes['hidden'] && this.hidden) {
+    if (this.swiper && ((changes['hidden'] && this.hidden) ||
+      (changes['fxHide'] && this.fxHide) || (changes['fxShow'] && !this.fxShow)))
+    {
       // For some reason resize causes Swiper to change index when hidden
       this.initialIndex = this.swiper.activeIndex || 0;
     }
 
-    if (this.swiper && changes['hidden'] && !this.hidden) {
+    if (this.swiper && ((changes['hidden'] && !this.hidden) ||
+      (changes['fxHide'] && !this.fxHide) || (changes['fxShow'] && this.fxShow)))
+    {
       // For some reason resize causes Swiper to change index when hidden
       this.swiper.activeIndex = this.initialIndex || 0;
 
@@ -275,7 +281,7 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
   }
 
   setIndex(index: number, speed?: number, silent?: boolean) {
-    if (!this.swiper || this.hidden) {
+    if (!this.swiper || this.hidden || this.fxHide || !this.fxShow) {
       this.initialIndex = index;
     } else {
       let realIndex = index * this.swiper.params.slidesPerGroup;

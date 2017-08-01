@@ -18,6 +18,9 @@ export class SwiperComponent implements DoCheck {
 
   private paginationBulletRender: Function;
 
+  @Input() fxShow: boolean = true;
+  @Input() fxHide: boolean = false;
+
   @HostBinding('hidden')
   @Input() hidden: boolean = false;
 
