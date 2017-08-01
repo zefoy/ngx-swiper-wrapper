@@ -151,7 +151,7 @@ export class SwiperComponent implements DoCheck {
   getIndex() {
     console.warn('Deprecated function, getIndex needs to be called through directiveRef!');
 
-    this.directiveRef.getIndex();
+    return this.directiveRef.getIndex();
   }
 
   setIndex(index: number, speed?: number, callbacks?: boolean) {
