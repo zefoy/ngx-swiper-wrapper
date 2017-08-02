@@ -11,12 +11,11 @@ import { SwiperConfig, SwiperConfigInterface } from './swiper.interfaces';
   encapsulation: ViewEncapsulation.None
 })
 export class SwiperComponent implements DoCheck {
-  public isAtLast: boolean;
-  public isAtFirst: boolean;
-
   private childrenDiff: number;
 
   private paginationBulletRender: Function;
+
+  @Input() index: number = null;
 
   @Input() fxShow: boolean = true;
   @Input() fxHide: boolean = false;
@@ -39,6 +38,16 @@ export class SwiperComponent implements DoCheck {
   @ViewChild('swiperSlides') swiperSlides: ElementRef;
 
   @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
+
+  get isAtLast(): boolean {
+    return (!this.directiveRef || !this.directiveRef.swiper) ?
+      false : this.directiveRef.swiper.isEnd;
+  }
+
+  get isAtFirst(): boolean {
+    return (!this.directiveRef || !this.directiveRef.swiper) ?
+      false : this.directiveRef.swiper.isBeginning;
+  }
 
   @Output('init'                   ) S_INIT                = new EventEmitter<any>();
   @Output('destroy'                ) S_DESTROY             = new EventEmitter<any>();
@@ -185,16 +194,5 @@ export class SwiperComponent implements DoCheck {
     console.warn('Deprecated function, startAutoplay needs to be called through directiveRef!');
 
     this.directiveRef.startAutoplay();
-  }
-
-  onIndexSelect(event: Event) {
-    this.directiveRef.setIndex(event.target['attributes']['index']['value']);
-  }
-
-  onIndexUpdate(swiper: any, event: string) {
-    this.isAtLast = swiper.isEnd;
-    this.isAtFirst = swiper.isBeginning;
-
-    this[event].emit(swiper);
   }
 }

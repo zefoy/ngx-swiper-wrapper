@@ -16,6 +16,13 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
 
   private initialIndex: number;
 
+  @Input()
+  set index(index: number) {
+    if (index != null) {
+      this.setIndex(index);
+    }
+  }
+
   @Input() fxShow: boolean = true;
   @Input() fxHide: boolean = false;
 
@@ -134,6 +141,8 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
         this.swiper = new Swiper(element, options);
       });
     }
+
+    this.S_INIT.emit(this.swiper);
 
     // Add native swiper event handling
     SwiperEvents.forEach((eventName) => {

@@ -56,11 +56,11 @@ This library provides two ways to create a Swiper element, simple component and 
 
 Simply replace the element that would oridinarily be passed to `Swiper` with the swiper component.
 
-**NOTE:** Component provides default elements for scroller, pagination, prevButton and nextButton which you can enable by setting 
+**NOTE:** Component provides default elements for scroller, pagination, prevButton and nextButton which you can enable by setting
 the apropriate configuration to 'true' (or to default swiper class). If you want to use custom components then you need use custom classes or preferably use the directive.
 
 ```html
-<swiper [config]="config" (indexChange)="onIndexChange($event)">
+<swiper [config]="config" [(index)]="index">
   <div>
     Swiper content
   </div>
@@ -68,6 +68,7 @@ the apropriate configuration to 'true' (or to default swiper class). If you want
 ```
 
 ```javascript
+[index]             // Can be used to set the active slide index.
 [config]            // Custom config to override the global defaults.
 [disabled]          // Disables changing of slides (locks the swiper).
 
@@ -78,7 +79,7 @@ the apropriate configuration to 'true' (or to default swiper class). If you want
 (indexChange)       // Event handler for the swiper index change event.
 
 (<swiper-event>)    // All swiper events / callbacks work as bindings.
-                    // Conflicting events are prefixed with 'swiper': 
+                    // Conflicting events are prefixed with 'swiper':
                     // click, tap, doubleTap, touch*, transition*
 ```
 
@@ -93,7 +94,7 @@ When using only the directive you need to provide your own theming or import the
 Swiper directive can be used in correctly structured div element with optional custom configuration:
 
 ```html
-<div [swiper]="config" class="swiper-container" (indexChange)="onIndexChange($event)">
+<div  class="swiper-container" [swiper]="config" [(index)]="index">
   <div class="swiper-wrapper">
     <div class="swiper-slide">
       Swiper content
@@ -110,6 +111,7 @@ Swiper directive can be used in correctly structured div element with optional c
 ```
 
 ```javascript
+[index]             // Can be used to set the active slide index.
 [swiper]            // Can be used to provide optional custom config.
 [disabled]          // Disables changing of slides (locks the swiper).
 
@@ -120,7 +122,7 @@ Swiper directive can be used in correctly structured div element with optional c
 (indexChange)       // Event handler for the swiper index change event.
 
 (<swiper-event>)    // All swiper events / callbacks work as bindings.
-                    // Conflicting events are prefixed with 'swiper': 
+                    // Conflicting events are prefixed with 'swiper':
                     // click, tap, doubleTap, touch*, transition*
 ```
 
