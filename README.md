@@ -50,6 +50,9 @@ This library provides two ways to create a Swiper element, simple component and 
 
 Simply replace the element that would oridinarily be passed to `Swiper` with the swiper component.
 
+**NOTE:** Component provides default elements for scroller, pagination, prevButton and nextButton which you can enable by setting 
+the apropriate configuration to 'true' (or to default swiper class). If you want to use custom components then you need use custom classes or preferably use the directive.
+
 ```html
 <swiper [config]="config" (indexChange)="onIndexChange($event)">
   <div>
