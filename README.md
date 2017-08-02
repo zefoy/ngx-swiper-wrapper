@@ -8,18 +8,24 @@ See a live example application <a href="https://zefoy.github.io/ngx-swiper-wrapp
 
 ### Building the library
 
-    npm install
-    npm run build
+```bash
+npm install
+npm run build
+```
 
 ### Running the example
 
-    cd example
-    npm install
-    npm start
+```bash
+cd example
+npm install
+npm start
+```
 
 ### Installing and usage
 
-    npm install ngx-swiper-wrapper --save-dev
+```bash
+npm install ngx-swiper-wrapper --save-dev
+```
 
 ##### Load the module for your app (with global configuration):
 
