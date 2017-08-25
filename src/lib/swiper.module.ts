@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders, OpaqueToken, Optional, SkipSelf, Inject } from "@angular/core";
+import { NgModule, ModuleWithProviders, OpaqueToken, Optional, SkipSelf, Inject } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 

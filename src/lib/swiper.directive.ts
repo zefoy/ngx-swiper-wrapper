@@ -81,12 +81,13 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
 
   @Output('paginationRendered'     ) S_PAGINATIONRENDERED  = new EventEmitter<any>();
 
-  constructor(private zone: NgZone, private elementRef: ElementRef, private differs: KeyValueDiffers, @Optional() private defaults: SwiperConfig) {}
+  constructor(private zone: NgZone, private elementRef: ElementRef, private differs: KeyValueDiffers,
+    @Optional() private defaults: SwiperConfig) {}
 
   ngOnInit() {
-    let element = this.elementRef.nativeElement;
+    const element = this.elementRef.nativeElement;
 
-    let options = new SwiperConfig(this.defaults);
+    const options = new SwiperConfig(this.defaults);
 
     options.assign(this.config); // Custom config
 
@@ -94,8 +95,8 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
       options.initialSlide = this.initialIndex;
     }
 
-    let onSlideChangeStart = options.onSlideChangeStart;
-    let onScrollbarDragEnd = options.onScrollbarDragEnd;
+    const onSlideChangeStart = options.onSlideChangeStart;
+    const onScrollbarDragEnd = options.onScrollbarDragEnd;
 
     options.onSlideChangeStart = (swiper) => {
       if (onSlideChangeStart) {
@@ -167,7 +168,7 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
   }
 
   ngDoCheck() {
-    let changes = this.configDiff.diff(this.config || {});
+    const changes = this.configDiff.diff(this.config || {});
 
     if (changes) {
       this.initialIndex = this.getIndex();
@@ -219,7 +220,7 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
     }
 
     if (this.swiper && changes['disabled']) {
-      if (changes['disabled'].currentValue != changes['disabled'].previousValue) {
+      if (changes['disabled'].currentValue !== changes['disabled'].previousValue) {
         if (changes['disabled'].currentValue === true) {
           if (this.runInsideAngular) {
             this.swiper.lockSwipes();

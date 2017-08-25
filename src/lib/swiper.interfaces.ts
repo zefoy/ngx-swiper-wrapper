@@ -508,7 +508,7 @@ export class SwiperConfig implements SwiperConfigInterface {
    }
 
    public assign(config: SwiperConfigInterface = {}) {
-     for (let key in config) {
+     for (const key in config) {
        this[key] = config[key];
      }
    }

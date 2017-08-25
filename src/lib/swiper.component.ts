@@ -1,4 +1,5 @@
-import { Component, Optional, DoCheck, Input, HostBinding, Output, EventEmitter, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, Optional, DoCheck, Input, Output } from '@angular/core';
+import { EventEmitter, HostBinding, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 
 import { SwiperDirective } from './swiper.directive';
 
@@ -95,7 +96,7 @@ export class SwiperComponent implements DoCheck {
 
   ngDoCheck() {
     if (this.swiperSlides) {
-      let children = this.swiperSlides.nativeElement.children.length;
+      const children = this.swiperSlides.nativeElement.children.length;
 
       if (children !== this.childrenDiff) {
         this.childrenDiff = children;
@@ -112,7 +113,7 @@ export class SwiperComponent implements DoCheck {
   getConfig() {
     this.config = this.config || {};
 
-    let options = new SwiperConfig(this.defaults);
+    const options = new SwiperConfig(this.defaults);
 
     options.assign(this.config); // Custom config
 
