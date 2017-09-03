@@ -3,10 +3,10 @@
     <ng-content></ng-content>
   </div>
 
-  <div [hidden]="!config?.scrollbar" class="swiper-scrollbar"></div>
+  <div [hidden]="config?.scrollbar !== '.swiper-scrollbar'" class="swiper-scrollbar"></div>
 
-  <div [hidden]="!config?.prevButton" class="swiper-button-prev" [attr.disabled]="isAtFirst"></div>
-  <div [hidden]="!config?.nextButton" class="swiper-button-next" [attr.disabled]="isAtLast"></div>
+  <div [hidden]="config?.prevButton !== '.swiper-button-prev'" class="swiper-button-prev" [attr.disabled]="isAtFirst"></div>
+  <div [hidden]="config?.nextButton !== '.swiper-button-next'" class="swiper-button-next" [attr.disabled]="isAtLast"></div>
 
-  <div [hidden]="!config?.pagination" class="swiper-pagination" (click)="directiveRef.setIndex($event.target.attributes.index.value)"></div>
+  <div [hidden]="config?.pagination !== '.swiper-pagination'" class="swiper-pagination" (click)="directiveRef.setIndex($event.target.attributes.index.value)"></div>
 </div>
