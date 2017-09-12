@@ -168,23 +168,25 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
   }
 
   ngDoCheck() {
-    const changes = this.configDiff.diff(this.config || {});
+    if (this.configDiff) {
+      const changes = this.configDiff.diff(this.config || {});
 
-    if (changes) {
-      this.initialIndex = this.getIndex();
+      if (changes) {
+        this.initialIndex = this.getIndex();
 
-      changes.forEachAddedItem((changed) => {
-        if (changed.key === 'initialSlide') {
-          this.initialIndex = this.config.initialSlide;
-        }
-      });
+        changes.forEachAddedItem((changed) => {
+          if (changed.key === 'initialSlide') {
+            this.initialIndex = this.config.initialSlide;
+          }
+        });
 
-      this.ngOnDestroy();
+        this.ngOnDestroy();
 
-      // Timeout is needed for the styles to update properly
-      setTimeout(() => {
-        this.ngOnInit();
-      }, 0);
+        // Timeout is needed for the styles to update properly
+        setTimeout(() => {
+          this.ngOnInit();
+        }, 0);
+      }
     }
   }
 
