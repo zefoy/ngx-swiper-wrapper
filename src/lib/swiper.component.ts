@@ -1,5 +1,5 @@
-import { Component, Optional, DoCheck, Input, Output } from '@angular/core';
-import { EventEmitter, HostBinding, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, Optional, DoCheck, Input, Output, EventEmitter,
+  HostBinding, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 
 import { SwiperDirective } from './swiper.directive';
 
@@ -29,7 +29,6 @@ export class SwiperComponent implements DoCheck {
   @Input() config: SwiperConfigInterface;
 
   @Input() useSwiperClass: boolean = true;
-  @Input() runInsideAngular: boolean = false;
 
   @HostBinding('class.s-wrapper')
   @Input() useSwiperWrapperClass: boolean = true;
@@ -37,7 +36,6 @@ export class SwiperComponent implements DoCheck {
   @Output() indexChange = new EventEmitter<number>();
 
   @ViewChild('swiperSlides') swiperSlides: ElementRef;
-
   @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
 
   get isAtLast(): boolean {
@@ -153,47 +151,5 @@ export class SwiperComponent implements DoCheck {
     }
 
     return options;
-  }
-
-  update(updateTranslate?: boolean) {
-    console.warn('Deprecated function, update needs to be called through directiveRef!');
-
-    this.directiveRef.update(updateTranslate);
-  }
-
-  getIndex() {
-    console.warn('Deprecated function, getIndex needs to be called through directiveRef!');
-
-    return this.directiveRef.getIndex();
-  }
-
-  setIndex(index: number, speed?: number, callbacks?: boolean) {
-    console.warn('Deprecated function, setIndex needs to be called through directiveRef!');
-
-    this.directiveRef.setIndex(index, speed, callbacks);
-  }
-
-  prevSlide(callbacks?: boolean, speed?: number) {
-    console.warn('Deprecated function, prevSlide needs to be called through directiveRef!');
-
-    this.directiveRef.prevSlide(speed, callbacks);
-  }
-
-  nextSlide(callbacks?: boolean, speed?: number) {
-    console.warn('Deprecated function, nextSlide needs to be called through directiveRef!');
-
-    this.directiveRef.nextSlide(speed, callbacks);
-  }
-
-  stopAutoplay() {
-    console.warn('Deprecated function, stopAutoplay needs to be called through directiveRef!');
-
-    this.directiveRef.stopAutoplay();
-  }
-
-  startAutoplay() {
-    console.warn('Deprecated function, startAutoplay needs to be called through directiveRef!');
-
-    this.directiveRef.startAutoplay();
   }
 }

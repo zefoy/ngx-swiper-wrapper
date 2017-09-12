@@ -2,6 +2,7 @@
 
 swiper {
   &.s-wrapper {
+    /* stylelint-disable */
     &[fxflex],
     &[fxlayout],
     &[fxflexfill] {
@@ -28,6 +29,7 @@ swiper {
         -webkit-box-align: inherit;
       }
     }
+    /* stylelint-enable */
 
     & > .swiper {
       width: 100%;

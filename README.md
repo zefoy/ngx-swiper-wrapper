@@ -74,8 +74,6 @@ the apropriate configuration to 'true' (or to default swiper class). If you want
 
 [useSwiperClass]    // Use swiper class (needed by the default styles).
 
-[runInsideAngular]  // Run swiper function calls inside the angular zone.
-
 (indexChange)       // Event handler for the swiper index change event.
 
 (<swiper-event>)    // All swiper events / callbacks work as bindings.
@@ -116,8 +114,6 @@ Swiper directive can be used in correctly structured div element with optional c
 [disabled]          // Disables changing of slides (locks the swiper).
 
 [useSwiperClass]    // Use swiper class (needed by the default styles).
-
-[runInsideAngular]  // Run swiper function calls inside the angular zone.
 
 (indexChange)       // Event handler for the swiper index change event.
 
