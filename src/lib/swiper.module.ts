@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders, OpaqueToken, Optional, SkipSelf, Inject } from '@angular/core';
+import { NgModule, ModuleWithProviders, InjectionToken, Optional, SkipSelf, Inject } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 
@@ -7,8 +7,8 @@ import { SwiperDirective } from './swiper.directive';
 
 import { SwiperConfig, SwiperConfigInterface} from './swiper.interfaces';
 
-export const SWIPER_GUARD = new OpaqueToken('SWIPER_GUARD');
-export const SWIPER_CONFIG = new OpaqueToken('SWIPER_CONFIG');
+export const SWIPER_GUARD = new InjectionToken('SWIPER_GUARD');
+export const SWIPER_CONFIG = new InjectionToken('SWIPER_CONFIG');
 
 @NgModule({
     imports: [CommonModule],
