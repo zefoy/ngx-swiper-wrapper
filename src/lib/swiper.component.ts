@@ -1,5 +1,5 @@
-import { Component, Optional, DoCheck, Input, Output, EventEmitter,
-  HostBinding, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, Optional, OnInit, OnDestroy, Input, Output, EventEmitter,
+  HostBinding, ViewChild, ElementRef, ViewEncapsulation, NgZone } from '@angular/core';
 
 import { SwiperDirective } from './swiper.directive';
 
@@ -11,8 +11,8 @@ import { SwiperConfig, SwiperConfigInterface } from './swiper.interfaces';
   styleUrls: ['./swiper.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class SwiperComponent implements DoCheck {
-  private childrenDiff: number;
+export class SwiperComponent implements OnInit, OnDestroy {
+  private mo: any;
 
   private paginationBulletRender: Function;
 
@@ -90,21 +90,28 @@ export class SwiperComponent implements DoCheck {
 
   @Output('paginationRendered'     ) S_PAGINATIONRENDERED  = new EventEmitter<any>();
 
-  constructor(private elementRef: ElementRef, @Optional() private defaults: SwiperConfig) {}
+  constructor(private zone: NgZone, private elementRef: ElementRef,
+    @Optional() private defaults: SwiperConfig) {}
 
-  ngDoCheck() {
-    if (this.swiperSlides) {
-      const children = this.swiperSlides.nativeElement.children.length;
+  ngOnInit() {
+    this.zone.runOutsideAngular(() => {
+      this.mo = new MutationObserver((mutations) => {
+        const children = this.swiperSlides.nativeElement.children;
 
-      if (children !== this.childrenDiff) {
-        this.childrenDiff = children;
-
-        for (let i = 0; i < this.swiperSlides.nativeElement.children.length; i++) {
-          this.swiperSlides.nativeElement.children[i].classList.add('swiper-slide');
+        for (let i = 0; i < children.length; i++) {
+          children[i].classList.add('swiper-slide');
         }
 
         this.directiveRef.update();
-      }
+      });
+
+      this.mo.observe(this.swiperSlides.nativeElement, { childList: true });
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.mo) {
+      this.mo.disconnect();
     }
   }
 
