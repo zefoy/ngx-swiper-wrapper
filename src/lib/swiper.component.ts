@@ -95,14 +95,10 @@ export class SwiperComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.zone.runOutsideAngular(() => {
+      this.updateClasses();
+
       this.mo = new MutationObserver((mutations) => {
-        const children = this.swiperSlides.nativeElement.children;
-
-        for (let i = 0; i < children.length; i++) {
-          children[i].classList.add('swiper-slide');
-        }
-
-        this.directiveRef.update();
+        this.updateClasses();
       });
 
       this.mo.observe(this.swiperSlides.nativeElement, { childList: true });
@@ -160,5 +156,23 @@ export class SwiperComponent implements OnInit, OnDestroy {
     }
 
     return options;
+  }
+
+  updateClasses() {
+    let updateNeeded = false;
+
+    const children = this.swiperSlides.nativeElement.children;
+
+    for (let i = 0; i < children.length; i++) {
+      if (!children[i].classList.contains('swiper-slide')) {
+        updateNeeded = true;
+
+        children[i].classList.add('swiper-slide');
+      }
+    }
+
+    if (updateNeeded) {
+      this.directiveRef.update();
+    }
   }
 }
