@@ -134,18 +134,20 @@ export class SwiperComponent implements DoCheck {
     }
 
     if (options.pagination === '.swiper-pagination' && !options.paginationBulletRender) {
+      options.paginationClickable = false;
+
       if (!this.paginationBulletRender) {
         this.paginationBulletRender = (swiper, index, className) => {
+          let bullet = `<span class="${className} ${className}-middle" index="${index}"></span>`;
+
           if (index === 0) {
-            return '<span class="swiper-pagination-handle" index=' + index + '>' +
-              '<span class="' + className + ' ' + className + '-first"></span></span>';
+            bullet = `<span class="${className} ${className}-first" index="${index}"></span>`;
+
           } else if (index === (swiper.slides.length - 1)) {
-            return '<span class="swiper-pagination-handle" index=' + index + '>' +
-              '<span class="' + className + ' ' + className + '-last"></span></span>';
-          } else {
-            return '<span class="swiper-pagination-handle" index=' + index + '>' +
-              '<span class="' + className + ' ' + className + '-middle"></span></span>';
+            bullet = `<span class="${className} ${className}-last" index="${index}"></span>`;
           }
+
+          return `<span class="swiper-pagination-handle" index="${index}">${bullet}</span>`;
         };
       }
 

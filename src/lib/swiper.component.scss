@@ -48,13 +48,16 @@ swiper {
         pointer-events: none;
 
         .swiper-pagination-handle {
+          position: relative;
+
+          padding: 4px;
           margin: 2px;
 
           cursor: pointer;
           pointer-events: all;
 
           .swiper-pagination-bullet {
-            pointer-events: none;
+            margin: 0;
           }
 
           .swiper-pagination-bullet-last,
@@ -105,7 +108,7 @@ swiper {
 
               &.swiper-pagination-bullet-last,
               &.swiper-pagination-bullet-first {
-                margin: 5px -1px;
+                margin: 0 -1px;
               }
             }
           }
@@ -128,7 +131,7 @@ swiper {
             .swiper-pagination-bullet {
               &.swiper-pagination-bullet-last,
               &.swiper-pagination-bullet-first {
-                margin: -1px 5px;
+                margin: -1px 0;
               }
             }
           }
