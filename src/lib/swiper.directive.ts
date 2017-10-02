@@ -278,7 +278,7 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
       }
 
       this.zone.runOutsideAngular(() => {
-        this.swiper.slideTo(index, speed, !silent);
+        this.swiper.slideTo(realIndex, speed, !silent);
       });
     }
   }
