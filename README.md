@@ -54,10 +54,13 @@ This library provides two ways to create a Swiper element, simple component and 
 
 **COMPONENT USAGE**
 
-Simply replace the element that would oridinarily be passed to `Swiper` with the swiper component.
+1. Import `SwiperComponent` 
 
-**NOTE:** Component provides default elements for scroller, pagination, prevButton and nextButton which you can enable by setting
-the apropriate configuration to 'true' (or to default swiper class). If you want to use custom components then you need use custom classes or preferably use the directive.
+```javascript
+import { SwiperComponent } from 'ngx-swiper-wrapper';
+```
+
+2. Simply replace the element that would oridinarily be passed to `Swiper` with the swiper component.
 
 ```html
 <swiper [config]="config" [(index)]="index">
@@ -79,17 +82,35 @@ the apropriate configuration to 'true' (or to default swiper class). If you want
 (<swiper-event>)    // All swiper events / callbacks work as bindings.
                     // Conflicting events are prefixed with 'swiper':
                     // click, tap, doubleTap, touch*, transition*
+                    // Ex. onTouchStart() -> (swiperTouchStart)
 ```
+
+**NOTE:** Component provides default elements for scroller, pagination, prevButton and nextButton which you can enable by setting
+the apropriate configuration to 'true' (or to default swiper class). If you want to use custom components then you need use custom classes or preferably use the directive.
 
 **DIRECTIVE USAGE**
 
-When using only the directive you need to provide your own theming or import the default theme:
+1. Import `SwiperDirective`
+
+```javascript
+import { SwiperDirective } from 'ngx-swiper-wrapper';
+```
+
+2. Import the default theme (or your own theming)
+
+CDN:
 
 ```css
 @import 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/css/swiper.min.css';
 ```
 
-Swiper directive can be used in correctly structured div element with optional custom configuration:
+or if you use NPM:
+
+```css
+@import '<path-to-node-module>/swiper/dist/css/swiper.min.css';
+```
+
+3. Swiper directive can be used in correctly structured div element with optional custom configuration:
 
 ```html
 <div  class="swiper-container" [swiper]="config" [(index)]="index">
@@ -120,6 +141,7 @@ Swiper directive can be used in correctly structured div element with optional c
 (<swiper-event>)    // All swiper events / callbacks work as bindings.
                     // Conflicting events are prefixed with 'swiper':
                     // click, tap, doubleTap, touch*, transition*
+                    // Ex. onTouchStart() -> (swiperTouchStart)
 ```
 
 ##### Available configuration options (custom / global configuration):
