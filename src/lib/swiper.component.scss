@@ -1,32 +1,27 @@
 @import '../../node_modules/swiper/dist/css/swiper.min';
 
+/*
+  TODO: Remove important flags after this bug if fixed:
+  https://github.com/angular/flex-layout/issues/381
+*/
+
 swiper {
   &.s-wrapper {
     /* stylelint-disable */
-    &[fxflex],
-    &[fxlayout],
-    &[fxflexfill] {
+    &[fxflex] {
       display: flex;
       flex-direction: inherit;
       -webkit-box-orient: inherit;
       -webkit-box-direction: inherit;
-      align-item: inherit;
-      place-content: inherit;
-      -webkit-box-pack: inherit;
-      -webkit-box-align: inherit;
+      min-width: 0;
+      min-height: 0;
 
       & > .swiper {
-        display: flex;
         flex: 1 1 auto;
-        -webkit-box-flex: 1;
         -ms-flex: 1 1 auto;
-        flex-direction: inherit;
-        -webkit-box-orient: inherit;
-        -webkit-box-direction: inherit;
-        align-item: inherit;
-        place-content: inherit;
-        -webkit-box-pack: inherit;
-        -webkit-box-align: inherit;
+        -webkit-box-flex: 1;
+        min-width: 0;
+        min-height: 0;
       }
     }
     /* stylelint-enable */
@@ -36,8 +31,7 @@ swiper {
       height: 100%;
 
       .swiper-wrapper {
-        .swiper-slide,
-        .swiper-slide-content {
+        .swiper-slide {
           overflow: auto;
           width: 100%;
           height: 100%;

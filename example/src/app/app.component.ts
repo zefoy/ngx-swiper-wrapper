@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { SwiperComponent, SwiperDirective, SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { SwiperComponent, SwiperDirective, SwiperConfigInterface,
+  SwiperScrollbarInterface, SwiperPaginationInterface } from 'ngx-swiper-wrapper';
 
 @Component({
   moduleId: module.id + '',
@@ -23,18 +24,25 @@ export class AppComponent {
   public type: string = 'component';
 
   public config: SwiperConfigInterface = {
-    scrollbar: null,
     direction: 'horizontal',
     slidesPerView: 1,
-    scrollbarHide: false,
-    keyboardControl: true,
-    mousewheelControl: true,
-    scrollbarDraggable: true,
-    scrollbarSnapOnRelease: true,
-    pagination: '.swiper-pagination',
-    paginationClickable: true,
-    nextButton: '.swiper-button-next',
-    prevButton: '.swiper-button-prev'
+    keyboard: true,
+    mousewheel: true,
+    scrollbar: false,
+    navigation: true,
+    pagination: false
+  };
+
+  private scrollbar: SwiperScrollbarInterface = {
+    el: '.swiper-scrollbar',
+    hide: false,
+    draggable: true
+  };
+
+  private pagination: SwiperPaginationInterface = {
+    el: '.swiper-pagination',
+    clickable: true,
+    hideOnClick: false
   };
 
   @ViewChild(SwiperComponent) componentRef: SwiperComponent;
@@ -59,26 +67,30 @@ export class AppComponent {
   }
 
   toggleOverlayControls() {
-    if (this.config.pagination) {
-      this.config.scrollbar = '.swiper-scrollbar';
-      this.config.pagination = null;
-      this.config.nextButton = null;
-      this.config.prevButton = null;
-    } else if (this.config.scrollbar) {
-      this.config.scrollbar = null;
+    if (this.config.navigation) {
+      this.config.scrollbar = false;
+      this.config.navigation = false;
+
+      this.config.pagination = this.pagination;
+    } else if (this.config.pagination) {
+      this.config.navigation = false;
+      this.config.pagination = false;
+
+      this.config.scrollbar = this.scrollbar;
     } else {
-      this.config.pagination = '.swiper-pagination';
-      this.config.nextButton = '.swiper-button-next';
-      this.config.prevButton = '.swiper-button-prev';
+      this.config.scrollbar = false;
+      this.config.pagination = false;
+
+      this.config.navigation = true;
     }
   }
 
   toggleKeyboardControl() {
-    this.config.keyboardControl = !this.config.keyboardControl;
+    this.config.keyboard = !this.config.keyboard;
   }
 
   toggleMouseWheelControl() {
-    this.config.mousewheelControl = !this.config.mousewheelControl;
+    this.config.mousewheel = !this.config.mousewheel;
   }
 
   onIndexChange(index: number) {

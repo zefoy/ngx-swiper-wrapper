@@ -18,9 +18,9 @@
 
         <div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex (click)='toggleOverlayControls()'>Toggle overlay controls</div>
 
-        <div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex (click)='toggleKeyboardControl()'>{{config.keyboardControl ? "Disable arrow keys" : "Enable arrow keys"}}</div>
+        <div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex (click)='toggleKeyboardControl()'>{{config.keyboard ? "Disable arrow keys" : "Enable arrow keys"}}</div>
 
-        <div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex (click)='toggleMouseWheelControl()'>{{config.mousewheelControl ? "Disable mouse wheel" : "Enable mouse wheel"}}</div>
+        <div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex (click)='toggleMouseWheelControl()'>{{config.mousewheel ? "Disable mouse wheel" : "Enable mouse wheel"}}</div>
       </div>
     </div>
 
@@ -30,23 +30,27 @@
       <div class="content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex>
         <swiper *ngIf="type == 'component' && show" overlay-controls [config]="config" (indexChange)="onIndexChange($event)" fxFlex>
           <div *ngFor="let slide of slides" class="swiper-slide">
-            <div class="swiper-slide-content" fxLayout="column" fxLayoutAlign="center center">{{slide}}</div>
+            <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+              {{slide}}
+            </div>
           </div>
         </swiper>
 
         <div *ngIf="type == 'directive' && show" class="swiper-container" [swiper]="config" (indexChange)="onIndexChange($event)">
           <div class="swiper-wrapper">
             <div *ngFor="let slide of slides" class="swiper-slide">
-              <div class="swiper-slide-content" fxLayout="column" fxLayoutAlign="center center">{{slide}}</div>
+              <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+                {{slide}}
+              </div>
             </div>
           </div>
 
-          <div [hidden]="config.scrollbar != '.swiper-scrollbar'" class="swiper-scrollbar"></div>
+          <div class="swiper-scrollbar" [hidden]="config.scrollbar === false"></div>
 
-          <div [hidden]="config.pagination != '.swiper-pagination'" class="swiper-pagination"></div>
+          <div class="swiper-pagination" [hidden]="config.pagination === false"></div>
 
-          <div [hidden]="config.prevButton != '.swiper-button-prev'" class="swiper-button-prev"></div>
-          <div [hidden]="config.nextButton != '.swiper-button-next'" class="swiper-button-next"></div>
+          <div class="swiper-button-prev" [hidden]="config.navigation === false"></div>
+          <div class="swiper-button-next" [hidden]="config.navigation === false"></div>
         </div>
       </div>
     </div>

@@ -1,13 +1,30 @@
-export {
-  SwiperComponent, SwiperDirective,
-  coverflowObject, coverflowObjectInterface,
-  cubeObject, cubeObjectInterface,
-  fadeObject, fadeObjectInterface,
-  flipObject, flipObjectInterface,
-  SwiperConfig, SwiperConfigInterface,
-  SwiperEvents,
-  provideDefaultConfig, provideForRootGuard,
-  SWIPER_CONFIG, SWIPER_GUARD,
-  SwiperModule
-} from './lib/index';
+export { SwiperComponent } from './lib/swiper.component';
+export { SwiperDirective } from './lib/swiper.directive';
 
+export {
+  SWIPER_CONFIG,
+  SwiperConfig,
+  SwiperConfigInterface,
+  SwiperBreakpointInterface,
+  SwiperBreakpointsInterface,
+  SwiperFadeEffectInterface,
+  SwiperFlipEffectInterface,
+  SwiperCubeEffectInterface,
+  SwiperCoverflowEffectInterface,
+  SwiperA11YInterface,
+  SwiperLazyInterface,
+  SwiperZoomInterface,
+  SwiperHistoryInterface,
+  SwiperVirtualInterface,
+  SwiperAutoplayInterface,
+  SwiperScrollbarInterface,
+  SwiperControllerInterface,
+  SwiperNavigationInterface,
+  SwiperPaginationInterface,
+  SwiperMousewheelInterface,
+  SwiperHashNavigationInterface
+} from './lib/swiper.interfaces';
+
+export {
+  SwiperModule
+} from './lib/swiper.module';

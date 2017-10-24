@@ -33,8 +33,7 @@ module.exports = {
         test: /\.ts$/,
         loaders: [
           'awesome-typescript-loader?configFileName=src/tsconfig.json',
-          'angular2-template-loader',
-          'angular2-router-loader'
+          'angular2-template-loader'
         ]
       },
       {
@@ -63,7 +62,7 @@ module.exports = {
     }]),
 
     new webpack.ContextReplacementPlugin(
-      /angular(\\|\/)core(\\|\/)@angular/,
+      /@angular(\\|\/)core(\\|\/)/,
       path.join(__dirname, '../src')
     )
   ]

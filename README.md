@@ -11,6 +11,7 @@ See a live example application <a href="https://zefoy.github.io/ngx-swiper-wrapp
 ```bash
 npm install
 npm run build
+npm run inline
 ```
 
 ### Running the example
@@ -79,6 +80,7 @@ the apropriate configuration to 'true' (or to default swiper class). If you want
 (<swiper-event>)    // All swiper events / callbacks work as bindings.
                     // Conflicting events are prefixed with 'swiper':
                     // click, tap, doubleTap, touch*, transition*
+                    // Example: touchStart -> swiperTouchStart
 ```
 
 **DIRECTIVE USAGE**
@@ -86,7 +88,7 @@ the apropriate configuration to 'true' (or to default swiper class). If you want
 When using only the directive you need to provide your own theming or import the default theme:
 
 ```css
-@import 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/css/swiper.min.css';
+@import '~swiper/dist/css/swiper.min.css';
 ```
 
 Swiper directive can be used in correctly structured div element with optional custom configuration:
@@ -120,6 +122,7 @@ Swiper directive can be used in correctly structured div element with optional c
 (<swiper-event>)    // All swiper events / callbacks work as bindings.
                     // Conflicting events are prefixed with 'swiper':
                     // click, tap, doubleTap, touch*, transition*
+                    // Example: touchStart -> swiperTouchStart
 ```
 
 ##### Available configuration options (custom / global configuration):
