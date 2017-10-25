@@ -11,6 +11,11 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "./dist",
+    "paths": {
+      "@angular/*": [
+        "../node_modules/@angular/*"
+      ]
+    },
     "sourceMap": true,
     "target": "es5",
     "typeRoots": [

@@ -61,8 +61,11 @@
     "stylelint-order": "^0.7.0",
     "tslint": "^5.8.0",
     "typescript": "^2.5.0",
+    "uglifyjs-webpack-plugin": "^1.0.0",
     "watch": "^1.0.0",
     "webpack": "^3.8.0",
+    "webpack-angular-externals": "^1.0.0",
+    "webpack-rxjs-externals": "^1.0.0",
     "zone.js": "^0.8.0"
   },
   "peerDependencies": {

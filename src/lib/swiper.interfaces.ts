@@ -7,8 +7,10 @@ export const SwiperEvents = [
   'beforeDestroy',
 
   'scroll',
-  'resize',
   'progress',
+
+  'resize',
+  'beforeResize',
 
   'keyPress',
   'sliderMove',

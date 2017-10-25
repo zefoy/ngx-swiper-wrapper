@@ -1,6 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
 
+var UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -25,34 +27,44 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        loaders: [
-          'angular2-template-loader'
-        ],
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        use: 'angular2-template-loader'
       },
       {
         test: /\.ts$/,
-        loaders: [
-          'awesome-typescript-loader?configFileName=src/tsconfig.json',
-          'angular2-template-loader',
-          'angular2-router-loader'
+        use: [
+          {
+            loader: 'awesome-typescript-loader',
+            options: {
+              configFileName: 'src/tsconfig.json'
+            }
+          },
+          {
+            loader: 'angular2-template-loader'
+          }
         ]
       },
+
       {
         test: /\.scss$/,
-        loaders: ['raw-loader', 'sass-loader']
+        use: ['raw-loader', 'sass-loader']
       },
+
       {
         test: /\.(html|css)$/,
-        loader: 'raw-loader'
+        use: 'raw-loader'
       }
     ]
   },
   resolve: {
-    extensions: ['.js', '.ts'],
+    extensions: [ '.js', '.ts' ],
     modules: [ '../src', path.join(__dirname, '../node_modules') ]
   },
   plugins: [
+    new UglifyJSPlugin({
+      include: /\.min\.js$/
+    }),
+
     new HtmlWebpackPlugin({
       template: './src/index.html'
     }),
@@ -63,12 +75,8 @@ module.exports = {
       to: '../dist/assets'
     }]),
 
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
-    }),
-
     new webpack.ContextReplacementPlugin(
-      /angular(\\|\/)core(\\|\/)@angular/,
+      /@angular(\\|\/)core(\\|\/)/,
       path.join(__dirname, '../src')
     )
   ]
