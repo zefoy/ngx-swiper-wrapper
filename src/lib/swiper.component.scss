@@ -1,10 +1,5 @@
 @import '../../node_modules/swiper/dist/css/swiper.min';
 
-/*
-  TODO: Remove important flags after this bug if fixed:
-  https://github.com/angular/flex-layout/issues/381
-*/
-
 swiper {
   &.s-wrapper {
     /* stylelint-disable */
