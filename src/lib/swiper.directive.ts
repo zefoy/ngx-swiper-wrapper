@@ -89,39 +89,39 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
   @Output('slideChangeTransitionStart' ) S_SLIDECHANGETRANSITIONSTART     = new EventEmitter<any>();
 
   constructor(private zone: NgZone, private elementRef: ElementRef, private differs: KeyValueDiffers,
-    @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperConfig) {}
+    @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperConfigInterface) {}
 
   ngOnInit() {
-    const options = new SwiperConfig(this.defaults);
+    const params = new SwiperConfig(this.defaults);
 
-    Object.assign(options, this.config); // Custom config
+    Object.assign(params, this.config); // Custom config
 
-    if (options.scrollbar === true) {
-      options.scrollbar = {
+    if (params.scrollbar === true) {
+      params.scrollbar = {
         el: '.swiper-scrollbar'
       };
     }
 
-    if (options.pagination === true) {
-      options.pagination = {
+    if (params.pagination === true) {
+      params.pagination = {
         el: '.swiper-pagination'
       };
     }
 
-    if (options.navigation === true) {
-      options.navigation = {
+    if (params.navigation === true) {
+      params.navigation = {
         prevEl: '.swiper-button-prev',
         nextEl: '.swiper-button-next'
       };
     }
 
     if (this.initialIndex != null) {
-      options.initialSlide = this.initialIndex;
+      params.initialSlide = this.initialIndex;
 
       this.initialIndex = null;
     }
 
-    options['on'] = {
+    params['on'] = {
       slideChange: () => {
         this.zone.run(() => {
           if (this.swiper) {
@@ -132,7 +132,7 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
     };
 
     this.zone.runOutsideAngular(() => {
-      this.swiper = new Swiper(this.elementRef.nativeElement, options);
+      this.swiper = new Swiper(this.elementRef.nativeElement, params);
     });
 
     this.S_INIT.emit(this.swiper);

@@ -460,7 +460,7 @@ export class SwiperConfig implements SwiperConfigInterface {
   public hashNavigation: boolean | any;
 
   constructor(config: SwiperConfigInterface = {}) {
-    const copy = (JSON.parse(JSON.stringify(config)));
+    const copy = (JSON.parse(JSON.stringify(config || {})));
 
     Object.assign(this, copy);
   }
