@@ -4,10 +4,10 @@ import { SwiperComponent, SwiperDirective, SwiperConfigInterface,
   SwiperScrollbarInterface, SwiperPaginationInterface } from 'ngx-swiper-wrapper';
 
 @Component({
-  moduleId: module.id + '',
   selector: 'my-app',
+  moduleId: module.id.toString(),
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css']
+  styleUrls: [ 'app.component.css' ]
 })
 export class AppComponent {
   public show: boolean = true;
@@ -62,7 +62,7 @@ export class AppComponent {
     if (this.config.slidesPerView != 1) {
       this.config.slidesPerView = 1;
     } else {
-      this.config.slidesPerView = +this.config.slidesPerView + 1;
+      this.config.slidesPerView = 2;
     }
   }
 
@@ -82,6 +82,12 @@ export class AppComponent {
       this.config.pagination = false;
 
       this.config.navigation = true;
+    }
+
+    if (this.type === 'directive') {
+      this.directiveRef.setIndex(0);
+    } else {
+      this.componentRef.directiveRef.setIndex(0);
     }
   }
 

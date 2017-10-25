@@ -3,14 +3,12 @@ export { SwiperDirective } from './lib/swiper.directive';
 
 export {
   SWIPER_CONFIG,
+
   SwiperConfig,
   SwiperConfigInterface,
+
   SwiperBreakpointInterface,
   SwiperBreakpointsInterface,
-  SwiperFadeEffectInterface,
-  SwiperFlipEffectInterface,
-  SwiperCubeEffectInterface,
-  SwiperCoverflowEffectInterface,
   SwiperA11YInterface,
   SwiperLazyInterface,
   SwiperZoomInterface,
@@ -22,7 +20,17 @@ export {
   SwiperNavigationInterface,
   SwiperPaginationInterface,
   SwiperMousewheelInterface,
-  SwiperHashNavigationInterface
+  SwiperHashNavigationInterface,
+  SwiperFadeEffectInterface,
+  SwiperFlipEffectInterface,
+  SwiperCubeEffectInterface,
+  SwiperCoverflowEffectInterface,
+  SwiperRenderSlideFunction,
+  SwiperRenderCustomFunction,
+  SwiperRenderBulletFunction,
+  SwiperRenderExternalFunction,
+  SwiperRenderFractionFunction,
+  SwiperRenderProgressbarFunction
 } from './lib/swiper.interfaces';
 
 export {

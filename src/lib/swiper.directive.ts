@@ -16,7 +16,6 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
   public swiper: any;
 
   private configDiff: any;
-
   private initialIndex: number;
 
   @Input()
@@ -91,17 +90,9 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
     @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperConfig) {}
 
   ngOnInit() {
-    const element = this.elementRef.nativeElement;
-
     const options = new SwiperConfig(this.defaults);
 
-    options.assign(this.config); // Custom config overrides
-
-    if (this.initialIndex != null) {
-      this.initialIndex = null;
-
-      options.initialSlide = this.initialIndex;
-    }
+    Object.assign(options, this.config); // Custom config
 
     if (options.scrollbar === true) {
       options.scrollbar = {
@@ -110,7 +101,7 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
     }
 
     if (options.pagination === true) {
-      options.navigation = {
+      options.pagination = {
         el: '.swiper-pagination'
       };
     }
@@ -122,6 +113,12 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
       };
     }
 
+    if (this.initialIndex != null) {
+      options.initialSlide = this.initialIndex;
+
+      this.initialIndex = null;
+    }
+
     options['on'] = {
       slideChange: (swiper) => {
         this.zone.run(() => {
@@ -131,7 +128,7 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
     };
 
     this.zone.runOutsideAngular(() => {
-      this.swiper = new Swiper(element, options);
+      this.swiper = new Swiper(this.elementRef.nativeElement, options);
     });
 
     this.S_INIT.emit(this.swiper);
@@ -165,12 +162,6 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
 
       if (changes) {
         this.initialIndex = this.getIndex(true);
-
-        changes.forEachAddedItem((changed) => {
-          if (changed.key === 'initialSlide') {
-            this.initialIndex = this.config.initialSlide;
-          }
-        });
 
         this.ngOnDestroy();
 

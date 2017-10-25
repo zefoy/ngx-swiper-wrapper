@@ -123,11 +123,14 @@ export class SwiperComponent implements OnInit, OnDestroy {
   public getConfig() {
     this.swiperConfig = new SwiperConfig(this.defaults);
 
-    this.swiperConfig.assign(this.config); // Custom config overrides
+    Object.assign(this.swiperConfig, this.config); // Custom config
 
-    if (this.swiperConfig.pagination === true || (this.swiperConfig.pagination &&
-      this.swiperConfig.pagination.el === '.swiper-pagination' && !this.swiperConfig.pagination.renderBullet))
+    if (this.swiperConfig.pagination === true ||
+       (this.swiperConfig.pagination && typeof this.swiperConfig.pagination === 'object' &&
+       !this.swiperConfig.pagination.renderBullet && this.swiperConfig.pagination.el === '.swiper-pagination'))
     {
+      this.config = Object.assign({}, this.config); // Shallow copy so we won't change the original
+
       if (!this.paginationConfig) {
         this.paginationConfig = {
           el: '.swiper-pagination',
@@ -149,15 +152,13 @@ export class SwiperComponent implements OnInit, OnDestroy {
       }
 
       if (this.swiperConfig.pagination === true) {
-        this.swiperConfig.pagination = this.paginationConfig;
+        this.config.pagination = this.paginationConfig;
       } else {
-        this.swiperConfig.pagination.clickable = false;
-
-        this.swiperConfig.pagination.renderBullet = this.paginationConfig.renderBullet;
+        this.config.pagination = Object.assign({} , this.config.pagination, this.paginationConfig);
       }
     }
 
-    return this.swiperConfig;
+    return this.config;
   }
 
   private updateClasses() {

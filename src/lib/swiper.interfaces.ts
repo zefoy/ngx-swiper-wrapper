@@ -458,20 +458,17 @@ export class SwiperConfig implements SwiperConfigInterface {
   public hashNavigation: boolean | any;
 
   constructor(config: SwiperConfigInterface = {}) {
-     this.assign(config);
-   }
+    const copy = (JSON.parse(JSON.stringify(config)));
 
-   public assign(config: SwiperConfigInterface = {}) {
-     for (const key in config) {
-       this[key] = config[key];
-     }
-   }
+    Object.assign(this, copy);
+  }
 }
 
 export type SwiperRenderSlideFunction = (index: number) => HTMLElement;
 export type SwiperRenderExternalFunction = (data: any) => void;
 
-export type SwiperRenderBulletFunction = (index: number, className: string) => string;
-export type SwiperRenderProgressbarFunction = (progressbarClass: string) => string;
-export type SwiperRenderFractionFunction = (currentClass: string, totalClass: string) => string;
 export type SwiperRenderCustomFunction = (current: number, total: number) => string;
+
+export type SwiperRenderBulletFunction = (index: number, className: string) => string;
+export type SwiperRenderFractionFunction = (currentClass: string, totalClass: string) => string;
+export type SwiperRenderProgressbarFunction = (progressbarClass: string) => string;
