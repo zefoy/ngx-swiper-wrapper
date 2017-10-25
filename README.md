@@ -37,7 +37,7 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 const SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
   slidesPerView: 'auto',
-  keyboardControl: true
+  keyboard: true
 };
 
 @NgModule({
@@ -133,7 +133,6 @@ threshold           // Distance needed for the swipe action (Default: 0).
 spaceBetween        // Space in pixels between the swiper items (Default: 0).
 slidesPerView       // Number of the items per view or 'auto' (Default: 1).
 centeredSlides      // Align active item on center not left (Default: false).
-keyboardControl     // Enables navigation through arrow keys (Default: false).
 ```
 
 For more detailed documentation with all the supported events / options see [swiper documentation](http://idangero.us/swiper/api/).
@@ -143,7 +142,7 @@ For more detailed documentation with all the supported events / options see [swi
 ```javascript
 update(updateTranslate)           // Updates Swiper elements / classes /etc.
 
-getIndex()                        // Returns the current Swiper slide index.
+getIndex(real?)                   // Returns the active or real slide index.
 setIndex(index, speed?, silent?)  // Runs transition to slide with given index.
 
 nextSlide(speed?, silent?)        // Runs transition to the next slide index.
