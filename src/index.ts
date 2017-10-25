@@ -9,6 +9,7 @@ export {
 
   SwiperBreakpointInterface,
   SwiperBreakpointsInterface,
+
   SwiperA11YInterface,
   SwiperLazyInterface,
   SwiperZoomInterface,
@@ -21,10 +22,12 @@ export {
   SwiperPaginationInterface,
   SwiperMousewheelInterface,
   SwiperHashNavigationInterface,
+
   SwiperFadeEffectInterface,
   SwiperFlipEffectInterface,
   SwiperCubeEffectInterface,
   SwiperCoverflowEffectInterface,
+
   SwiperRenderSlideFunction,
   SwiperRenderCustomFunction,
   SwiperRenderBulletFunction,
@@ -33,6 +36,4 @@ export {
   SwiperRenderProgressbarFunction
 } from './lib/swiper.interfaces';
 
-export {
-  SwiperModule
-} from './lib/swiper.module';
+export { SwiperModule } from './lib/swiper.module';
