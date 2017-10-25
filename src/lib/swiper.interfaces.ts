@@ -470,7 +470,6 @@ export type SwiperRenderSlideFunction = (index: number) => HTMLElement;
 export type SwiperRenderExternalFunction = (data: any) => void;
 
 export type SwiperRenderCustomFunction = (current: number, total: number) => string;
-
 export type SwiperRenderBulletFunction = (index: number, className: string) => string;
 export type SwiperRenderFractionFunction = (currentClass: string, totalClass: string) => string;
 export type SwiperRenderProgressbarFunction = (progressbarClass: string) => string;

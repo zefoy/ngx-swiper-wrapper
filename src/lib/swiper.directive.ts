@@ -122,9 +122,11 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
     }
 
     options['on'] = {
-      slideChange: (swiper) => {
+      slideChange: () => {
         this.zone.run(() => {
-          this.indexChange.emit(this.swiper.realIndex);
+          if (this.swiper) {
+            this.indexChange.emit(this.swiper.realIndex);
+          }
         });
       }
     };
