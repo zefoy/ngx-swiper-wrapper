@@ -28,13 +28,14 @@ npm start
 npm install ngx-swiper-wrapper --save
 ```
 
-##### Load the module for your app (with global configuration):
+##### Load the module for your app (with optional global config):
 
 ```javascript
 import { SwiperModule } from 'ngx-swiper-wrapper';
+import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
-const SWIPER_CONFIG: SwiperConfigInterface = {
+const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
   slidesPerView: 'auto',
   keyboard: true
@@ -44,12 +45,18 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
   ...
   imports: [
     ...
-    SwiperModule.forRoot(SWIPER_CONFIG)
+    SwiperModule
+  ],
+  providers: [
+    {
+      provide: SWIPER_CONFIG,
+      useValue: DEFAULT_SWIPER_CONFIG
+    }
   ]
 })
 ```
 
-##### Use it in your html template (with custom configuration):
+##### Use it in your html template (with optional custom config):
 
 This library provides two ways to create a Swiper element, simple component and custom directive.
 
@@ -91,7 +98,7 @@ When using only the directive you need to provide your own theming or import the
 @import '~swiper/dist/css/swiper.min.css';
 ```
 
-Swiper directive can be used in correctly structured div element with optional custom configuration:
+Swiper directive can be used in correctly structured div element with optional custom config:
 
 ```html
 <div  class="swiper-container" [swiper]="config" [(index)]="index">
@@ -125,7 +132,7 @@ Swiper directive can be used in correctly structured div element with optional c
                     // Example: touchStart -> swiperTouchStart
 ```
 
-##### Available configuration options (custom / global configuration):
+##### Available configuration options (both custom and global config):
 
 ```javascript
 direction           // Direction of the swiper (Default: 'horizontal').
