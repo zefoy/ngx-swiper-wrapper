@@ -9,7 +9,7 @@ import { SwiperModule, SwiperConfigInterface, SWIPER_CONFIG } from 'ngx-swiper-w
 import { AppComponent } from './app.component';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
-  observer: false,
+  observer: true,
   direction: 'horizontal',
   threshold: 50,
   spaceBetween: 5,
