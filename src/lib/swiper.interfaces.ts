@@ -54,7 +54,7 @@ export const SwiperEvents = [
 ];
 
 export interface SwiperConfigInterface {
-  // Not in the wrapper
+  // Not supported by the wrapper:
   // init
   // on
 
@@ -325,7 +325,7 @@ export interface SwiperBreakpointsInterface {
 }
 
 export class SwiperConfig implements SwiperConfigInterface {
-  // Not in the wrapper
+  // Not supported by the wrapper:
   // public init
   // public on
 
@@ -460,9 +460,17 @@ export class SwiperConfig implements SwiperConfigInterface {
   public hashNavigation: boolean | any;
 
   constructor(config: SwiperConfigInterface = {}) {
-    const copy = (JSON.parse(JSON.stringify(config || {})));
+    this.assign(config);
+  }
 
-    Object.assign(this, copy);
+  assign(config: SwiperConfigInterface = {}) {
+    for (const key in config) {
+      if (config[key] && typeof config[key] === 'object') {
+        this[key] = Object.assign({}, config[key]);
+      } else {
+        this[key] = config[key];
+      }
+    }
   }
 }
 

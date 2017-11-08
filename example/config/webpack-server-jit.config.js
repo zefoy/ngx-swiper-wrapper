@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var ngtools = require('@ngtools/webpack');
 
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -23,30 +24,16 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: 'angular2-template-loader'
+        test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
+        loader: '@ngtools/webpack',
+        options: {
+          tsConfigPath: "./src/tsconfig.json"
+        }
       },
-      {
-        test: /\.ts$/,
-        use: [
-          {
-            loader: 'awesome-typescript-loader',
-            options: {
-              configFileName: 'src/tsconfig.json'
-            }
-          },
-          {
-            loader: 'angular2-template-loader'
-          }
-        ]
-      },
-
       {
         test: /\.scss$/,
         use: ['raw-loader', 'sass-loader']
       },
-
       {
         test: /\.(html|css)$/,
         use: 'raw-loader'
@@ -55,7 +42,7 @@ module.exports = {
   },
   resolve: {
     extensions: [ '.js', '.ts' ],
-    modules: [ '../src', path.join(__dirname, '../node_modules') ]
+    modules: [ path.join(__dirname, '../node_modules') ]
   },
   plugins: [
     new HtmlWebpackPlugin({

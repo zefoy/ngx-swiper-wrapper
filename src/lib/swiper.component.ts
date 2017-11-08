@@ -1,5 +1,6 @@
-import { NgZone, Component, Optional, Inject, OnInit, OnDestroy, Input, Output,
-  EventEmitter, HostBinding, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation,
+  OnInit, OnDestroy, Input, Output, HostBinding, EventEmitter, ViewChild,
+  NgZone, Renderer2, ElementRef, Optional, Inject } from '@angular/core';
 
 import { SWIPER_CONFIG } from './swiper.interfaces';
 
@@ -9,8 +10,8 @@ import { SwiperConfig, SwiperConfigInterface, SwiperRenderBulletFunction } from 
 
 @Component({
   selector: 'swiper',
-  templateUrl: './swiper.component.html',
-  styleUrls: [ './swiper.component.css' ],
+  templateUrl: './lib/swiper.component.html',
+  styleUrls: [ './lib/swiper.component.css' ],
   encapsulation: ViewEncapsulation.None
 })
 export class SwiperComponent implements OnInit, OnDestroy {
@@ -21,20 +22,11 @@ export class SwiperComponent implements OnInit, OnDestroy {
 
   @Input() index: number = null;
 
-  @Input() fxShow: boolean = true;
-  @Input() fxHide: boolean = false;
-
-  @HostBinding('hidden')
-  @Input() hidden: boolean = false;
-
   @Input() disabled: boolean = false;
 
   @Input() config: SwiperConfigInterface;
 
   @Input() useSwiperClass: boolean = true;
-
-  @HostBinding('class.s-wrapper')
-  @Input() useSwiperWrapperClass: boolean = true;
 
   @Output() indexChange = new EventEmitter<number>();
 
@@ -44,12 +36,12 @@ export class SwiperComponent implements OnInit, OnDestroy {
 
   get isAtLast(): boolean {
     return (!this.directiveRef || !this.directiveRef.swiper) ?
-      false : this.directiveRef.swiper.isEnd;
+      false : this.directiveRef.swiper['isEnd'];
   }
 
   get isAtFirst(): boolean {
     return (!this.directiveRef || !this.directiveRef.swiper) ?
-      false : this.directiveRef.swiper.isBeginning;
+      false : this.directiveRef.swiper['isBeginning'];
   }
 
   @Output('init'                       ) S_INIT                           = new EventEmitter<any>();
@@ -101,7 +93,7 @@ export class SwiperComponent implements OnInit, OnDestroy {
   @Output('slideChangeTransitionEnd'   ) S_SLIDECHANGETRANSITIONEND       = new EventEmitter<any>();
   @Output('slideChangeTransitionStart' ) S_SLIDECHANGETRANSITIONSTART     = new EventEmitter<any>();
 
-  constructor(private zone: NgZone, private elementRef: ElementRef,
+  constructor(private zone: NgZone, private renderer: Renderer2, private elementRef: ElementRef,
     @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperConfigInterface) {}
 
   ngOnInit() {
@@ -125,7 +117,7 @@ export class SwiperComponent implements OnInit, OnDestroy {
   public getConfig() {
     this.swiperConfig = new SwiperConfig(this.defaults);
 
-    Object.assign(this.swiperConfig, this.config); // Custom config
+    this.swiperConfig.assign(this.config); // Custom configuration
 
     if (this.swiperConfig.pagination === true ||
        (this.swiperConfig.pagination && typeof this.swiperConfig.pagination === 'object' &&

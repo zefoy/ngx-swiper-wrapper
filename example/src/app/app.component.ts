@@ -23,6 +23,8 @@ export class AppComponent {
 
   public type: string = 'component';
 
+  public disabled: boolean = false;
+
   public config: SwiperConfigInterface = {
     direction: 'horizontal',
     slidesPerView: 1,
@@ -50,23 +52,27 @@ export class AppComponent {
 
   constructor() {}
 
-  toggleType() {
-    this.type = this.type == 'component' ? 'directive' : 'component';
+  public toggleType() {
+    this.type = (this.type === 'component') ? 'directive' : 'component';
   }
 
-  toggleDirection() {
-    this.config.direction = (this.config.direction == 'horizontal') ? 'vertical' : 'horizontal';
+  public toggleDisabled() {
+    this.disabled = !this.disabled;
   }
 
-  toggleSlidesPerView() {
-    if (this.config.slidesPerView != 1) {
+  public toggleDirection() {
+    this.config.direction = (this.config.direction === 'horizontal') ? 'vertical' : 'horizontal';
+  }
+
+  public toggleSlidesPerView() {
+    if (this.config.slidesPerView !== 1) {
       this.config.slidesPerView = 1;
     } else {
       this.config.slidesPerView = 2;
     }
   }
 
-  toggleOverlayControls() {
+  public toggleOverlayControls() {
     if (this.config.navigation) {
       this.config.scrollbar = false;
       this.config.navigation = false;
@@ -91,15 +97,15 @@ export class AppComponent {
     }
   }
 
-  toggleKeyboardControl() {
+  public toggleKeyboardControl() {
     this.config.keyboard = !this.config.keyboard;
   }
 
-  toggleMouseWheelControl() {
+  public toggleMouseWheelControl() {
     this.config.mousewheel = !this.config.mousewheel;
   }
 
-  onIndexChange(index: number) {
-    console.log('Swiper index: ' + index);
+  public onIndexChange(index: number) {
+    console.log('Swiper index: ', index);
   }
 }

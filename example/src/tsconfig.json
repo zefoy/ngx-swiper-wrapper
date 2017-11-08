@@ -4,11 +4,12 @@
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "inlineSources": false,
     "lib": [
-      "dom",
-      "es6"
+      "es2015",
+      "dom"
     ],
-    "module": "commonjs",
+    "module": "es2015",
     "moduleResolution": "node",
     "outDir": "./dist",
     "paths": {
@@ -22,11 +23,8 @@
       "./node_modules/@types"
     ],
     "types": [
-      "core-js",
       "node"
+      // Add this when 4.x types available: "swiper"
     ]
-  },
-  "awesomeTypescriptLoaderOptions": {
-    "useWebpackText": true
   }
 }

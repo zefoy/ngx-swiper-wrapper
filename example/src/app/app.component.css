@@ -29,10 +29,6 @@
   line-height: 24px;
 }
 
-.action-container {
-  padding: 16px;
-}
-
 .action-container,
 .content-container {
   position: relative;
@@ -42,6 +38,15 @@
   border-radius: 4px;
 
   background-color: #fff;
+}
+
+.action-container {
+  padding: 16px;
+}
+
+.vertical-container,
+.horizontal-container {
+  min-height: 0 !important;
 }
 
 .action-button {
