@@ -95,7 +95,7 @@ Simply replace the element that would oridinarily be passed to `Swiper` with the
 
 (indexChange)           // Event handler for the Swiper index change event.
 
-(<swiper-event>)        // All Swiper events / callbacks work as bindings.
+(<swiperEvent>)         // All Swiper events / callbacks work as bindings.
                         // Conflicting events are prefixed with 'swiper':
                         // click, tap, doubleTap, touch*, transition*
                         // Example: touchStart -> swiperTouchStart
@@ -136,7 +136,7 @@ Swiper directive can be used in correctly structured div element with optional c
 
 (indexChange)           // Event handler for the swiper index change event.
 
-(<swiper-event>)        // All Swiper events / callbacks work as bindings.
+(<swiperEvent>)         // All Swiper events / callbacks work as bindings.
                         // Conflicting events are prefixed with 'swiper':
                         // click, tap, doubleTap, touch*, transition*
                         // Example: touchStart -> swiperTouchStart

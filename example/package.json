@@ -2,7 +2,7 @@
   "name": "ngx-swiper-wrapper-example",
   "description": "Example app for the ngx-swiper-wrapper",
   "license": "MIT",
-  "version": "5.0.0-0",
+  "version": "5.0.0",
   "tslint": {
     "extends": "./tslint.json"
   },
@@ -43,7 +43,7 @@
     "@angular/platform-browser-dynamic": "^5.0.0",
     "@angular/router": "^5.0.0",
     "core-js": "^2.5.0",
-    "ngx-swiper-wrapper": "5.0.0-6",
+    "ngx-swiper-wrapper": "^5.0.0",
     "rxjs": "^5.5.0",
     "swiper": "^4.0.0",
     "zone.js": "^0.8.0"
