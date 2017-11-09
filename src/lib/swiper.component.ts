@@ -123,8 +123,6 @@ export class SwiperComponent implements OnInit, OnDestroy {
        (this.swiperConfig.pagination && typeof this.swiperConfig.pagination === 'object' &&
        !this.swiperConfig.pagination.renderBullet && this.swiperConfig.pagination.el === '.swiper-pagination'))
     {
-      this.config = Object.assign({}, this.config); // Shallow copy so we won't change the original
-
       if (!this.paginationConfig) {
         this.paginationConfig = {
           el: '.swiper-pagination',

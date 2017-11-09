@@ -167,6 +167,8 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
         this.ngOnDestroy();
 
         this.ngOnInit();
+
+        this.update();
       }
     }
   }

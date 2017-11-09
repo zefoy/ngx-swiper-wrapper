@@ -5,7 +5,7 @@ import { SwiperComponent, SwiperDirective, SwiperConfigInterface,
 
 @Component({
   selector: 'my-app',
-  moduleId: module.id.toString(),
+  moduleId: 'src/app/app.component',
   templateUrl: 'app.component.html',
   styleUrls: [ 'app.component.css' ]
 })
