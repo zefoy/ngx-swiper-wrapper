@@ -166,10 +166,7 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
 
         this.ngOnDestroy();
 
-        // Timeout is needed for the styles to update properly
-        //setTimeout(() => {
-          this.ngOnInit();
-        //}, 0);
+        this.ngOnInit();
       }
     }
   }
