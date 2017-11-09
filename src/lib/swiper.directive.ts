@@ -15,7 +15,7 @@ import { SwiperEvents, SwiperConfig, SwiperConfigInterface } from './swiper.inte
   exportAs: 'ngxSwiper'
 })
 export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
-  public instance: any;
+  private instance: any;
 
   private configDiff: KeyValueDiffer<string, any>;
 
