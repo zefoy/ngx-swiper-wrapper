@@ -26,7 +26,6 @@ npm start
 
 ### Library development
 
-
 ```bash
 npm link
 cd example
