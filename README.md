@@ -39,7 +39,7 @@ npm ling ngx-swiper-wrapper
 npm install ngx-swiper-wrapper --save
 ```
 
-##### Load the module for your app (with global config):
+##### Load the module for your app (with global configuration):
 
 ```javascript
 import { SwiperModule } from 'ngx-swiper-wrapper';
