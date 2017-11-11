@@ -12,8 +12,7 @@ See a live example application <a href="https://zefoy.github.io/ngx-swiper-wrapp
 
 ```bash
 npm install
-npm run build
-npm run bundle
+npm start
 ```
 
 ### Running the example
@@ -68,13 +67,13 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 
 ##### Use it in your HTML template (with custom configuration):
 
-This library provides two ways to create a Dropzone element, component for simple use cases and directive for more custom use cases.
+This library provides two ways to create a Swiper element, component for simple use cases and directive for more custom use cases.
 
 **COMPONENT USAGE**
 
-Simply replace the element that would oridinarily be passed to `Swiper` with the swiper component.
+Simply replace the element that would ordinarily be passed to `Swiper` with the swiper component.
 
-**NOTE:** Component provides default elements for the scroller, navigation and pagination which you can enable by setting the apropriate configuration to 'true' or by using the default selector. If you want to use custom elements then you might want to use the directive instead.
+**NOTE:** Component provides default elements for the scrollbar, navigation and pagination which you can enable by setting the appropriate configuration to 'true' or by using the default selector. If you want to use custom elements then you might want to use the directive instead.
 
 ```html
 <swiper [config]="config" [(index)]="index">
@@ -133,7 +132,7 @@ Swiper directive can be used in correctly structured div element with optional c
 [index]                 // Can be used to set the active slide index.
 [disabled]              // Disables changing of slides (locks the Swiper).
 
-(indexChange)           // Event handler for the swiper index change event.
+(indexChange)           // Event handler for the Swiper index change event.
 
 (<swiperEvent>)         // All Swiper events / callbacks work as bindings.
                         // Conflicting events are prefixed with 'swiper':
@@ -146,9 +145,10 @@ Swiper directive can be used in correctly structured div element with optional c
 This library supports all Swiper configuration options and few extra options for easier usage.
 
 ```javascript
-direction               // Direction of the swiper (Default: 'horizontal').
+observer                // Set to to true to enable automatic update calls.
+direction               // Direction of the Swiper (Default: 'horizontal').
 threshold               // Distance needed for the swipe action (Default: 0).
-spaceBetween            // Space in pixels between the swiper items (Default: 0).
+spaceBetween            // Space in pixels between the Swiper items (Default: 0).
 slidesPerView           // Number of the items per view or 'auto' (Default: 1).
 centeredSlides          // Align active item on center not left (Default: false).
 ```

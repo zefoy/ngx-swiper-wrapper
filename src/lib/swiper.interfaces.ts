@@ -463,12 +463,16 @@ export class SwiperConfig implements SwiperConfigInterface {
     this.assign(config);
   }
 
-  assign(config: SwiperConfigInterface = {}) {
+  assign(config: SwiperConfigInterface | any = {}, target?: any) {
+    target = target || this;
+
     for (const key in config) {
-      if (config[key] && typeof config[key] === 'object') {
-        this[key] = Object.assign({}, config[key]);
+      if (config[key] && !Array.isArray(config[key]) && typeof config[key] === 'object') {
+        target[key] = {};
+
+        this.assign(config[key], target[key]);
       } else {
-        this[key] = config[key];
+        target[key] = config[key];
       }
     }
   }
