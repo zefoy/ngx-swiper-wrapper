@@ -12,10 +12,35 @@ import { AppComponent } from './app.component';
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   observer: true,
   direction: 'horizontal',
-  threshold: 50,
-  spaceBetween: 5,
-  slidesPerView: 1,
-  centeredSlides: true
+   slidesPerView: 4,
+   spaceBetween: 40,
+   breakpoints: {
+     1024: {
+   slidesPerView: 4,
+   spaceBetween: 40,
+ },
+ 767: {
+   slidesPerView: 3,
+   spaceBetween: 20,
+ },
+ 479: {
+   slidesPerView: 2,
+   spaceBetween: 10
+
+ }
+},
+   centeredSlides: true,
+   keyboard: true,
+   mousewheel: false,
+   freeMode: false,
+   speed: 1000,
+   autoplay: {
+delay: 2000,
+stopOnLast: false
+},
+   effect: 'slide',
+   grabCursor: true,
+   loop: true,
 };
 
 @NgModule({
