@@ -45,14 +45,12 @@
     "core-js": "^2.5.0",
     "ngx-swiper-wrapper": "^5.0.0",
     "rxjs": "^5.5.0",
-    "swiper": "^4.0.0",
     "zone.js": "^0.8.0"
   },
   "devDependencies": {
     "@angular/compiler-cli": "^5.0.0",
     "@ngtools/webpack": "^1.8.0",
     "@types/node": "^8.0.0",
-    "@types/swiper": "^3.4.0",
     "codelyzer": "^4.0.0",
     "connect-history-api-fallback": "^1.4.0",
     "copy-webpack-plugin": "^4.1.0",
