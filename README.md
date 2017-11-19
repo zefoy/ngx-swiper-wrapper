@@ -28,7 +28,7 @@ npm start
 ```bash
 npm link
 cd example
-npm ling ngx-swiper-wrapper
+npm link ngx-swiper-wrapper
 ```
 
 ### Installing and usage
