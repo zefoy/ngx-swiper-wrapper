@@ -240,7 +240,7 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
   public prevSlide(speed?: number, silent?: boolean) {
     if (this.instance) {
       this.zone.runOutsideAngular(() => {
-        this.instance.slidePrev(!silent, speed);
+        this.instance.slidePrev(speed, !silent);
       });
     }
   }
@@ -248,7 +248,7 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
   public nextSlide(speed?: number, silent?: boolean) {
     if (this.instance) {
       this.zone.runOutsideAngular(() => {
-        this.instance.slideNext(!silent, speed);
+        this.instance.slideNext(speed, !silent);
       });
     }
   }
