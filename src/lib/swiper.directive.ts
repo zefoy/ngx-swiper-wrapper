@@ -162,13 +162,7 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
       const changes = this.configDiff.diff(this.config || {});
 
       if (changes) {
-        this.initialIndex = this.getIndex(true);
-
-        this.ngOnDestroy();
-
-        this.ngOnInit();
-
-        this.update();
+        this.reinitialize();
       }
     }
   }
@@ -197,6 +191,13 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
         }
       }
     }
+  }
+
+  public reinitialize() {
+    this.initialIndex = this.getIndex(true);
+    this.ngOnDestroy();
+    this.ngOnInit();
+    this.update();
   }
 
   public swiper(): any {
