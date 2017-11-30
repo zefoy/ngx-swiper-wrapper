@@ -25,38 +25,15 @@ export class AppComponent {
 
   public disabled: boolean = false;
 
-  public config: SwiperConfigInterface = {};/*
+  public config: SwiperConfigInterface = {
     direction: 'horizontal',
-     slidesPerView: 4,
-     spaceBetween: 40,
-     breakpoints: {
-       1024: {
-     slidesPerView: 4,
-     spaceBetween: 40,
-   },
-   767: {
-     slidesPerView: 3,
-     spaceBetween: 20,
-   },
-   479: {
-     slidesPerView: 2,
-     spaceBetween: 10
-
-   }
- },
-     centeredSlides: true,
-     keyboard: true,
-     mousewheel: false,
-     freeMode: false,
-     speed: 1000,
-     autoplay: {
-  delay: 2000,
-  stopOnLast: false
-},
-     effect: 'slide',
-     grabCursor: true,
-     loop: true,
-  };*/
+    slidesPerView: 1,
+    keyboard: true,
+    mousewheel: true,
+    scrollbar: false,
+    navigation: true,
+    pagination: false
+  };
 
   private scrollbar: SwiperScrollbarInterface = {
     el: '.swiper-scrollbar',
@@ -73,13 +50,7 @@ export class AppComponent {
   @ViewChild(SwiperComponent) componentRef: SwiperComponent;
   @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
 
-  constructor() {
-setTimeout(() => {
-  console.log("STOP");
-  this.componentRef.directiveRef.stopAutoplay();
-}, 3000);
-
-  }
+  constructor() {}
 
   public toggleType() {
     this.type = (this.type === 'component') ? 'directive' : 'component';
