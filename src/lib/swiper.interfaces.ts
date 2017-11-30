@@ -182,10 +182,10 @@ export interface SwiperConfigInterface {
   virtual?: boolean | SwiperVirtualInterface,
   autoplay?: boolean | SwiperAutoplayInterface,
   scrollbar?: boolean | SwiperScrollbarInterface,
+  mousewheel?: boolean | SwiperMousewheelInterface,
   controller?: boolean | SwiperControllerInterface,
   navigation?: boolean | SwiperNavigationInterface,
   pagination?: boolean | SwiperPaginationInterface,
-  mousewheel?: boolean | SwiperMousewheelInterface,
   hashNavigation?: boolean | SwiperHashNavigationInterface
 }
 
@@ -314,14 +314,8 @@ export interface SwiperCoverflowEffectInterface {
   slideShadows?: boolean
 }
 
-export interface SwiperBreakpointInterface {
-  spaceBetween?: number,
-  slidesPerView?: number,
-  slidesPerGroup?: number
-}
-
 export interface SwiperBreakpointsInterface {
-  [size: number]: SwiperBreakpointInterface
+  [size: number]: SwiperConfigInterface
 }
 
 export class SwiperConfig implements SwiperConfigInterface {
@@ -453,10 +447,10 @@ export class SwiperConfig implements SwiperConfigInterface {
   public virtual: boolean | any;
   public autoplay: boolean | any;
   public scrollbar: boolean | any;
+  public mousewheel: boolean | any;
   public controller: boolean | any;
   public navigation: boolean | any;
   public pagination: boolean | any;
-  public mousewheel: boolean | any;
   public hashNavigation: boolean | any;
 
   constructor(config: SwiperConfigInterface = {}) {
@@ -484,6 +478,7 @@ export type SwiperRenderSlideFunction = (index: number) => HTMLElement;
 export type SwiperRenderExternalFunction = (data: any) => void;
 
 export type SwiperRenderCustomFunction = (current: number, total: number) => string;
+
 export type SwiperRenderBulletFunction = (index: number, className: string) => string;
 export type SwiperRenderFractionFunction = (currentClass: string, totalClass: string) => string;
 export type SwiperRenderProgressbarFunction = (progressbarClass: string) => string;

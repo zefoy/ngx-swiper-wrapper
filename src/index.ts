@@ -6,8 +6,6 @@ export {
 
   SwiperConfig,
   SwiperConfigInterface,
-
-  SwiperBreakpointInterface,
   SwiperBreakpointsInterface,
 
   SwiperA11YInterface,
@@ -17,10 +15,10 @@ export {
   SwiperVirtualInterface,
   SwiperAutoplayInterface,
   SwiperScrollbarInterface,
+  SwiperMousewheelInterface,
   SwiperControllerInterface,
   SwiperNavigationInterface,
   SwiperPaginationInterface,
-  SwiperMousewheelInterface,
   SwiperHashNavigationInterface,
 
   SwiperFadeEffectInterface,
