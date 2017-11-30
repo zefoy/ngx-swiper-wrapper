@@ -3,7 +3,7 @@
   "description": "Angular wrapper library for Swiper",
   "bugs": "https://github.com/zefoy/ngx-swiper-wrapper/issues",
   "license": "MIT",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "main": "./bundles/ngx-swiper-wrapper.umd.js",
   "module": "./dist/ngx-swiper-wrapper.es5.js",
   "typings": "./dist/ngx-swiper-wrapper.d.ts",
