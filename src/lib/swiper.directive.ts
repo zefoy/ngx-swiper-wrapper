@@ -41,6 +41,7 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
   @Output('progress'                   ) S_PROGRESS                       = new EventEmitter<any>();
 
   @Output('resize'                     ) S_RESIZE                         = new EventEmitter<any>();
+  @Output('breakpoint'                 ) S_BREAKPOINT                     = new EventEmitter<any>();
   @Output('beforeResize'               ) S_BEFORERESIZE                   = new EventEmitter<any>();
 
   @Output('keyPress'                   ) S_KEYPRESS                       = new EventEmitter<any>();

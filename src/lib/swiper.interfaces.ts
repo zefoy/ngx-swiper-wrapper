@@ -10,6 +10,7 @@ export const SwiperEvents = [
   'progress',
 
   'resize',
+  'breakpoint',
   'beforeResize',
 
   'keyPress',
