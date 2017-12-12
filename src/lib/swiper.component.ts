@@ -10,6 +10,7 @@ import { SwiperConfig, SwiperConfigInterface, SwiperRenderBulletFunction } from 
 
 @Component({
   selector: 'swiper',
+  exportAs: 'ngxSwiper',
   templateUrl: './lib/swiper.component.html',
   styleUrls: [ './lib/swiper.component.css' ],
   encapsulation: ViewEncapsulation.None
