@@ -44,7 +44,6 @@
     "@angular/core": "^5.1.0",
     "@angular/platform-browser": "^5.1.0",
     "@types/node": "^8.0.0",
-    "@types/swiper": "^3.4.0",
     "angular-inliner-cli": "^1.2.0",
     "codelyzer": "^4.0.0",
     "core-js": "^2.5.0",
