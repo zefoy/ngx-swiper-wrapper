@@ -7,6 +7,7 @@ import { SwiperConfig, SwiperConfigInterface } from './swiper.interfaces';
 
 @Component({
   selector: 'swiper',
+  exportAs: 'ngxSwiper',
   templateUrl: './swiper.component.html',
   styleUrls: ['./swiper.component.css'],
   encapsulation: ViewEncapsulation.None

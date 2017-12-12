@@ -7,7 +7,8 @@ import { Input, HostBinding, Output, EventEmitter, ElementRef } from '@angular/c
 import { SwiperConfig, SwiperConfigInterface, SwiperEvents } from './swiper.interfaces';
 
 @Directive({
-  selector: '[swiper]'
+  selector: '[swiper]',
+  exportAs: 'ngxSwiper'
 })
 export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
   public swiper: any;
