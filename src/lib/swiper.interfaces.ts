@@ -6,6 +6,10 @@ export const SwiperEvents = [
 
   'scroll',
   'progress',
+  'keyPress',
+
+  'beforeResize',
+  'afterResize',
 
   'setTranslate',
   'setTransition',

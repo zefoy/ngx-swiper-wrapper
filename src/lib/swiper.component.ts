@@ -56,6 +56,10 @@ export class SwiperComponent implements OnInit, OnDestroy {
 
   @Output('scroll'                 ) S_SCROLL              = new EventEmitter<any>();
   @Output('progress'               ) S_PROGRESS            = new EventEmitter<any>();
+  @Output('keyPress'               ) S_KEYPRESS            = new EventEmitter<any>();
+
+  @Output('beforeResize'           ) S_BEFORERESIZE        = new EventEmitter<any>();
+  @Output('afterResize'            ) S_AFTERRESIZE         = new EventEmitter<any>();
 
   @Output('setTranslate'           ) S_SETTRANSLATE        = new EventEmitter<any>();
   @Output('setTransition'          ) S_SETTRANSITION       = new EventEmitter<any>();
