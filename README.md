@@ -137,7 +137,7 @@ centeredSlides      // Align active item on center not left (Default: false).
 keyboardControl     // Enables navigation through arrow keys (Default: false).
 ```
 
-For more detailed documentation with all the supported events / options see [swiper documentation](http://idangero.us/swiper/api/).
+For more detailed documentation with all the supported events / options see [swiper documentation](https://github.com/nolimits4web/Swiper/blob/Swiper3/API.md).
 
 ##### Available control / helper functions (provided by the directive):
 
