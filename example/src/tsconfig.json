@@ -24,7 +24,6 @@
     ],
     "types": [
       "node"
-      // Add this when 4.x types available: "swiper"
     ]
   }
 }
