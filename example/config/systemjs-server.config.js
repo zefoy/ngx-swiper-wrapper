@@ -27,7 +27,7 @@
       'rxjs': 'npm:rxjs',
       'ts': 'npm:plugin-typescript/lib/plugin.js',
       'typescript': 'npm:typescript/lib/typescript.js',
-      'swiper': 'npm:swiper/dist/js/swiper.esm.bundle.js',
+      'swiper': 'npm:swiper',
       'ngx-swiper-wrapper': 'npm:ngx-swiper-wrapper/bundles/ngx-swiper-wrapper.umd.js'
     },
     packages: {
