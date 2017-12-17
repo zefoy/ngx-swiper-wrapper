@@ -11,8 +11,8 @@
     "extends": "./stylelint.json"
   },
   "scripts": {
+    "clean": "rm -rf dist",
     "start": "npm run serve:wds",
-    "clean": "rm -rf dist node_modules",
     "lint": "npm run lint:ts && npm run lint:css",
     "build": "rm -rf dist/* && npm run build:aot",
     "deploy": "rm -rf dist && deploy-to-git",
