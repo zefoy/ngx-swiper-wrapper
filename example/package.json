@@ -11,16 +11,17 @@
     "extends": "./stylelint.json"
   },
   "scripts": {
-    "start": "webpack-dev-server --open --inline --config config/webpack-server-jit.config.js",
+    "start": "npm run serve:wds",
     "clean": "rm -rf dist node_modules",
     "lint": "npm run lint:ts && npm run lint:css",
     "build": "rm -rf dist/* && npm run build:aot",
     "deploy": "rm -rf dist && deploy-to-git",
     "lint:ts": "tslint -p src/tsconfig.json \"src/**/*.ts\"",
     "lint:css": "stylelint --syntax css \"src/**/*.css\"",
-    "start:sjs": "lite-server -c config/lite-server-bs-config.js",
     "build:aot": "webpack --config config/webpack-build-aot.config.js",
-    "build:jit": "webpack --config config/webpack-build-jit.config.js"
+    "build:jit": "webpack --config config/webpack-build-jit.config.js",
+    "serve:sjs": "lite-server -c config/lite-server-bs-config.js",
+    "serve:wds": "webpack-dev-server --open --inline --config config/webpack-server-jit.config.js",
   },
   "config": {
     "deployToGit": {
