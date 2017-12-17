@@ -25,7 +25,7 @@
     "lint:scss": "stylelint --syntax scss \"src/**/*.scss\"",
     "build:js": "ngc -p src/tsconfig.json && ngi -c -s dist/",
     "build:css": "node-sass src/ -o dist/ --source-map=true",
-    "build:html": "cpx src/lib/*.html dist/lib/",
+    "build:html": "cpx --dereference src/lib/*.html dist/lib/",
     "bundle:es5": "rollup -c config/rollup-es5.config.js --silent",
     "bundle:umd": "rollup -c config/rollup-umd.config.js --silent",
     "minify:umd": "uglifyjs bundles/$npm_package_name.umd.js -o bundles/$npm_package_name.umd.min.js --source-map=\"filename=bundles/$npm_package_name.umd.min.js.map\""
