@@ -124,7 +124,6 @@ Swiper directive can be used in correctly structured div element with optional c
   </div>
 
   <div class="swiper-scrollbar"></div>
-
   <div class="swiper-pagination"></div>
 
   <div class="swiper-button-prev"></div>
