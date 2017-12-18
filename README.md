@@ -2,11 +2,17 @@
 
 <a href="https://badge.fury.io/js/ngx-swiper-wrapper"><img src="https://badge.fury.io/js/ngx-swiper-wrapper.svg" align="right" alt="npm version" height="18"></a>
 
-This is an Angular wrapper library for the [Swiper](http://idangero.us/swiper/). To use this library you should get familiar with the [Swiper documentation](http://idangero.us/swiper/api/) as well, this documentation only explains details specific to this wrapper.
+This is an Angular wrapper library for the [Swiper](http://idangero.us/swiper/). To use this library you should get familiar with the Swiper documentation as well since this documentation only explains details specific to this wrapper.
 
 This documentation is for the latest 5.x.x version which requires Angular 5. For Angular 4 you need to use the latest 4.x.x version. Documentation for the 4.x.x can be found from <a href="https://github.com/zefoy/ngx-swiper-wrapper/tree/4.x.x/">here</a>.
 
-See a live example application <a href="https://zefoy.github.io/ngx-swiper-wrapper/">here</a>.
+### Quick links
+
+[Example application](https://zefoy.github.io/ngx-swiper-wrapper/)
+ | 
+[Plunker template](http://plnkr.co/edit/5eGsfBasinjUBWYEcNx8?p=preview)
+ | 
+[Swiper documentation](http://idangero.us/swiper/api/)
 
 ### Building the library
 
@@ -153,7 +159,7 @@ slidesPerView           // Number of the items per view or 'auto' (Default: 1).
 centeredSlides          // Align active item on center not left (Default: false).
 ```
 
-For more detailed documentation with all the supported events / options see [Swiper documentation](http://idangero.us/swiper/api/).
+For more detailed documentation with all the supported events / options see the Swiper documentation.
 
 ##### Available control / helper functions (provided by the directive):
 
