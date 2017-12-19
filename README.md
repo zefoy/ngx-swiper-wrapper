@@ -24,7 +24,7 @@ npm start
 ### Installing and usage
 
 ```bash
-npm install ngx-swiper-wrapper@4.7.0 --save
+npm install ngx-swiper-wrapper@prev --save
 ```
 
 ##### Load the module for your app (with global configuration):
