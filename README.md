@@ -12,6 +12,10 @@ This documentation is for the latest 5.x.x version which requires Angular 5. For
  | 
 [Plunker template](http://plnkr.co/edit/5eGsfBasinjUBWYEcNx8?p=preview)
  | 
+[Stackblitz template](https://stackblitz.com/edit/ngx-swiper-wrapper-demo)
+ | 
+[Stackblitz live demo](https://ngx-swiper-wrapper-demo.stackblitz.io)
+ | 
 [Swiper documentation](http://idangero.us/swiper/api/)
 
 ### Building the library
