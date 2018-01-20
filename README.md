@@ -45,6 +45,8 @@ npm install ngx-swiper-wrapper --save
 
 ##### Load the module for your app (with global configuration):
 
+Providing the global configuration is optional and when used you should only provide the configuration in your root module.
+
 ```javascript
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
