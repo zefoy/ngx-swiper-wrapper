@@ -19,6 +19,7 @@ export class SwiperComponent implements OnInit, OnDestroy {
   private mo: any;
 
   public swiperConfig: any;
+  public paginationBackup: any;
   public paginationConfig: any;
 
   @Input() index: number = null;
@@ -114,6 +115,10 @@ export class SwiperComponent implements OnInit, OnDestroy {
     if (this.mo) {
       this.mo.disconnect();
     }
+
+    if (this.config && this.paginationBackup) {
+      this.config.pagination = this.paginationBackup;
+    }
   }
 
   public getConfig() {
@@ -129,6 +134,8 @@ export class SwiperComponent implements OnInit, OnDestroy {
       this.config = this.config || {};
 
       if (!this.paginationConfig) {
+        this.paginationBackup = this.config.pagination;
+
         this.paginationConfig = {
           el: '.swiper-pagination',
 
