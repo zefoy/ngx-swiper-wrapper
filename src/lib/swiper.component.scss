@@ -41,8 +41,6 @@ swiper {
         pointer-events: none;
 
         .swiper-pagination-handle {
-          position: relative;
-
           padding: 4px;
           margin: 2px;
 
@@ -51,6 +49,8 @@ swiper {
 
           .swiper-pagination-bullet {
             margin: 0;
+
+            pointer-events: none;
           }
 
           .swiper-pagination-bullet-last,
