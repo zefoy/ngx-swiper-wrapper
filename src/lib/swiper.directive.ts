@@ -111,6 +111,11 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
       };
     }
 
+    if (this.disabled) {
+      params.allowSlidePrev = false;
+      params.allowSlideNext = false;
+    }
+
     if (this.initialIndex != null) {
       params.initialSlide = this.initialIndex;
 
@@ -189,11 +194,15 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
       if (changes['disabled'].currentValue !== changes['disabled'].previousValue) {
         if (changes['disabled'].currentValue === true) {
           this.zone.runOutsideAngular(() => {
-            this.instance.lockSwipes();
+            this.ngOnDestroy();
+
+            this.ngOnInit();
           });
         } else if (changes['disabled'].currentValue === false) {
           this.zone.runOutsideAngular(() => {
-            this.instance.unlockSwipes();
+            this.ngOnDestroy();
+
+            this.ngOnInit();
           });
         }
       }

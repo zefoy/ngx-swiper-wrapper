@@ -28,7 +28,7 @@
       <div class="box-title">Swiper</div>
 
       <div class="content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
-        <swiper *ngIf="type == 'component' && show" class="swiper-container" [config]="config" (indexChange)="onIndexChange($event)" fxFlex="auto">
+        <swiper *ngIf="type == 'component' && show" class="swiper-container" [config]="config" [disabled]="disabled" (indexChange)="onIndexChange($event)" fxFlex="auto">
           <div *ngFor="let slide of slides" class="swiper-slide">
             <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
               {{slide}}
@@ -36,7 +36,7 @@
           </div>
         </swiper>
 
-        <div *ngIf="type == 'directive' && show" class="swiper-container" [swiper]="config" (indexChange)="onIndexChange($event)">
+        <div *ngIf="type == 'directive' && show" class="swiper-container" [disabled]="disabled" [swiper]="config" (indexChange)="onIndexChange($event)">
           <div class="swiper-wrapper">
             <div *ngFor="let slide of slides" class="swiper-slide">
               <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
