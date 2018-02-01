@@ -183,7 +183,6 @@ export class SwiperDirective implements AfterViewInit, DoCheck, OnDestroy, OnCha
 
   ngOnDestroy() {
     if (this.instance) {
-      console.log(this.instance.initialized);
       this.zone.runOutsideAngular(() => {
         this.instance.destroy(true, this.instance.initialized || false);
       });
