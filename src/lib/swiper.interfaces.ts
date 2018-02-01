@@ -59,11 +59,8 @@ export const SwiperEvents = [
 ];
 
 export interface SwiperConfigInterface {
-  // Not supported by the wrapper:
-  // init
-  // on
-
   // Swiper parameters
+  init?: boolean,
   initialSlide?: number,
   direction?: string,
   speed?: number,
@@ -324,11 +321,8 @@ export interface SwiperBreakpointsInterface {
 }
 
 export class SwiperConfig implements SwiperConfigInterface {
-  // Not supported by the wrapper:
-  // public init
-  // public on
-
   // Swiper parameters
+  public init: boolean;
   public initialSlide: number;
   public direction: string;
   public speed: number;

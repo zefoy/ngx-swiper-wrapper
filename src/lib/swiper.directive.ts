@@ -136,7 +136,9 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
       this.instance = new Swiper(this.elementRef.nativeElement, params);
     });
 
-    this.S_INIT.emit(this.instance);
+    if (params.init !== false) {
+      this.S_INIT.emit(this.instance);
+    }
 
     // Add native Swiper event handling
     SwiperEvents.forEach((eventName) => {
@@ -181,8 +183,9 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
 
   ngOnDestroy() {
     if (this.instance) {
+      console.log(this.instance.initialized);
       this.zone.runOutsideAngular(() => {
-        this.instance.destroy(true, true);
+        this.instance.destroy(true, this.instance.initialized || false);
       });
 
       this.instance = null;
@@ -211,6 +214,14 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
 
   public swiper(): any {
     return this.instance;
+  }
+
+  public init() {
+    if (this.instance) {
+      this.zone.runOutsideAngular(() => {
+        this.instance.init();
+      });
+    }
   }
 
   public update() {
