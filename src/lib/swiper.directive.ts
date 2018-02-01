@@ -1,7 +1,7 @@
 import * as Swiper from 'swiper/dist/js/swiper.js';
 
 import { Directive,
-  OnInit, DoCheck, OnDestroy, OnChanges,
+  AfterViewInit, DoCheck, OnDestroy, OnChanges,
   Input, Output, HostBinding, EventEmitter,
   NgZone, Renderer2, ElementRef, Optional, Inject,
   SimpleChanges, KeyValueDiffer, KeyValueDiffers } from '@angular/core';
@@ -14,7 +14,7 @@ import { SwiperEvents, SwiperConfig, SwiperConfigInterface } from './swiper.inte
   selector: '[swiper]',
   exportAs: 'ngxSwiper'
 })
-export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
+export class SwiperDirective implements AfterViewInit, DoCheck, OnDestroy, OnChanges {
   private instance: any;
 
   private configDiff: KeyValueDiffer<string, any>;
@@ -87,7 +87,7 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
   constructor(private zone: NgZone, private elementRef: ElementRef, private differs: KeyValueDiffers,
     @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperConfigInterface) {}
 
-  ngOnInit() {
+  ngAfterViewInit() {
     const params = new SwiperConfig(this.defaults);
 
     params.assign(this.config); // Custom configuration
@@ -174,7 +174,7 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
 
         this.ngOnDestroy();
 
-        this.ngOnInit();
+        this.ngAfterViewInit();
 
         this.update();
       }
@@ -199,13 +199,13 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
           this.zone.runOutsideAngular(() => {
             this.ngOnDestroy();
 
-            this.ngOnInit();
+            this.ngAfterViewInit();
           });
         } else if (changes['disabled'].currentValue === false) {
           this.zone.runOutsideAngular(() => {
             this.ngOnDestroy();
 
-            this.ngOnInit();
+            this.ngAfterViewInit();
           });
         }
       }

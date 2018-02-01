@@ -1,6 +1,6 @@
-import { Component, ViewEncapsulation,
-  OnInit, OnDestroy, Input, Output, HostBinding, EventEmitter, ViewChild,
-  NgZone, Renderer2, ElementRef, Optional, Inject } from '@angular/core';
+import { Component,
+  AfterViewInit, OnDestroy, Input, Output, HostBinding, EventEmitter, ViewChild,
+  NgZone, Renderer2, ElementRef, Optional, Inject, ViewEncapsulation } from '@angular/core';
 
 import { SWIPER_CONFIG } from './swiper.interfaces';
 
@@ -15,7 +15,7 @@ import { SwiperConfig, SwiperConfigInterface, SwiperRenderBulletFunction } from 
   styleUrls: [ './lib/swiper.component.css' ],
   encapsulation: ViewEncapsulation.None
 })
-export class SwiperComponent implements OnInit, OnDestroy {
+export class SwiperComponent implements AfterViewInit, OnDestroy {
   private mo: any;
 
   public swiperConfig: any;
@@ -99,7 +99,7 @@ export class SwiperComponent implements OnInit, OnDestroy {
   constructor(private zone: NgZone, private renderer: Renderer2, private elementRef: ElementRef,
     @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperConfigInterface) {}
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.zone.runOutsideAngular(() => {
       this.updateClasses();
 

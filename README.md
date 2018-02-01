@@ -9,11 +9,11 @@ This documentation is for the latest 5.x.x version which requires Angular 5. For
 ### Quick links
 
 [Example application](https://zefoy.github.io/ngx-swiper-wrapper/)
- | 
+ |
 [Plunker template](http://plnkr.co/edit/5eGsfBasinjUBWYEcNx8?p=preview)
- | 
+ |
 [Stackblitz template](https://stackblitz.com/edit/ngx-swiper-wrapper-demo)
- | 
+ |
 [Swiper documentation](http://idangero.us/swiper/api/)
 
 ### Building the library
@@ -56,8 +56,7 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
-  slidesPerView: 'auto',
-  keyboard: true
+  slidesPerView: 'auto'
 };
 
 @NgModule({
@@ -169,6 +168,7 @@ For more detailed documentation with all the supported events / options see the 
 ```javascript
 swiper()                          // Returns reference to the Swiper instance.
 
+init()                            // Starts Swiper (when init set to false).
 update()                          // Updates Swiper elements / classes / etc.
 
 getIndex(real?)                   // Returns the active or real slide index.
