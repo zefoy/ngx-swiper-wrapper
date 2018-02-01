@@ -103,9 +103,11 @@ export class SwiperComponent implements OnInit, OnDestroy {
     this.zone.runOutsideAngular(() => {
       this.updateClasses();
 
-      this.mo = new MutationObserver((mutations) => {
-        this.updateClasses();
-      });
+      if (typeof MutationObserver !== 'undefined') {
+        this.mo = new MutationObserver((mutations) => {
+          this.updateClasses();
+        });
+      }
 
       this.mo.observe(this.swiperSlides.nativeElement, { childList: true });
     });

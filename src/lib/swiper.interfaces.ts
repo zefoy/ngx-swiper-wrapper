@@ -466,8 +466,8 @@ export class SwiperConfig implements SwiperConfigInterface {
     target = target || this;
 
     for (const key in config) {
-      if (config[key] != null && !(Array.isArray(config[key])) &&
-          typeof config[key] === 'object' && !(config[key] instanceof HTMLElement))
+      if (config[key] != null && !Array.isArray(config[key]) && typeof config[key] === 'object' &&
+         (typeof HTMLElement === 'undefined' || !(config[key] instanceof HTMLElement)))
       {
         target[key] = {};
 
