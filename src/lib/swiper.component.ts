@@ -1,4 +1,5 @@
-import { Component,
+import { isPlatformBrowser } from '@angular/common';
+import { Component, PLATFORM_ID,
   AfterViewInit, OnDestroy, Input, Output, HostBinding, EventEmitter, ViewChild,
   NgZone, Renderer2, ElementRef, Optional, Inject, ViewEncapsulation } from '@angular/core';
 
@@ -96,10 +97,15 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
   @Output('slideChangeTransitionEnd'   ) S_SLIDECHANGETRANSITIONEND       = new EventEmitter<any>();
   @Output('slideChangeTransitionStart' ) S_SLIDECHANGETRANSITIONSTART     = new EventEmitter<any>();
 
-  constructor(private zone: NgZone, private renderer: Renderer2, private elementRef: ElementRef,
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private zone: NgZone,
+    private renderer: Renderer2, private elementRef: ElementRef,
     @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperConfigInterface) {}
 
   ngAfterViewInit() {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     this.zone.runOutsideAngular(() => {
       this.updateClasses();
 

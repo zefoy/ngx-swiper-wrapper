@@ -1,6 +1,7 @@
 import * as Swiper from 'swiper/dist/js/swiper.js';
 
-import { Directive,
+import { isPlatformBrowser } from '@angular/common';
+import { Directive, PLATFORM_ID,
   AfterViewInit, DoCheck, OnDestroy, OnChanges,
   Input, Output, HostBinding, EventEmitter,
   NgZone, Renderer2, ElementRef, Optional, Inject,
@@ -84,10 +85,15 @@ export class SwiperDirective implements AfterViewInit, DoCheck, OnDestroy, OnCha
   @Output('slideChangeTransitionEnd'   ) S_SLIDECHANGETRANSITIONEND       = new EventEmitter<any>();
   @Output('slideChangeTransitionStart' ) S_SLIDECHANGETRANSITIONSTART     = new EventEmitter<any>();
 
-  constructor(private zone: NgZone, private elementRef: ElementRef, private differs: KeyValueDiffers,
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private zone: NgZone,
+    private elementRef: ElementRef, private differs: KeyValueDiffers,
     @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperConfigInterface) {}
 
   ngAfterViewInit() {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     const params = new SwiperConfig(this.defaults);
 
     params.assign(this.config); // Custom configuration
