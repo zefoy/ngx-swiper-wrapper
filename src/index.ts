@@ -14,6 +14,7 @@ export {
   SwiperHistoryInterface,
   SwiperVirtualInterface,
   SwiperAutoplayInterface,
+  SwiperKeyboardInterface,
   SwiperScrollbarInterface,
   SwiperMousewheelInterface,
   SwiperControllerInterface,

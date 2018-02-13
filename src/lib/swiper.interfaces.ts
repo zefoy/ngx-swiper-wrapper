@@ -74,6 +74,7 @@ export interface SwiperConfigInterface {
   uniqueNavElements?: boolean,
   effect?: string,
   runCallbacksOnInit?: boolean,
+  watchOverflow?: boolean,
 
   // Slides grid
   spaceBetween?: number,
@@ -112,10 +113,12 @@ export interface SwiperConfigInterface {
   resistanceRatio?: number,
 
   // Swiping / no swiping
+  preventInteractionOnTransition?: boolean,
   allowSlidePrev?: boolean,
   allowSlideNext?: boolean,
   noSwiping?: boolean,
   noSwipingClass?: string,
+  noSwipingSelector?: string,
   swipeHandler?: string | HTMLElement,
 
   // Clicks
@@ -175,7 +178,6 @@ export interface SwiperConfigInterface {
 
   // Components
   parallax?: boolean,
-  keyboard?: boolean,
 
   a11y?: boolean | SwiperA11YInterface,
   lazy?: boolean | SwiperLazyInterface,
@@ -183,6 +185,7 @@ export interface SwiperConfigInterface {
   history?: boolean | SwiperHistoryInterface,
   virtual?: boolean | SwiperVirtualInterface,
   autoplay?: boolean | SwiperAutoplayInterface,
+  keyboard?: boolean | SwiperKeyboardInterface,
   scrollbar?: boolean | SwiperScrollbarInterface,
   mousewheel?: boolean | SwiperMousewheelInterface,
   controller?: boolean | SwiperControllerInterface,
@@ -230,10 +233,17 @@ export interface SwiperVirtualInterface {
   renderExternal?: SwiperRenderExternalFunction
 }
 
+export interface SwiperKeyboardInterface {
+  enabled?: boolean,
+  onlyInViewport?: boolean
+}
+
 export interface SwiperAutoplayInterface {
   delay?: number,
-  stopOnLast?: boolean,
-  disableOnInteraction?: boolean
+  stopOnLastSlide?: boolean,
+  disableOnInteraction?: boolean,
+  reverseDirection?: boolean,
+  waitForTransition?: boolean
 }
 
 export interface SwiperScrollbarInterface {
@@ -336,6 +346,7 @@ export class SwiperConfig implements SwiperConfigInterface {
   public uniqueNavElements: boolean;
   public effect: string;
   public runCallbacksOnInit: boolean;
+  public watchOverflow: boolean;
 
   // Slides grid
   public spaceBetween: number;
@@ -374,10 +385,12 @@ export class SwiperConfig implements SwiperConfigInterface {
   public resistanceRatio: number;
 
   // Swiping / no swiping
+  public preventInteractionOnTransition: boolean;
   public allowSlidePrev: boolean;
   public allowSlideNext: boolean;
   public noSwiping: boolean;
   public noSwipingClass: string;
+  public noSwipingSelector: string;
   public swipeHandler: string | HTMLElement;
 
   // Clicks
@@ -437,7 +450,6 @@ export class SwiperConfig implements SwiperConfigInterface {
 
   // Components
   public parallax: boolean;
-  public keyboard: boolean;
 
   public a11y: boolean | any;
   public lazy: boolean | any;
@@ -445,6 +457,7 @@ export class SwiperConfig implements SwiperConfigInterface {
   public history: boolean | any;
   public virtual: boolean | any;
   public autoplay: boolean | any;
+  public keyboard: boolean | any;
   public scrollbar: boolean | any;
   public mousewheel: boolean | any;
   public controller: boolean | any;
