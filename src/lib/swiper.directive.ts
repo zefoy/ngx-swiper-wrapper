@@ -1,8 +1,10 @@
 import * as Swiper from 'swiper';
 
-import { NgZone, SimpleChanges, KeyValueDiffers } from '@angular/core';
-import { Directive, Optional, OnInit, DoCheck, OnDestroy, OnChanges } from '@angular/core';
-import { Input, HostBinding, Output, EventEmitter, ElementRef } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+
+import { NgZone, SimpleChanges, KeyValueDiffers, PLATFORM_ID } from '@angular/core';
+import { Inject, Optional, OnInit, DoCheck, OnDestroy, OnChanges } from '@angular/core';
+import { Directive, Input, HostBinding, Output, EventEmitter, ElementRef } from '@angular/core';
 
 import { SwiperConfig, SwiperConfigInterface, SwiperEvents } from './swiper.interfaces';
 
@@ -86,10 +88,15 @@ export class SwiperDirective implements OnInit, DoCheck, OnDestroy, OnChanges {
 
   @Output('paginationRendered'     ) S_PAGINATIONRENDERED  = new EventEmitter<any>();
 
-  constructor(private zone: NgZone, private elementRef: ElementRef, private differs: KeyValueDiffers,
+  constructor(private zone: NgZone, @Inject(PLATFORM_ID) private platformId: Object,
+    private elementRef: ElementRef, private differs: KeyValueDiffers,
     @Optional() private defaults: SwiperConfig) {}
 
   ngOnInit() {
+    if (!isPlatformBrowser(this.platformId)) {
+      return false;
+    }
+
     const element = this.elementRef.nativeElement;
 
     const options = new SwiperConfig(this.defaults);
