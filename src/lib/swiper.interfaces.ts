@@ -273,7 +273,7 @@ export interface SwiperPaginationInterface {
   type?: 'bullets' | 'fraction' | 'progressbar' | 'custom',
   bulletElement?: string,
   dynamicBullets?: boolean,
-  dynamicMainBullets?: 1,
+  dynamicMainBullets?: number,
   hideOnClick?: boolean,
   clickable?: boolean,
   renderBullet?: SwiperRenderBulletFunction,
