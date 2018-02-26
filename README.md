@@ -10,9 +10,7 @@ This documentation is for the latest 5.x.x version which requires Angular 5. For
 
 [Example application](https://zefoy.github.io/ngx-swiper-wrapper/)
  |
-[Plunker template](http://plnkr.co/edit/5eGsfBasinjUBWYEcNx8?p=preview)
- |
-[Stackblitz template](https://stackblitz.com/edit/ngx-swiper-wrapper-demo)
+[StackBlitz example](https://stackblitz.com/github/zefoy/ngx-swiper-wrapper/tree/master/example)
  |
 [Swiper documentation](http://idangero.us/swiper/api/)
 

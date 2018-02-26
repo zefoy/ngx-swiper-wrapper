@@ -1,10 +1,10 @@
 import * as Swiper from 'swiper/dist/js/swiper.js';
 
 import { isPlatformBrowser } from '@angular/common';
-import { Directive, PLATFORM_ID,
+import { PLATFORM_ID,
+  Input, Output, EventEmitter,
   AfterViewInit, DoCheck, OnDestroy, OnChanges,
-  Input, Output, HostBinding, EventEmitter,
-  NgZone, Renderer2, ElementRef, Optional, Inject,
+  Directive, NgZone, ElementRef, Optional, Inject,
   SimpleChanges, KeyValueDiffer, KeyValueDiffers } from '@angular/core';
 
 import { SWIPER_CONFIG } from './swiper.interfaces';

@@ -1,13 +1,13 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Component, PLATFORM_ID,
-  AfterViewInit, OnDestroy, Input, Output, HostBinding, EventEmitter, ViewChild,
-  NgZone, Renderer2, ElementRef, Optional, Inject, ViewEncapsulation } from '@angular/core';
+import { PLATFORM_ID,
+  Component, AfterViewInit, OnDestroy, Input, Output, EventEmitter, ViewChild,
+  NgZone, ElementRef, Optional, Inject, ViewEncapsulation } from '@angular/core';
 
 import { SWIPER_CONFIG } from './swiper.interfaces';
 
 import { SwiperDirective } from './swiper.directive';
 
-import { SwiperConfig, SwiperConfigInterface, SwiperRenderBulletFunction } from './swiper.interfaces';
+import { SwiperConfig, SwiperConfigInterface } from './swiper.interfaces';
 
 @Component({
   selector: 'swiper',
@@ -98,7 +98,6 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
   @Output('slideChangeTransitionStart' ) S_SLIDECHANGETRANSITIONSTART     = new EventEmitter<any>();
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private zone: NgZone,
-    private renderer: Renderer2, private elementRef: ElementRef,
     @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperConfigInterface) {}
 
   ngAfterViewInit() {
