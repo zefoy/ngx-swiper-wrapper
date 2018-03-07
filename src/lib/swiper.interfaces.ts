@@ -174,7 +174,7 @@ export interface SwiperConfigInterface {
   fadeEffect?: SwiperFadeEffectInterface,
   flipEffect?: SwiperFlipEffectInterface,
   cubeEffect?: SwiperCubeEffectInterface,
-  coverflowEffect?: SwiperCoverflowEffectInterface
+  coverflowEffect?: SwiperCoverflowEffectInterface,
 
   // Components
   parallax?: boolean,
