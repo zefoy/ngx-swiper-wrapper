@@ -3,7 +3,7 @@ import * as Swiper from 'swiper/dist/js/swiper.js';
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID,
   Input, Output, EventEmitter,
-  AfterViewInit, DoCheck, OnDestroy, OnChanges,
+  AfterViewInit, OnDestroy, DoCheck, OnChanges,
   Directive, NgZone, ElementRef, Optional, Inject,
   SimpleChanges, KeyValueDiffer, KeyValueDiffers } from '@angular/core';
 
@@ -15,7 +15,7 @@ import { SwiperEvents, SwiperConfig, SwiperConfigInterface } from './swiper.inte
   selector: '[swiper]',
   exportAs: 'ngxSwiper'
 })
-export class SwiperDirective implements AfterViewInit, DoCheck, OnDestroy, OnChanges {
+export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnChanges {
   private instance: any;
 
   private configDiff: KeyValueDiffer<string, any>;
@@ -89,7 +89,7 @@ export class SwiperDirective implements AfterViewInit, DoCheck, OnDestroy, OnCha
     private elementRef: ElementRef, private differs: KeyValueDiffers,
     @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperConfigInterface) {}
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
@@ -171,7 +171,17 @@ export class SwiperDirective implements AfterViewInit, DoCheck, OnDestroy, OnCha
     }
   }
 
-  ngDoCheck() {
+  ngOnDestroy(): void {
+    if (this.instance) {
+      this.zone.runOutsideAngular(() => {
+        this.instance.destroy(true, this.instance.initialized || false);
+      });
+
+      this.instance = null;
+    }
+  }
+
+  ngDoCheck(): void {
     if (this.configDiff) {
       const changes = this.configDiff.diff(this.config || {});
 
@@ -187,17 +197,7 @@ export class SwiperDirective implements AfterViewInit, DoCheck, OnDestroy, OnCha
     }
   }
 
-  ngOnDestroy() {
-    if (this.instance) {
-      this.zone.runOutsideAngular(() => {
-        this.instance.destroy(true, this.instance.initialized || false);
-      });
-
-      this.instance = null;
-    }
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (this.instance && changes['disabled']) {
       if (changes['disabled'].currentValue !== changes['disabled'].previousValue) {
         if (changes['disabled'].currentValue === true) {
@@ -221,7 +221,7 @@ export class SwiperDirective implements AfterViewInit, DoCheck, OnDestroy, OnCha
     return this.instance;
   }
 
-  public init() {
+  public init(): void {
     if (this.instance) {
       this.zone.runOutsideAngular(() => {
         this.instance.init();
@@ -229,7 +229,7 @@ export class SwiperDirective implements AfterViewInit, DoCheck, OnDestroy, OnCha
     }
   }
 
-  public update() {
+  public update(): void {
     setTimeout(() => {
       if (this.instance) {
         this.zone.runOutsideAngular(() => {
@@ -239,7 +239,7 @@ export class SwiperDirective implements AfterViewInit, DoCheck, OnDestroy, OnCha
     }, 0);
   }
 
-  public getIndex(real?: boolean) {
+  public getIndex(real?: boolean): number {
     if (!this.instance) {
       return this.initialIndex;
     } else {
@@ -247,7 +247,7 @@ export class SwiperDirective implements AfterViewInit, DoCheck, OnDestroy, OnCha
     }
   }
 
-  public setIndex(index: number, speed?: number, silent?: boolean) {
+  public setIndex(index: number, speed?: number, silent?: boolean): void {
     if (!this.instance) {
       this.initialIndex = index;
     } else {
@@ -263,7 +263,7 @@ export class SwiperDirective implements AfterViewInit, DoCheck, OnDestroy, OnCha
     }
   }
 
-  public prevSlide(speed?: number, silent?: boolean) {
+  public prevSlide(speed?: number, silent?: boolean): void {
     if (this.instance) {
       this.zone.runOutsideAngular(() => {
         this.instance.slidePrev(speed, !silent);
@@ -271,7 +271,7 @@ export class SwiperDirective implements AfterViewInit, DoCheck, OnDestroy, OnCha
     }
   }
 
-  public nextSlide(speed?: number, silent?: boolean) {
+  public nextSlide(speed?: number, silent?: boolean): void {
     if (this.instance) {
       this.zone.runOutsideAngular(() => {
         this.instance.slideNext(speed, !silent);
@@ -279,7 +279,7 @@ export class SwiperDirective implements AfterViewInit, DoCheck, OnDestroy, OnCha
     }
   }
 
-  public stopAutoplay(reset?: boolean) {
+  public stopAutoplay(reset?: boolean): void {
     if (reset) {
       this.setIndex(0);
     }
@@ -291,7 +291,7 @@ export class SwiperDirective implements AfterViewInit, DoCheck, OnDestroy, OnCha
     }
   }
 
-  public startAutoplay(reset?: boolean) {
+  public startAutoplay(reset?: boolean): void {
     if (reset) {
       this.setIndex(0);
     }

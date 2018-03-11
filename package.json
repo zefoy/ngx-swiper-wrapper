@@ -3,7 +3,7 @@
   "description": "Angular wrapper library for Swiper",
   "bugs": "https://github.com/zefoy/ngx-swiper-wrapper/issues",
   "license": "MIT",
-  "version": "5.3.8",
+  "version": "6.0.0",
   "main": "./bundles/ngx-swiper-wrapper.umd.js",
   "module": "./dist/ngx-swiper-wrapper.es5.js",
   "typings": "./dist/ngx-swiper-wrapper.d.ts",
@@ -35,14 +35,14 @@
     "url": "https://github.com/zefoy/ngx-swiper-wrapper.git"
   },
   "dependencies": {
-    "swiper": "^4.1.6"
+    "swiper": "^4.1.0"
   },
   "devDependencies": {
-    "@angular/common": "^5.2.0",
-    "@angular/compiler": "^5.2.0",
-    "@angular/compiler-cli": "^5.2.0",
-    "@angular/core": "^5.2.0",
-    "@angular/platform-browser": "^5.2.0",
+    "@angular/common": "6.0.0-beta.6",
+    "@angular/compiler": "6.0.0-beta.6",
+    "@angular/compiler-cli": "6.0.0-beta.6",
+    "@angular/core": "6.0.0-beta.6",
+    "@angular/platform-browser": "6.0.0-beta.6",
     "@types/node": "^8.5.0",
     "angular-inliner-cli": "^1.2.0",
     "codelyzer": "^4.1.0",
@@ -54,7 +54,7 @@
     "rollup-plugin-sourcemaps": "^0.4.0",
     "rxjs": "^5.5.0",
     "stylelint": "^9.1.0",
-    "stylelint-config-standard": "^18.1.0",
+    "stylelint-config-standard": "^18.2.0",
     "stylelint-order": "^0.8.0",
     "tslint": "^5.9.0",
     "typescript": "~2.6.0",

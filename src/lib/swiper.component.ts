@@ -100,7 +100,7 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private zone: NgZone,
     @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperConfigInterface) {}
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
@@ -118,7 +118,7 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.mo) {
       this.mo.disconnect();
     }
@@ -128,7 +128,7 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  public getConfig() {
+  public getConfig(): SwiperConfigInterface {
     this.swiperConfig = new SwiperConfig(this.defaults);
 
     this.swiperConfig.assign(this.config); // Custom configuration
@@ -172,7 +172,7 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
     return this.config;
   }
 
-  private updateClasses() {
+  private updateClasses(): void {
     let updateNeeded = false;
 
     const children = this.swiperSlides.nativeElement.children;

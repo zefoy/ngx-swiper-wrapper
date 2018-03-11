@@ -52,19 +52,19 @@ export class AppComponent {
 
   constructor() {}
 
-  public toggleType() {
+  public toggleType(): void {
     this.type = (this.type === 'component') ? 'directive' : 'component';
   }
 
-  public toggleDisabled() {
+  public toggleDisabled(): void {
     this.disabled = !this.disabled;
   }
 
-  public toggleDirection() {
+  public toggleDirection(): void {
     this.config.direction = (this.config.direction === 'horizontal') ? 'vertical' : 'horizontal';
   }
 
-  public toggleSlidesPerView() {
+  public toggleSlidesPerView(): void {
     if (this.config.slidesPerView !== 1) {
       this.config.slidesPerView = 1;
     } else {
@@ -72,7 +72,7 @@ export class AppComponent {
     }
   }
 
-  public toggleOverlayControls() {
+  public toggleOverlayControls(): void {
     if (this.config.navigation) {
       this.config.scrollbar = false;
       this.config.navigation = false;
@@ -97,15 +97,15 @@ export class AppComponent {
     }
   }
 
-  public toggleKeyboardControl() {
+  public toggleKeyboardControl(): void {
     this.config.keyboard = !this.config.keyboard;
   }
 
-  public toggleMouseWheelControl() {
+  public toggleMouseWheelControl(): void {
     this.config.mousewheel = !this.config.mousewheel;
   }
 
-  public onIndexChange(index: number) {
+  public onIndexChange(index: number): void {
     console.log('Swiper index: ', index);
   }
 }
