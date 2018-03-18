@@ -1,13 +1,14 @@
+import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { PLATFORM_ID,
-  Component, AfterViewInit, OnDestroy, Input, Output, EventEmitter, ViewChild,
-  NgZone, ElementRef, Optional, Inject, ViewEncapsulation } from '@angular/core';
+import { NgZone, Inject, Optional, ElementRef, Component,
+  AfterViewInit, OnDestroy, Input, Output, EventEmitter,
+  ViewChild, ViewEncapsulation } from '@angular/core';
 
 import { SWIPER_CONFIG } from './swiper.interfaces';
 
 import { SwiperDirective } from './swiper.directive';
 
-import { SwiperConfig, SwiperConfigInterface } from './swiper.interfaces';
+import { SwiperEvents, SwiperConfig, SwiperConfigInterface } from './swiper.interfaces';
 
 @Component({
   selector: 'swiper',
@@ -97,7 +98,7 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
   @Output('slideChangeTransitionEnd'   ) S_SLIDECHANGETRANSITIONEND       = new EventEmitter<any>();
   @Output('slideChangeTransitionStart' ) S_SLIDECHANGETRANSITIONSTART     = new EventEmitter<any>();
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private zone: NgZone,
+  constructor(private zone: NgZone, @Inject(PLATFORM_ID) private platformId: Object,
     @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperConfigInterface) {}
 
   ngAfterViewInit(): void {
@@ -116,6 +117,18 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
         this.mo.observe(this.swiperSlides.nativeElement, { childList: true });
       }
     });
+
+    window.setTimeout(() => {
+      if (this.directiveRef) {
+        this.directiveRef.indexChange = this.indexChange;
+
+        SwiperEvents.forEach((eventName: string) => {
+          eventName = `S_${eventName.replace('swiper', '').toUpperCase()}`;
+
+          this.directiveRef[eventName] = this[eventName];
+        });
+      }
+    }, 0);
   }
 
   ngOnDestroy(): void {

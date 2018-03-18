@@ -1,10 +1,9 @@
 import * as Swiper from 'swiper/dist/js/swiper.js';
 
+import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { PLATFORM_ID,
-  Input, Output, EventEmitter,
-  AfterViewInit, OnDestroy, DoCheck, OnChanges,
-  Directive, NgZone, ElementRef, Optional, Inject,
+import { NgZone, Inject, Optional, ElementRef, Directive,
+  AfterViewInit, OnDestroy, DoCheck, OnChanges, Input, Output, EventEmitter,
   SimpleChanges, KeyValueDiffer, KeyValueDiffers } from '@angular/core';
 
 import { SWIPER_CONFIG } from './swiper.interfaces';
@@ -156,11 +155,9 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
           args = args[0];
         }
 
-        if (this[`S_${eventName.toUpperCase()}`]) {
-          this.zone.run(() => {
-            this[`S_${eventName.toUpperCase()}`].emit(args);
-          });
-        }
+        this.zone.run(() => {
+          this[`S_${eventName.toUpperCase()}`].emit(args);
+        });
       });
     });
 
