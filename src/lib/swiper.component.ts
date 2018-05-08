@@ -13,8 +13,8 @@ import { SwiperEvents, SwiperConfig, SwiperConfigInterface } from './swiper.inte
 @Component({
   selector: 'swiper',
   exportAs: 'ngxSwiper',
-  templateUrl: './lib/swiper.component.html',
-  styleUrls: [ './lib/swiper.component.css' ],
+  templateUrl: '../../dist/lib/swiper.component.html',
+  styleUrls: [ '../../dist/lib/swiper.component.css' ],
   encapsulation: ViewEncapsulation.None
 })
 export class SwiperComponent implements AfterViewInit, OnDestroy {
