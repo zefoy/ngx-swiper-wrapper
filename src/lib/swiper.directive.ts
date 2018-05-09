@@ -155,8 +155,7 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
           args = args[0];
         }
 
-        const eventEmitter: EventEmitter<any> = this[`S_${eventName.toUpperCase()}`];
-        if (eventEmitter.observers.length > 0) {
+        if (this[`S_${eventName.toUpperCase()}`].observers.length > 0) {
           this.zone.run(() => {
             this[`S_${eventName.toUpperCase()}`].emit(args);
           });
