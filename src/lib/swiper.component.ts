@@ -2,13 +2,12 @@ import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { NgZone, Inject, Optional, ElementRef, Component,
   AfterViewInit, OnDestroy, Input, Output, EventEmitter,
-  ViewChild, ViewEncapsulation } from '@angular/core';
-
-import { SWIPER_CONFIG } from './swiper.interfaces';
+  ViewChild, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
 
 import { SwiperDirective } from './swiper.directive';
 
-import { SwiperEvents, SwiperConfig, SwiperConfigInterface } from './swiper.interfaces';
+import { SWIPER_CONFIG, SwiperConfig, SwiperConfigInterface,
+  SwiperEvent, SwiperEvents } from './swiper.interfaces';
 
 @Component({
   selector: 'swiper',
@@ -18,34 +17,34 @@ import { SwiperEvents, SwiperConfig, SwiperConfigInterface } from './swiper.inte
   encapsulation: ViewEncapsulation.None
 })
 export class SwiperComponent implements AfterViewInit, OnDestroy {
-  private mo: any;
+  private mo: MutationObserver | null = null;
 
-  public swiperConfig: any;
-  public paginationBackup: any;
-  public paginationConfig: any;
+  public swiperConfig: any = null;
+  public paginationBackup: any = null;
+  public paginationConfig: any = null;
 
-  @Input() index: number = null;
+  @Input() index: number | null = null;
 
   @Input() disabled: boolean = false;
 
-  @Input() config: SwiperConfigInterface;
+  @Input() config?: SwiperConfigInterface;
 
   @Input() useSwiperClass: boolean = true;
 
   @Output() indexChange = new EventEmitter<number>();
 
-  @ViewChild('swiperSlides') swiperSlides: ElementRef;
+  @ViewChild('swiperSlides') swiperSlides?: ElementRef;
 
-  @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
+  @ViewChild(SwiperDirective) directiveRef?: SwiperDirective;
 
   get isAtLast(): boolean {
-    return (!this.directiveRef || !this.directiveRef.swiper) ?
-      false : this.directiveRef.swiper['isEnd'];
+    return (!this.directiveRef || !this.directiveRef.swiper()) ?
+      false : this.directiveRef.swiper()['isEnd'];
   }
 
   get isAtFirst(): boolean {
-    return (!this.directiveRef || !this.directiveRef.swiper) ?
-      false : this.directiveRef.swiper['isBeginning'];
+    return (!this.directiveRef || !this.directiveRef.swiper()) ?
+      false : this.directiveRef.swiper()['isBeginning'];
   }
 
   @Output('init'                       ) S_INIT                           = new EventEmitter<any>();
@@ -98,7 +97,8 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
   @Output('slideChangeTransitionEnd'   ) S_SLIDECHANGETRANSITIONEND       = new EventEmitter<any>();
   @Output('slideChangeTransitionStart' ) S_SLIDECHANGETRANSITIONSTART     = new EventEmitter<any>();
 
-  constructor(private zone: NgZone, @Inject(PLATFORM_ID) private platformId: Object,
+  constructor(private zone: NgZone, private cdRef: ChangeDetectorRef,
+    @Inject(PLATFORM_ID) private platformId: Object,
     @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperConfigInterface) {}
 
   ngAfterViewInit(): void {
@@ -109,7 +109,7 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
     this.zone.runOutsideAngular(() => {
       this.updateClasses();
 
-      if (typeof MutationObserver !== 'undefined') {
+      if (this.swiperSlides && typeof MutationObserver !== 'undefined') {
         this.mo = new MutationObserver((mutations) => {
           this.updateClasses();
         });
@@ -122,10 +122,15 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
       if (this.directiveRef) {
         this.directiveRef.indexChange = this.indexChange;
 
-        SwiperEvents.forEach((eventName: string) => {
-          eventName = `S_${eventName.replace('swiper', '').toUpperCase()}`;
+        SwiperEvents.forEach((eventName: SwiperEvent) => {
+          if (this.directiveRef) {
+            const output = `S_${eventName.replace('swiper', '').toUpperCase()}`;
 
-          this.directiveRef[eventName] = this[eventName];
+            const directiveOutput = output as keyof SwiperDirective;
+            const componentOutput = output as keyof SwiperComponent;
+
+            this.directiveRef[directiveOutput] = this[componentOutput] as EventEmitter<any>;
+          }
         });
       }
     }, 0);
@@ -160,7 +165,7 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
           el: '.swiper-pagination',
 
           renderBullet: (index: number, className: string) => {
-            const children = this.swiperSlides.nativeElement.children;
+            const children = this.swiperSlides ? this.swiperSlides.nativeElement.children : [];
 
             let bullet = `<span class="${className} ${className}-middle" index="${index}"></span>`;
 
@@ -182,24 +187,28 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
       }
     }
 
-    return this.config;
+    return this.config as SwiperConfigInterface;
   }
 
   private updateClasses(): void {
-    let updateNeeded = false;
+    if (this.swiperSlides) {
+      let updateNeeded = false;
 
-    const children = this.swiperSlides.nativeElement.children;
+      const children = this.swiperSlides.nativeElement.children;
 
-    for (let i = 0; i < children.length; i++) {
-      if (!children[i].classList.contains('swiper-slide')) {
-        updateNeeded = true;
+      for (let i = 0; i < children.length; i++) {
+        if (!children[i].classList.contains('swiper-slide')) {
+          updateNeeded = true;
 
-        children[i].classList.add('swiper-slide');
+          children[i].classList.add('swiper-slide');
+        }
+      }
+
+      if (updateNeeded && this.directiveRef) {
+        this.directiveRef.update();
       }
     }
 
-    if (updateNeeded) {
-      this.directiveRef.update();
-    }
+    this.cdRef.detectChanges();
   }
 }

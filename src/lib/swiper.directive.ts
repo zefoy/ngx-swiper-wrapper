@@ -6,9 +6,8 @@ import { NgZone, Inject, Optional, ElementRef, Directive,
   AfterViewInit, OnDestroy, DoCheck, OnChanges, Input, Output, EventEmitter,
   SimpleChanges, KeyValueDiffer, KeyValueDiffers } from '@angular/core';
 
-import { SWIPER_CONFIG } from './swiper.interfaces';
-
-import { SwiperEvents, SwiperConfig, SwiperConfigInterface } from './swiper.interfaces';
+import { SWIPER_CONFIG, SwiperConfig, SwiperConfigInterface,
+  SwiperEvent, SwiperEvents } from './swiper.interfaces';
 
 @Directive({
   selector: '[swiper]',
@@ -17,9 +16,9 @@ import { SwiperEvents, SwiperConfig, SwiperConfigInterface } from './swiper.inte
 export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnChanges {
   private instance: any;
 
-  private configDiff: KeyValueDiffer<string, any>;
+  private initialIndex: number | null = null;
 
-  private initialIndex: number;
+  private configDiff: KeyValueDiffer<string, any> | null = null;
 
   @Input()
   set index(index: number) {
@@ -30,7 +29,7 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
 
   @Input() disabled: boolean = false;
 
-  @Input('swiper') config: SwiperConfigInterface;
+  @Input('swiper') config?: SwiperConfigInterface;
 
   @Output() indexChange = new EventEmitter<number>();
 
@@ -127,7 +126,7 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
       this.initialIndex = null;
     }
 
-    params['on'] = {
+    params.on = {
       slideChange: () => {
         this.zone.run(() => {
           if (this.instance) {
@@ -146,18 +145,23 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
     }
 
     // Add native Swiper event handling
-    SwiperEvents.forEach((eventName) => {
-      eventName = eventName.replace('swiper', '');
-      eventName = eventName.charAt(0).toLowerCase() + eventName.slice(1);
+    SwiperEvents.forEach((eventName: SwiperEvent) => {
+      let swiperEvent = eventName.replace('swiper', '');
 
-      this.instance.on(eventName, (...args) => {
+      swiperEvent = eventName.charAt(0).toLowerCase() + eventName.slice(1);
+
+      this.instance.on(swiperEvent, (...args: any[]) => {
         if (args.length === 1) {
           args = args[0];
         }
 
-        if (this[`S_${eventName.toUpperCase()}`].observers.length > 0) {
+        const output = `S_${swiperEvent.toUpperCase()}`;
+
+        const emitter = this[output as keyof SwiperDirective] as EventEmitter<any>;
+
+        if (emitter.observers.length > 0) {
           this.zone.run(() => {
-            this[`S_${eventName.toUpperCase()}`].emit(args);
+            emitter.emit(args);
           });
         }
       });
@@ -240,7 +244,7 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
 
   public getIndex(real?: boolean): number {
     if (!this.instance) {
-      return this.initialIndex;
+      return this.initialIndex || 0;
     } else {
       return real ? this.instance.realIndex : this.instance.activeIndex;
     }

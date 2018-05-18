@@ -47,8 +47,8 @@ export class AppComponent {
     hideOnClick: false
   };
 
-  @ViewChild(SwiperComponent) componentRef: SwiperComponent;
-  @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
+  @ViewChild(SwiperComponent) componentRef?: SwiperComponent;
+  @ViewChild(SwiperDirective) directiveRef?: SwiperDirective;
 
   constructor() {}
 
@@ -90,9 +90,9 @@ export class AppComponent {
       this.config.navigation = true;
     }
 
-    if (this.type === 'directive') {
+    if (this.type === 'directive' && this.directiveRef) {
       this.directiveRef.setIndex(0);
-    } else {
+    } else if (this.type === 'component' && this.componentRef && this.componentRef.directiveRef) {
       this.componentRef.directiveRef.setIndex(0);
     }
   }
