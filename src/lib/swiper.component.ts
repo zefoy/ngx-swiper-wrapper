@@ -120,6 +120,8 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
 
     window.setTimeout(() => {
       if (this.directiveRef) {
+        this.S_INIT.emit();
+
         this.directiveRef.indexChange = this.indexChange;
 
         SwiperEvents.forEach((eventName: SwiperEvent) => {
