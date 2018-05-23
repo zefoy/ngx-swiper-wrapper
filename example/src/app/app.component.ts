@@ -108,4 +108,8 @@ export class AppComponent {
   public onIndexChange(index: number): void {
     console.log('Swiper index: ', index);
   }
+
+  public onTransitionEnd(event: any[]): void {
+    console.log('Swiper event: ', event);
+  }
 }
