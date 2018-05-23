@@ -28,7 +28,7 @@
       <div class="box-title">Swiper</div>
 
       <div class="content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
-        <swiper *ngIf="type == 'component' && show" class="swiper-container" fxFlex="auto" [config]="config" [disabled]="disabled" (indexChange)="onIndexChange($event)" (swiperTransitionEnd)="onTransitionEnd($event)">
+        <swiper *ngIf="type == 'component' && show" class="swiper-container" fxFlex="auto" [config]="config" [disabled]="disabled" (indexChange)="onIndexChange($event)" (swiperTransitionStart)="onSwiperEvent('transitionStart')" (swiperTransitionEnd)="onSwiperEvent('transitionEnd')">
           <div *ngFor="let slide of slides" class="swiper-slide">
             <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
               {{slide}}
@@ -36,7 +36,7 @@
           </div>
         </swiper>
 
-        <div *ngIf="type == 'directive' && show" class="swiper-container" [disabled]="disabled" [swiper]="config" (indexChange)="onIndexChange($event)" (swiperTransitionEnd)="onTransitionEnd($event)">
+        <div *ngIf="type == 'directive' && show" class="swiper-container" [disabled]="disabled" [swiper]="config" (indexChange)="onIndexChange($event)" (swiperTransitionStart)="onSwiperEvent('transitionStart')" (swiperTransitionEnd)="onSwiperEvent('transitionEnd')">
           <div class="swiper-wrapper">
             <div *ngFor="let slide of slides" class="swiper-slide">
               <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>

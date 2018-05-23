@@ -148,7 +148,7 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
     SwiperEvents.forEach((eventName: SwiperEvent) => {
       let swiperEvent = eventName.replace('swiper', '');
 
-      swiperEvent = eventName.charAt(0).toLowerCase() + eventName.slice(1);
+      swiperEvent = swiperEvent.charAt(0).toLowerCase() + swiperEvent.slice(1);
 
       this.instance.on(swiperEvent, (...args: any[]) => {
         if (args.length === 1) {

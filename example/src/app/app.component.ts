@@ -109,7 +109,7 @@ export class AppComponent {
     console.log('Swiper index: ', index);
   }
 
-  public onTransitionEnd(event: any[]): void {
+  public onSwiperEvent(event: string): void {
     console.log('Swiper event: ', event);
   }
 }
