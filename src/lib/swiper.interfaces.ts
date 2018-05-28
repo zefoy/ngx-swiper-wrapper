@@ -498,7 +498,7 @@ export class SwiperConfig implements SwiperConfigInterface {
   }
 }
 
-export type SwiperRenderSlideFunction = (index: number) => HTMLElement;
+export type SwiperRenderSlideFunction = (slide: any, index: number) => HTMLElement;
 export type SwiperRenderExternalFunction = (data: any) => void;
 
 export type SwiperRenderCustomFunction = (current: number, total: number) => string;
