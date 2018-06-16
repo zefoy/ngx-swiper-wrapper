@@ -35,7 +35,7 @@
     "url": "https://github.com/zefoy/ngx-swiper-wrapper.git"
   },
   "dependencies": {
-    "swiper": "^4.2.0"
+    "swiper": "^4.3.0"
   },
   "devDependencies": {
     "@angular/cli": "^6.0.0",
@@ -47,16 +47,17 @@
     "@angular-devkit/build-angular": "^0.6.0",
     "@angular/platform-browser": "^6.0.0",
     "@types/node": "^8.10.0",
+    "@types/swiper": "^4.2.0",
     "codelyzer": "^4.3.0",
     "core-js": "^2.5.0",
     "cpx": "^1.5.0",
-    "ng-packagr": "^2.4.0",
+    "ng-packagr": "^3.0.0",
     "node-sass": "^4.9.0",
-    "rollup": "^0.58.0",
+    "rollup": "^0.60.0",
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-sourcemaps": "^0.4.0",
-    "rxjs": "^6.1.0",
-    "stylelint": "^9.2.0",
+    "rxjs": "^6.2.0",
+    "stylelint": "^9.3.0",
     "stylelint-config-standard": "^18.2.0",
     "stylelint-order": "^0.8.0",
     "tslint": "^5.10.0",
