@@ -26,6 +26,7 @@ export class AppComponent {
   public disabled: boolean = false;
 
   public config: SwiperConfigInterface = {
+    a11y: true,
     direction: 'horizontal',
     slidesPerView: 1,
     keyboard: true,
