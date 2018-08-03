@@ -1,0 +1,119 @@
+swiper[fxflex] {
+  display: flex;
+  flex-direction: inherit;
+  min-width: 0;
+  min-height: 0;
+
+  -webkit-box-direction: inherit;
+  -webkit-box-orient: inherit;
+}
+
+swiper[fxflex] > .swiper.s-wrapper {
+  -ms-flex: 1 1 auto;
+
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+
+  -webkit-box-flex: 1;
+}
+
+swiper > .swiper.s-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+swiper > .swiper.s-wrapper .swiper-wrapper .swiper-slide {
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+swiper > .swiper.s-wrapper .swiper-pagination {
+  pointer-events: none;
+}
+
+swiper > .swiper.s-wrapper .swiper-pagination .swiper-pagination-handle {
+  position: relative;
+
+  display: inline-block;
+  padding: 4px;
+  margin: 2px;
+
+  cursor: pointer;
+  pointer-events: all;
+}
+
+swiper > .swiper.s-wrapper .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet {
+  display: inline-block;
+
+  margin: 0;
+
+  pointer-events: none;
+}
+
+swiper > .swiper.s-wrapper .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet.swiper-pagination-bullet-last,
+swiper > .swiper.s-wrapper .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet.swiper-pagination-bullet-first {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+swiper > .swiper.s-wrapper.swiper-container-vertical > .swiper-button-prev {
+  top: 10px;
+  left: 50%;
+
+  margin-top: 0;
+  margin-left: -13px;
+
+  transform: rotate(90deg);
+}
+
+swiper > .swiper.s-wrapper.swiper-container-vertical > .swiper-button-next {
+  top: auto;
+  bottom: 10px;
+  left: 50%;
+
+  margin-top: 0;
+  margin-left: -13px;
+
+  transform: rotate(90deg);
+}
+
+swiper > .swiper.s-wrapper.swiper-container-vertical > .swiper-scrollbar {
+  width: 8px;
+
+  transition: width 250ms ease-in-out;
+}
+
+swiper > .swiper.s-wrapper.swiper-container-vertical > .swiper-scrollbar:hover {
+  width: 16px;
+}
+
+swiper > .swiper.s-wrapper.swiper-container-vertical > .swiper-pagination .swiper-pagination-handle {
+  display: block;
+}
+
+swiper > .swiper.s-wrapper.swiper-container-vertical > .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet {
+  display: inline-block;
+}
+
+swiper > .swiper.s-wrapper.swiper-container-vertical > .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet.swiper-pagination-bullet-last,
+swiper > .swiper.s-wrapper.swiper-container-vertical > .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet.swiper-pagination-bullet-first {
+  margin: 0 -1px;
+}
+
+swiper > .swiper.s-wrapper.swiper-container-horizontal > .swiper-scrollbar {
+  height: 8px;
+
+  transition: height 250ms ease-in-out;
+}
+
+swiper > .swiper.s-wrapper.swiper-container-horizontal > .swiper-scrollbar:hover {
+  height: 16px;
+}
+
+swiper > .swiper.s-wrapper.swiper-container-horizontal > .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet.swiper-pagination-bullet-last,
+swiper > .swiper.s-wrapper.swiper-container-horizontal > .swiper-pagination .swiper-pagination-handle .swiper-pagination-bullet.swiper-pagination-bullet-first {
+  margin: -1px 0;
+}
