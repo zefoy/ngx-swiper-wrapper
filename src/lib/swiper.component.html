@@ -8,5 +8,5 @@
   <div class="swiper-button-prev" [hidden]="swiperConfig?.navigation !== true && swiperConfig?.navigation?.prevEl !== '.swiper-button-prev'" [attr.disabled]="isAtFirst || null"></div>
   <div class="swiper-button-next" [hidden]="swiperConfig?.navigation !== true && swiperConfig?.navigation?.nextEl !== '.swiper-button-next'" [attr.disabled]="isAtLast || null"></div>
 
-  <div class="swiper-pagination" [hidden]="swiperConfig?.pagination !== true && swiperConfig?.pagination?.el !== '.swiper-pagination'" (click)="directiveRef?.setIndex($event.target.getAttribute('index'))" (keyup.enter)="directiveRef?.setIndex($event.target.getAttribute('index'))"></div>
+  <div class="swiper-pagination" [hidden]="swiperConfig?.pagination !== true && swiperConfig?.pagination?.el !== '.swiper-pagination'" (click)="onPaginationClick($event.target.getAttribute('index'))" (keyup.enter)="onPaginationClick($event.target.getAttribute('index'))"></div>
 </div>

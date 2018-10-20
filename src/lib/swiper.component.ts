@@ -216,4 +216,14 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
 
     this.cdRef.detectChanges();
   }
+
+  public onPaginationClick(index: number): void {
+    if (this.config && this.directiveRef && (this.config.pagination === true ||
+       (this.config.pagination && typeof this.config.pagination === 'object' &&
+       (!this.config.pagination.type || this.config.pagination.type === 'bullets') &&
+       (this.config.pagination.clickable && this.config.pagination.el === '.swiper-pagination'))))
+    {
+      this.directiveRef.setIndex(index);
+    }
+  }
 }
