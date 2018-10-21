@@ -113,7 +113,7 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
       this.updateClasses();
 
       if (this.swiperSlides && typeof MutationObserver !== 'undefined') {
-        this.mo = new MutationObserver((mutations) => {
+        this.mo = new MutationObserver(() => {
           this.updateClasses();
         });
 

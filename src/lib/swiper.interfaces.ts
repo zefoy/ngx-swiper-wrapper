@@ -95,6 +95,7 @@ export interface SwiperConfigInterface {
   slidesOffsetBefore?: number,
   slidesOffsetAfter?: number,
   normalizeSlideIndex?: boolean,
+  centerInsufficientSlides?: boolean,
 
   // Grab cursor
   grabCursor?: boolean,
@@ -161,6 +162,7 @@ export interface SwiperConfigInterface {
 
   // Breakpoints
   breakpoints?: SwiperBreakpointsInterface,
+  breakpointsInverse?: SwiperBreakpointsInterface,
 
   // Observer
   observer?: boolean,
@@ -191,6 +193,7 @@ export interface SwiperConfigInterface {
   a11y?: boolean | SwiperA11YInterface,
   lazy?: boolean | SwiperLazyInterface,
   zoom?: boolean | SwiperZoomInterface,
+  thumbs?: boolean | SwiperThumbsInterface,
   history?: boolean | SwiperHistoryInterface,
   virtual?: boolean | SwiperVirtualInterface,
   autoplay?: boolean | SwiperAutoplayInterface,
@@ -230,6 +233,12 @@ export interface SwiperZoomInterface {
   zoomedSlideClass?: string
 }
 
+export interface SwiperThumbsInterface {
+  swiper?: any,
+  slideThumbActiveClass?: string,
+  thumbsContainerClass?: string
+}
+
 export interface SwiperHistoryInterface {
   replaceState?: boolean,
   key?: string
@@ -238,6 +247,8 @@ export interface SwiperHistoryInterface {
 export interface SwiperVirtualInterface {
   slides?: any[],
   cache?: boolean,
+  addSliderBefore?: number,
+  addSliderAfter?: number,
   renderSlide?: SwiperRenderSlideFunction,
   renderExternal?: SwiperRenderExternalFunction
 }
@@ -370,6 +381,7 @@ export class SwiperConfig implements SwiperConfigInterface {
   public slidesOffsetBefore?: number;
   public slidesOffsetAfter?: number;
   public normalizeSlideIndex?: boolean;
+  public centerInsufficientSlides?: boolean;
 
   // Grab cursor
   public grabCursor?: boolean;
@@ -436,6 +448,7 @@ export class SwiperConfig implements SwiperConfigInterface {
 
   // Breakpoints
   public breakpoints?: any;
+  public breakpointsInverse?: any;
 
   // Observer
   public observer?: boolean;
