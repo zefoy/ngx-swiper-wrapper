@@ -11,9 +11,9 @@
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,
     "enableResourceInlining": true,
-    "fullTemplateTypeCheck": true,
     "flatModuleId": "ngx-swiper-wrapper",
     "flatModuleOutFile": "ngx-swiper-wrapper.js",
+    "fullTemplateTypeCheck": true,
     "skipTemplateCodegen": true,
     "strictInjectionParameters": true,
     "strictMetadataEmit": true
