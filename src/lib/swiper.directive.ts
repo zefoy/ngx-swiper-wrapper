@@ -120,7 +120,6 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
       params.allowSlideNext = false;
     }
 
-    if (this.initialIndex != null) {
       params.initialSlide = this.initialIndex;
 
       this.initialIndex = null;
@@ -129,7 +128,7 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
     params.on = {
       slideChange: () => {
         this.zone.run(() => {
-          if (this.instance) {
+          if (this.instance && this.indexChange.observers.length) {
             this.indexChange.emit(this.instance.realIndex);
           }
         });
