@@ -119,7 +119,8 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
       params.allowSlidePrev = false;
       params.allowSlideNext = false;
     }
-
+    
+    if (this.initialIndex != null) {
       params.initialSlide = this.initialIndex;
 
       this.initialIndex = null;
