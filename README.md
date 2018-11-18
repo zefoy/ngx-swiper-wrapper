@@ -95,6 +95,7 @@ Simply replace the element that would ordinarily be passed to `Swiper` with the 
 
 [index]                 // Can be used to set the active slide index.
 [disabled]              // Disables changing of slides (locks the Swiper).
+[performance]              // Toggle EventEmitters into performance mode (they run outside angular zone, and don't cause force change detection)
 
 [useSwiperClass]        // Use 'swiper' class (use provided default styles).
 

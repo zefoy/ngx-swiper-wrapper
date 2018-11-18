@@ -29,6 +29,8 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
 
   @Input() disabled: boolean = false;
 
+  @Input() performance: boolean = false;
+
   @Input('swiper') config?: SwiperConfigInterface;
 
   @Output() indexChange = new EventEmitter<number>();
@@ -83,9 +85,13 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
   @Output('slideChangeTransitionEnd'   ) S_SLIDECHANGETRANSITIONEND       = new EventEmitter<any>();
   @Output('slideChangeTransitionStart' ) S_SLIDECHANGETRANSITIONSTART     = new EventEmitter<any>();
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private zone: NgZone,
-    private elementRef: ElementRef, private differs: KeyValueDiffers,
-    @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperConfigInterface) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private zone: NgZone,
+    private elementRef: ElementRef,
+    private differs: KeyValueDiffers,
+    @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperConfigInterface
+  ) {}
 
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) {
@@ -120,6 +126,7 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
       params.allowSlideNext = false;
     }
 
+    if (this.initialIndex != null) {
       params.initialSlide = this.initialIndex;
 
       this.initialIndex = null;
@@ -127,11 +134,9 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
 
     params.on = {
       slideChange: () => {
-        this.zone.run(() => {
-          if (this.instance && this.indexChange.observers.length) {
-            this.indexChange.emit(this.instance.realIndex);
-          }
-        });
+        if (this.instance && this.indexChange.observers.length) {
+          this.emit(this.indexChange, this.instance.realIndex);
+        }
       }
     };
 
@@ -139,8 +144,8 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
       this.instance = new Swiper(this.elementRef.nativeElement, params);
     });
 
-    if (params.init !== false) {
-      this.S_INIT.emit(this.instance);
+    if (params.init !== false && this.S_INIT.observers.length) {
+      this.emit(this.S_INIT, this.instance);
     }
 
     // Add native Swiper event handling
@@ -155,13 +160,10 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
         }
 
         const output = `S_${swiperEvent.toUpperCase()}`;
-
         const emitter = this[output as keyof SwiperDirective] as EventEmitter<any>;
 
-        if (emitter.observers.length > 0) {
-          this.zone.run(() => {
-            emitter.emit(args);
-          });
+        if (emitter.observers.length) {
+          this.emit(emitter, args);
         }
       });
     });
@@ -170,6 +172,14 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
       this.configDiff = this.differs.find(this.config || {}).create();
 
       this.configDiff.diff(this.config || {});
+    }
+  }
+
+  emit(emitter: EventEmitter<any>, value: any) {
+    if (!this.performance) {
+      this.zone.run(() => emitter.emit(value));
+    } else {
+      emitter.emit(value);
     }
   }
 
