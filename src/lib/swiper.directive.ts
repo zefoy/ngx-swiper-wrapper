@@ -85,13 +85,9 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
   @Output('slideChangeTransitionEnd'   ) S_SLIDECHANGETRANSITIONEND       = new EventEmitter<any>();
   @Output('slideChangeTransitionStart' ) S_SLIDECHANGETRANSITIONSTART     = new EventEmitter<any>();
 
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private zone: NgZone,
-    private elementRef: ElementRef,
-    private differs: KeyValueDiffers,
-    @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperConfigInterface
-  ) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private zone: NgZone,
+    private elementRef: ElementRef, private differs: KeyValueDiffers,
+    @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperConfigInterface) {}
 
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) {
@@ -160,6 +156,7 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
         }
 
         const output = `S_${swiperEvent.toUpperCase()}`;
+
         const emitter = this[output as keyof SwiperDirective] as EventEmitter<any>;
 
         if (emitter.observers.length) {
@@ -172,14 +169,6 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
       this.configDiff = this.differs.find(this.config || {}).create();
 
       this.configDiff.diff(this.config || {});
-    }
-  }
-
-  emit(emitter: EventEmitter<any>, value: any) {
-    if (!this.performance) {
-      this.zone.run(() => emitter.emit(value));
-    } else {
-      emitter.emit(value);
     }
   }
 
@@ -226,6 +215,14 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
           });
         }
       }
+    }
+  }
+
+  private emit(emitter: EventEmitter<any>, value: any): void {
+    if (this.performance) {
+      emitter.emit(value);
+    } else {
+      this.zone.run(() => emitter.emit(value));
     }
   }
 

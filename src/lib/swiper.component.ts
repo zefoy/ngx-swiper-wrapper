@@ -30,6 +30,8 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
 
   @Input() disabled: boolean = false;
 
+  @Input() performance: boolean = false;
+
   @Input() config?: SwiperConfigInterface;
 
   @Input() useSwiperClass: boolean = true;

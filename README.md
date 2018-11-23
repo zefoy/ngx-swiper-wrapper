@@ -95,7 +95,6 @@ Simply replace the element that would ordinarily be passed to `Swiper` with the 
 
 [index]                 // Can be used to set the active slide index.
 [disabled]              // Disables changing of slides (locks the Swiper).
-[performance]              // Toggle EventEmitters into performance mode (they run outside angular zone, and don't cause force change detection)
 
 [useSwiperClass]        // Use 'swiper' class (use provided default styles).
 
@@ -138,6 +137,7 @@ Swiper directive can be used in correctly structured div element with optional c
 
 [index]                 // Can be used to set the active slide index.
 [disabled]              // Disables changing of slides (locks the Swiper).
+[performance]           // Emit all Swiper events outside the Angular zone.
 
 (indexChange)           // Event handler for the Swiper index change event.
 
