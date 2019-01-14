@@ -162,7 +162,7 @@ export interface SwiperConfigInterface {
 
   // Breakpoints
   breakpoints?: SwiperBreakpointsInterface,
-  breakpointsInverse?: SwiperBreakpointsInterface,
+  breakpointsInverse?: boolean,
 
   // Observer
   observer?: boolean,
