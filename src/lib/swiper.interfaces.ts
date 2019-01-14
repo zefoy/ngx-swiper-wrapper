@@ -448,7 +448,7 @@ export class SwiperConfig implements SwiperConfigInterface {
 
   // Breakpoints
   public breakpoints?: any;
-  public breakpointsInverse?: any;
+  public breakpointsInverse?: boolean;
 
   // Observer
   public observer?: boolean;
