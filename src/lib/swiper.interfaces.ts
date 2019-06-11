@@ -3,7 +3,7 @@ import { InjectionToken } from '@angular/core';
 export const SWIPER_CONFIG = new InjectionToken<SwiperConfigInterface>('SWIPER_CONFIG');
 
 export type SwiperEvent = 'init' | 'beforeDestroy' | 'scroll' | 'progress' | 'keyPress' |
-  'beforeResize' | 'afterResize' | 'resize' | 'breakpoint' | 'zoomChange' | 'sliderMove' |
+  'resize' | 'breakpoint' | 'zoomChange' | 'beforeResize' | 'afterResize' | 'sliderMove' |
   'slideChange' | 'setTranslate' | 'setTransition' | 'fromEdge' | 'reachEnd' | 'reachBeginning' |
   'autoplay' | 'autoplayStop' | 'autoplayStart' | 'imagesReady' | 'lazyImageLoad' |
   'lazyImageReady' | 'scrollDragEnd' | 'scrollDragMove' | 'scrollDragStart' | 'navigationHide' |
@@ -21,12 +21,11 @@ export const SwiperEvents: SwiperEvent[] = [
   'progress',
   'keyPress',
 
-  'beforeResize',
-  'afterResize',
-
   'resize',
   'breakpoint',
   'zoomChange',
+  'beforeResize',
+  'afterResize',
 
   'sliderMove',
   'slideChange',

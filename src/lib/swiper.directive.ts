@@ -40,12 +40,14 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
 
   @Output('scroll'                     ) S_SCROLL                         = new EventEmitter<any>();
   @Output('progress'                   ) S_PROGRESS                       = new EventEmitter<any>();
+  @Output('keyPress'                   ) S_KEYPRESS                       = new EventEmitter<any>();
 
   @Output('resize'                     ) S_RESIZE                         = new EventEmitter<any>();
   @Output('breakpoint'                 ) S_BREAKPOINT                     = new EventEmitter<any>();
+  @Output('zoomChange'                 ) S_ZOOMCHANGE                     = new EventEmitter<any>();
+  @Output('afterResize'                ) S_AFTERRESIZE                    = new EventEmitter<any>();
   @Output('beforeResize'               ) S_BEFORERESIZE                   = new EventEmitter<any>();
 
-  @Output('keyPress'                   ) S_KEYPRESS                       = new EventEmitter<any>();
   @Output('sliderMove'                 ) S_SLIDERMOVE                     = new EventEmitter<any>();
   @Output('slideChange'                ) S_SLIDECHANGE                    = new EventEmitter<any>();
 
@@ -67,6 +69,14 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
   @Output('scrollDragEnd'              ) S_SCROLLDRAGEND                  = new EventEmitter<any>();
   @Output('scrollDragMove'             ) S_SCROLLDRAGMOVE                 = new EventEmitter<any>();
   @Output('scrollDragStart'            ) S_SCROLLDRAGSTART                = new EventEmitter<any>();
+
+  @Output('navigationHide'             ) S_NAVIGATIONHIDE                 = new EventEmitter<any>();
+  @Output('navigationShow'             ) S_NAVIGATIONSHOW                 = new EventEmitter<any>();
+
+  @Output('paginationRender'           ) S_PAGINATIONRENDER               = new EventEmitter<any>();
+  @Output('paginationUpdate'           ) S_PAGINATIONUPDATE               = new EventEmitter<any>();
+  @Output('paginationHide'             ) S_PAGINATIONHIDE                 = new EventEmitter<any>();
+  @Output('paginationShow'             ) S_PAGINATIONSHOW                 = new EventEmitter<any>();
 
   @Output('swiperTap'                  ) S_TAP                            = new EventEmitter<any>();
   @Output('swiperClick'                ) S_CLICK                          = new EventEmitter<any>();
