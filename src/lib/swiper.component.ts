@@ -38,9 +38,9 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
 
   @Output() indexChange = new EventEmitter<number>();
 
-  @ViewChild('swiperSlides') swiperSlides?: ElementRef;
+  @ViewChild('swiperSlides', { static: true }) swiperSlides?: ElementRef;
 
-  @ViewChild(SwiperDirective) directiveRef?: SwiperDirective;
+  @ViewChild(SwiperDirective, { static: true }) directiveRef?: SwiperDirective;
 
   get isAtLast(): boolean {
     return (!this.directiveRef || !this.directiveRef.swiper()) ?
