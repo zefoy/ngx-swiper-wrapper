@@ -40,7 +40,7 @@
     "@angular/platform-browser": "^8.0.0",
     "@angular/platform-browser-dynamic": "^8.0.0",
     "core-js": "^3.1.0",
-    "ngx-swiper-wrapper": "^7.2.0",
+    "ngx-swiper-wrapper": "^8.0.0",
     "rxjs": "^6.5.0",
     "swiper": "^4.5.0",
     "zone.js": "^0.9.0"
