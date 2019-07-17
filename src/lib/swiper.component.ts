@@ -38,9 +38,9 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
 
   @Output() indexChange = new EventEmitter<number>();
 
-  @ViewChild('swiperSlides', { static: true }) swiperSlides?: ElementRef;
+  @ViewChild('swiperSlides', { static: false }) swiperSlides?: ElementRef;
 
-  @ViewChild(SwiperDirective, { static: true }) directiveRef?: SwiperDirective;
+  @ViewChild(SwiperDirective, { static: false }) directiveRef?: SwiperDirective;
 
   get isAtLast(): boolean {
     return (!this.directiveRef || !this.directiveRef.swiper()) ?
@@ -168,10 +168,10 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
 
     this.swiperConfig.assign(this.config); // Custom configuration
 
-    if (this.swiperConfig.pagination === true ||
+    if (this.swiperSlides && (this.swiperConfig.pagination === true ||
        (this.swiperConfig.pagination && typeof this.swiperConfig.pagination === 'object' &&
        (!this.swiperConfig.pagination.type || this.swiperConfig.pagination.type === 'bullets') &&
-       !this.swiperConfig.pagination.renderBullet && this.swiperConfig.pagination.el === '.swiper-pagination'))
+       !this.swiperConfig.pagination.renderBullet && this.swiperConfig.pagination.el === '.swiper-pagination')))
     {
       this.config = this.config || {};
 
@@ -182,7 +182,9 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
           el: '.swiper-pagination',
 
           renderBullet: (index: number, className: string) => {
-            const children = this.swiperSlides ? this.swiperSlides.nativeElement.children : [];
+            let children = this.swiperSlides ? Array.from(this.swiperSlides.nativeElement.children) : [];
+
+            children = children.filter((child: any) => child.classList.contains('swiper-slide'));
 
             let bullet = `<span class="${className} ${className}-middle" index="${index}"></span>`;
 
@@ -214,7 +216,7 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
       const children = this.swiperSlides.nativeElement.children;
 
       for (let i = 0; i < children.length; i++) {
-        if (!children[i].classList.contains('swiper-slide')) {
+        if (/swiper-.*/.test(children[i].className) === false) {
           updateNeeded = true;
 
           children[i].classList.add('swiper-slide');
