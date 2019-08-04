@@ -258,8 +258,8 @@ export interface SwiperHistoryInterface {
 export interface SwiperVirtualInterface {
   slides?: any[],
   cache?: boolean,
-  addSliderBefore?: number,
-  addSliderAfter?: number,
+  addSlidesBefore?: number,
+  addSlidesAfter?: number,
   renderSlide?: SwiperRenderSlideFunction,
   renderExternal?: SwiperRenderExternalFunction
 }
