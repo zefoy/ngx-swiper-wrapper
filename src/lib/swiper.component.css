@@ -24,6 +24,7 @@ swiper > .swiper.s-wrapper {
 }
 
 swiper > .swiper.s-wrapper .swiper-wrapper .swiper-slide {
+  will-change: transform;
   overflow: auto;
   width: 100%;
   height: 100%;
