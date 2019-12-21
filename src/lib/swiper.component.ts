@@ -15,7 +15,7 @@ import { SWIPER_CONFIG, SwiperConfig, SwiperConfigInterface,
   templateUrl: '../../dist/lib/swiper.component.html',
   styleUrls: [
     '../../dist/lib/swiper.component.css',
-    '../../node_modules/swiper/dist/css/swiper.min.css'
+    '../../node_modules/swiper/css/swiper.min.css'
   ],
   encapsulation: ViewEncapsulation.None
 })
@@ -146,7 +146,7 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
             const directiveOutput = output as keyof SwiperDirective;
             const componentOutput = output as keyof SwiperComponent;
 
-            this.directiveRef[directiveOutput] = this[componentOutput] as EventEmitter<any>;
+            this.directiveRef[directiveOutput] = this[componentOutput] as never;
           }
         });
       }

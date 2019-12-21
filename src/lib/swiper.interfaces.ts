@@ -2,16 +2,17 @@ import { InjectionToken } from '@angular/core';
 
 export const SWIPER_CONFIG = new InjectionToken<SwiperConfigInterface>('SWIPER_CONFIG');
 
-export type SwiperEvent = 'init' | 'beforeDestroy' | 'scroll' | 'progress' | 'keyPress' |
-  'resize' | 'breakpoint' | 'zoomChange' | 'beforeResize' | 'afterResize' | 'sliderMove' |
-  'slideChange' | 'setTranslate' | 'setTransition' | 'fromEdge' | 'reachEnd' | 'reachBeginning' |
-  'autoplay' | 'autoplayStop' | 'autoplayStart' | 'imagesReady' | 'lazyImageLoad' |
-  'lazyImageReady' | 'scrollDragEnd' | 'scrollDragMove' | 'scrollDragStart' | 'navigationHide' |
+export type SwiperEvent = 'init' | 'beforeDestroy' | 'slideChange' | 'slideChangeTransitionStart' |
+  'slideChangeTransitionEnd' | 'slideNextTransitionStart' | 'slideNextTransitionEnd' |
+  'slidePrevTransitionStart' | 'slidePrevTransitionEnd' | 'swiperTransitionStart' |
+  'swiperTransitionEnd' | 'swiperTouchStart' | 'swiperTouchMove' | 'swiperTouchMoveOpposite' |
+  'sliderMove' | 'swiperTouchEnd' | 'swiperClick' | 'swiperTap' | 'swiperDoubleTap' |
+  'imagesReady' | 'progress' | 'reachBeginning' | 'reachEnd' | 'fromEdge' | 'setTranslate' |
+  'setTransition' | 'resize' | 'observerUpdate' | 'beforeLoopFix' | 'loopFix' | 'navigationHide' |
   'navigationShow' | 'paginationRender' | 'paginationUpdate' | 'paginationHide' | 'paginationShow' |
-  'swiperTap' | 'swiperClick' | 'swiperDoubleTap' | 'swiperTouchEnd' | 'swiperTouchMove' |
-  'swiperTouchStart' | 'swiperTouchMoveOpposite' | 'swiperTransitionEnd' | 'swiperTransitionStart' |
-  'slideNextTransitionEnd' | 'slideNextTransitionStart' | 'slidePrevTransitionEnd' |
-  'slidePrevTransitionStart' | 'slideChangeTransitionEnd' | 'slideChangeTransitionStart';
+  'autoplayStart' | 'autoplayStop' | 'autoplay' | 'lazyImageLoad' | 'lazyImageReady' |
+  'zoomChange' | 'scroll' | 'keyPress' | 'breakpoint' | 'beforeResize' | 'scrollbarDragEnd' |
+  'scrollbarDragMove' | 'scrollbarDragStart';
 
 export const SwiperEvents: SwiperEvent[] = [
   'init',
@@ -22,10 +23,11 @@ export const SwiperEvents: SwiperEvent[] = [
   'keyPress',
 
   'resize',
+  'loopFix',
   'breakpoint',
   'zoomChange',
   'beforeResize',
-  'afterResize',
+  'beforeLoopFix',
 
   'sliderMove',
   'slideChange',
@@ -45,9 +47,9 @@ export const SwiperEvents: SwiperEvent[] = [
   'lazyImageLoad',
   'lazyImageReady',
 
-  'scrollDragEnd',
-  'scrollDragMove',
-  'scrollDragStart',
+  'scrollbarDragEnd',
+  'scrollbarDragMove',
+  'scrollbarDragStart',
 
   'navigationHide',
   'navigationShow',
@@ -78,6 +80,7 @@ export const SwiperEvents: SwiperEvent[] = [
 export interface SwiperConfigInterface {
   // Swiper parameters
   init?: boolean,
+  updateOnWindowResize?: boolean,
   initialSlide?: number,
   direction?: string,
   speed?: number,
@@ -93,6 +96,9 @@ export interface SwiperConfigInterface {
   runCallbacksOnInit?: boolean,
   watchOverflow?: boolean,
 
+  // CSS scroll snapOnRelease
+  cssMode?: boolean,
+
   // Slides grid
   spaceBetween?: number,
   slidesPerView?: number | 'auto',
@@ -100,6 +106,7 @@ export interface SwiperConfigInterface {
   slidesPerColumnFill?: string,
   slidesPerGroup?: number,
   centeredSlides?: boolean,
+  centeredSlidesBounds?: boolean,
   slidesOffsetBefore?: number,
   slidesOffsetAfter?: number,
   normalizeSlideIndex?: boolean,
@@ -172,7 +179,6 @@ export interface SwiperConfigInterface {
 
   // Breakpoints
   breakpoints?: SwiperBreakpointsInterface,
-  breakpointsInverse?: boolean,
 
   // Observer
   observer?: boolean,
@@ -218,6 +224,7 @@ export interface SwiperConfigInterface {
 }
 
 export interface SwiperA11YInterface {
+  enabled?: boolean,
   prevSlideMessage?: string,
   nextSlideMessage?: string,
   firstSlideMessage?: string,
@@ -247,7 +254,8 @@ export interface SwiperZoomInterface {
 export interface SwiperThumbsInterface {
   swiper?: any,
   slideThumbActiveClass?: string,
-  thumbsContainerClass?: string
+  thumbsContainerClass?: string,
+  multipleActiveThumbs?: boolean
 }
 
 export interface SwiperHistoryInterface {
@@ -258,10 +266,10 @@ export interface SwiperHistoryInterface {
 export interface SwiperVirtualInterface {
   slides?: any[],
   cache?: boolean,
-  addSlidesBefore?: number,
-  addSlidesAfter?: number,
   renderSlide?: SwiperRenderSlideFunction,
-  renderExternal?: SwiperRenderExternalFunction
+  renderExternal?: SwiperRenderExternalFunction,
+  addSlidesBefore?: number,
+  addSlidesAfter?: number
 }
 
 export interface SwiperKeyboardInterface {
@@ -282,7 +290,9 @@ export interface SwiperScrollbarInterface {
   hide?: boolean,
   draggable?: boolean,
   snapOnRelease?: boolean,
-  dragSize?: number | 'auto'
+  dragSize?: number | 'auto',
+  loclClass?: string,
+  dragClass?: string
 }
 
 export interface SwiperControllerInterface {
@@ -307,6 +317,9 @@ export interface SwiperPaginationInterface {
   dynamicMainBullets?: number,
   hideOnClick?: boolean,
   clickable?: boolean,
+  progressbarOpposite?: boolean,
+  formatFractionCurrent?: SwiperFormatFractionFunction,
+  formatFractionTotal?: SwiperFormatFractionFunction,
   renderBullet?: SwiperRenderBulletFunction,
   renderFraction?: SwiperRenderFractionFunction,
   renderProgressbar?: SwiperRenderProgressbarFunction,
@@ -318,7 +331,8 @@ export interface SwiperPaginationInterface {
   totalClass?: string,
   hiddenClass?: string,
   progressbarFillClass?: string,
-  clickableClass?: string
+  clickableClass?: string,
+  lockClass?: string
 }
 
 export interface SwiperMousewheelInterface {
@@ -339,23 +353,23 @@ export interface SwiperFadeEffectInterface {
 }
 
 export interface SwiperFlipEffectInterface {
-  limitRotation?: boolean,
-  slideShadows?: boolean
+  slideShadows?: boolean,
+  limitRotation?: boolean
 }
 
 export interface SwiperCubeEffectInterface {
+  slideShadows?: boolean,
   shadow?: boolean,
-  shadowScale?: number,
   shadowOffset?: number,
-  slideShadows?: boolean
+  shadowScale?: number
 }
 
 export interface SwiperCoverflowEffectInterface {
-  depth?: number,
+  slideShadows?: boolean,
   rotate?: number,
   stretch?: number,
-  modifier?: number,
-  slideShadows?: boolean
+  depth?: number,
+  modifier?: number
 }
 
 export interface SwiperBreakpointsInterface {
@@ -367,6 +381,7 @@ export class SwiperConfig implements SwiperConfigInterface {
 
   // Swiper parameters
   public init?: boolean;
+  public updateOnWindowResize?: boolean;
   public initialSlide?: number;
   public direction?: string;
   public speed?: number;
@@ -382,6 +397,9 @@ export class SwiperConfig implements SwiperConfigInterface {
   public runCallbacksOnInit?: boolean;
   public watchOverflow?: boolean;
 
+  // CSS scroll snapOnRelease
+  public cssMode?: boolean;
+
   // Slides grid
   public spaceBetween?: number;
   public slidesPerView?: number | 'auto';
@@ -389,6 +407,7 @@ export class SwiperConfig implements SwiperConfigInterface {
   public slidesPerColumnFill?: string;
   public slidesPerGroup?: number;
   public centeredSlides?: boolean;
+  public centeredSlidesBounds?: boolean;
   public slidesOffsetBefore?: number;
   public slidesOffsetAfter?: number;
   public normalizeSlideIndex?: boolean;
@@ -461,7 +480,6 @@ export class SwiperConfig implements SwiperConfigInterface {
 
   // Breakpoints
   public breakpoints?: any;
-  public breakpointsInverse?: boolean;
 
   // Observer
   public observer?: boolean;
@@ -524,6 +542,8 @@ export class SwiperConfig implements SwiperConfigInterface {
     }
   }
 }
+
+export type SwiperFormatFractionFunction = (fraction: number) => number;
 
 export type SwiperRenderSlideFunction = (slide: any, index: number) => HTMLElement;
 export type SwiperRenderExternalFunction = (data: any) => void;
