@@ -82,7 +82,7 @@ export interface SwiperConfigInterface {
   init?: boolean,
   updateOnWindowResize?: boolean,
   initialSlide?: number,
-  direction?: string,
+  direction?: 'horizontal' | 'vertical',
   speed?: number,
   setWrapperSize?: boolean,
   virtualTranslate?: boolean,
@@ -92,7 +92,7 @@ export interface SwiperConfigInterface {
   roundLengths?: boolean,
   nested?: boolean,
   uniqueNavElements?: boolean,
-  effect?: string,
+  effect?: 'slide' | 'fade' | 'cube' | 'coverflow' | 'flip',
   runCallbacksOnInit?: boolean,
   watchOverflow?: boolean,
 
@@ -103,7 +103,7 @@ export interface SwiperConfigInterface {
   spaceBetween?: number,
   slidesPerView?: number | 'auto',
   slidesPerColumn?: number,
-  slidesPerColumnFill?: string,
+  slidesPerColumnFill?: 'row' | 'column',
   slidesPerGroup?: number,
   centeredSlides?: boolean,
   centeredSlidesBounds?: boolean,
@@ -116,7 +116,7 @@ export interface SwiperConfigInterface {
   grabCursor?: boolean,
 
   // Touches
-  touchEventsTarget?: string,
+  touchEventsTarget?: 'container' | 'wrapper',
   touchRatio?: number,
   touchAngle?: number,
   simulateTouch?: boolean,
@@ -383,7 +383,7 @@ export class SwiperConfig implements SwiperConfigInterface {
   public init?: boolean;
   public updateOnWindowResize?: boolean;
   public initialSlide?: number;
-  public direction?: string;
+  public direction?: 'horizontal' | 'vertical';
   public speed?: number;
   public setWrapperSize?: boolean;
   public virtualTranslate?: boolean;
@@ -393,7 +393,7 @@ export class SwiperConfig implements SwiperConfigInterface {
   public roundLengths?: boolean;
   public nested?: boolean;
   public uniqueNavElements?: boolean;
-  public effect?: string;
+  public effect?: 'slide' | 'fade' | 'cube' | 'coverflow' | 'flip';
   public runCallbacksOnInit?: boolean;
   public watchOverflow?: boolean;
 
@@ -404,7 +404,7 @@ export class SwiperConfig implements SwiperConfigInterface {
   public spaceBetween?: number;
   public slidesPerView?: number | 'auto';
   public slidesPerColumn?: number;
-  public slidesPerColumnFill?: string;
+  public slidesPerColumnFill?: 'row' | 'column';
   public slidesPerGroup?: number;
   public centeredSlides?: boolean;
   public centeredSlidesBounds?: boolean;
@@ -417,7 +417,7 @@ export class SwiperConfig implements SwiperConfigInterface {
   public grabCursor?: boolean;
 
   // Touches
-  public touchEventsTarget?: string;
+  public touchEventsTarget?: 'container' | 'wrapper';
   public touchRatio?: number;
   public touchAngle?: number;
   public simulateTouch?: boolean;

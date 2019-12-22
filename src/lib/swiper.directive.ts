@@ -1,4 +1,4 @@
-import * as Swiper from 'swiper/dist/js/swiper.js';
+import Swiper from 'swiper';
 
 import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
