@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <base href="/">
+
+    <meta charset="UTF-8">
+
+    <title>Example app</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/dist/css/swiper.min.css" />
+
+    <style>
+      .loading,
+      .loading:after,
+      .loading:before {
+        content: ' ';
+
+        top: 0;
+
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+
+        animation: spinner 1600ms infinite ease-in-out;
+      }
+
+      .loading {
+        position: relative;
+
+        margin: 64px auto;
+
+        color: #555;
+
+        animation-delay: -160ms;
+      }
+
+      .loading:after {
+        left: 64px;
+      }
+
+      .loading:before {
+        left: -64px;
+
+        animation-delay: -320ms;
+      }
+
+      .loading:after,
+      .loading:before {
+        position: absolute;
+      }
+
+      @keyframes spinner {
+        40% {
+          box-shadow: 0 40px 0 0;
+        }
+
+        0%,
+        80%,
+        100% {
+          box-shadow: 0 40px 0 -20px;
+        }
+      }
+    </style>
+
+    <script>window.module = 'aot';</script>
+  </head>
+
+  <body>
+    <my-app><div class="loading"></div></my-app>
+  </body>
+</html>

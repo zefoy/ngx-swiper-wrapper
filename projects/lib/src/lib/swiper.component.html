@@ -1,0 +1,12 @@
+<div #swiper class="s-wrapper" [class.swiper]="useSwiperClass" [class.swiper-container]="useSwiperClass" [swiper]="getConfig()" [index]="index" [disabled]="disabled" [performance]="performance">
+  <div #swiperSlides class="swiper-wrapper">
+    <ng-content></ng-content>
+  </div>
+
+  <div class="swiper-scrollbar" [hidden]="!swiperConfig?.scrollbar || (swiperConfig?.scrollbar !== true && !!swiperConfig?.scrollbar?.el && swiperConfig?.scrollbar?.el !== '.swiper-scrollbar')"></div>
+
+  <div class="swiper-button-prev" [hidden]="!swiperConfig?.navigation || (swiperConfig?.navigation !== true && !!swiperConfig?.navigation?.prevEl && swiperConfig?.navigation?.prevEl !== '.swiper-button-prev')" [attr.disabled]="isAtFirst || null"></div>
+  <div class="swiper-button-next" [hidden]="!swiperConfig?.navigation || (swiperConfig?.navigation !== true && !!swiperConfig?.navigation?.nextEl && swiperConfig?.navigation?.nextEl !== '.swiper-button-next')" [attr.disabled]="isAtLast || null"></div>
+
+  <div class="swiper-pagination" [hidden]="!swiperConfig?.pagination || (swiperConfig?.pagination !== true && !!swiperConfig?.pagination?.el && swiperConfig?.pagination?.el !== '.swiper-pagination')" (click)="onPaginationClick($event.target.getAttribute('index'))" (keyup.enter)="onPaginationClick($event.target.getAttribute('index'))"></div>
+</div>

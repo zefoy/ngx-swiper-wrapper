@@ -1,0 +1,12 @@
+{
+  "name": "ngx-swiper-wrapper",
+  "description": "Angular wrapper library for Swiper",
+  "bugs": "https://github.com/zefoy/ngx-swiper-wrapper/issues",
+  "version": "9.0.0-1",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^9.0.0",
+    "@angular/core": "^9.0.0",
+    "tslib": "^1.10.0"
+  }
+}
