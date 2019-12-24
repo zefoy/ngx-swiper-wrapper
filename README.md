@@ -10,7 +10,7 @@ This documentation is for the latest 6.x.x version which requires Angular 5 or n
 
 [Example application](https://zefoy.github.io/ngx-swiper-wrapper/)
  |
-[StackBlitz example](https://stackblitz.com/github/zefoy/ngx-swiper-wrapper/tree/master/example)
+[StackBlitz example](https://stackblitz.com/github/zefoy/ngx-swiper-wrapper/tree/master)
  |
 [Swiper documentation](http://idangero.us/swiper/api/)
 
@@ -18,23 +18,14 @@ This documentation is for the latest 6.x.x version which requires Angular 5 or n
 
 ```bash
 npm install
-npm start
+npm run build
 ```
 
 ### Running the example
 
 ```bash
-cd example
 npm install
-npm start
-```
-
-### Library development
-
-```bash
-npm link
-cd example
-npm link ngx-swiper-wrapper
+npm run start
 ```
 
 ### Installing and usage
