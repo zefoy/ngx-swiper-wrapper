@@ -4,6 +4,9 @@
   "bugs": "https://github.com/zefoy/ngx-swiper-wrapper/issues",
   "version": "9.0.0-1",
   "license": "MIT",
+  "dependencies": {
+    "swiper": "^5.2.0"
+  },
   "peerDependencies": {
     "@angular/common": "^9.0.0",
     "@angular/core": "^9.0.0",
