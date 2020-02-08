@@ -2,14 +2,14 @@
   "name": "ngx-swiper-wrapper",
   "description": "Angular wrapper library for Swiper",
   "bugs": "https://github.com/zefoy/ngx-swiper-wrapper/issues",
-  "version": "9.0.0-3",
+  "version": "9.0.0",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/zefoy/ngx-swiper-wrapper.git"
   },
   "dependencies": {
-    "swiper": "^5.2.0"
+    "swiper": "^5.3.0"
   },
   "peerDependencies": {
     "@angular/common": "^9.0.0",
