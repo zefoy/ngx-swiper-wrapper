@@ -112,6 +112,9 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
   @Output('slideChangeTransitionEnd'   ) S_SLIDECHANGETRANSITIONEND       = new EventEmitter<any>();
   @Output('slideChangeTransitionStart' ) S_SLIDECHANGETRANSITIONSTART     = new EventEmitter<any>();
 
+  @Output('beforeLoopFix'              ) S_BEFORELOOPFIX                  = new EventEmitter<any>();
+  @Output('loopFix'                    ) S_LOOPFIX                        = new EventEmitter<any>();
+
   constructor(private zone: NgZone, private cdRef: ChangeDetectorRef,
     @Inject(PLATFORM_ID) private platformId: Object,
     @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperConfigInterface) {}
