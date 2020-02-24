@@ -94,6 +94,9 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
   @Output('slideNextTransitionStart'   ) S_SLIDENEXTTRANSITIONSTART       = new EventEmitter<any>();
   @Output('slideChangeTransitionEnd'   ) S_SLIDECHANGETRANSITIONEND       = new EventEmitter<any>();
   @Output('slideChangeTransitionStart' ) S_SLIDECHANGETRANSITIONSTART     = new EventEmitter<any>();
+  
+  @Output('beforeLoopFix'              ) S_BEFORELOOPFIX                  = new EventEmitter<any>();
+  @Output('loopFix'                    ) S_LOOPFIX                        = new EventEmitter<any>();
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private zone: NgZone,
     private elementRef: ElementRef, private differs: KeyValueDiffers,
