@@ -4,6 +4,7 @@ bundles/
 package/
 npm-debug.log
 node_modules/
+.idea/
 
 example/dist/
 example/npm-debug.log
