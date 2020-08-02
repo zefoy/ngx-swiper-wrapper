@@ -6,6 +6,10 @@ This is an Angular wrapper library for the [Swiper](http://idangero.us/swiper/).
 
 This documentation is for the latest 6.x.x version which requires Angular 5 or newer. For Angular 4 you need to use the latest 4.x.x version. Documentation for the 4.x.x can be found from <a href="https://github.com/zefoy/ngx-swiper-wrapper/tree/4.x.x/">here</a>.
 
+### EOL notice
+
+Version 10.0.0 will most likely be last release of this library unless new maintainer is found.
+
 ### Quick links
 
 [Example application](https://zefoy.github.io/ngx-swiper-wrapper/)
