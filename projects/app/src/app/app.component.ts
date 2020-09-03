@@ -1,7 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { SwiperComponent, SwiperDirective, SwiperConfigInterface,
-  SwiperScrollbarInterface, SwiperPaginationInterface } from 'ngx-swiper-wrapper';
+import { SwiperComponent, SwiperDirective } from 'ngx-swiper-wrapper';
+import { SwiperOptions } from 'swiper';
+import { PaginationOptions } from 'swiper/types/components/pagination';
+import { ScrollbarOptions } from 'swiper/types/components/scrollbar';
 
 @Component({
   selector: 'my-app',
@@ -25,8 +27,8 @@ export class AppComponent {
 
   public disabled: boolean = false;
 
-  public config: SwiperConfigInterface = {
-    a11y: true,
+  public config: SwiperOptions = {
+    a11y: { enabled: true },
     direction: 'horizontal',
     slidesPerView: 1,
     keyboard: true,
@@ -36,13 +38,13 @@ export class AppComponent {
     pagination: false
   };
 
-  private scrollbar: SwiperScrollbarInterface = {
+  private scrollbar: ScrollbarOptions = {
     el: '.swiper-scrollbar',
     hide: false,
     draggable: true
   };
 
-  private pagination: SwiperPaginationInterface = {
+  private pagination: PaginationOptions = {
     el: '.swiper-pagination',
     clickable: true,
     hideOnClick: false
