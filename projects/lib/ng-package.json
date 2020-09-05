@@ -6,8 +6,5 @@
     "umdModuleIds": {
       "swiper": "Swiper"
     }
-  },
-  "whitelistedNonPeerDependencies": [
-    "swiper"
-  ]
+  }
 }
