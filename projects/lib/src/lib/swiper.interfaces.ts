@@ -1,20 +1,26 @@
 import { InjectionToken } from '@angular/core';
+import { SwiperOptions } from 'swiper';
+import { SwiperEvents } from 'swiper/types/swiper-events';
 
-export const SWIPER_CONFIG = new InjectionToken<SwiperConfigInterface>('SWIPER_CONFIG');
+export const SWIPER_CONFIG = new InjectionToken<SwiperOptions>('SWIPER_CONFIG');
 
-export type SwiperEvent = 'init' | 'beforeDestroy' | 'slideChange' | 'slideChangeTransitionStart' |
-  'slideChangeTransitionEnd' | 'slideNextTransitionStart' | 'slideNextTransitionEnd' |
-  'slidePrevTransitionStart' | 'slidePrevTransitionEnd' | 'swiperTransitionStart' |
-  'swiperTransitionEnd' | 'swiperTouchStart' | 'swiperTouchMove' | 'swiperTouchMoveOpposite' |
-  'sliderMove' | 'swiperTouchEnd' | 'swiperClick' | 'swiperTap' | 'swiperDoubleTap' |
-  'imagesReady' | 'progress' | 'reachBeginning' | 'reachEnd' | 'fromEdge' | 'setTranslate' |
-  'setTransition' | 'resize' | 'observerUpdate' | 'beforeLoopFix' | 'loopFix' | 'navigationHide' |
-  'navigationShow' | 'paginationRender' | 'paginationUpdate' | 'paginationHide' | 'paginationShow' |
-  'autoplayStart' | 'autoplayStop' | 'autoplay' | 'lazyImageLoad' | 'lazyImageReady' |
-  'zoomChange' | 'scroll' | 'keyPress' | 'breakpoint' | 'beforeResize' | 'scrollbarDragEnd' |
-  'scrollbarDragMove' | 'scrollbarDragStart';
+export type SwiperEvent = keyof SwiperEvents
+// Custom Events
+| 'scroll' | 'keyPress' | 'beforeResize'
+// swiper prefixed events that were added in v4.5.0
+| 'swiperTap'
+| 'swiperClick'
+| 'swiperDoubleTap'
+| 'swiperTouchEnd'
+| 'swiperTouchMove'
+| 'swiperTouchStart'
+| 'swiperTouchMoveOpposite'
+| 'swiperTransitionEnd'
+| 'swiperTransitionStart';
 
-export const SwiperEvents: SwiperEvent[] = [
+
+export const SwiperEventNames: SwiperEvent[] = [
+
   'init',
   'beforeDestroy',
 
@@ -74,154 +80,11 @@ export const SwiperEvents: SwiperEvent[] = [
   'slidePrevTransitionEnd',
   'slidePrevTransitionStart',
   'slideChangeTransitionEnd',
-  'slideChangeTransitionStart'
+  'slideChangeTransitionStart',
+
+  'toEdge',
+  'observerUpdate'
 ];
-
-export interface SwiperConfigInterface {
-  // Swiper parameters
-  init?: boolean,
-  updateOnWindowResize?: boolean,
-  initialSlide?: number,
-  direction?: 'horizontal' | 'vertical',
-  speed?: number,
-  setWrapperSize?: boolean,
-  virtualTranslate?: boolean,
-  width?: number,
-  height?: number,
-  autoHeight?: boolean,
-  roundLengths?: boolean,
-  nested?: boolean,
-  uniqueNavElements?: boolean,
-  effect?: 'slide' | 'fade' | 'cube' | 'coverflow' | 'flip',
-  runCallbacksOnInit?: boolean,
-  watchOverflow?: boolean,
-
-  // CSS scroll snapOnRelease
-  cssMode?: boolean,
-
-  // Slides grid
-  spaceBetween?: number,
-  slidesPerView?: number | 'auto',
-  slidesPerColumn?: number,
-  slidesPerColumnFill?: 'row' | 'column',
-  slidesPerGroup?: number,
-  centeredSlides?: boolean,
-  centeredSlidesBounds?: boolean,
-  slidesOffsetBefore?: number,
-  slidesOffsetAfter?: number,
-  normalizeSlideIndex?: boolean,
-  centerInsufficientSlides?: boolean,
-
-  // Grab cursor
-  grabCursor?: boolean,
-
-  // Touches
-  touchEventsTarget?: 'container' | 'wrapper',
-  touchRatio?: number,
-  touchAngle?: number,
-  simulateTouch?: boolean,
-  shortSwipes?: boolean,
-  longSwipes?: boolean,
-  longSwipesRatio?: number,
-  longSwipesMs?: number,
-  followFinger?: boolean,
-  allowTouchMove?: boolean,
-  threshold?: number,
-  touchStartPreventDefault?: boolean,
-  touchStartForcePreventDefault?: boolean,
-  touchMoveStopPropagation?: boolean,
-  iOSEdgeSwipeDetection?: boolean,
-  iOSEdgeSwipeThreshold?: number,
-  touchReleaseOnEdges?: boolean,
-  passiveListeners?: boolean,
-
-  // Touch resistance
-  resistance?: boolean,
-  resistanceRatio?: number,
-
-  // Swiping / no swiping
-  preventInteractionOnTransition?: boolean,
-  allowSlidePrev?: boolean,
-  allowSlideNext?: boolean,
-  noSwiping?: boolean,
-  noSwipingClass?: string,
-  noSwipingSelector?: string,
-  swipeHandler?: string | HTMLElement,
-
-  // Clicks
-  preventClicks?: boolean,
-  preventClicksPropagation?: boolean,
-  slideToClickedSlide?: boolean,
-
-  // Freemode
-  freeMode?: boolean,
-  freeModeMomentum?: boolean,
-  freeModeMomentumRatio?: number,
-  freeModeMomentumVelocityRatio?: number,
-  freeModeMomentumBounce?: boolean,
-  freeModeMomentumBounceRatio?: number,
-  freeModeMinimumVelocity?: number,
-  freeModeSticky?: boolean,
-
-  // Progress
-  watchSlidesProgress?: boolean,
-  watchSlidesVisibility?: boolean,
-
-  // Images
-  preloadImages?: boolean,
-  updateOnImagesReady?: boolean,
-
-  // Loop
-  loop?: boolean,
-  loopAdditionalSlides?: number,
-  loopedSlides?: number,
-  loopFillGroupWithBlank?: boolean,
-
-  // Breakpoints
-  breakpoints?: SwiperBreakpointsInterface,
-
-  // Observer
-  observer?: boolean,
-  observeParents?: boolean,
-  observeSlideChildren?: boolean,
-
-  // Namespace
-  containerModifierClass?: string,
-  slideClass?: string,
-  slideActiveClass?: string,
-  slideDuplicatedActiveClass?: string,
-  slideVisibleClass?: string,
-  slideDuplicateClass?: string,
-  slideNextClass?: string,
-  slideDuplicatedNextClass?: string,
-  slidePrevClass?: string,
-  slideDuplicatedPrevClass?: string,
-  wrapperClass?: string,
-
-  // Effects
-  fadeEffect?: SwiperFadeEffectInterface,
-  flipEffect?: SwiperFlipEffectInterface,
-  cubeEffect?: SwiperCubeEffectInterface,
-  coverflowEffect?: SwiperCoverflowEffectInterface,
-
-  // Components
-  parallax?: boolean,
-
-  a11y?: boolean | SwiperA11YInterface,
-  lazy?: boolean | SwiperLazyInterface,
-  zoom?: boolean | SwiperZoomInterface,
-  thumbs?: boolean | SwiperThumbsInterface,
-  history?: boolean | SwiperHistoryInterface,
-  virtual?: boolean | SwiperVirtualInterface,
-  autoplay?: boolean | SwiperAutoplayInterface,
-  keyboard?: boolean | SwiperKeyboardInterface,
-  scrollbar?: boolean | SwiperScrollbarInterface,
-  mousewheel?: boolean | SwiperMousewheelInterface,
-  controller?: boolean | SwiperControllerInterface,
-  navigation?: boolean | SwiperNavigationInterface,
-  pagination?: boolean | SwiperPaginationInterface,
-  hashNavigation?: boolean | SwiperHashNavigationInterface
-}
 
 export interface SwiperA11YInterface {
   enabled?: boolean,
@@ -373,10 +236,10 @@ export interface SwiperCoverflowEffectInterface {
 }
 
 export interface SwiperBreakpointsInterface {
-  [size: number]: SwiperConfigInterface
+  [size: number]: SwiperOptions
 }
 
-export class SwiperConfig implements SwiperConfigInterface {
+export class SwiperConfig implements SwiperOptions {
   public on?: any;
 
   // Swiper parameters
@@ -522,11 +385,11 @@ export class SwiperConfig implements SwiperConfigInterface {
   public pagination?: boolean | any;
   public hashNavigation?: boolean | any;
 
-  constructor(config: SwiperConfigInterface = {}) {
+  constructor(config: SwiperOptions = {}) {
     this.assign(config);
   }
 
-  assign(config: SwiperConfigInterface | any = {}, target?: any) {
+  assign(config: SwiperOptions | any = {}, target?: any) {
     target = target || this;
 
     for (const key in config) {

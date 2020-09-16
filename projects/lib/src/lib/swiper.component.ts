@@ -4,10 +4,10 @@ import { NgZone, Inject, Optional, ElementRef, Component,
   AfterViewInit, OnDestroy, Input, Output, EventEmitter,
   ViewChild, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
 
-import { SwiperDirective } from './swiper.directive';
+import { SwiperOptions } from 'swiper';
 
-import { SWIPER_CONFIG, SwiperConfig, SwiperConfigInterface,
-  SwiperEvent, SwiperEvents } from './swiper.interfaces';
+import { SwiperDirective } from './swiper.directive';
+import { SWIPER_CONFIG, SwiperConfig, SwiperEventNames, SwiperEvent } from './swiper.interfaces';
 
 @Component({
   selector: 'swiper',
@@ -15,7 +15,7 @@ import { SWIPER_CONFIG, SwiperConfig, SwiperConfigInterface,
   templateUrl: './swiper.component.html',
   styleUrls: [
     './swiper.component.css',
-    '../../../../node_modules/swiper/css/swiper.min.css'
+    '../../../../node_modules/swiper/swiper-bundle.css'
   ],
   encapsulation: ViewEncapsulation.None
 })
@@ -32,7 +32,7 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
 
   @Input() performance: boolean = false;
 
-  @Input() config?: SwiperConfigInterface;
+  @Input() config?: SwiperOptions;
 
   @Input() useSwiperClass: boolean = true;
 
@@ -75,6 +75,7 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
   @Output('setTransition'              ) S_SETTRANSITION                  = new EventEmitter<any>();
 
   @Output('fromEdge'                   ) S_FROMEDGE                       = new EventEmitter<any>();
+  @Output('toEdge'                     ) S_TOEDGE                         = new EventEmitter<any>();
   @Output('reachEnd'                   ) S_REACHEND                       = new EventEmitter<any>();
   @Output('reachBeginning'             ) S_REACHBEGINNING                 = new EventEmitter<any>();
 
@@ -114,10 +115,12 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
   @Output('slideNextTransitionStart'   ) S_SLIDENEXTTRANSITIONSTART       = new EventEmitter<any>();
   @Output('slideChangeTransitionEnd'   ) S_SLIDECHANGETRANSITIONEND       = new EventEmitter<any>();
   @Output('slideChangeTransitionStart' ) S_SLIDECHANGETRANSITIONSTART     = new EventEmitter<any>();
+  @Output('observerUpdate'             ) S_OBSERVERUPDATE                 = new EventEmitter<any>();
+
 
   constructor(private zone: NgZone, private cdRef: ChangeDetectorRef,
     @Inject(PLATFORM_ID) private platformId: Object,
-    @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperConfigInterface) {}
+    @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperOptions) {}
 
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) {
@@ -142,7 +145,7 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
 
         this.directiveRef.indexChange = this.indexChange;
 
-        SwiperEvents.forEach((eventName: SwiperEvent) => {
+        SwiperEventNames.forEach((eventName: SwiperEvent) => {
           if (this.directiveRef) {
             const output = `S_${eventName.replace('swiper', '').toUpperCase()}`;
 
@@ -166,7 +169,7 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  public getConfig(): SwiperConfigInterface {
+  public getConfig(): SwiperOptions {
     this.swiperConfig = new SwiperConfig(this.defaults);
 
     this.swiperConfig.assign(this.config); // Custom configuration
@@ -209,7 +212,7 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
       }
     }
 
-    return this.config as SwiperConfigInterface;
+    return this.config as SwiperOptions;
   }
 
   private updateClasses(): void {

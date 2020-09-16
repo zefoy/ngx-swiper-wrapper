@@ -1,13 +1,12 @@
-import Swiper from 'swiper';
+import Swiper from 'swiper/bundle';
+import { SwiperOptions } from 'swiper';
 
 import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { NgZone, Inject, Optional, ElementRef, Directive,
   AfterViewInit, OnDestroy, DoCheck, OnChanges, Input, Output, EventEmitter,
   SimpleChanges, KeyValueDiffer, KeyValueDiffers } from '@angular/core';
-
-import { SWIPER_CONFIG, SwiperConfig, SwiperConfigInterface,
-  SwiperEvent, SwiperEvents } from './swiper.interfaces';
+import { SWIPER_CONFIG, SwiperConfig, SwiperEvent, SwiperEventNames } from './swiper.interfaces';
 
 @Directive({
   selector: '[swiper]',
@@ -31,7 +30,7 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
 
   @Input() performance: boolean = false;
 
-  @Input('swiper') config?: SwiperConfigInterface;
+  @Input('swiper') config?: SwiperOptions;
 
   @Output() indexChange = new EventEmitter<number>();
 
@@ -58,6 +57,7 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
   @Output('setTransition'              ) S_SETTRANSITION                  = new EventEmitter<any>();
 
   @Output('fromEdge'                   ) S_FROMEDGE                       = new EventEmitter<any>();
+  @Output('toEdge'                     ) S_TOEDGE                         = new EventEmitter<any>();
   @Output('reachEnd'                   ) S_REACHEND                       = new EventEmitter<any>();
   @Output('reachBeginning'             ) S_REACHBEGINNING                 = new EventEmitter<any>();
 
@@ -97,10 +97,11 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
   @Output('slideNextTransitionStart'   ) S_SLIDENEXTTRANSITIONSTART       = new EventEmitter<any>();
   @Output('slideChangeTransitionEnd'   ) S_SLIDECHANGETRANSITIONEND       = new EventEmitter<any>();
   @Output('slideChangeTransitionStart' ) S_SLIDECHANGETRANSITIONSTART     = new EventEmitter<any>();
+  @Output('observerUpdate'             ) S_OBSERVERUPDATE                 = new EventEmitter<any>();
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private zone: NgZone,
     private elementRef: ElementRef, private differs: KeyValueDiffers,
-    @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperConfigInterface) {}
+    @Optional() @Inject(SWIPER_CONFIG) private defaults: SwiperOptions) {}
 
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) {
@@ -158,7 +159,7 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
     }
 
     // Add native Swiper event handling
-    SwiperEvents.forEach((eventName: SwiperEvent) => {
+    SwiperEventNames.forEach((eventName: SwiperEvent) => {
       let swiperEvent = eventName.replace('swiper', '');
 
       swiperEvent = swiperEvent.charAt(0).toLowerCase() + swiperEvent.slice(1);

@@ -1,11 +1,13 @@
 export { SwiperComponent } from './lib/swiper.component';
 export { SwiperDirective } from './lib/swiper.directive';
 
+// Avoid breaking change
+export { SwiperOptions as SwiperConfigInterface } from 'swiper';
+
 export {
   SWIPER_CONFIG,
 
   SwiperConfig,
-  SwiperConfigInterface,
   SwiperBreakpointsInterface,
 
   SwiperA11YInterface,

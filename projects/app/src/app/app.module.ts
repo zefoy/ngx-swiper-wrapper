@@ -9,6 +9,7 @@ import { SwiperModule, SwiperConfigInterface,
 
 import { AppComponent } from './app.component';
 
+// SwiperOptions from 'swiper' could also be used here instead of SwiperConfigInterface
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   observer: true,
   direction: 'horizontal',
