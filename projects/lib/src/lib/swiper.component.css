@@ -81,6 +81,10 @@ swiper > .swiper.s-wrapper.swiper-container-vertical > .swiper-button-next {
   transform: rotate(90deg);
 }
 
+.swiper-button-prev[hidden]::after,  .swiper-button-next[hidden]::after {
+  display: none;
+}
+
 swiper > .swiper.s-wrapper.swiper-container-vertical > .swiper-scrollbar {
   width: 8px;
 
