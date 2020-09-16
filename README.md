@@ -106,7 +106,7 @@ Simply replace the element that would ordinarily be passed to `Swiper` with the 
 When using only the directive you need to provide your own theming or import the default theme:
 
 ```css
-@import '~swiper/css/swiper.min.css';
+@import '~swiper/swiper-bundle.min.css';
 ```
 
 Swiper directive can be used in correctly structured div element with optional custom configuration:
