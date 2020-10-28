@@ -177,7 +177,7 @@ startAutoplay(reset?)             // Starts and optionally resets the autoplay.
 
 Above functions can be accessed through the directive reference (available as directiveRef in the component).
 
-** IE 11 / Edge support **
+**IE 11 / Edge support**
 
 According to https://github.com/nolimits4web/swiper/issues/3199#issuecomment-531185060 
 
