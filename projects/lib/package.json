@@ -8,9 +8,10 @@
     "type": "git",
     "url": "https://github.com/zefoy/ngx-swiper-wrapper.git"
   },
-
+  "dependencies": {
+    "swiper": ">=6.0.0"
+  },
   "peerDependencies": {
-    "swiper": ">=6.0.0",
     "@angular/common": ">=9.0.0",
     "@angular/core": ">=9.0.0"
   }
