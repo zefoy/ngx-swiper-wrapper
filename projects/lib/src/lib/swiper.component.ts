@@ -91,6 +91,10 @@ export class SwiperComponent implements AfterViewInit, OnDestroy {
   @Output('scrollDragMove'             ) S_SCROLLDRAGMOVE                 = new EventEmitter<any>();
   @Output('scrollDragStart'            ) S_SCROLLDRAGSTART                = new EventEmitter<any>();
 
+  @Output('scrollbarDragEnd'           ) S_SCROLLBARDRAGEND               = new EventEmitter<any>();
+  @Output('scrollbarDragMove'          ) S_SCROLLBARDRAGMOVE              = new EventEmitter<any>();
+  @Output('scrollbarDragStart'         ) S_SCROLLBARDRAGSTART             = new EventEmitter<any>();
+
   @Output('navigationHide'             ) S_NAVIGATIONHIDE                 = new EventEmitter<any>();
   @Output('navigationShow'             ) S_NAVIGATIONSHOW                 = new EventEmitter<any>();
 
