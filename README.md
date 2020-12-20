@@ -8,7 +8,7 @@ This documentation is for the latest 6.x.x version which requires Angular 5 or n
 
 ### EOL notice
 
-Version 10.0.0 will most likely be last release of this library unless new maintainer is found.
+Version 10.0.0 will be last release of this library since this is now obsolete due to latest Swiper including direct support for Angular.
 
 ### Quick links
 
