@@ -176,3 +176,44 @@ startAutoplay(reset?)             // Starts and optionally resets the autoplay.
 ```
 
 Above functions can be accessed through the directive reference (available as directiveRef in the component).
+
+**IE 11 / Edge support**
+
+According to https://github.com/nolimits4web/swiper/issues/3199#issuecomment-531185060 
+
+1. `npm i @angular-builders/custom-webpack -D`
+2. in `angular.json`:
+```js
+"architect": {
+  ...
+  "build": {
+    "builder": "@angular-builders/custom-webpack:browser"
+    "options": {
+      "customWebpackConfig": {
+        "path": "./extra-webpack.config.js",
+        "mergeStrategies": {
+          "externals": "replace"
+        }
+...
+```
+3. extra-webpack.config.js:
+```js
+const path = require("path");
+module.exports = (config, options) => {
+    config.module.rules.push({
+      test: /\.(js|jsx)$/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env']
+        }
+      },
+      include: [
+        path.resolve(__dirname, "node_modules/swiper"),
+        path.resolve(__dirname, "node_modules/dom7"),
+        path.resolve(__dirname, "node_modules/ssr-window"),
+      ]
+    })
+    return config;
+  };
+```
