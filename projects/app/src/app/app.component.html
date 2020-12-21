@@ -12,6 +12,8 @@
       <div class="action-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
         <div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex="auto" (click)='toggleType()'>{{(type == "component") ? "Switch to directive" : "Switch to component"}}</div>
 
+        <div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex="auto" (click)='toggleDisabled()'>{{disabled ? "Enable slider" : "Disable slider"}}</div>
+
         <div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex="auto" (click)='toggleDirection()'>{{(config.direction == "horizontal") ? "Change to vertical" : "Change to horizontal"}}</div>
 
         <div class="action-button" fxLayout="column" fxLayoutAlign="center" fxFlex="auto" (click)='toggleSlidesPerView()'>Toggle slides per view</div>
